@@ -22,34 +22,14 @@ jobs:
       - name: Fetch comparison theme
         run: git clone --depth 1 https://github.com/liudakarapet10/zipfit.git /tmp/tinker-source
 
-      - name: Copy exact checksum matches
+      - name: Restore complete Tinker base
         shell: bash
         run: |
           set -euo pipefail
-          cat .theme-import/manifest-1.tsv .theme-import/manifest-2.tsv > /tmp/theme-manifest.tsv
-          : > .theme-import/mismatches.tsv
-          matched=0
-          mismatched=0
-          while IFS=$'\t' read -r expected path; do
-            [ -n "$path" ] || continue
-            source="/tmp/tinker-source/$path"
-            if [ -f "$source" ]; then
-              actual=$(git -C /tmp/tinker-source hash-object "$path")
-              if [ "$actual" = "$expected" ]; then
-                mkdir -p "$(dirname "$path")"
-                cp "$source" "$path"
-                matched=$((matched + 1))
-              else
-                printf '%s\t%s\t%s\tdifferent\n' "$expected" "$actual" "$path" >> .theme-import/mismatches.tsv
-                mismatched=$((mismatched + 1))
-              fi
-            else
-              printf '%s\t-\t%s\tmissing\n' "$expected" "$path" >> .theme-import/mismatches.tsv
-              mismatched=$((mismatched + 1))
-            fi
-          done < /tmp/theme-manifest.tsv
-          echo "Exact matches copied: $matched"
-          echo "Files needing exact patch: $mismatched"
+          for dir in assets blocks config layout locales sections snippets templates; do
+            rm -rf "$dir"
+            cp -a "/tmp/tinker-source/$dir" "$dir"
+          done
 
       - name: Download and apply exact theme patch
         shell: bash
@@ -96,7 +76,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A assets blocks config layout locales sections snippets templates .theme-import/mismatches.tsv 2>/dev/null || true
+          git add -A assets blocks config layout locales sections snippets templates
           if git diff --cached --quiet; then
             echo "Theme already matches the uploaded export."
           else
