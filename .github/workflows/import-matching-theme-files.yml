@@ -5,7 +5,6 @@ on:
   push:
     paths:
       - '.theme-import/manifest-*.tsv'
-      - '.theme-import/exact.patch.b64.part*'
       - '.github/workflows/import-matching-theme-files.yml'
 
 permissions:
@@ -52,21 +51,14 @@ jobs:
           echo "Exact matches copied: $matched"
           echo "Files needing exact patch: $mismatched"
 
-      - name: Rebuild and apply exact theme patch
+      - name: Download and apply exact theme patch
         shell: bash
         run: |
           set -euo pipefail
-          : > /tmp/exact.patch.zst
-          for part in .theme-import/exact.patch.b64.part*; do
-            base64 --decode "$part" >> /tmp/exact.patch.zst
-          done
-          zstd -d -f /tmp/exact.patch.zst -o /tmp/exact.patch
-          if git apply --check --binary /tmp/exact.patch; then
-            git apply --binary /tmp/exact.patch
-            echo "Exact patch applied."
-          else
-            echo "Patch is not applicable to the current tree; checking whether the target files are already present."
-          fi
+          curl -fL 'https://sdmntprkoreacentral.oaiusercontent.com/files/00000000-8798-8206-8f02-f209cc0b0300/raw?se=2026-10-07T05%3A12%3A07Z&sp=r&sv=2026-02-06&sr=b&scid=e9665c80-9805-5191-9319-ece17eb9945e&skoid=0765b554-4b90-4fa2-9d6d-0055a2427910&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-07T01%3A12%3A49Z&ske=2026-10-08T01%3A12%3A49Z&sks=b&skv=2026-02-06&sig=Vsp4BjNE9NBXYLACoToDSYZ/bNNv%2BnUIvzNIgwlriIM%3D' -o /tmp/exact-theme.patch.xz
+          xz -dc /tmp/exact-theme.patch.xz > /tmp/exact-theme.patch
+          git apply --check --binary /tmp/exact-theme.patch
+          git apply --binary /tmp/exact-theme.patch
 
       - name: Verify imported files against uploaded-theme manifest
         shell: bash
@@ -104,7 +96,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets blocks config layout locales sections snippets templates .theme-import/mismatches.tsv 2>/dev/null || true
+          git add -A assets blocks config layout locales sections snippets templates .theme-import/mismatches.tsv 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Theme already matches the uploaded export."
           else
