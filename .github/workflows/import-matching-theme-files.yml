@@ -1,0 +1,67 @@
+name: Import matching Tinker files
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.theme-import/manifest-*.tsv'
+      - '.github/workflows/import-matching-theme-files.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch comparison theme
+        run: git clone --depth 1 https://github.com/liudakarapet10/zipfit.git /tmp/tinker-source
+
+      - name: Copy only exact checksum matches
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .theme-import/manifest-1.tsv .theme-import/manifest-2.tsv > /tmp/theme-manifest.tsv
+          : > .theme-import/mismatches.tsv
+          matched=0
+          mismatched=0
+          while IFS=$'\t' read -r expected path; do
+            [ -n "$path" ] || continue
+            source="/tmp/tinker-source/$path"
+            if [ -f "$source" ]; then
+              actual=$(git -C /tmp/tinker-source hash-object "$path")
+              if [ "$actual" = "$expected" ]; then
+                mkdir -p "$(dirname "$path")"
+                cp "$source" "$path"
+                matched=$((matched + 1))
+              else
+                printf '%s\t%s\t%s\tdifferent\n' "$expected" "$actual" "$path" >> .theme-import/mismatches.tsv
+                mismatched=$((mismatched + 1))
+              fi
+            else
+              printf '%s\t-\t%s\tmissing\n' "$expected" "$path" >> .theme-import/mismatches.tsv
+              mismatched=$((mismatched + 1))
+            fi
+          done < /tmp/theme-manifest.tsv
+          echo "Exact matches copied: $matched"
+          echo "Files still needing exact import: $mismatched"
+          cat .theme-import/mismatches.tsv
+
+      - name: Commit exact matches
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets blocks config layout locales sections snippets templates .theme-import/mismatches.tsv 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No matching files to commit."
+          else
+            git commit -m "chore: import checksum-matched Tinker theme files"
+            git push origin HEAD:main
+          fi
