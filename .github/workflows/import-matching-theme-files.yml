@@ -56,7 +56,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .theme-import/exact.patch.b64.part* | base64 --decode > /tmp/exact.patch.zst
+          : > /tmp/exact.patch.zst
+          for part in .theme-import/exact.patch.b64.part*; do
+            base64 --decode "$part" >> /tmp/exact.patch.zst
+          done
           zstd -d -f /tmp/exact.patch.zst -o /tmp/exact.patch
           if git apply --check --binary /tmp/exact.patch; then
             git apply --binary /tmp/exact.patch
