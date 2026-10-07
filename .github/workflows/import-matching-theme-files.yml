@@ -22,6 +22,16 @@ jobs:
       - name: Fetch comparison theme
         run: git clone --depth 1 https://github.com/liudakarapet10/zipfit.git /tmp/tinker-source
 
+      - name: Package comparison source
+        run: tar -C /tmp/tinker-source -czf /tmp/tinker-source.tar.gz .
+
+      - name: Upload comparison source
+        uses: actions/upload-artifact@v4
+        with:
+          name: tinker-comparison-source
+          path: /tmp/tinker-source.tar.gz
+          retention-days: 1
+
       - name: Copy only exact checksum matches
         shell: bash
         run: |
