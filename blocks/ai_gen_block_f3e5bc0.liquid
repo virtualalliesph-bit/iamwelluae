@@ -1,0 +1,533 @@
+{% doc %}
+  @prompt
+    a block where I can upload a main product photo and there are pointed items around it like bubble wehre it showcase the 7 ingredients of the item. each ingredient can upload a photo and a label text. it needs to be responsive in mobile, and in desktop it can be repositioned to left, right or center., can the position of the ingredient be beside it like floating around? 3 in the left, 1 on top and 3 on the right. 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-ingredient-showcase-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 60px 20px;
+  }
+
+  .ai-ingredient-showcase__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-ingredient-showcase__main-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+  }
+
+  .ai-ingredient-showcase__main-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 400px;
+    max-width: 100%;
+    z-index: 1;
+  }
+
+  .ai-ingredient-showcase__main-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-ingredient-showcase__main-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-ingredient-showcase__main-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-ingredient-showcase__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }} {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .ai-ingredient-showcase__ingredient-image-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.bubble_size }}px;
+    height: {{ block.settings.bubble_size }}px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: {{ block.settings.bubble_bg_color }};
+    border: {{ block.settings.bubble_border_width }}px solid {{ block.settings.bubble_border_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-ingredient-showcase__ingredient-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-ingredient-showcase__ingredient-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-ingredient-showcase__ingredient-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ai-ingredient-showcase__ingredient-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    color: {{ block.settings.label_color }};
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 120px;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--1 {
+    top: 10%;
+    left: 5%;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--2 {
+    top: 40%;
+    left: 0%;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--3 {
+    bottom: 15%;
+    left: 8%;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--4 {
+    top: -5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--5 {
+    top: 10%;
+    right: 5%;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--6 {
+    top: 40%;
+    right: 0%;
+  }
+
+  .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--7 {
+    bottom: 15%;
+    right: 8%;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-ingredient-showcase-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-ingredient-showcase__main-wrapper-{{ ai_gen_id }} {
+      padding: 80px 0;
+    }
+
+    .ai-ingredient-showcase__main-image-wrapper-{{ ai_gen_id }} {
+      width: 280px;
+    }
+
+    .ai-ingredient-showcase__ingredient-image-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.bubble_size | times: 0.7 }}px;
+      height: {{ block.settings.bubble_size | times: 0.7 }}px;
+    }
+
+    .ai-ingredient-showcase__ingredient-label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_font_size | times: 0.85 }}px;
+      max-width: 90px;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--1 {
+      top: 5%;
+      left: 2%;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--2 {
+      top: 35%;
+      left: -5%;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--3 {
+      bottom: 10%;
+      left: 5%;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--4 {
+      top: -8%;
+      left: 50%;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--5 {
+      top: 5%;
+      right: 2%;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--6 {
+      top: 35%;
+      right: -5%;
+    }
+
+    .ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--7 {
+      bottom: 10%;
+      right: 5%;
+    }
+  }
+
+  {% if block.settings.desktop_alignment == 'left' %}
+    .ai-ingredient-showcase__container-{{ ai_gen_id }} {
+      justify-content: flex-start;
+    }
+  {% elsif block.settings.desktop_alignment == 'right' %}
+    .ai-ingredient-showcase__container-{{ ai_gen_id }} {
+      justify-content: flex-end;
+    }
+  {% endif %}
+{% endstyle %}
+
+<ingredient-showcase-{{ ai_gen_id }}
+  class="ai-ingredient-showcase-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-ingredient-showcase__container-{{ ai_gen_id }}">
+    <div class="ai-ingredient-showcase__main-wrapper-{{ ai_gen_id }}">
+      <div class="ai-ingredient-showcase__main-image-wrapper-{{ ai_gen_id }}">
+        {% if block.settings.main_product_image %}
+          <img
+            src="{{ block.settings.main_product_image | image_url: width: 1000 }}"
+            alt="{{ block.settings.main_product_image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.main_product_image.width }}"
+            height="{{ block.settings.main_product_image.height }}"
+            class="ai-ingredient-showcase__main-image-{{ ai_gen_id }}"
+          >
+        {% else %}
+          <div class="ai-ingredient-showcase__main-image-placeholder-{{ ai_gen_id }}">
+            {{ 'product-1' | placeholder_svg_tag }}
+            <div class="ai-ingredient-showcase__empty-state-{{ ai_gen_id }}">
+              Add your main product image
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      {% for i in (1..7) %}
+        {% liquid
+          assign image_key = 'ingredient_' | append: i | append: '_image'
+          assign label_key = 'ingredient_' | append: i | append: '_label'
+          assign ingredient_image = block.settings[image_key]
+          assign ingredient_label = block.settings[label_key]
+        %}
+
+        <div class="ai-ingredient-showcase__ingredient-{{ ai_gen_id }} ai-ingredient-showcase__ingredient-{{ ai_gen_id }}--{{ i }}">
+          <div class="ai-ingredient-showcase__ingredient-image-wrapper-{{ ai_gen_id }}">
+            {% if ingredient_image %}
+              <img
+                src="{{ ingredient_image | image_url: width: 200 }}"
+                alt="{{ ingredient_image.alt | escape }}"
+                loading="lazy"
+                width="200"
+                height="200"
+                class="ai-ingredient-showcase__ingredient-image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-ingredient-showcase__ingredient-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          {% if ingredient_label != blank %}
+            <div class="ai-ingredient-showcase__ingredient-label-{{ ai_gen_id }}">
+              {{ ingredient_label }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</ingredient-showcase-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IngredientShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('ingredient-showcase-{{ ai_gen_id }}', IngredientShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Ingredient showcase",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Desktop alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Ingredient bubbles"
+    },
+    {
+      "type": "range",
+      "id": "bubble_size",
+      "min": 60,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Bubble size",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "bubble_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bubble_border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "bubble_border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_1_label",
+      "label": "Label",
+      "default": "Ingredient 1"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_2_label",
+      "label": "Label",
+      "default": "Ingredient 2"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_3_label",
+      "label": "Label",
+      "default": "Ingredient 3"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_4_label",
+      "label": "Label",
+      "default": "Ingredient 4"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_5_label",
+      "label": "Label",
+      "default": "Ingredient 5"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_6_label",
+      "label": "Label",
+      "default": "Ingredient 6"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_7_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_7_label",
+      "label": "Label",
+      "default": "Ingredient 7"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient showcase"
+    }
+  ]
+}
+{% endschema %}

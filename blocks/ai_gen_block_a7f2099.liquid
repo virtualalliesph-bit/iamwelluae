@@ -1,0 +1,541 @@
+{% doc %}
+  @prompt
+    A HOLOGRAM PRODUCT GRID THAT CAN SHOWCASE 3 PRODUCTS. THE MIDDLE MUST BE LARGER SINCE IT WILL SHOW AS BEST SELLER. MAKE SURE THE BLOCK IS ALSO REPSONSIVE IN MOBILE AND CUSTOMIZABLE
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hologram-grid-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+    background: {{ block.settings.background_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-hologram-grid__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-hologram-grid__title-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-hologram-grid__products-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .ai-hologram-grid__product-{{ ai_gen_id }} {
+    position: relative;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    background: {{ block.settings.card_background }};
+    transition: transform 0.3s ease;
+  }
+
+  .ai-hologram-grid__product-{{ ai_gen_id }}:hover {
+    transform: translateY(-5px);
+  }
+
+  .ai-hologram-grid__product--featured-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-hologram-grid__product--featured-{{ ai_gen_id }}:hover {
+    transform: scale(1.08) translateY(-5px);
+  }
+
+  .ai-hologram-grid__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  .ai-hologram-grid__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-hologram-grid__placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-hologram-grid__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-hologram-grid__hologram-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: {{ block.settings.hologram_intensity | divided_by: 100.0 }};
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      {{ block.settings.hologram_color_1 }} 40%,
+      {{ block.settings.hologram_color_2 }} 50%,
+      {{ block.settings.hologram_color_3 }} 60%,
+      transparent 70%
+    );
+    background-size: 200% 200%;
+    mix-blend-mode: screen;
+  }
+
+  .ai-hologram-grid__product-{{ ai_gen_id }}:hover .ai-hologram-grid__hologram-overlay-{{ ai_gen_id }} {
+    animation: ai-hologram-shift-{{ ai_gen_id }} 2s ease infinite;
+  }
+
+  @keyframes ai-hologram-shift-{{ ai_gen_id }} {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  .ai-hologram-grid__badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-hologram-grid__content-{{ ai_gen_id }} {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .ai-hologram-grid__product-title-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-hologram-grid__product--featured-{{ ai_gen_id }} .ai-hologram-grid__product-title-{{ ai_gen_id }} {
+    font-size: 24px;
+  }
+
+  .ai-hologram-grid__product-price-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.price_color }};
+    margin-bottom: 15px;
+  }
+
+  .ai-hologram-grid__product--featured-{{ ai_gen_id }} .ai-hologram-grid__product-price-{{ ai_gen_id }} {
+    font-size: 20px;
+  }
+
+  .ai-hologram-grid__button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .ai-hologram-grid__button-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    transform: scale(1.05);
+  }
+
+  .ai-hologram-grid__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-hologram-grid__products-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ai-hologram-grid__product--featured-{{ ai_gen_id }} {
+      transform: scale(1);
+      order: -1;
+    }
+
+    .ai-hologram-grid__product--featured-{{ ai_gen_id }}:hover {
+      transform: translateY(-5px);
+    }
+
+    .ai-hologram-grid__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-hologram-grid-{{ ai_gen_id }} {
+      padding: 30px 15px;
+    }
+
+    .ai-hologram-grid__content-{{ ai_gen_id }} {
+      padding: 15px;
+    }
+
+    .ai-hologram-grid__product-title-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+
+    .ai-hologram-grid__product--featured-{{ ai_gen_id }} .ai-hologram-grid__product-title-{{ ai_gen_id }} {
+      font-size: 20px;
+    }
+
+    .ai-hologram-grid__product-price-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
+
+    .ai-hologram-grid__product--featured-{{ ai_gen_id }} .ai-hologram-grid__product-price-{{ ai_gen_id }} {
+      font-size: 18px;
+    }
+  }
+{% endstyle %}
+
+<hologram-product-grid-{{ ai_gen_id }}
+  class="ai-hologram-grid-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-hologram-grid__container-{{ ai_gen_id }}">
+    {% if block.settings.section_title != blank %}
+      <h2 class="ai-hologram-grid__title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="ai-hologram-grid__products-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign product_key = 'product_' | append: i
+          assign product = block.settings[product_key]
+          assign is_featured = false
+          if i == 2
+            assign is_featured = true
+          endif
+        %}
+
+        <div class="ai-hologram-grid__product-{{ ai_gen_id }} {% if is_featured %}ai-hologram-grid__product--featured-{{ ai_gen_id }}{% endif %}">
+          <div class="ai-hologram-grid__image-wrapper-{{ ai_gen_id }}">
+            {% if product != blank and product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 800 }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                class="ai-hologram-grid__image-{{ ai_gen_id }}"
+                loading="lazy"
+                width="800"
+                height="800"
+              >
+            {% else %}
+              <div class="ai-hologram-grid__placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+                <div class="ai-hologram-grid__empty-state-{{ ai_gen_id }}">
+                  Add product {{ i }}
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="ai-hologram-grid__hologram-overlay-{{ ai_gen_id }}"></div>
+
+            {% if is_featured and block.settings.show_badge %}
+              <div class="ai-hologram-grid__badge-{{ ai_gen_id }}">
+                {{ block.settings.badge_text }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-hologram-grid__content-{{ ai_gen_id }}">
+            {% if product != blank %}
+              <h3 class="ai-hologram-grid__product-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+              <div class="ai-hologram-grid__product-price-{{ ai_gen_id }}">
+                {{ product.price | money }}
+              </div>
+              <a
+                href="{{ product.url }}"
+                class="ai-hologram-grid__button-{{ ai_gen_id }}"
+              >
+                {{ block.settings.button_text }}
+              </a>
+            {% else %}
+              <h3 class="ai-hologram-grid__product-title-{{ ai_gen_id }}">Product Title</h3>
+              <div class="ai-hologram-grid__product-price-{{ ai_gen_id }}">₱0.00</div>
+              <a href="#" class="ai-hologram-grid__button-{{ ai_gen_id }}">
+                {{ block.settings.button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</hologram-product-grid-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HologramProductGrid{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.initHologramEffect();
+      }
+
+      initHologramEffect() {
+        const products = this.querySelectorAll('.ai-hologram-grid__product-{{ ai_gen_id }}');
+        
+        products.forEach((product) => {
+          product.addEventListener('mouseenter', function() {
+            const overlay = this.querySelector('.ai-hologram-grid__hologram-overlay-{{ ai_gen_id }}');
+            if (overlay) {
+              overlay.style.opacity = '{{ block.settings.hologram_intensity | divided_by: 100.0 }}';
+            }
+          });
+
+          product.addEventListener('mouseleave', function() {
+            const overlay = this.querySelector('.ai-hologram-grid__hologram-overlay-{{ ai_gen_id }}');
+            if (overlay) {
+              overlay.style.opacity = '{{ block.settings.hologram_intensity | times: 0.7 | divided_by: 100.0 }}';
+            }
+          });
+        });
+      }
+    }
+
+    customElements.define('hologram-product-grid-{{ ai_gen_id }}', HologramProductGrid{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hologram product grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2 (Best seller)"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "header",
+      "content": "Best seller badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Best Seller"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#FF8F23"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Hologram effect"
+    },
+    {
+      "type": "range",
+      "id": "hologram_intensity",
+      "label": "Intensity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_1",
+      "label": "Color 1",
+      "default": "#00FFFF"
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_2",
+      "label": "Color 2",
+      "default": "#FF00FF"
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_3",
+      "label": "Color 3",
+      "default": "#FFFF00"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Product"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#FF8F23"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#FBB60D"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#FF8F23"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hologram product grid"
+    }
+  ]
+}
+{% endschema %}

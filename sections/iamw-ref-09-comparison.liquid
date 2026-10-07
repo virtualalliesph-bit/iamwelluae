@@ -1,0 +1,1866 @@
+{% comment %}
+  I AM WELL
+  Reference Section 09
+  Comparison Table
+
+  Features:
+  - Intro / brand story on left
+  - Optional decorative images
+  - Editable comparison rows
+  - Highlighted IAMW column
+  - Desktop + mobile layout modeled after reference
+  - Check / cross values editable
+  - Optional icon or SVG above heading
+  - Blank optional content collapses
+{% endcomment %}
+
+<section
+  id="IAMW-COMPARE-{{ section.id }}"
+  class="iamw-compare"
+  style="
+    --page-width: {{ section.settings.page_width }}px;
+
+    --pad-x: {{ section.settings.padding_x }}px;
+    --pad-x-mobile: {{ section.settings.mobile_padding_x }}px;
+
+    --pad-top: {{ section.settings.padding_top }}px;
+    --pad-bottom: {{ section.settings.padding_bottom }}px;
+
+    --card-padding: {{ section.settings.card_padding }}px;
+    --column-gap: {{ section.settings.column_gap }}px;
+    --row-height: {{ section.settings.row_height }}px;
+
+    --radius: {{ section.settings.radius }}px;
+
+    --section-bg: {{ section.settings.section_background }};
+    --card-bg: {{ section.settings.card_background }};
+    --highlight: {{ section.settings.highlight_color }};
+    --highlight-text: {{ section.settings.highlight_text_color }};
+    --text: {{ section.settings.text_color }};
+    --muted: {{ section.settings.muted }};
+    --border: {{ section.settings.border_color }};
+    --positive: {{ section.settings.positive_color }};
+    --negative: {{ section.settings.negative_color }};
+
+    --heading-size: {{ section.settings.heading_size }}px;
+    --body-size: {{ section.settings.body_size }}px;
+    --row-size: {{ section.settings.row_size }}px;
+    --column-title-size: {{ section.settings.column_title_size }}px;
+
+    --heading-mobile: {{ section.settings.mobile_heading_size }}px;
+    --body-mobile: {{ section.settings.mobile_body_size }}px;
+    --row-mobile: {{ section.settings.mobile_row_size }}px;
+    --column-title-mobile: {{ section.settings.mobile_column_title_size }}px;
+  "
+>
+
+  <div class="iamw-compare__shell">
+
+    <div class="iamw-compare__card">
+
+      {% comment %}
+        LEFT STORY
+      {% endcomment %}
+
+      <div class="iamw-compare__story">
+
+        {% if section.settings.icon_image != blank %}
+
+          <div
+            class="iamw-compare__heading-icon"
+            style="
+              width: {{ section.settings.icon_size }}px;
+              height: {{ section.settings.icon_size }}px;
+            "
+          >
+            {{
+              section.settings.icon_image
+              | image_url: width: 180
+              | image_tag:
+                loading: 'lazy',
+                class: 'iamw-compare__icon-image'
+            }}
+          </div>
+
+        {% elsif section.settings.icon_svg != blank %}
+
+          <div
+            class="iamw-compare__heading-icon iamw-compare__svg"
+            style="
+              width: {{ section.settings.icon_size }}px;
+              height: {{ section.settings.icon_size }}px;
+            "
+          >
+            {{ section.settings.icon_svg }}
+          </div>
+
+        {% endif %}
+
+
+        {% if section.settings.heading != blank %}
+          <h2 class="iamw-compare__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+
+        {% if section.settings.body != blank %}
+          <div class="iamw-compare__rte">
+            {{ section.settings.body }}
+          </div>
+        {% endif %}
+
+
+        {% comment %}
+          OPTIONAL DECORATIVE IMAGES
+        {% endcomment %}
+
+        {% if section.settings.decor_1 != blank %}
+          <div class="iamw-compare__decor iamw-compare__decor--1">
+            {{
+              section.settings.decor_1
+              | image_url: width: 400
+              | image_tag:
+                loading: 'lazy',
+                class: 'iamw-compare__decor-image'
+            }}
+          </div>
+        {% endif %}
+
+
+        {% if section.settings.decor_2 != blank %}
+          <div class="iamw-compare__decor iamw-compare__decor--2">
+            {{
+              section.settings.decor_2
+              | image_url: width: 400
+              | image_tag:
+                loading: 'lazy',
+                class: 'iamw-compare__decor-image'
+            }}
+          </div>
+        {% endif %}
+
+
+        {% if section.settings.decor_3 != blank %}
+          <div class="iamw-compare__decor iamw-compare__decor--3">
+            {{
+              section.settings.decor_3
+              | image_url: width: 400
+              | image_tag:
+                loading: 'lazy',
+                class: 'iamw-compare__decor-image'
+            }}
+          </div>
+        {% endif %}
+
+      </div>
+
+
+      {% comment %}
+        COMPARISON TABLE
+      {% endcomment %}
+
+      {% assign has_rows = false %}
+
+      {% for block in section.blocks %}
+        {% if block.type == 'comparison' %}
+          {% if block.settings.label != blank %}
+            {% assign has_rows = true %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+
+      {% if has_rows %}
+
+        <div class="iamw-compare__table">
+
+          <div class="iamw-compare__header">
+
+            <div class="iamw-compare__header-spacer">
+            </div>
+
+            <div class="iamw-compare__brand-header">
+              {{ section.settings.brand_column_title }}
+            </div>
+
+            <div class="iamw-compare__other-header">
+              {{ section.settings.other_column_title }}
+            </div>
+
+          </div>
+
+
+          <div class="iamw-compare__rows">
+
+            {% for block in section.blocks %}
+
+              {% if block.type == 'comparison' %}
+
+                {% if block.settings.label != blank %}
+
+                  <div
+                    class="iamw-compare__row"
+                    {{ block.shopify_attributes }}
+                  >
+
+                    <div class="iamw-compare__label">
+
+                      {% if block.settings.icon_image != blank %}
+
+                        <span
+                          class="iamw-compare__row-icon"
+                          style="
+                            width: {{ block.settings.icon_size }}px;
+                            height: {{ block.settings.icon_size }}px;
+                          "
+                        >
+                          {{
+                            block.settings.icon_image
+                            | image_url: width: 100
+                            | image_tag:
+                              loading: 'lazy',
+                              class: 'iamw-compare__icon-image'
+                          }}
+                        </span>
+
+                      {% elsif block.settings.icon_svg != blank %}
+
+                        <span
+                          class="iamw-compare__row-icon iamw-compare__svg"
+                          style="
+                            width: {{ block.settings.icon_size }}px;
+                            height: {{ block.settings.icon_size }}px;
+                          "
+                        >
+                          {{ block.settings.icon_svg }}
+                        </span>
+
+                      {% endif %}
+
+                      <span>
+                        {{ block.settings.label }}
+                      </span>
+
+                    </div>
+
+
+                    <div class="iamw-compare__brand-value">
+
+                      {% if block.settings.brand_value != blank %}
+                        <span class="iamw-compare__brand-symbol">
+                          {{ block.settings.brand_value }}
+                        </span>
+                      {% endif %}
+
+                      {% if block.settings.brand_note != blank %}
+                        <span class="iamw-compare__value-note">
+                          {{ block.settings.brand_note }}
+                        </span>
+                      {% endif %}
+
+                    </div>
+
+
+                    <div class="iamw-compare__other-value">
+
+                      {% if block.settings.other_value != blank %}
+                        <span class="iamw-compare__other-symbol">
+                          {{ block.settings.other_value }}
+                        </span>
+                      {% endif %}
+
+                      {% if block.settings.other_note != blank %}
+                        <span class="iamw-compare__value-note">
+                          {{ block.settings.other_note }}
+                        </span>
+                      {% endif %}
+
+                    </div>
+
+                  </div>
+
+                {% endif %}
+
+              {% endif %}
+
+            {% endfor %}
+
+          </div>
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+
+    {% if section.settings.cta_text != blank %}
+
+      {% assign iamw_cta_url = blank %}
+
+      {% if section.settings.cta_destination == 'anchor' %}
+
+        {% if section.settings.cta_anchor != blank %}
+          {% assign iamw_cta_url = '#' | append: section.settings.cta_anchor %}
+        {% endif %}
+
+      {% elsif section.settings.cta_destination == 'link' %}
+
+        {% if section.settings.cta_link != blank %}
+          {% assign iamw_cta_url = section.settings.cta_link %}
+        {% endif %}
+
+      {% endif %}
+
+      <div class="iamw-compare__cta-wrap">
+
+        {% if iamw_cta_url != blank %}
+
+          <a
+            href="{{ iamw_cta_url }}"
+            class="iamw-compare__cta"
+            {% if section.settings.cta_destination == 'anchor' %}
+              data-iamw-anchor-link
+            {% endif %}
+          >
+            {{ section.settings.cta_text }}
+          </a>
+
+        {% else %}
+
+          <div class="iamw-compare__cta iamw-compare__cta--disabled">
+            {{ section.settings.cta_text }}
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+
+<style>
+
+#IAMW-COMPARE-{{ section.id }} {
+  width: 100%;
+
+  padding:
+    var(--pad-top)
+    var(--pad-x)
+    var(--pad-bottom);
+
+  background:
+    var(--section-bg);
+
+  color:
+    var(--text);
+}
+
+
+#IAMW-COMPARE-{{ section.id }} * {
+  box-sizing: border-box;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__shell {
+  width: 100%;
+
+  max-width:
+    var(--page-width);
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    28px;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__card {
+  width: 100%;
+
+  padding:
+    var(--card-padding);
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, .9fr)
+    minmax(0, 1.1fr);
+
+  gap:
+    var(--column-gap);
+
+  background:
+    var(--card-bg);
+
+  border-radius:
+    var(--radius);
+
+  overflow:
+    hidden;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__story {
+  position: relative;
+
+  min-height:
+    500px;
+
+  padding:
+    32px 24px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    center;
+
+  gap:
+    20px;
+
+  overflow:
+    hidden;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__heading-icon {
+  position: relative;
+
+  z-index: 2;
+
+  display:
+    block;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    10px;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__icon-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit:
+    contain;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__svg svg {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__heading {
+  position: relative;
+
+  z-index: 2;
+
+  max-width:
+    500px;
+
+  margin: 0;
+
+  color:
+    var(--text);
+
+  font-size:
+    var(--heading-size);
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__rte {
+  position: relative;
+
+  z-index: 2;
+
+  max-width:
+    520px;
+
+  color:
+    var(--text);
+
+  font-size:
+    var(--body-size);
+
+  line-height:
+    1.65;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__rte p:first-child {
+  margin-top: 0;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__rte p:last-child {
+  margin-bottom: 0;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__decor {
+  position: absolute;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__decor-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit:
+    contain;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__decor--1 {
+  width:
+    {{ section.settings.decor_1_size }}px;
+
+  top:
+    {{ section.settings.decor_1_top }}%;
+
+  right:
+    {{ section.settings.decor_1_right }}%;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__decor--2 {
+  width:
+    {{ section.settings.decor_2_size }}px;
+
+  top:
+    {{ section.settings.decor_2_top }}%;
+
+  right:
+    {{ section.settings.decor_2_right }}%;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__decor--3 {
+  width:
+    {{ section.settings.decor_3_size }}px;
+
+  bottom:
+    {{ section.settings.decor_3_bottom }}%;
+
+  right:
+    {{ section.settings.decor_3_right }}%;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__table {
+  width: 100%;
+
+  align-self:
+    center;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__header {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(120px, .75fr)
+    minmax(120px, .75fr);
+
+  align-items:
+    stretch;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__header-spacer {
+  min-height:
+    76px;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__brand-header {
+  min-height:
+    76px;
+
+  padding:
+    14px 10px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    var(--highlight);
+
+  color:
+    var(--highlight-text);
+
+  border-radius:
+    16px 16px 0 0;
+
+  text-align:
+    center;
+
+  font-size:
+    var(--column-title-size);
+
+  font-weight:
+    800;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__other-header {
+  min-height:
+    76px;
+
+  padding:
+    14px 10px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  color:
+    var(--text);
+
+  text-align:
+    center;
+
+  font-size:
+    var(--column-title-size);
+
+  font-weight:
+    800;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__rows {
+  width:
+    100%;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__row {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(120px, .75fr)
+    minmax(120px, .75fr);
+
+  min-height:
+    var(--row-height);
+
+  border-top:
+    1px solid var(--border);
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__label {
+  padding:
+    14px 12px 14px 0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  color:
+    var(--text);
+
+  font-size:
+    var(--row-size);
+
+  font-weight:
+    600;
+
+  line-height:
+    1.35;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__row-icon {
+  flex:
+    0 0 auto;
+
+  display:
+    block;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__brand-value,
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__other-value {
+  padding:
+    12px 8px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    4px;
+
+  text-align:
+    center;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__brand-value {
+  background:
+    var(--highlight);
+
+  color:
+    var(--highlight-text);
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__row:last-child
+.iamw-compare__brand-value {
+  border-radius:
+    0 0 16px 16px;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__brand-symbol,
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__other-symbol {
+  font-size:
+    26px;
+
+  font-weight:
+    900;
+
+  line-height:
+    1;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__brand-symbol {
+  color:
+    var(--highlight-text);
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__other-symbol {
+  color:
+    var(--negative);
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__value-note {
+  font-size:
+    11px;
+
+  line-height:
+    1.25;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__cta-wrap {
+  display:
+    flex;
+
+  justify-content:
+    center;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__cta {
+  min-height:
+    52px;
+
+  padding:
+    14px 28px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    var(--highlight);
+
+  color:
+    var(--highlight-text);
+
+  border-radius:
+    999px;
+
+  text-decoration:
+    none;
+
+  text-align:
+    center;
+
+  font-size:
+    var(--body-size);
+
+  font-weight:
+    900;
+}
+
+
+#IAMW-COMPARE-{{ section.id }}
+.iamw-compare__cta--disabled {
+  cursor:
+    default;
+}
+
+
+@media screen and (max-width: 749px) {
+
+  #IAMW-COMPARE-{{ section.id }} {
+    padding-left:
+      var(--pad-x-mobile);
+
+    padding-right:
+      var(--pad-x-mobile);
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__card {
+    padding:
+      {{ section.settings.mobile_card_padding }}px;
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      32px;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__story {
+    min-height:
+      auto;
+
+    padding:
+      22px 4px 10px;
+
+    align-items:
+      center;
+
+    text-align:
+      center;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__heading {
+    font-size:
+      var(--heading-mobile);
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__rte {
+    font-size:
+      var(--body-mobile);
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__decor {
+    opacity:
+      {{ section.settings.mobile_decor_opacity | divided_by: 100.0 }};
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__decor--1 {
+    left:
+      -30px;
+
+    right:
+      auto;
+
+    top:
+      -20px;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__decor--2 {
+    display:
+      none;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__decor--3 {
+    display:
+      none;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__header,
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__row {
+    grid-template-columns:
+      minmax(0, 1.45fr)
+      minmax(86px, .72fr)
+      minmax(86px, .72fr);
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__header-spacer,
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__brand-header,
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__other-header {
+    min-height:
+      68px;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__brand-header,
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__other-header {
+    padding:
+      10px 5px;
+
+    font-size:
+      var(--column-title-mobile);
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__row {
+    min-height:
+      {{ section.settings.mobile_row_height }}px;
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__label {
+    padding:
+      12px 8px 12px 0;
+
+    font-size:
+      var(--row-mobile);
+  }
+
+
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__brand-symbol,
+  #IAMW-COMPARE-{{ section.id }}
+  .iamw-compare__other-symbol {
+    font-size:
+      23px;
+  }
+
+}
+
+</style>
+
+
+
+<script>
+
+(function() {
+
+  function initIAMWCompareCTA() {
+
+    const section =
+      document.getElementById(
+        'IAMW-COMPARE-{{ section.id }}'
+      );
+
+    if (!section) return;
+
+    const anchorLinks =
+      section.querySelectorAll(
+        '[data-iamw-anchor-link]'
+      );
+
+    anchorLinks.forEach(
+      function(link) {
+
+        if (
+          link.dataset.iamwAnchorReady ===
+          'true'
+        ) {
+          return;
+        }
+
+        link.dataset.iamwAnchorReady =
+          'true';
+
+        link.addEventListener(
+          'click',
+          function(event) {
+
+            const href =
+              link.getAttribute(
+                'href'
+              );
+
+            if (
+              !href ||
+              href.charAt(0) !== '#'
+            ) {
+              return;
+            }
+
+            const target =
+              document.querySelector(
+                href
+              );
+
+            if (!target) {
+              return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+              behavior:
+                'smooth',
+
+              block:
+                'start'
+            });
+
+            if (
+              window.history &&
+              window.history.replaceState
+            ) {
+
+              window.history.replaceState(
+                null,
+                '',
+                href
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      initIAMWCompareCTA
+    );
+
+  } else {
+
+    initIAMWCompareCTA();
+
+  }
+
+  document.addEventListener(
+    'shopify:section:load',
+    function(event) {
+
+      if (
+        event.target &&
+        event.target.id ===
+        'IAMW-COMPARE-{{ section.id }}'
+      ) {
+
+        initIAMWCompareCTA();
+
+      }
+
+    }
+  );
+
+})();
+
+</script>
+
+{% schema %}
+{
+  "name": "IAMW Comparison",
+
+  "max_blocks": 20,
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Intro content"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Heading icon"
+    },
+
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "Or paste heading SVG"
+    },
+
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Heading icon size",
+      "min": 30,
+      "max": 100,
+      "step": 2,
+      "default": 58,
+      "unit": "px"
+    },
+
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why choose I Am Well Smart Gummies?"
+    },
+
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Made for growing kids and real family routines, Smart Gummies combines support for appetite, focus, growth, immunity and digestion in one kid-friendly mixed berry gummy.</p>"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Comparison columns"
+    },
+
+    {
+      "type": "text",
+      "id": "brand_column_title",
+      "label": "IAMW column title",
+      "default": "I Am Well"
+    },
+
+    {
+      "type": "text",
+      "id": "other_column_title",
+      "label": "Other column title",
+      "default": "Typical Kids Vitamin"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Optional decoration"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "decor_1",
+      "label": "Decorative image 1"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_1_size",
+      "label": "Decor 1 size",
+      "min": 50,
+      "max": 260,
+      "step": 10,
+      "default": 140,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_1_top",
+      "label": "Decor 1 top position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 5,
+      "unit": "%"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_1_right",
+      "label": "Decor 1 right position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 5,
+      "unit": "%"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "decor_2",
+      "label": "Decorative image 2"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_2_size",
+      "label": "Decor 2 size",
+      "min": 50,
+      "max": 260,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_2_top",
+      "label": "Decor 2 top position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_2_right",
+      "label": "Decor 2 right position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 20,
+      "unit": "%"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "decor_3",
+      "label": "Decorative image 3"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_3_size",
+      "label": "Decor 3 size",
+      "min": 50,
+      "max": 260,
+      "step": 10,
+      "default": 150,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_3_bottom",
+      "label": "Decor 3 bottom position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 0,
+      "unit": "%"
+    },
+
+    {
+      "type": "range",
+      "id": "decor_3_right",
+      "label": "Decor 3 right position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 0,
+      "unit": "%"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_decor_opacity",
+      "label": "Mobile decor opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 70,
+      "unit": "%"
+    },
+
+
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "START THE SMART ROUTINE"
+    },
+
+    {
+      "type": "select",
+      "id": "cta_destination",
+      "label": "CTA destination",
+      "default": "anchor",
+      "options": [
+        {
+          "value": "anchor",
+          "label": "Scroll to section"
+        },
+        {
+          "value": "link",
+          "label": "Regular link"
+        }
+      ]
+    },
+
+    {
+      "type": "text",
+      "id": "cta_anchor",
+      "label": "Anchor ID",
+      "default": "iamw-product",
+      "info": "Enter the anchor without the # symbol."
+    },
+
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Regular link"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "Max page width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "default": 1320,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Desktop side padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_x",
+      "label": "Mobile side padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Desktop card padding",
+      "min": 20,
+      "max": 70,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_card_padding",
+      "label": "Mobile card padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Desktop column gap",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "row_height",
+      "label": "Desktop row height",
+      "min": 60,
+      "max": 130,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_row_height",
+      "label": "Mobile row height",
+      "min": 70,
+      "max": 150,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Card radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 30,
+      "max": 64,
+      "step": 2,
+      "default": 44,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "row_size",
+      "label": "Comparison row text",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "column_title_size",
+      "label": "Column title size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 28,
+      "max": 50,
+      "step": 2,
+      "default": 38,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "label": "Mobile body size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_row_size",
+      "label": "Mobile comparison text",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_column_title_size",
+      "label": "Mobile column title",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#F7EFFB"
+    },
+
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "IAMW column",
+      "default": "#42106B"
+    },
+
+    {
+      "type": "color",
+      "id": "highlight_text_color",
+      "label": "IAMW column text",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1C1930"
+    },
+
+    {
+      "type": "color",
+      "id": "muted",
+      "label": "Muted",
+      "default": "#6C6670"
+    },
+
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Row borders",
+      "default": "#E3D8E9"
+    },
+
+    {
+      "type": "color",
+      "id": "positive_color",
+      "label": "Positive icon color",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "color",
+      "id": "negative_color",
+      "label": "Other / negative icon",
+      "default": "#E64E4E"
+    }
+
+  ],
+
+
+  "blocks": [
+
+    {
+      "type": "comparison",
+      "name": "Comparison row",
+
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Optional row icon"
+        },
+
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Or paste row SVG"
+        },
+
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Row icon size",
+          "min": 16,
+          "max": 44,
+          "step": 2,
+          "default": 24,
+          "unit": "px"
+        },
+
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Comparison point",
+          "default": "Appetite support"
+        },
+
+        {
+          "type": "text",
+          "id": "brand_value",
+          "label": "IAMW value",
+          "default": "✓"
+        },
+
+        {
+          "type": "text",
+          "id": "brand_note",
+          "label": "Optional IAMW note"
+        },
+
+        {
+          "type": "text",
+          "id": "other_value",
+          "label": "Other vitamin value",
+          "default": "—"
+        },
+
+        {
+          "type": "text",
+          "id": "other_note",
+          "label": "Optional other note"
+        }
+
+      ]
+
+    }
+
+  ],
+
+
+  "presets": [
+
+    {
+      "name": "IAMW Comparison",
+
+      "blocks": [
+
+        {
+          "type": "comparison",
+          "settings": {
+            "label": "Appetite support with L-Lysine",
+            "brand_value": "✓",
+            "other_value": "?"
+          }
+        },
+
+        {
+          "type": "comparison",
+          "settings": {
+            "label": "DHA + Choline for brain support",
+            "brand_value": "✓",
+            "other_value": "?"
+          }
+        },
+
+        {
+          "type": "comparison",
+          "settings": {
+            "label": "Digestive enzymes included",
+            "brand_value": "✓",
+            "other_value": "?"
+          }
+        },
+
+        {
+          "type": "comparison",
+          "settings": {
+            "label": "Vitamins + Zinc for immunity support",
+            "brand_value": "✓",
+            "other_value": "?"
+          }
+        },
+
+        {
+          "type": "comparison",
+          "settings": {
+            "label": "Kid-friendly mixed berry gummy",
+            "brand_value": "✓",
+            "other_value": "Depends"
+          }
+        },
+
+        {
+          "type": "comparison",
+          "settings": {
+            "label": "No tablet to swallow",
+            "brand_value": "✓",
+            "other_value": "Depends"
+          }
+        }
+
+      ]
+
+    }
+
+  ]
+
+}
+
+{% endschema %}

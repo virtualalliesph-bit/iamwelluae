@@ -1,0 +1,757 @@
+{% doc %}
+  @prompt
+    A BLOCK THAT HAS 2 COLUMNS IN DESKTOP, ONE COLUMN SHOWCASE THE IMAGE - THEN THE SECOND COLUMN SHOWCASE THE PRODUCT CHECKLIST
+    THE CHECKLIST MUST BE IN BULLET POINTS - WHERE I CAN CHOOSE AN ICON TO USE FOR EACH BULLET. IT MUST ALSO BE CUSTOMIZABLE IN SIZE, COLOR AND PADDING OR MARGIN. IT MUST BE RSPONSIVE IN MOBILE. IN MOBILE IT CAN BE STACKED, WHERE THE COLUMNS WILL BECOME TWO ROWS. 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-checklist-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.column_gap }}px;
+    padding: {{ block.settings.section_padding }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-image-checklist__image-column-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-image-checklist__image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    position: relative;
+  }
+
+  .ai-image-checklist__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-image-checklist__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    position: relative;
+  }
+
+  .ai-image-checklist__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-image-checklist__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-image-checklist__content-column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-image-checklist__heading-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.heading_margin_bottom }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-image-checklist__list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.item_spacing }}px;
+  }
+
+  .ai-image-checklist__item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: {{ block.settings.icon_text_gap }}px;
+  }
+
+  .ai-image-checklist__icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-top: {{ block.settings.icon_margin_top }}px;
+  }
+
+  .ai-image-checklist__icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-image-checklist__text-{{ ai_gen_id }} {
+    flex: 1;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-checklist-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_row_gap }}px;
+    }
+
+    {% if block.settings.mobile_image_first %}
+      .ai-image-checklist__image-column-{{ ai_gen_id }} {
+        order: 1;
+      }
+
+      .ai-image-checklist__content-column-{{ ai_gen_id }} {
+        order: 2;
+      }
+    {% else %}
+      .ai-image-checklist__image-column-{{ ai_gen_id }} {
+        order: 2;
+      }
+
+      .ai-image-checklist__content-column-{{ ai_gen_id }} {
+        order: 1;
+      }
+    {% endif %}
+
+    .ai-image-checklist__content-column-{{ ai_gen_id }} {
+      padding: {{ block.settings.mobile_content_padding }}px;
+    }
+
+    .ai-image-checklist__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_heading_size }}px;
+    }
+
+    .ai-image-checklist__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_text_size }}px;
+    }
+
+    .ai-image-checklist__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.mobile_icon_size }}px;
+      height: {{ block.settings.mobile_icon_size }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-image-checklist-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-image-checklist__image-column-{{ ai_gen_id }}">
+    <div class="ai-image-checklist__image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        <img
+          src="{{ block.settings.image | image_url: width: 1000 }}"
+          alt="{{ block.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          class="ai-image-checklist__image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-image-checklist__image-placeholder-{{ ai_gen_id }}">
+          {{ 'product-1' | placeholder_svg_tag }}
+          <div class="ai-image-checklist__empty-state-{{ ai_gen_id }}">
+            Add an image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="ai-image-checklist__content-column-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-image-checklist__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <ul class="ai-image-checklist__list-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign item_enabled_key = 'item_' | append: i | append: '_enabled'
+          assign item_text_key = 'item_' | append: i | append: '_text'
+          assign item_icon_key = 'item_' | append: i | append: '_icon'
+
+          assign item_enabled = block.settings[item_enabled_key]
+          assign item_text = block.settings[item_text_key]
+          assign item_icon = block.settings[item_icon_key]
+        %}
+
+        {% if item_enabled and item_text != blank %}
+          <li class="ai-image-checklist__item-{{ ai_gen_id }}">
+            <div class="ai-image-checklist__icon-{{ ai_gen_id }}">
+              {% case item_icon %}
+                {% when 'checkmark' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                  </svg>
+                {% when 'star' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                {% when 'heart' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                {% when 'circle' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                  </svg>
+                {% when 'arrow' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                  </svg>
+                {% when 'plus' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                  </svg>
+              {% endcase %}
+            </div>
+            <div class="ai-image-checklist__text-{{ ai_gen_id }}">{{ item_text }}</div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image with checklist",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Features"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "min": 14,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading size",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Heading bottom margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Checklist items"
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between items",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile text size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "min": 14,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile icon size",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between icon and text",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "icon_margin_top",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon top margin",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Item 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_1_enabled",
+      "label": "Enable item 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_1_text",
+      "label": "Text",
+      "default": "Premium quality materials"
+    },
+    {
+      "type": "select",
+      "id": "item_1_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Item 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_2_enabled",
+      "label": "Enable item 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_2_text",
+      "label": "Text",
+      "default": "Sustainable and eco-friendly"
+    },
+    {
+      "type": "select",
+      "id": "item_2_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Item 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_3_enabled",
+      "label": "Enable item 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_3_text",
+      "label": "Text",
+      "default": "Free shipping worldwide"
+    },
+    {
+      "type": "select",
+      "id": "item_3_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Item 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_4_enabled",
+      "label": "Enable item 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_4_text",
+      "label": "Text",
+      "default": "30-day money back guarantee"
+    },
+    {
+      "type": "select",
+      "id": "item_4_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Item 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_5_enabled",
+      "label": "Enable item 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_5_text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "item_5_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Item 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_6_enabled",
+      "label": "Enable item 6",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_6_text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "item_6_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Gap between columns",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_image_first",
+      "label": "Show image first on mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "mobile_row_gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between rows",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile content padding",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with checklist"
+    }
+  ]
+}
+{% endschema %}

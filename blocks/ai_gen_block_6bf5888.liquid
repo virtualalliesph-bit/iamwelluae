@@ -1,0 +1,555 @@
+{% doc %}
+  @prompt
+    a slider block of images that can set the scrolling and stop when hover. the block must be responsive on mobile and should have arrow left and right for manual navigaiton. , can we make the image up to 8
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-slider-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ai-image-slider-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-image-slider-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.image_gap }}px;
+    transition: transform 0.5s ease;
+  }
+
+  .ai-image-slider-slide-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: {{ block.settings.slide_width }}%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-slider-slide-{{ ai_gen_id }} {
+      width: {{ block.settings.slide_width_mobile }}%;
+    }
+  }
+
+  .ai-image-slider-slide-{{ ai_gen_id }} img {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    object-fit: cover;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-slider-slide-{{ ai_gen_id }} img {
+      height: {{ block.settings.image_height_mobile }}px;
+    }
+  }
+
+  .ai-image-slider-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-slider-placeholder-{{ ai_gen_id }} {
+      height: {{ block.settings.image_height_mobile }}px;
+    }
+  }
+
+  .ai-image-slider-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-image-slider-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-image-slider-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: {{ block.settings.arrow_size }}px;
+    height: {{ block.settings.arrow_size }}px;
+    background-color: {{ block.settings.arrow_background }};
+    color: {{ block.settings.arrow_color }};
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-image-slider-arrow-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.arrow_hover_background }};
+  }
+
+  .ai-image-slider-arrow-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-image-slider-arrow-left-{{ ai_gen_id }} {
+    left: {{ block.settings.arrow_offset }}px;
+  }
+
+  .ai-image-slider-arrow-right-{{ ai_gen_id }} {
+    right: {{ block.settings.arrow_offset }}px;
+  }
+
+  .ai-image-slider-arrow-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.arrow_size }}px * 0.5);
+    height: calc({{ block.settings.arrow_size }}px * 0.5);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-slider-arrow-{{ ai_gen_id }} {
+      width: {{ block.settings.arrow_size_mobile }}px;
+      height: {{ block.settings.arrow_size_mobile }}px;
+    }
+
+    .ai-image-slider-arrow-{{ ai_gen_id }} svg {
+      width: calc({{ block.settings.arrow_size_mobile }}px * 0.5);
+      height: calc({{ block.settings.arrow_size_mobile }}px * 0.5);
+    }
+
+    .ai-image-slider-arrow-left-{{ ai_gen_id }} {
+      left: {{ block.settings.arrow_offset_mobile }}px;
+    }
+
+    .ai-image-slider-arrow-right-{{ ai_gen_id }} {
+      right: {{ block.settings.arrow_offset_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<image-slider-{{ ai_gen_id }}
+  class="ai-image-slider-{{ ai_gen_id }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  data-pause-on-hover="{{ block.settings.pause_on_hover }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-image-slider-container-{{ ai_gen_id }}">
+    <div class="ai-image-slider-track-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign image = block.settings[image_key]
+        %}
+
+        <div class="ai-image-slider-slide-{{ ai_gen_id }}">
+          {% if image != blank %}
+            <img
+              src="{{ image | image_url: width: 1000 }}"
+              alt="{{ image.alt | escape }}"
+              loading="lazy"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+            >
+          {% else %}
+            <div class="ai-image-slider-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+              {% if i == 1 %}
+                <div class="ai-image-slider-empty-state-{{ ai_gen_id }}">
+                  Add images to start
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <button
+      class="ai-image-slider-arrow-{{ ai_gen_id }} ai-image-slider-arrow-left-{{ ai_gen_id }}"
+      aria-label="Previous slide"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <button
+      class="ai-image-slider-arrow-{{ ai_gen_id }} ai-image-slider-arrow-right-{{ ai_gen_id }}"
+      aria-label="Next slide"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</image-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ImageSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+        this.isHovered = false;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-image-slider-track-{{ ai_gen_id }}');
+        this.slides = this.querySelectorAll('.ai-image-slider-slide-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-image-slider-arrow-left-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-image-slider-arrow-right-{{ ai_gen_id }}');
+
+        this.autoplay = this.dataset.autoplay === 'true';
+        this.autoplaySpeed = parseInt(this.dataset.autoplaySpeed) * 1000;
+        this.pauseOnHover = this.dataset.pauseOnHover === 'true';
+
+        this.setupEventListeners();
+        this.updateSlider();
+
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      }
+
+      setupEventListeners() {
+        this.prevButton.addEventListener('click', () => this.goToPrevious());
+        this.nextButton.addEventListener('click', () => this.goToNext());
+
+        if (this.pauseOnHover) {
+          this.addEventListener('mouseenter', () => {
+            this.isHovered = true;
+            this.stopAutoplay();
+          });
+
+          this.addEventListener('mouseleave', () => {
+            this.isHovered = false;
+            if (this.autoplay) {
+              this.startAutoplay();
+            }
+          });
+        }
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        this.track.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        this.track.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          this.handleSwipe(touchStartX, touchEndX);
+        });
+      }
+
+      handleSwipe(startX, endX) {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            this.goToNext();
+          } else {
+            this.goToPrevious();
+          }
+        }
+      }
+
+      goToPrevious() {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+          this.updateSlider();
+        }
+      }
+
+      goToNext() {
+        if (this.currentIndex < this.slides.length - 1) {
+          this.currentIndex++;
+          this.updateSlider();
+        }
+      }
+
+      updateSlider() {
+        const slideWidth = this.slides[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(this.track).gap) || 0;
+        const offset = -(this.currentIndex * (slideWidth + gap));
+
+        this.track.style.transform = `translateX(${offset}px)`;
+
+        this.prevButton.disabled = this.currentIndex === 0;
+        this.nextButton.disabled = this.currentIndex === this.slides.length - 1;
+      }
+
+      startAutoplay() {
+        this.stopAutoplay();
+        this.autoplayInterval = setInterval(() => {
+          if (this.currentIndex < this.slides.length - 1) {
+            this.goToNext();
+          } else {
+            this.currentIndex = 0;
+            this.updateSlider();
+          }
+        }, this.autoplaySpeed);
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+      }
+    }
+
+    customElements.define('image-slider-{{ ai_gen_id }}', ImageSlider{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image slider",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image 8"
+    },
+    {
+      "type": "header",
+      "content": "Slider settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between images",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Image style"
+    },
+    {
+      "type": "range",
+      "id": "slide_width",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Desktop slide width",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "slide_width_mobile",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile slide width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Desktop image height",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "min": 150,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "label": "Mobile image height",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Navigation arrows"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop arrow size",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "arrow_size_mobile",
+      "min": 25,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile arrow size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "arrow_offset",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop arrow offset",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "arrow_offset_mobile",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile arrow offset",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_background",
+      "label": "Arrow hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow icon color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image slider"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1730 @@
+{% comment %}
+  I AM WELL SMART GUMMIES
+  LANDING PAGE SECTION 02
+  Why Smart Gummies + Ingredients / Benefit Education
+
+  Rules:
+  - Required main visual shows placeholder if empty
+  - Optional icons/SVGs collapse completely if empty
+  - Empty text does not render spacing
+  - Benefit cards are editable blocks
+  - Ingredient rows are editable blocks
+{% endcomment %}
+
+<section
+  id="IAMW-LP02-{{ section.id }}"
+  class="iamw-lp02"
+  style="
+    --page-width: {{ section.settings.page_width }}px;
+    --pad-x: {{ section.settings.padding_x }}px;
+    --pad-x-mobile: {{ section.settings.mobile_padding_x }}px;
+    --pad-top: {{ section.settings.padding_top }}px;
+    --pad-bottom: {{ section.settings.padding_bottom }}px;
+    --section-gap: {{ section.settings.section_gap }}px;
+    --card-gap: {{ section.settings.card_gap }}px;
+    --radius: {{ section.settings.radius }}px;
+
+    --purple: {{ section.settings.purple }};
+    --orange: {{ section.settings.orange }};
+    --cream: {{ section.settings.cream }};
+    --soft-bg: {{ section.settings.soft_background }};
+    --ink: {{ section.settings.ink }};
+    --muted: {{ section.settings.muted }};
+
+    --heading-size: {{ section.settings.section_title_size }}px;
+    --body-size: {{ section.settings.body_size }}px;
+    --heading-mobile: {{ section.settings.mobile_section_title_size }}px;
+    --body-mobile: {{ section.settings.mobile_body_size }}px;
+  "
+>
+
+  <div class="iamw-lp02__shell">
+
+    {% comment %}
+      INTRO
+    {% endcomment %}
+
+    {% if section.settings.intro_eyebrow != blank
+      or section.settings.intro_title != blank
+      or section.settings.intro_text != blank
+    %}
+
+      <div class="iamw-lp02__center-head">
+
+        {% if section.settings.intro_eyebrow != blank %}
+          <div class="iamw-lp02__eyebrow">
+            {{ section.settings.intro_eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.intro_title != blank %}
+          <h2>
+            {{ section.settings.intro_title }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.intro_text != blank %}
+          <div class="iamw-lp02__rte">
+            {{ section.settings.intro_text }}
+          </div>
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+
+    {% comment %}
+      WHY SMART GUMMIES CARDS
+    {% endcomment %}
+
+    {% assign has_benefit_cards = false %}
+
+    {% for block in section.blocks %}
+
+      {% if block.type == 'benefit' %}
+
+        {% if block.settings.title != blank
+          or block.settings.text != blank
+          or block.settings.kicker != blank
+        %}
+          {% assign has_benefit_cards = true %}
+        {% endif %}
+
+      {% endif %}
+
+    {% endfor %}
+
+
+    {% if has_benefit_cards %}
+
+      <div class="iamw-lp02__benefit-grid">
+
+        {% for block in section.blocks %}
+
+          {% if block.type == 'benefit' %}
+
+            {% if block.settings.title != blank
+              or block.settings.text != blank
+              or block.settings.kicker != blank
+            %}
+
+              <article
+                class="iamw-lp02__benefit-card"
+                {{ block.shopify_attributes }}
+              >
+
+                {% if block.settings.icon_image != blank %}
+
+                  <span
+                    class="iamw-lp02__benefit-icon-holder"
+                    style="
+                      width: {{ block.settings.icon_size }}px;
+                      height: {{ block.settings.icon_size }}px;
+                    "
+                  >
+
+                    {{
+                      block.settings.icon_image
+                      | image_url: width: 220
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'iamw-lp02__icon-image'
+                    }}
+
+                  </span>
+
+                {% elsif block.settings.icon_svg != blank %}
+
+                  <span
+                    class="iamw-lp02__benefit-icon-holder iamw-lp02__svg"
+                    style="
+                      width: {{ block.settings.icon_size }}px;
+                      height: {{ block.settings.icon_size }}px;
+                    "
+                  >
+                    {{ block.settings.icon_svg }}
+                  </span>
+
+                {% endif %}
+
+
+                {% if block.settings.kicker != blank %}
+                  <div class="iamw-lp02__benefit-kicker">
+                    {{ block.settings.kicker }}
+                  </div>
+                {% endif %}
+
+
+                {% if block.settings.title != blank %}
+                  <h3>
+                    {{ block.settings.title }}
+                  </h3>
+                {% endif %}
+
+
+                {% if block.settings.text != blank %}
+                  <div class="iamw-lp02__rte">
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}
+
+              </article>
+
+            {% endif %}
+
+          {% endif %}
+
+        {% endfor %}
+
+      </div>
+
+    {% endif %}
+
+
+    {% comment %}
+      FEATURE STORY + MAIN IMAGE
+    {% endcomment %}
+
+    <div class="iamw-lp02__story">
+
+      <div class="iamw-lp02__story-media">
+
+        {% if section.settings.story_image != blank %}
+
+          {{
+            section.settings.story_image
+            | image_url: width: 1500
+            | image_tag:
+              loading: 'lazy',
+              widths: '480,720,960,1200,1500',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              class: 'iamw-lp02__image'
+          }}
+
+        {% else %}
+
+          <div class="iamw-lp02__placeholder iamw-lp02__placeholder--story">
+            <span>ADD PRODUCT / INGREDIENT LIFESTYLE IMAGE</span>
+          </div>
+
+        {% endif %}
+
+      </div>
+
+
+      <div class="iamw-lp02__story-copy">
+
+        {% if section.settings.story_eyebrow != blank %}
+          <div class="iamw-lp02__eyebrow">
+            {{ section.settings.story_eyebrow }}
+          </div>
+        {% endif %}
+
+
+        {% if section.settings.story_title != blank %}
+          <h2>
+            {{ section.settings.story_title }}
+          </h2>
+        {% endif %}
+
+
+        {% if section.settings.story_text != blank %}
+          <div class="iamw-lp02__rte">
+            {{ section.settings.story_text }}
+          </div>
+        {% endif %}
+
+
+        {% if section.settings.story_highlight != blank %}
+          <div class="iamw-lp02__highlight">
+            {{ section.settings.story_highlight }}
+          </div>
+        {% endif %}
+
+
+        {% if section.settings.story_cta_text != blank %}
+
+          {% if section.settings.story_cta_link != blank %}
+
+            <a
+              href="{{ section.settings.story_cta_link }}"
+              class="iamw-lp02__btn"
+            >
+              {{ section.settings.story_cta_text }}
+            </a>
+
+          {% else %}
+
+            <div class="iamw-lp02__btn iamw-lp02__btn--disabled">
+              {{ section.settings.story_cta_text }}
+            </div>
+
+          {% endif %}
+
+        {% endif %}
+
+      </div>
+
+    </div>
+
+
+    {% comment %}
+      INGREDIENT EDUCATION
+    {% endcomment %}
+
+    {% assign has_ingredients = false %}
+
+    {% for block in section.blocks %}
+
+      {% if block.type == 'ingredient' %}
+
+        {% if block.settings.name != blank
+          or block.settings.benefit != blank
+          or block.settings.description != blank
+        %}
+          {% assign has_ingredients = true %}
+        {% endif %}
+
+      {% endif %}
+
+    {% endfor %}
+
+
+    {% if has_ingredients %}
+
+      <div class="iamw-lp02__ingredients-panel">
+
+        {% if section.settings.ingredients_eyebrow != blank
+          or section.settings.ingredients_title != blank
+          or section.settings.ingredients_intro != blank
+        %}
+
+          <div class="iamw-lp02__ingredients-head">
+
+            {% if section.settings.ingredients_eyebrow != blank %}
+              <div class="iamw-lp02__eyebrow">
+                {{ section.settings.ingredients_eyebrow }}
+              </div>
+            {% endif %}
+
+            {% if section.settings.ingredients_title != blank %}
+              <h2>
+                {{ section.settings.ingredients_title }}
+              </h2>
+            {% endif %}
+
+            {% if section.settings.ingredients_intro != blank %}
+              <div class="iamw-lp02__rte">
+                {{ section.settings.ingredients_intro }}
+              </div>
+            {% endif %}
+
+          </div>
+
+        {% endif %}
+
+
+        <div class="iamw-lp02__ingredient-list">
+
+          {% for block in section.blocks %}
+
+            {% if block.type == 'ingredient' %}
+
+              {% if block.settings.name != blank
+                or block.settings.benefit != blank
+                or block.settings.description != blank
+              %}
+
+                <div
+                  class="iamw-lp02__ingredient-row"
+                  {{ block.shopify_attributes }}
+                >
+
+                  {% if block.settings.icon_image != blank %}
+
+                    <span
+                      class="iamw-lp02__ingredient-icon"
+                      style="
+                        width: {{ block.settings.icon_size }}px;
+                        height: {{ block.settings.icon_size }}px;
+                      "
+                    >
+
+                      {{
+                        block.settings.icon_image
+                        | image_url: width: 200
+                        | image_tag:
+                          loading: 'lazy',
+                          class: 'iamw-lp02__icon-image'
+                      }}
+
+                    </span>
+
+                  {% elsif block.settings.icon_svg != blank %}
+
+                    <span
+                      class="iamw-lp02__ingredient-icon iamw-lp02__svg"
+                      style="
+                        width: {{ block.settings.icon_size }}px;
+                        height: {{ block.settings.icon_size }}px;
+                      "
+                    >
+                      {{ block.settings.icon_svg }}
+                    </span>
+
+                  {% endif %}
+
+
+                  <div class="iamw-lp02__ingredient-copy">
+
+                    {% if block.settings.name != blank %}
+                      <div class="iamw-lp02__ingredient-name">
+                        {{ block.settings.name }}
+                      </div>
+                    {% endif %}
+
+
+                    {% if block.settings.benefit != blank %}
+                      <div class="iamw-lp02__ingredient-benefit">
+                        {{ block.settings.benefit }}
+                      </div>
+                    {% endif %}
+
+
+                    {% if block.settings.description != blank %}
+                      <div class="iamw-lp02__ingredient-description">
+                        {{ block.settings.description }}
+                      </div>
+                    {% endif %}
+
+                  </div>
+
+                </div>
+
+              {% endif %}
+
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    {% endif %}
+
+
+    {% comment %}
+      BOTTOM CTA
+    {% endcomment %}
+
+    {% if section.settings.bottom_cta_text != blank %}
+
+      <div class="iamw-lp02__bottom-cta">
+
+        {% if section.settings.bottom_cta_link != blank %}
+
+          <a
+            href="{{ section.settings.bottom_cta_link }}"
+            class="iamw-lp02__btn iamw-lp02__btn--purple"
+          >
+            {{ section.settings.bottom_cta_text }}
+          </a>
+
+        {% else %}
+
+          <div class="iamw-lp02__btn iamw-lp02__btn--purple iamw-lp02__btn--disabled">
+            {{ section.settings.bottom_cta_text }}
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+
+<style>
+
+#IAMW-LP02-{{ section.id }} {
+  padding:
+    var(--pad-top)
+    var(--pad-x)
+    var(--pad-bottom);
+
+  background:
+    {{ section.settings.background }};
+
+  color:
+    var(--ink);
+}
+
+
+#IAMW-LP02-{{ section.id }} * {
+  box-sizing: border-box;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__shell {
+
+  width:
+    100%;
+
+  max-width:
+    var(--page-width);
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    var(--section-gap);
+}
+
+
+#IAMW-LP02-{{ section.id }} h2,
+#IAMW-LP02-{{ section.id }} h3 {
+
+  margin:
+    0;
+
+  color:
+    var(--ink);
+
+  letter-spacing:
+    -0.025em;
+}
+
+
+#IAMW-LP02-{{ section.id }} h2 {
+
+  font-size:
+    var(--heading-size);
+
+  line-height:
+    1.05;
+}
+
+
+#IAMW-LP02-{{ section.id }} h3 {
+
+  font-size:
+    calc(var(--body-size) * 1.28);
+
+  line-height:
+    1.15;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__rte {
+
+  font-size:
+    var(--body-size);
+
+  line-height:
+    1.65;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__rte p:first-child {
+
+  margin-top:
+    0;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__rte p:last-child {
+
+  margin-bottom:
+    0;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__eyebrow,
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__benefit-kicker {
+
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--body-size) * .78);
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .12em;
+
+  line-height:
+    1.35;
+
+  text-transform:
+    uppercase;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__center-head {
+
+  max-width:
+    820px;
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    calc(var(--card-gap) * .7);
+
+  text-align:
+    center;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__benefit-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      {{ section.settings.benefit_columns }},
+      minmax(0,1fr)
+    );
+
+  gap:
+    var(--card-gap);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__benefit-card {
+
+  padding:
+    22px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    12px;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  border-radius:
+    var(--radius);
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.045);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__benefit-icon-holder,
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-icon {
+
+  display:
+    block;
+
+  flex:
+    0 0 auto;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__icon-image {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    contain;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__svg svg {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__story {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+
+  gap:
+    var(--section-gap);
+
+  align-items:
+    center;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__story-media {
+
+  min-height:
+    520px;
+
+  overflow:
+    hidden;
+
+  background:
+    var(--cream);
+
+  border-radius:
+    var(--radius);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__story-copy {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    var(--card-gap);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__image {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    cover;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__placeholder {
+
+  width:
+    100%;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    32px;
+
+  text-align:
+    center;
+
+  color:
+    var(--muted);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66,16,107,.04),
+      rgba(255,157,22,.08)
+    );
+
+  border:
+    2px dashed rgba(66,16,107,.28);
+
+  font-size:
+    calc(var(--body-size) * .88);
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .06em;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__placeholder--story {
+
+  min-height:
+    520px;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__highlight {
+
+  padding:
+    16px 18px;
+
+  background:
+    var(--cream);
+
+  border-left:
+    4px solid var(--orange);
+
+  border-radius:
+    calc(var(--radius) * .6);
+
+  font-size:
+    var(--body-size);
+
+  line-height:
+    1.55;
+
+  font-weight:
+    700;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__btn {
+
+  width:
+    fit-content;
+
+  min-height:
+    52px;
+
+  padding:
+    14px 24px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    var(--orange);
+
+  color:
+    #111111;
+
+  border-radius:
+    999px;
+
+  text-decoration:
+    none;
+
+  text-align:
+    center;
+
+  font-weight:
+    800;
+
+  line-height:
+    1.2;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__btn--purple {
+
+  background:
+    var(--purple);
+
+  color:
+    #ffffff;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__btn--disabled {
+
+  cursor:
+    default;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredients-panel {
+
+  padding:
+    clamp(26px, 5vw, 60px);
+
+  display:
+    grid;
+
+  grid-template-columns:
+    .8fr 1.2fr;
+
+  gap:
+    var(--section-gap);
+
+  background:
+    var(--soft-bg);
+
+  border-radius:
+    var(--radius);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredients-head {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    calc(var(--card-gap) * .7);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-list {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    var(--card-gap);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-row {
+
+  padding:
+    18px;
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    14px;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid rgba(0,0,0,.07);
+
+  border-radius:
+    calc(var(--radius) * .7);
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-copy {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-name {
+
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--body-size) * 1.05);
+
+  font-weight:
+    900;
+
+  line-height:
+    1.25;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-benefit {
+
+  color:
+    var(--ink);
+
+  font-size:
+    var(--body-size);
+
+  font-weight:
+    800;
+
+  line-height:
+    1.4;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__ingredient-description {
+
+  color:
+    var(--muted);
+
+  font-size:
+    calc(var(--body-size) * .9);
+
+  line-height:
+    1.55;
+}
+
+
+#IAMW-LP02-{{ section.id }}
+.iamw-lp02__bottom-cta {
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+}
+
+
+@media screen and (max-width: 989px) {
+
+  #IAMW-LP02-{{ section.id }} {
+
+    padding-left:
+      var(--pad-x-mobile);
+
+    padding-right:
+      var(--pad-x-mobile);
+  }
+
+
+  #IAMW-LP02-{{ section.id }} h2 {
+
+    font-size:
+      var(--heading-mobile);
+  }
+
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__rte,
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__highlight,
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__ingredient-benefit {
+
+    font-size:
+      var(--body-mobile);
+  }
+
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__benefit-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__story,
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__ingredients-panel {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__story-media,
+
+  #IAMW-LP02-{{ section.id }}
+  .iamw-lp02__placeholder--story {
+
+    min-height:
+      360px;
+  }
+
+}
+
+</style>
+
+
+{% schema %}
+
+{
+  "name": "IAMW LP 02 Ingredients",
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "Max page width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "default": 1240,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Desktop left/right padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_x",
+      "label": "Mobile left/right padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "section_gap",
+      "label": "Gap between major areas",
+      "min": 16,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card / inner gap",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "benefit_columns",
+      "label": "Benefit card columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "label": "Section heading size",
+      "min": 28,
+      "max": 64,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_section_title_size",
+      "label": "Mobile heading size",
+      "min": 26,
+      "max": 48,
+      "step": 2,
+      "default": 34,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "label": "Mobile body size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background",
+      "default": "#FBFAFC"
+    },
+
+    {
+      "type": "color",
+      "id": "soft_background",
+      "label": "Ingredient panel background",
+      "default": "#FFF7E5"
+    },
+
+    {
+      "type": "color",
+      "id": "purple",
+      "label": "Brand purple",
+      "default": "#42106B"
+    },
+
+    {
+      "type": "color",
+      "id": "orange",
+      "label": "Accent orange",
+      "default": "#FF9D16"
+    },
+
+    {
+      "type": "color",
+      "id": "cream",
+      "label": "Cream",
+      "default": "#FFF4D6"
+    },
+
+    {
+      "type": "color",
+      "id": "ink",
+      "label": "Text",
+      "default": "#111111"
+    },
+
+    {
+      "type": "color",
+      "id": "muted",
+      "label": "Muted text",
+      "default": "#6C6670"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Section intro"
+    },
+
+    {
+      "type": "text",
+      "id": "intro_eyebrow",
+      "label": "Eyebrow",
+      "default": "BAKIT SMART GUMMIES?"
+    },
+
+    {
+      "type": "textarea",
+      "id": "intro_title",
+      "label": "Title",
+      "default": "Hindi lang pampagana. Daily support din for the things growing kids need."
+    },
+
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro",
+      "default": "<p>Smart Gummies combines appetite support with nutrients for growth, focus, immunity and digestion in one kid-friendly gummy routine.</p>"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Story section"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Product / ingredient lifestyle image"
+    },
+
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Eyebrow",
+      "default": "MADE FOR REAL KID ROUTINES"
+    },
+
+    {
+      "type": "textarea",
+      "id": "story_title",
+      "label": "Title",
+      "default": "For picky eaters, busy school days, and vitamins time na ayaw mong maging struggle."
+    },
+
+    {
+      "type": "richtext",
+      "id": "story_text",
+      "label": "Body",
+      "default": "<p>Hindi mo laging makokontrol kung ano ang kakainin ni baby today. Smart Gummies makes it easier to add daily nutritional support to their routine without syrup, tablets or another fight at vitamins time.</p>"
+    },
+
+    {
+      "type": "text",
+      "id": "story_highlight",
+      "label": "Highlight box",
+      "default": "With L-Lysine for appetite and growth support, plus DHA, Choline, vitamins, minerals and digestive support."
+    },
+
+    {
+      "type": "text",
+      "id": "story_cta_text",
+      "label": "CTA text",
+      "default": "HELP MY CHILD EAT BETTER"
+    },
+
+    {
+      "type": "url",
+      "id": "story_cta_link",
+      "label": "CTA link"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Ingredient section"
+    },
+
+    {
+      "type": "text",
+      "id": "ingredients_eyebrow",
+      "label": "Eyebrow",
+      "default": "WHAT'S INSIDE?"
+    },
+
+    {
+      "type": "textarea",
+      "id": "ingredients_title",
+      "label": "Title",
+      "default": "Key nutrients behind the Smart Gummies routine"
+    },
+
+    {
+      "type": "richtext",
+      "id": "ingredients_intro",
+      "label": "Intro",
+      "default": "<p>Each ingredient block can be edited, reordered or removed depending on the final approved product claims.</p>"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Bottom CTA"
+    },
+
+    {
+      "type": "text",
+      "id": "bottom_cta_text",
+      "label": "CTA text",
+      "default": "SEE THE SMART GUMMIES ROUTINE"
+    },
+
+    {
+      "type": "url",
+      "id": "bottom_cta_link",
+      "label": "CTA link"
+    }
+
+  ],
+
+
+  "blocks": [
+
+    {
+      "type": "benefit",
+      "name": "Why Smart Gummies card",
+
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image"
+        },
+
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Or paste SVG"
+        },
+
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 24,
+          "max": 100,
+          "step": 2,
+          "default": 50,
+          "unit": "px"
+        },
+
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Small label",
+          "default": "APPETITE SUPPORT"
+        },
+
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "For kids na hirap ganahan kumain"
+        },
+
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body",
+          "default": "<p>Daily nutritional support made with picky eaters and real family routines in mind.</p>"
+        }
+
+      ]
+    },
+
+
+    {
+      "type": "ingredient",
+      "name": "Ingredient row",
+
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Ingredient icon"
+        },
+
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Or paste SVG"
+        },
+
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 24,
+          "max": 90,
+          "step": 2,
+          "default": 46,
+          "unit": "px"
+        },
+
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient name",
+          "default": "L-Lysine"
+        },
+
+        {
+          "type": "text",
+          "id": "benefit",
+          "label": "Main benefit",
+          "default": "Appetite & growth support"
+        },
+
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Included to support appetite and normal growth as part of a balanced nutrition routine."
+        }
+
+      ]
+    }
+
+  ],
+
+
+  "presets": [
+
+    {
+      "name": "IAMW LP 02 Ingredients",
+
+      "blocks": [
+
+        {
+          "type": "benefit",
+          "settings": {
+            "kicker": "PIHIKAN KUMAIN",
+            "title": "For kids na kailangan pang pilitin sa bawat meal",
+            "text": "<p>A simple daily gummy routine designed to complement balanced meals and everyday nutrition.</p>",
+            "icon_size": 50
+          }
+        },
+
+        {
+          "type": "benefit",
+          "settings": {
+            "kicker": "APPETITE SUPPORT",
+            "title": "Support para mas ready sila for mealtime",
+            "text": "<p>With nutrients such as L-Lysine plus vitamins and minerals included for appetite and growth support.</p>",
+            "icon_size": 50
+          }
+        },
+
+        {
+          "type": "benefit",
+          "settings": {
+            "kicker": "GROWTH SUPPORT",
+            "title": "Nutrition support habang lumalaki si baby",
+            "text": "<p>Key vitamins and minerals help support normal growth and development.</p>",
+            "icon_size": 50
+          }
+        },
+
+        {
+          "type": "benefit",
+          "settings": {
+            "kicker": "FOCUS & LEARNING",
+            "title": "Support din for busy brains sa school",
+            "text": "<p>DHA, Choline and B Vitamins support normal brain and nervous system function.</p>",
+            "icon_size": 50
+          }
+        },
+
+        {
+          "type": "benefit",
+          "settings": {
+            "kicker": "IMMUNITY",
+            "title": "Daily support for school days and playtime",
+            "text": "<p>Vitamins A, C, D, E and Zinc help support normal immune function.</p>",
+            "icon_size": 50
+          }
+        },
+
+        {
+          "type": "benefit",
+          "settings": {
+            "kicker": "DIGESTION",
+            "title": "Support for a more complete nutrition routine",
+            "text": "<p>Digestive enzymes are included to support healthy digestion and nutrient utilization.</p>",
+            "icon_size": 50
+          }
+        },
+
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "L-Lysine",
+            "benefit": "Appetite & growth support",
+            "description": "Included to support appetite and normal growth as part of a balanced nutrition routine.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "DHA",
+            "benefit": "Brain development support",
+            "description": "Supports normal brain development for growing kids.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Choline",
+            "benefit": "Brain & nervous system support",
+            "description": "Supports normal brain and nervous system function.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "B Complex Vitamins",
+            "benefit": "Energy & everyday development",
+            "description": "Supports normal energy metabolism and everyday nutritional needs.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Zinc",
+            "benefit": "Growth & immunity",
+            "description": "Supports normal growth and normal immune function.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Vitamins A, C, D & E",
+            "benefit": "Everyday immune and wellness support",
+            "description": "Important vitamins that support normal growth, immunity and everyday wellness.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Digestive Enzymes",
+            "benefit": "Digestive support",
+            "description": "Included to support healthy digestion and nutrient utilization.",
+            "icon_size": 46
+          }
+        },
+
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Lutein",
+            "benefit": "Eye health support",
+            "description": "Included as part of the formula for normal eye and visual health support.",
+            "icon_size": 46
+          }
+        }
+
+      ]
+    }
+
+  ]
+
+}
+
+{% endschema %}

@@ -1,0 +1,1623 @@
+{% comment %}
+  I AM WELL
+  Reference Section 03
+  Image + Accordion Education Section
+
+  CTA options:
+  1. Scroll to section
+  2. Regular link
+{% endcomment %}
+
+<section
+  id="IAMW-ACC-{{ section.id }}"
+  class="iamw-acc"
+  style="
+    --page-width: {{ section.settings.page_width }}px;
+
+    --pad-x: {{ section.settings.padding_x }}px;
+    --pad-x-mobile: {{ section.settings.mobile_padding_x }}px;
+
+    --pad-top: {{ section.settings.padding_top }}px;
+    --pad-bottom: {{ section.settings.padding_bottom }}px;
+
+    --section-gap: {{ section.settings.section_gap }}px;
+    --column-gap: {{ section.settings.column_gap }}px;
+    --accordion-gap: {{ section.settings.accordion_gap }}px;
+
+    --radius: {{ section.settings.radius }}px;
+
+    --purple: {{ section.settings.purple }};
+    --orange: {{ section.settings.orange }};
+    --cream: {{ section.settings.cream }};
+    --background: {{ section.settings.background }};
+    --text: {{ section.settings.text_color }};
+    --muted: {{ section.settings.muted }};
+    --border: {{ section.settings.border_color }};
+
+    --heading-size: {{ section.settings.heading_size }}px;
+    --body-size: {{ section.settings.body_size }}px;
+    --accordion-title-size: {{ section.settings.accordion_title_size }}px;
+
+    --heading-mobile: {{ section.settings.mobile_heading_size }}px;
+    --body-mobile: {{ section.settings.mobile_body_size }}px;
+    --accordion-title-mobile: {{ section.settings.mobile_accordion_title_size }}px;
+  "
+>
+
+  <div class="iamw-acc__shell">
+
+
+    {% comment %}
+      HEADER
+    {% endcomment %}
+
+    {% if section.settings.eyebrow != blank
+      or section.settings.heading != blank
+      or section.settings.intro != blank
+    %}
+
+      <div class="iamw-acc__head">
+
+        {% if section.settings.eyebrow != blank %}
+
+          <div class="iamw-acc__eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+
+        {% endif %}
+
+
+        {% if section.settings.heading != blank %}
+
+          <h2 class="iamw-acc__heading">
+            {{ section.settings.heading }}
+          </h2>
+
+        {% endif %}
+
+
+        {% if section.settings.intro != blank %}
+
+          <div class="iamw-acc__rte iamw-acc__intro">
+            {{ section.settings.intro }}
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+
+
+    {% comment %}
+      IMAGE + ACCORDIONS
+    {% endcomment %}
+
+    <div class="iamw-acc__grid">
+
+
+      <div class="iamw-acc__media">
+
+        {% if section.settings.image != blank %}
+
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              widths: '480,720,960,1200,1600',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              class: 'iamw-acc__image'
+          }}
+
+        {% else %}
+
+          <div class="iamw-acc__placeholder">
+            <span>
+              ADD EDUCATIONAL / LIFESTYLE IMAGE
+            </span>
+          </div>
+
+        {% endif %}
+
+      </div>
+
+
+
+      {% assign has_accordion = false %}
+
+      {% for block in section.blocks %}
+
+        {% if block.type == 'accordion' %}
+
+          {% if block.settings.title != blank %}
+            {% assign has_accordion = true %}
+          {% endif %}
+
+        {% endif %}
+
+      {% endfor %}
+
+
+
+      {% if has_accordion %}
+
+        <div class="iamw-acc__list">
+
+          {% for block in section.blocks %}
+
+            {% if block.type == 'accordion' %}
+
+              {% if block.settings.title != blank %}
+
+                <details
+                  class="iamw-acc__item"
+                  {% if block.settings.open_by_default %}open{% endif %}
+                  {{ block.shopify_attributes }}
+                >
+
+                  <summary class="iamw-acc__summary">
+
+                    <div class="iamw-acc__summary-left">
+
+
+                      {% if block.settings.icon_image != blank %}
+
+                        <span
+                          class="iamw-acc__icon"
+                          style="
+                            width: {{ block.settings.icon_size }}px;
+                            height: {{ block.settings.icon_size }}px;
+                          "
+                        >
+
+                          {{
+                            block.settings.icon_image
+                            | image_url: width: 180
+                            | image_tag:
+                              loading: 'lazy',
+                              class: 'iamw-acc__icon-image'
+                          }}
+
+                        </span>
+
+
+                      {% elsif block.settings.icon_svg != blank %}
+
+                        <span
+                          class="iamw-acc__icon iamw-acc__svg"
+                          style="
+                            width: {{ block.settings.icon_size }}px;
+                            height: {{ block.settings.icon_size }}px;
+                          "
+                        >
+                          {{ block.settings.icon_svg }}
+                        </span>
+
+                      {% endif %}
+
+
+                      <span class="iamw-acc__title">
+                        {{ block.settings.title }}
+                      </span>
+
+                    </div>
+
+
+                    <span class="iamw-acc__toggle">
+
+                      <span class="iamw-acc__toggle-icon">
+                        ⌄
+                      </span>
+
+                    </span>
+
+                  </summary>
+
+
+
+                  {% if block.settings.text != blank %}
+
+                    <div class="iamw-acc__content">
+
+                      <div class="iamw-acc__rte">
+                        {{ block.settings.text }}
+                      </div>
+
+                    </div>
+
+                  {% endif %}
+
+                </details>
+
+              {% endif %}
+
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+
+
+    {% comment %}
+      CTA DESTINATION
+    {% endcomment %}
+
+    {% if section.settings.cta_text != blank %}
+
+      {% assign iamw_cta_url = blank %}
+
+      {% if section.settings.cta_destination == 'anchor' %}
+
+        {% if section.settings.cta_anchor != blank %}
+          {% assign iamw_cta_url = '#' | append: section.settings.cta_anchor %}
+        {% endif %}
+
+      {% elsif section.settings.cta_destination == 'link' %}
+
+        {% if section.settings.cta_link != blank %}
+          {% assign iamw_cta_url = section.settings.cta_link %}
+        {% endif %}
+
+      {% endif %}
+
+
+      <div class="iamw-acc__bottom">
+
+        {% if iamw_cta_url != blank %}
+
+          <a
+            href="{{ iamw_cta_url }}"
+            class="iamw-acc__cta"
+            {% if section.settings.cta_destination == 'anchor' %}
+              data-iamw-anchor-link
+            {% endif %}
+          >
+            {{ section.settings.cta_text }}
+          </a>
+
+        {% else %}
+
+          <div class="iamw-acc__cta iamw-acc__cta--disabled">
+            {{ section.settings.cta_text }}
+          </div>
+
+        {% endif %}
+
+
+
+        {% if section.settings.trust_text != blank %}
+
+          <div class="iamw-acc__trust">
+
+
+            {% if section.settings.trust_icon != blank %}
+
+              <span
+                class="iamw-acc__trust-icon"
+                style="
+                  width: {{ section.settings.trust_icon_size }}px;
+                  height: {{ section.settings.trust_icon_size }}px;
+                "
+              >
+
+                {{
+                  section.settings.trust_icon
+                  | image_url: width: 120
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'iamw-acc__trust-image'
+                }}
+
+              </span>
+
+
+            {% elsif section.settings.trust_svg != blank %}
+
+              <span
+                class="iamw-acc__trust-icon iamw-acc__svg"
+                style="
+                  width: {{ section.settings.trust_icon_size }}px;
+                  height: {{ section.settings.trust_icon_size }}px;
+                "
+              >
+                {{ section.settings.trust_svg }}
+              </span>
+
+            {% endif %}
+
+
+            <span>
+              {{ section.settings.trust_text }}
+            </span>
+
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+
+
+<style>
+
+#IAMW-ACC-{{ section.id }} {
+  width:
+    100%;
+
+  padding:
+    var(--pad-top)
+    var(--pad-x)
+    var(--pad-bottom);
+
+  background:
+    var(--background);
+
+  color:
+    var(--text);
+}
+
+
+#IAMW-ACC-{{ section.id }} * {
+  box-sizing:
+    border-box;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__shell {
+  width:
+    100%;
+
+  max-width:
+    var(--page-width);
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    var(--section-gap);
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__head {
+  max-width:
+    1080px;
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    12px;
+
+  text-align:
+    center;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__eyebrow {
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--body-size) * .78);
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__heading {
+  margin:
+    0;
+
+  color:
+    var(--text);
+
+  font-size:
+    var(--heading-size);
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__rte {
+  color:
+    var(--text);
+
+  font-size:
+    var(--body-size);
+
+  line-height:
+    1.65;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__rte p:first-child {
+  margin-top:
+    0;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__rte p:last-child {
+  margin-bottom:
+    0;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap:
+    var(--column-gap);
+
+  align-items:
+    stretch;
+}
+
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__media {
+  min-height:
+    {{ section.settings.image_height }}px;
+
+  overflow:
+    hidden;
+
+  background:
+    var(--cream);
+
+  border-radius:
+    var(--radius);
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__image {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    {{ section.settings.image_fit }};
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__placeholder {
+  width:
+    100%;
+
+  min-height:
+    {{ section.settings.image_height }}px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66,16,107,.04),
+      rgba(255,157,22,.09)
+    );
+
+  border:
+    2px dashed rgba(66,16,107,.28);
+
+  color:
+    var(--muted);
+
+  text-align:
+    center;
+
+  font-size:
+    calc(var(--body-size) * .88);
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .06em;
+}
+
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__list {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    var(--accordion-gap);
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__item {
+  overflow:
+    hidden;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    var(--radius);
+
+  background:
+    #fff;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__summary {
+  list-style:
+    none;
+
+  cursor:
+    pointer;
+
+  min-height:
+    78px;
+
+  padding:
+    16px 18px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    18px;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__summary::-webkit-details-marker {
+  display:
+    none;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__summary-left {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    14px;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__icon {
+  flex:
+    0 0 auto;
+
+  display:
+    block;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__icon-image,
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__trust-image {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    contain;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__svg svg {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__title {
+  color:
+    var(--text);
+
+  font-size:
+    var(--accordion-title-size);
+
+  font-weight:
+    800;
+
+  line-height:
+    1.25;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__toggle {
+  flex:
+    0 0 auto;
+
+  width:
+    30px;
+
+  height:
+    30px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--purple);
+
+  color:
+    #fff;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__toggle-icon {
+  display:
+    block;
+
+  transform:
+    translateY(-1px);
+
+  transition:
+    transform .2s ease;
+
+  font-size:
+    18px;
+
+  font-weight:
+    800;
+
+  line-height:
+    1;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__item[open]
+.iamw-acc__toggle-icon {
+  transform:
+    rotate(180deg)
+    translateY(1px);
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__content {
+  padding:
+    0 18px 18px 18px;
+}
+
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__bottom {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  gap:
+    16px;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__cta {
+  min-height:
+    52px;
+
+  padding:
+    14px 26px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    var(--orange);
+
+  color:
+    #111;
+
+  border-radius:
+    10px;
+
+  text-decoration:
+    none;
+
+  text-align:
+    center;
+
+  font-size:
+    var(--body-size);
+
+  font-weight:
+    900;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform .2s ease,
+    opacity .2s ease;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__cta:hover {
+  transform:
+    translateY(-1px);
+
+  opacity:
+    .92;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__cta--disabled {
+  cursor:
+    default;
+
+  opacity:
+    .6;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__trust {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    10px;
+
+  color:
+    var(--text);
+
+  font-size:
+    calc(var(--body-size) * .88);
+
+  line-height:
+    1.4;
+
+  text-align:
+    center;
+}
+
+
+#IAMW-ACC-{{ section.id }}
+.iamw-acc__trust-icon {
+  flex:
+    0 0 auto;
+
+  display:
+    block;
+}
+
+
+
+@media screen and (max-width: 989px) {
+
+  #IAMW-ACC-{{ section.id }} {
+    padding-left:
+      var(--pad-x-mobile);
+
+    padding-right:
+      var(--pad-x-mobile);
+  }
+
+
+  #IAMW-ACC-{{ section.id }}
+  .iamw-acc__heading {
+    font-size:
+      var(--heading-mobile);
+  }
+
+
+  #IAMW-ACC-{{ section.id }}
+  .iamw-acc__rte {
+    font-size:
+      var(--body-mobile);
+  }
+
+
+  #IAMW-ACC-{{ section.id }}
+  .iamw-acc__title {
+    font-size:
+      var(--accordion-title-mobile);
+  }
+
+
+  #IAMW-ACC-{{ section.id }}
+  .iamw-acc__grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  #IAMW-ACC-{{ section.id }}
+  .iamw-acc__media,
+
+  #IAMW-ACC-{{ section.id }}
+  .iamw-acc__placeholder {
+    min-height:
+      {{ section.settings.mobile_image_height }}px;
+  }
+
+}
+
+</style>
+
+
+
+<script>
+
+(function() {
+
+  function initIAMWAccordionCTA() {
+
+    const section =
+      document.getElementById(
+        'IAMW-ACC-{{ section.id }}'
+      );
+
+    if (!section) return;
+
+
+    const anchorLinks =
+      section.querySelectorAll(
+        '[data-iamw-anchor-link]'
+      );
+
+
+    anchorLinks.forEach(
+      function(link) {
+
+        if (
+          link.dataset.iamwAnchorReady ===
+          'true'
+        ) {
+          return;
+        }
+
+
+        link.dataset.iamwAnchorReady =
+          'true';
+
+
+        link.addEventListener(
+          'click',
+          function(event) {
+
+            const href =
+              link.getAttribute(
+                'href'
+              );
+
+
+            if (
+              !href ||
+              href.charAt(0) !== '#'
+            ) {
+              return;
+            }
+
+
+            const target =
+              document.querySelector(
+                href
+              );
+
+
+            if (!target) {
+              return;
+            }
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+              behavior:
+                'smooth',
+
+              block:
+                'start'
+            });
+
+
+            if (
+              window.history &&
+              window.history.replaceState
+            ) {
+
+              window.history.replaceState(
+                null,
+                '',
+                href
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      initIAMWAccordionCTA
+    );
+
+  } else {
+
+    initIAMWAccordionCTA();
+
+  }
+
+
+  document.addEventListener(
+    'shopify:section:load',
+    function(event) {
+
+      if (
+        event.target &&
+        event.target.id ===
+        'IAMW-ACC-{{ section.id }}'
+      ) {
+
+        initIAMWAccordionCTA();
+
+      }
+
+    }
+  );
+
+})();
+
+</script>
+
+
+
+{% schema %}
+
+{
+  "name": "IAMW Accordion",
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHY SMART GUMMIES?"
+    },
+
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smart support where your child needs it most."
+    },
+
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>Especially for picky eaters, growing kids and moms who want one easier daily nutrition routine.</p>"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Image"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Educational / lifestyle image"
+    },
+
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ]
+    },
+
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Desktop image height",
+      "min": 420,
+      "max": 900,
+      "step": 20,
+      "default": 620,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "label": "Mobile image height",
+      "min": 280,
+      "max": 650,
+      "step": 10,
+      "default": 420,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "HELP MY CHILD EAT BETTER"
+    },
+
+    {
+      "type": "select",
+      "id": "cta_destination",
+      "label": "CTA destination",
+      "default": "anchor",
+      "options": [
+        {
+          "value": "anchor",
+          "label": "Scroll to section"
+        },
+        {
+          "value": "link",
+          "label": "Regular link"
+        }
+      ]
+    },
+
+    {
+      "type": "text",
+      "id": "cta_anchor",
+      "label": "Anchor ID",
+      "default": "iamw-product",
+      "info": "Enter the anchor without the # symbol."
+    },
+
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Regular link"
+    },
+
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust text",
+      "default": "Kid-friendly mixed berry gummy • Food supplement"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "trust_icon",
+      "label": "Optional trust icon"
+    },
+
+    {
+      "type": "html",
+      "id": "trust_svg",
+      "label": "Or paste trust SVG"
+    },
+
+    {
+      "type": "range",
+      "id": "trust_icon_size",
+      "label": "Trust icon size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "Max page width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "default": 1260,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Desktop side padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_x",
+      "label": "Mobile side padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "section_gap",
+      "label": "Section gap",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "accordion_gap",
+      "label": "Accordion gap",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 30,
+      "max": 64,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "accordion_title_size",
+      "label": "Accordion title size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 26,
+      "max": 48,
+      "step": 2,
+      "default": 34,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "label": "Mobile body size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_accordion_title_size",
+      "label": "Mobile accordion title",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "color",
+      "id": "purple",
+      "label": "IAMW purple",
+      "default": "#42106B"
+    },
+
+    {
+      "type": "color",
+      "id": "orange",
+      "label": "Accent orange",
+      "default": "#FF9D16"
+    },
+
+    {
+      "type": "color",
+      "id": "cream",
+      "label": "Placeholder",
+      "default": "#FFF4D6"
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1C1930"
+    },
+
+    {
+      "type": "color",
+      "id": "muted",
+      "label": "Muted text",
+      "default": "#6C6670"
+    },
+
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Accordion border",
+      "default": "#E2D9EA"
+    }
+
+  ],
+
+
+  "blocks": [
+
+    {
+      "type": "accordion",
+      "name": "Accordion item",
+
+      "settings": [
+
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        },
+
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image"
+        },
+
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Or paste SVG"
+        },
+
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 20,
+          "max": 70,
+          "step": 2,
+          "default": 38,
+          "unit": "px"
+        },
+
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Appetite Support for Picky Eaters"
+        },
+
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body",
+          "default": "<p>Add your accordion explanation here.</p>"
+        }
+
+      ]
+    }
+
+  ],
+
+
+  "presets": [
+
+    {
+      "name": "IAMW Accordion",
+
+      "blocks": [
+
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Helps Support Appetite for Picky Eaters",
+            "text": "<p>Kung konti lang kumain si baby or puro favorite food lang ang gusto, Smart Gummies includes L-Lysine plus vitamins and minerals to help support appetite and everyday nutrition.</p>",
+            "icon_size": 38
+          }
+        },
+
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Supports Focus & Learning",
+            "text": "<p>DHA, Choline and B Complex Vitamins support normal brain development and nervous system function for busy school days and everyday learning.</p>",
+            "icon_size": 38
+          }
+        },
+
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Helps Fill Everyday Nutrition Gaps",
+            "text": "<p>Picky eating can make variety difficult. Smart Gummies helps complement a balanced diet with key vitamins and minerals for growing kids.</p>",
+            "icon_size": 38
+          }
+        },
+
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Daily Immunity Support",
+            "text": "<p>Vitamins A, C, D, E and Zinc help support normal immune function for active kids from school days to playtime.</p>",
+            "icon_size": 38
+          }
+        },
+
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Made for Growing Kids",
+            "text": "<p>The formula combines nutrients for appetite, growth, focus, immunity, digestion and overall daily wellness in one simple routine.</p>",
+            "icon_size": 38
+          }
+        },
+
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Mixed Berry Gummy Kids Will Actually Take",
+            "text": "<p>No syrup. No tablets. Less pilitan and less habulan during vitamins time, with a kid-friendly mixed berry gummy.</p>",
+            "icon_size": 38,
+            "open_by_default": true
+          }
+        }
+
+      ]
+
+    }
+
+  ]
+
+}
+
+{% endschema %}

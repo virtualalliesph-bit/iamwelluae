@@ -1,0 +1,1105 @@
+{% comment %}
+  I AM WELL
+  Reference Section 04
+  Nutrient Support Tabs
+{% endcomment %}
+
+<section
+  id="IAMW-TABS-{{ section.id }}"
+  class="iamw-tabs"
+  style="
+    --page-width: {{ section.settings.page_width }}px;
+
+    --pad-x: {{ section.settings.padding_x }}px;
+    --pad-x-mobile: {{ section.settings.mobile_padding_x }}px;
+    --pad-top: {{ section.settings.padding_top }}px;
+    --pad-bottom: {{ section.settings.padding_bottom }}px;
+
+    --section-gap: {{ section.settings.section_gap }}px;
+    --tab-gap: {{ section.settings.tab_gap }}px;
+
+    --radius: {{ section.settings.radius }}px;
+
+    --purple: {{ section.settings.purple }};
+    --orange: {{ section.settings.orange }};
+    --cream: {{ section.settings.cream }};
+    --background: {{ section.settings.background }};
+    --text: {{ section.settings.text_color }};
+    --muted: {{ section.settings.muted }};
+    --border: {{ section.settings.border_color }};
+    --active-tab: {{ section.settings.active_tab_color }};
+
+    --heading-size: {{ section.settings.heading_size }}px;
+    --panel-heading-size: {{ section.settings.panel_heading_size }}px;
+    --body-size: {{ section.settings.body_size }}px;
+    --tab-size: {{ section.settings.tab_size }}px;
+
+    --heading-mobile: {{ section.settings.mobile_heading_size }}px;
+    --panel-heading-mobile: {{ section.settings.mobile_panel_heading_size }}px;
+    --body-mobile: {{ section.settings.mobile_body_size }}px;
+    --tab-mobile: {{ section.settings.mobile_tab_size }}px;
+  "
+>
+
+  <div class="iamw-tabs__shell">
+
+    {% if section.settings.eyebrow != blank
+      or section.settings.heading != blank
+      or section.settings.intro != blank
+    %}
+      <div class="iamw-tabs__head">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="iamw-tabs__eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="iamw-tabs__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.intro != blank %}
+          <div class="iamw-tabs__rte">
+            {{ section.settings.intro }}
+          </div>
+        {% endif %}
+
+      </div>
+    {% endif %}
+
+
+    {% assign has_tabs = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'tab' %}
+        {% if block.settings.title != blank %}
+          {% assign has_tabs = true %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+
+    {% if has_tabs %}
+
+      <div
+        class="iamw-tabs__component"
+        data-iamw-tabs
+      >
+
+        <div
+          class="iamw-tabs__nav"
+          role="tablist"
+        >
+
+          {% assign tab_index = 0 %}
+
+          {% for block in section.blocks %}
+
+            {% if block.type == 'tab' %}
+
+              {% if block.settings.title != blank %}
+
+                <button
+                  type="button"
+                  class="iamw-tabs__button {% if tab_index == 0 %}is-active{% endif %}"
+                  data-tab-button="{{ block.id }}"
+                  aria-selected="{% if tab_index == 0 %}true{% else %}false{% endif %}"
+                  role="tab"
+                >
+                  {{ block.settings.title }}
+                </button>
+
+                {% assign tab_index = tab_index | plus: 1 %}
+
+              {% endif %}
+
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+
+
+        <div class="iamw-tabs__panels">
+
+          {% assign panel_index = 0 %}
+
+          {% for block in section.blocks %}
+
+            {% if block.type == 'tab' %}
+
+              {% if block.settings.title != blank %}
+
+                <div
+                  class="iamw-tabs__panel {% if panel_index == 0 %}is-active{% endif %}"
+                  data-tab-panel="{{ block.id }}"
+                  role="tabpanel"
+                  {{ block.shopify_attributes }}
+                >
+
+                  <div
+                    class="
+                      iamw-tabs__panel-inner
+
+                      {% if block.settings.media_position == 'left' %}
+                        iamw-tabs__panel-inner--media-left
+                      {% else %}
+                        iamw-tabs__panel-inner--media-right
+                      {% endif %}
+                    "
+                  >
+
+                    <div class="iamw-tabs__copy">
+
+                      {% if block.settings.panel_heading != blank %}
+                        <h3 class="iamw-tabs__panel-heading">
+                          {{ block.settings.panel_heading }}
+                        </h3>
+                      {% endif %}
+
+                      {% if block.settings.text != blank %}
+                        <div class="iamw-tabs__rte">
+                          {{ block.settings.text }}
+                        </div>
+                      {% endif %}
+
+                    </div>
+
+
+                    <div class="iamw-tabs__media">
+
+                      {% if block.settings.video != blank %}
+
+                        {{
+                          block.settings.video
+                          | video_tag:
+                            autoplay: false,
+                            controls: true,
+                            loop: false,
+                            muted: false,
+                            class: 'iamw-tabs__video'
+                        }}
+
+                      {% elsif block.settings.image != blank %}
+
+                        {{
+                          block.settings.image
+                          | image_url: width: 1600
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '480,720,960,1200,1600',
+                            sizes: '(min-width: 990px) 42vw, 100vw',
+                            class: 'iamw-tabs__image'
+                        }}
+
+                      {% else %}
+
+                        <div class="iamw-tabs__placeholder">
+                          <span>ADD TAB IMAGE OR VIDEO</span>
+                        </div>
+
+                      {% endif %}
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {% assign panel_index = panel_index | plus: 1 %}
+
+              {% endif %}
+
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+
+<style>
+
+#IAMW-TABS-{{ section.id }} {
+  width: 100%;
+  padding:
+    var(--pad-top)
+    var(--pad-x)
+    var(--pad-bottom);
+  background: var(--background);
+  color: var(--text);
+}
+
+
+#IAMW-TABS-{{ section.id }} * {
+  box-sizing: border-box;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__shell {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__head {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__eyebrow {
+  color: var(--purple);
+  font-size: calc(var(--body-size) * .78);
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__heading {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--heading-size);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__rte {
+  color: var(--text);
+  font-size: var(--body-size);
+  line-height: 1.7;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__rte p:first-child {
+  margin-top: 0;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__rte p:last-child {
+  margin-bottom: 0;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__component {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tab-gap);
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__nav {
+  padding: 8px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  scrollbar-width: none;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__nav::-webkit-scrollbar {
+  display: none;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__button {
+  flex: 1 0 180px;
+  min-height: 58px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--tab-size);
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background .2s ease,
+    color .2s ease;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__button.is-active {
+  background: var(--active-tab);
+  color: #fff;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel {
+  display: none;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel.is-active {
+  display: block;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel-inner {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(0, .75fr);
+  min-height: {{ section.settings.panel_height }}px;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel-inner--media-left
+.iamw-tabs__media {
+  order: 1;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel-inner--media-left
+.iamw-tabs__copy {
+  order: 2;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel-inner--media-right
+.iamw-tabs__copy {
+  order: 1;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel-inner--media-right
+.iamw-tabs__media {
+  order: 2;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__copy {
+  padding:
+    clamp(28px, 5vw, 58px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__panel-heading {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--panel-heading-size);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__media {
+  min-height: {{ section.settings.panel_height }}px;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__image,
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: {{ section.settings.media_fit }};
+}
+
+
+#IAMW-TABS-{{ section.id }}
+.iamw-tabs__placeholder {
+  width: 100%;
+  min-height: {{ section.settings.panel_height }}px;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  color: var(--muted);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66,16,107,.04),
+      rgba(255,157,22,.09)
+    );
+  text-align: center;
+  font-size: calc(var(--body-size) * .88);
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+
+
+@media screen and (max-width: 989px) {
+
+  #IAMW-TABS-{{ section.id }} {
+    padding-left: var(--pad-x-mobile);
+    padding-right: var(--pad-x-mobile);
+  }
+
+
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__heading {
+    font-size: var(--heading-mobile);
+  }
+
+
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__panel-heading {
+    font-size: var(--panel-heading-mobile);
+  }
+
+
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__rte {
+    font-size: var(--body-mobile);
+  }
+
+
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__button {
+    flex-basis: 150px;
+    min-height: 50px;
+    font-size: var(--tab-mobile);
+  }
+
+
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__panel-inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__media,
+  #IAMW-TABS-{{ section.id }}
+  .iamw-tabs__placeholder {
+    min-height: {{ section.settings.mobile_media_height }}px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+(function() {
+
+  function initIAMWTabs(section) {
+
+    if (!section) return;
+
+    const buttons =
+      section.querySelectorAll(
+        '[data-tab-button]'
+      );
+
+    const panels =
+      section.querySelectorAll(
+        '[data-tab-panel]'
+      );
+
+
+    if (!buttons.length) return;
+
+
+    buttons.forEach(function(button) {
+
+      button.addEventListener(
+        'click',
+        function() {
+
+          const target =
+            button.getAttribute(
+              'data-tab-button'
+            );
+
+
+          buttons.forEach(
+            function(btn) {
+
+              btn.classList.remove(
+                'is-active'
+              );
+
+              btn.setAttribute(
+                'aria-selected',
+                'false'
+              );
+
+            }
+          );
+
+
+          panels.forEach(
+            function(panel) {
+
+              panel.classList.remove(
+                'is-active'
+              );
+
+            }
+          );
+
+
+          button.classList.add(
+            'is-active'
+          );
+
+          button.setAttribute(
+            'aria-selected',
+            'true'
+          );
+
+
+          const targetPanel =
+            section.querySelector(
+              '[data-tab-panel="' +
+              target +
+              '"]'
+            );
+
+
+          if (targetPanel) {
+
+            targetPanel.classList.add(
+              'is-active'
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+  }
+
+
+  const section =
+    document.getElementById(
+      'IAMW-TABS-{{ section.id }}'
+    );
+
+  initIAMWTabs(section);
+
+
+  document.addEventListener(
+    'shopify:section:load',
+    function(event) {
+
+      if (
+        event.target &&
+        event.target.id ===
+        'IAMW-TABS-{{ section.id }}'
+      ) {
+
+        initIAMWTabs(
+          event.target
+        );
+
+      }
+
+    }
+  );
+
+})();
+
+</script>
+
+
+{% schema %}
+
+{
+  "name": "IAMW Support Tabs",
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SMART GUMMIES SUPPORT"
+    },
+
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Delivering the nutrients a growing kid needs"
+    },
+
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "Max page width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "default": 1260,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Desktop side padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_x",
+      "label": "Mobile side padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "section_gap",
+      "label": "Section gap",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "tab_gap",
+      "label": "Tabs to panel gap",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "default": 26,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "panel_height",
+      "label": "Desktop panel height",
+      "min": 320,
+      "max": 760,
+      "step": 20,
+      "default": 440,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_media_height",
+      "label": "Mobile media height",
+      "min": 220,
+      "max": 550,
+      "step": 10,
+      "default": 300,
+      "unit": "px"
+    },
+
+    {
+      "type": "select",
+      "id": "media_fit",
+      "label": "Media fit",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ]
+    },
+
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 30,
+      "max": 64,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "panel_heading_size",
+      "label": "Panel heading size",
+      "min": 22,
+      "max": 42,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "tab_size",
+      "label": "Tab text size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 26,
+      "max": 48,
+      "step": 2,
+      "default": 34,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_panel_heading_size",
+      "label": "Mobile panel heading",
+      "min": 20,
+      "max": 36,
+      "step": 2,
+      "default": 26,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "label": "Mobile body size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_tab_size",
+      "label": "Mobile tab size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "color",
+      "id": "purple",
+      "label": "IAMW purple",
+      "default": "#42106B"
+    },
+
+    {
+      "type": "color",
+      "id": "orange",
+      "label": "Accent orange",
+      "default": "#FF9D16"
+    },
+
+    {
+      "type": "color",
+      "id": "cream",
+      "label": "Placeholder",
+      "default": "#FFF4D6"
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1C1930"
+    },
+
+    {
+      "type": "color",
+      "id": "muted",
+      "label": "Muted text",
+      "default": "#6C6670"
+    },
+
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#E2D9EA"
+    },
+
+    {
+      "type": "color",
+      "id": "active_tab_color",
+      "label": "Active tab",
+      "default": "#42106B"
+    }
+
+  ],
+
+
+  "blocks": [
+
+    {
+      "type": "tab",
+      "name": "Support tab",
+
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Picky Eating"
+        },
+
+        {
+          "type": "text",
+          "id": "panel_heading",
+          "label": "Panel heading",
+          "default": "How This Helps"
+        },
+
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Panel content",
+          "default": "<p>Add your explanation here.</p>"
+        },
+
+        {
+          "type": "select",
+          "id": "media_position",
+          "label": "Media position",
+          "default": "right",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Tab image"
+        },
+
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Tab video"
+        }
+
+      ]
+
+    }
+
+  ],
+
+
+  "presets": [
+
+    {
+      "name": "IAMW Support Tabs",
+
+      "blocks": [
+
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Picky Eating",
+            "panel_heading": "How This Helps",
+            "text": "<p>Kapag pihikan kumain si baby, mahirap minsan makakuha ng enough variety from meals alone. Smart Gummies helps complement a balanced diet with key nutrients for appetite, growth and everyday wellness.</p><p><strong>🍓 L-Lysine</strong> — included for appetite and growth support.</p><p><strong>⚡ B Complex Vitamins</strong> — support normal energy metabolism.</p><p><strong>🌱 Zinc</strong> — supports normal growth and immune function.</p>",
+            "media_position": "right"
+          }
+        },
+
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Focus & Learning",
+            "panel_heading": "How This Helps",
+            "text": "<p>Busy school days and everyday learning need consistent nutritional support. Smart Gummies contains nutrients selected to support normal brain and nervous system function.</p><p><strong>🧠 DHA</strong> — supports normal brain development.</p><p><strong>✨ Choline</strong> — supports brain and nervous system function.</p><p><strong>⚡ B Complex</strong> — supports normal energy metabolism.</p>",
+            "media_position": "right"
+          }
+        },
+
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Immunity",
+            "panel_heading": "How This Helps",
+            "text": "<p>School, playtime and everyday activities mean growing kids need consistent immune support too.</p><p><strong>🍊 Vitamin C</strong> — supports normal immune function.</p><p><strong>☀️ Vitamin D</strong> — supports normal immune function and development.</p><p><strong>🌱 Zinc</strong> — supports normal immune function.</p>",
+            "media_position": "right"
+          }
+        },
+
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Growth Support",
+            "panel_heading": "How This Helps",
+            "text": "<p>Growing kids need key vitamins, minerals and amino acids as part of a balanced nutrition routine.</p><p><strong>🌱 L-Lysine</strong> — included for appetite and growth support.</p><p><strong>☀️ Vitamin D</strong> — supports normal bones and development.</p><p><strong>⭐ Zinc</strong> — supports normal growth.</p>",
+            "media_position": "right"
+          }
+        }
+
+      ]
+
+    }
+
+  ]
+
+}
+
+{% endschema %}

@@ -1,0 +1,2392 @@
+{% comment %}
+  I AM WELL
+  Social Proof Carousel + Metrics
+
+  Supports:
+  - Photo slides
+  - Shopify-hosted video slides
+  - Quote / testimonial slides
+  - Mixed carousel
+  - Manual arrows
+  - Dots
+  - Swipe
+  - Autoplay toggle
+  - Autoplay speed
+  - Pause on hover
+  - Pause after interaction
+  - Metric cards below carousel
+{% endcomment %}
+
+<section
+  id="IAMW-SOCIAL-{{ section.id }}"
+  class="iamw-social"
+  style="
+    --page-width: {{ section.settings.page_width }}px;
+
+    --pad-x: {{ section.settings.padding_x }}px;
+    --pad-x-mobile: {{ section.settings.mobile_padding_x }}px;
+
+    --pad-top: {{ section.settings.padding_top }}px;
+    --pad-bottom: {{ section.settings.padding_bottom }}px;
+
+    --section-gap: {{ section.settings.section_gap }}px;
+    --slide-gap: {{ section.settings.slide_gap }}px;
+    --metric-gap: {{ section.settings.metric_gap }}px;
+
+    --radius: {{ section.settings.radius }}px;
+
+    --background: {{ section.settings.background }};
+    --card-bg: {{ section.settings.card_background }};
+    --purple: {{ section.settings.purple }};
+    --orange: {{ section.settings.orange }};
+    --cream: {{ section.settings.cream }};
+    --text: {{ section.settings.text_color }};
+    --muted: {{ section.settings.muted }};
+    --border: {{ section.settings.border_color }};
+
+    --heading-size: {{ section.settings.heading_size }}px;
+    --body-size: {{ section.settings.body_size }}px;
+    --quote-size: {{ section.settings.quote_size }}px;
+
+    --heading-mobile: {{ section.settings.mobile_heading_size }}px;
+    --body-mobile: {{ section.settings.mobile_body_size }}px;
+    --quote-mobile: {{ section.settings.mobile_quote_size }}px;
+
+    --slide-width: {{ section.settings.slide_width }}px;
+    --slide-height: {{ section.settings.slide_height }}px;
+  "
+>
+
+  <div class="iamw-social__shell">
+
+    {% comment %}
+      SECTION HEADER
+    {% endcomment %}
+
+    {% if section.settings.eyebrow != blank
+      or section.settings.heading != blank
+      or section.settings.intro != blank
+    %}
+
+      <div class="iamw-social__head">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="iamw-social__eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="iamw-social__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.intro != blank %}
+          <div class="iamw-social__rte">
+            {{ section.settings.intro }}
+          </div>
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+
+    {% comment %}
+      CHECK FOR SLIDES
+    {% endcomment %}
+
+    {% assign has_slides = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'media_slide' or block.type == 'quote_slide' %}
+        {% assign has_slides = true %}
+      {% endif %}
+    {% endfor %}
+
+
+    {% if has_slides %}
+
+      <div
+        class="iamw-social__carousel"
+        data-iamw-carousel
+      >
+
+        <div class="iamw-social__viewport">
+
+          <div
+            class="iamw-social__track"
+            data-iamw-track
+          >
+
+            {% for block in section.blocks %}
+
+              {% if block.type == 'media_slide' %}
+
+                <article
+                  class="iamw-social__slide iamw-social__slide--media"
+                  data-iamw-slide
+                  {{ block.shopify_attributes }}
+                >
+
+                  <div class="iamw-social__media">
+
+                    {% if block.settings.video != blank %}
+
+                      {{
+                        block.settings.video
+                        | video_tag:
+                          controls: true,
+                          autoplay: false,
+                          muted: false,
+                          loop: false,
+                          playsinline: true,
+                          class: 'iamw-social__video'
+                      }}
+
+                    {% elsif block.settings.image != blank %}
+
+                      {{
+                        block.settings.image
+                        | image_url: width: 1200
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '320,480,640,800,1000,1200',
+                          sizes: '320px',
+                          class: 'iamw-social__image'
+                      }}
+
+                    {% else %}
+
+                      <div class="iamw-social__placeholder">
+                        <span>ADD PHOTO OR VIDEO</span>
+                      </div>
+
+                    {% endif %}
+
+                  </div>
+
+
+                  {% if block.settings.caption != blank
+                    or block.settings.name != blank
+                  %}
+
+                    <div class="iamw-social__media-caption">
+
+                      {% if block.settings.caption != blank %}
+                        <div class="iamw-social__caption">
+                          {{ block.settings.caption }}
+                        </div>
+                      {% endif %}
+
+                      {% if block.settings.name != blank %}
+                        <div class="iamw-social__name">
+                          {{ block.settings.name }}
+                        </div>
+                      {% endif %}
+
+                    </div>
+
+                  {% endif %}
+
+                </article>
+
+
+              {% elsif block.type == 'quote_slide' %}
+
+                {% if block.settings.quote != blank
+                  or block.settings.name != blank
+                %}
+
+                  <article
+                    class="iamw-social__slide iamw-social__slide--quote"
+                    data-iamw-slide
+                    {{ block.shopify_attributes }}
+                  >
+
+                    {% if block.settings.photo != blank %}
+
+                      <div class="iamw-social__quote-avatar">
+
+                        {{
+                          block.settings.photo
+                          | image_url: width: 180
+                          | image_tag:
+                            loading: 'lazy',
+                            class: 'iamw-social__avatar-image'
+                        }}
+
+                      </div>
+
+                    {% endif %}
+
+
+                    {% if block.settings.stars != blank %}
+
+                      <div class="iamw-social__stars">
+                        {{ block.settings.stars }}
+                      </div>
+
+                    {% endif %}
+
+
+                    {% if block.settings.quote != blank %}
+
+                      <div class="iamw-social__quote">
+                        {{ block.settings.quote }}
+                      </div>
+
+                    {% endif %}
+
+
+                    {% if block.settings.name != blank
+                      or block.settings.meta != blank
+                    %}
+
+                      <div class="iamw-social__quote-footer">
+
+                        {% if block.settings.name != blank %}
+                          <strong>
+                            {{ block.settings.name }}
+                          </strong>
+                        {% endif %}
+
+                        {% if block.settings.meta != blank %}
+                          <span>
+                            {{ block.settings.meta }}
+                          </span>
+                        {% endif %}
+
+                      </div>
+
+                    {% endif %}
+
+                  </article>
+
+                {% endif %}
+
+              {% endif %}
+
+            {% endfor %}
+
+          </div>
+
+        </div>
+
+
+        {% if section.settings.show_controls %}
+
+          <div class="iamw-social__controls">
+
+            <button
+              type="button"
+              class="iamw-social__arrow"
+              data-iamw-prev
+              aria-label="Previous reviews"
+            >
+              ‹
+            </button>
+
+
+            {% if section.settings.show_dots %}
+              <div
+                class="iamw-social__dots"
+                data-iamw-dots
+              >
+              </div>
+            {% endif %}
+
+
+            <button
+              type="button"
+              class="iamw-social__arrow"
+              data-iamw-next
+              aria-label="Next reviews"
+            >
+              ›
+            </button>
+
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    {% endif %}
+
+
+    {% comment %}
+      METRIC CARDS
+    {% endcomment %}
+
+    {% assign has_metrics = false %}
+
+    {% for block in section.blocks %}
+
+      {% if block.type == 'metric' %}
+
+        {% if block.settings.value != blank
+          or block.settings.text != blank
+        %}
+          {% assign has_metrics = true %}
+        {% endif %}
+
+      {% endif %}
+
+    {% endfor %}
+
+
+    {% if has_metrics %}
+
+      <div class="iamw-social__metrics">
+
+        {% for block in section.blocks %}
+
+          {% if block.type == 'metric' %}
+
+            {% if block.settings.value != blank
+              or block.settings.text != blank
+            %}
+
+              <div
+                class="iamw-social__metric"
+                {{ block.shopify_attributes }}
+              >
+
+                {% if block.settings.icon_image != blank %}
+
+                  <span
+                    class="iamw-social__metric-icon"
+                    style="
+                      width: {{ block.settings.icon_size }}px;
+                      height: {{ block.settings.icon_size }}px;
+                    "
+                  >
+
+                    {{
+                      block.settings.icon_image
+                      | image_url: width: 160
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'iamw-social__metric-icon-image'
+                    }}
+
+                  </span>
+
+                {% elsif block.settings.icon_svg != blank %}
+
+                  <span
+                    class="iamw-social__metric-icon iamw-social__svg"
+                    style="
+                      width: {{ block.settings.icon_size }}px;
+                      height: {{ block.settings.icon_size }}px;
+                    "
+                  >
+                    {{ block.settings.icon_svg }}
+                  </span>
+
+                {% endif %}
+
+
+                <div class="iamw-social__metric-copy">
+
+                  {% if block.settings.value != blank %}
+                    <div class="iamw-social__metric-value">
+                      {{ block.settings.value }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.text != blank %}
+                    <div class="iamw-social__metric-text">
+                      {{ block.settings.text }}
+                    </div>
+                  {% endif %}
+
+                </div>
+
+              </div>
+
+            {% endif %}
+
+          {% endif %}
+
+        {% endfor %}
+
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+
+<style>
+
+#IAMW-SOCIAL-{{ section.id }} {
+  width: 100%;
+
+  padding:
+    var(--pad-top)
+    var(--pad-x)
+    var(--pad-bottom);
+
+  background:
+    var(--background);
+
+  color:
+    var(--text);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }} * {
+  box-sizing: border-box;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__shell {
+  width: 100%;
+
+  max-width:
+    var(--page-width);
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    var(--section-gap);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__head {
+  max-width:
+    1000px;
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    12px;
+
+  text-align:
+    center;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__eyebrow {
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--body-size) * .78);
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__heading {
+  margin:
+    0;
+
+  color:
+    var(--text);
+
+  font-size:
+    var(--heading-size);
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__rte {
+  color:
+    var(--text);
+
+  font-size:
+    var(--body-size);
+
+  line-height:
+    1.65;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__rte p:first-child {
+  margin-top:
+    0;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__rte p:last-child {
+  margin-bottom:
+    0;
+}
+
+
+/* CAROUSEL */
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__carousel {
+  width:
+    100%;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__viewport {
+  width:
+    100%;
+
+  overflow:
+    hidden;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__track {
+  display:
+    flex;
+
+  gap:
+    var(--slide-gap);
+
+  transition:
+    transform {{ section.settings.transition_speed }}ms ease;
+
+  will-change:
+    transform;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__slide {
+  flex:
+    0 0 var(--slide-width);
+
+  min-height:
+    var(--slide-height);
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    var(--radius);
+
+  background:
+    var(--card-bg);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__slide--media {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__media {
+  flex:
+    1;
+
+  min-height:
+    var(--slide-height);
+
+  overflow:
+    hidden;
+
+  background:
+    var(--cream);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__image,
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__video {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  min-height:
+    var(--slide-height);
+
+  display:
+    block;
+
+  object-fit:
+    {{ section.settings.media_fit }};
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__placeholder {
+  width:
+    100%;
+
+  min-height:
+    var(--slide-height);
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66,16,107,.05),
+      rgba(255,157,22,.10)
+    );
+
+  color:
+    var(--muted);
+
+  text-align:
+    center;
+
+  font-size:
+    13px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .06em;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__media-caption {
+  padding:
+    16px 18px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    6px;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__caption {
+  color:
+    var(--text);
+
+  font-size:
+    calc(var(--body-size) * .88);
+
+  line-height:
+    1.5;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__name {
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--body-size) * .82);
+
+  font-weight:
+    900;
+}
+
+
+/* QUOTE CARDS */
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__slide--quote {
+  padding:
+    28px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  gap:
+    18px;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__quote-avatar {
+  width:
+    58px;
+
+  height:
+    58px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    50%;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__avatar-image {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    cover;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__stars {
+  color:
+    var(--orange);
+
+  font-size:
+    calc(var(--body-size) * 1.1);
+
+  letter-spacing:
+    .04em;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__quote {
+  color:
+    var(--text);
+
+  font-size:
+    var(--quote-size);
+
+  line-height:
+    1.55;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__quote-footer {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__quote-footer strong {
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--body-size) * .9);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__quote-footer span {
+  color:
+    var(--muted);
+
+  font-size:
+    calc(var(--body-size) * .78);
+}
+
+
+/* CONTROLS */
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__controls {
+  margin-top:
+    24px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    16px;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__arrow {
+  width:
+    42px;
+
+  height:
+    42px;
+
+  padding:
+    0;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    50%;
+
+  background:
+    #ffffff;
+
+  color:
+    var(--text);
+
+  font-size:
+    25px;
+
+  line-height:
+    1;
+
+  cursor:
+    pointer;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__arrow:hover {
+  border-color:
+    var(--purple);
+
+  color:
+    var(--purple);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__dots {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__dot {
+  width:
+    8px;
+
+  height:
+    8px;
+
+  padding:
+    0;
+
+  border:
+    0;
+
+  border-radius:
+    50%;
+
+  background:
+    #d2cad7;
+
+  cursor:
+    pointer;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__dot.is-active {
+  background:
+    var(--purple);
+}
+
+
+/* METRICS */
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metrics {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      {{ section.settings.metric_columns }},
+      minmax(0,1fr)
+    );
+
+  gap:
+    var(--metric-gap);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metric {
+  min-height:
+    110px;
+
+  padding:
+    20px;
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    12px;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    var(--radius);
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metric-icon {
+  flex:
+    0 0 auto;
+
+  display:
+    block;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metric-icon-image {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    contain;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__svg svg {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metric-copy {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metric-value {
+  color:
+    var(--purple);
+
+  font-size:
+    calc(var(--heading-size) * .62);
+
+  font-weight:
+    900;
+
+  line-height:
+    1;
+}
+
+
+#IAMW-SOCIAL-{{ section.id }}
+.iamw-social__metric-text {
+  color:
+    var(--text);
+
+  font-size:
+    calc(var(--body-size) * .9);
+
+  line-height:
+    1.4;
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 749px) {
+
+  #IAMW-SOCIAL-{{ section.id }} {
+    padding-left:
+      var(--pad-x-mobile);
+
+    padding-right:
+      var(--pad-x-mobile);
+  }
+
+
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__heading {
+    font-size:
+      var(--heading-mobile);
+  }
+
+
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__rte {
+    font-size:
+      var(--body-mobile);
+  }
+
+
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__quote {
+    font-size:
+      var(--quote-mobile);
+  }
+
+
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__slide {
+    flex-basis:
+      {{ section.settings.mobile_slide_width }}px;
+
+    min-height:
+      {{ section.settings.mobile_slide_height }}px;
+  }
+
+
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__media,
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__image,
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__video,
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__placeholder {
+    min-height:
+      {{ section.settings.mobile_slide_height }}px;
+  }
+
+
+  #IAMW-SOCIAL-{{ section.id }}
+  .iamw-social__metrics {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+(function() {
+
+  function initIAMWSocialCarousel() {
+
+    const section =
+      document.getElementById(
+        'IAMW-SOCIAL-{{ section.id }}'
+      );
+
+    if (!section) return;
+
+
+    const carousel =
+      section.querySelector(
+        '[data-iamw-carousel]'
+      );
+
+    if (!carousel) return;
+
+
+    const track =
+      carousel.querySelector(
+        '[data-iamw-track]'
+      );
+
+
+    const slides =
+      carousel.querySelectorAll(
+        '[data-iamw-slide]'
+      );
+
+
+    const prev =
+      carousel.querySelector(
+        '[data-iamw-prev]'
+      );
+
+
+    const next =
+      carousel.querySelector(
+        '[data-iamw-next]'
+      );
+
+
+    const dotsWrap =
+      carousel.querySelector(
+        '[data-iamw-dots]'
+      );
+
+
+    if (!track || !slides.length) return;
+
+
+    let index = 0;
+    let autoplayTimer = null;
+    let interactionTimer = null;
+    let isPaused = false;
+
+
+    const autoplayEnabled =
+      {{ section.settings.autoplay | json }};
+
+
+    const autoplaySpeed =
+      {{ section.settings.autoplay_speed | times: 1000 }};
+
+
+    const pauseOnHover =
+      {{ section.settings.pause_on_hover | json }};
+
+
+    const pauseOnInteraction =
+      {{ section.settings.pause_on_interaction | json }};
+
+
+    function visibleCount() {
+
+      if (window.innerWidth < 750) {
+        return 1;
+      }
+
+
+      if (window.innerWidth < 1100) {
+        return 2;
+      }
+
+
+      return {{ section.settings.desktop_visible_slides }};
+
+    }
+
+
+    function maxIndex() {
+
+      return Math.max(
+        0,
+        slides.length - visibleCount()
+      );
+
+    }
+
+
+    function slideStep() {
+
+      if (!slides[0]) return 0;
+
+
+      const rect =
+        slides[0].getBoundingClientRect();
+
+
+      const trackStyle =
+        window.getComputedStyle(track);
+
+
+      const gap =
+        parseFloat(trackStyle.gap) || 0;
+
+
+      return rect.width + gap;
+
+    }
+
+
+    function update() {
+
+      const max =
+        maxIndex();
+
+
+      if (index > max) {
+        index = max;
+      }
+
+
+      if (index < 0) {
+        index = 0;
+      }
+
+
+      track.style.transform =
+        'translateX(-' +
+        (index * slideStep()) +
+        'px)';
+
+
+      if (dotsWrap) {
+
+        const dots =
+          dotsWrap.querySelectorAll(
+            '.iamw-social__dot'
+          );
+
+
+        dots.forEach(
+          function(dot, dotIndex) {
+
+            dot.classList.toggle(
+              'is-active',
+              dotIndex === index
+            );
+
+          }
+        );
+
+      }
+
+    }
+
+
+    function buildDots() {
+
+      if (!dotsWrap) return;
+
+
+      dotsWrap.innerHTML = '';
+
+
+      const count =
+        maxIndex() + 1;
+
+
+      for (
+        let i = 0;
+        i < count;
+        i++
+      ) {
+
+        const dot =
+          document.createElement(
+            'button'
+          );
+
+
+        dot.type =
+          'button';
+
+
+        dot.className =
+          'iamw-social__dot';
+
+
+        if (i === index) {
+
+          dot.classList.add(
+            'is-active'
+          );
+
+        }
+
+
+        dot.setAttribute(
+          'aria-label',
+          'Go to carousel position ' +
+          (i + 1)
+        );
+
+
+        dot.addEventListener(
+          'click',
+          function() {
+
+            index = i;
+
+            update();
+
+            handleInteraction();
+
+          }
+        );
+
+
+        dotsWrap.appendChild(
+          dot
+        );
+
+      }
+
+    }
+
+
+    function nextSlide() {
+
+      const max =
+        maxIndex();
+
+
+      if (max <= 0) return;
+
+
+      if (index >= max) {
+
+        index = 0;
+
+      } else {
+
+        index =
+          index + 1;
+
+      }
+
+
+      update();
+
+    }
+
+
+    function prevSlide() {
+
+      const max =
+        maxIndex();
+
+
+      if (max <= 0) return;
+
+
+      if (index <= 0) {
+
+        index = max;
+
+      } else {
+
+        index =
+          index - 1;
+
+      }
+
+
+      update();
+
+    }
+
+
+    function stopAutoplay() {
+
+      if (autoplayTimer) {
+
+        window.clearInterval(
+          autoplayTimer
+        );
+
+
+        autoplayTimer =
+          null;
+
+      }
+
+    }
+
+
+    function startAutoplay() {
+
+      if (!autoplayEnabled) return;
+
+
+      if (slides.length <= visibleCount()) {
+        return;
+      }
+
+
+      stopAutoplay();
+
+
+      autoplayTimer =
+        window.setInterval(
+          function() {
+
+            if (!isPaused) {
+
+              nextSlide();
+
+            }
+
+          },
+          autoplaySpeed
+        );
+
+    }
+
+
+    function pauseAutoplay() {
+
+      isPaused =
+        true;
+
+    }
+
+
+    function resumeAutoplay() {
+
+      isPaused =
+        false;
+
+    }
+
+
+    function handleInteraction() {
+
+      if (!pauseOnInteraction) {
+        return;
+      }
+
+
+      pauseAutoplay();
+
+
+      if (interactionTimer) {
+
+        window.clearTimeout(
+          interactionTimer
+        );
+
+      }
+
+
+      interactionTimer =
+        window.setTimeout(
+          function() {
+
+            resumeAutoplay();
+
+          },
+          autoplaySpeed
+        );
+
+    }
+
+
+    if (prev) {
+
+      prev.addEventListener(
+        'click',
+        function() {
+
+          prevSlide();
+
+          handleInteraction();
+
+        }
+      );
+
+    }
+
+
+    if (next) {
+
+      next.addEventListener(
+        'click',
+        function() {
+
+          nextSlide();
+
+          handleInteraction();
+
+        }
+      );
+
+    }
+
+
+    if (pauseOnHover) {
+
+      carousel.addEventListener(
+        'mouseenter',
+        pauseAutoplay
+      );
+
+
+      carousel.addEventListener(
+        'mouseleave',
+        resumeAutoplay
+      );
+
+    }
+
+
+    let touchStartX = 0;
+
+
+    track.addEventListener(
+      'touchstart',
+      function(event) {
+
+        touchStartX =
+          event.touches[0].clientX;
+
+
+        if (pauseOnInteraction) {
+
+          pauseAutoplay();
+
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    track.addEventListener(
+      'touchend',
+      function(event) {
+
+        const touchEndX =
+          event.changedTouches[0].clientX;
+
+
+        const difference =
+          touchStartX -
+          touchEndX;
+
+
+        if (
+          Math.abs(difference) >
+          45
+        ) {
+
+          if (difference > 0) {
+
+            index =
+              Math.min(
+                index + 1,
+                maxIndex()
+              );
+
+          } else {
+
+            index =
+              Math.max(
+                index - 1,
+                0
+              );
+
+          }
+
+
+          update();
+
+        }
+
+
+        handleInteraction();
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    document.addEventListener(
+      'visibilitychange',
+      function() {
+
+        if (document.hidden) {
+
+          pauseAutoplay();
+
+        } else {
+
+          resumeAutoplay();
+
+        }
+
+      }
+    );
+
+
+    window.addEventListener(
+      'resize',
+      function() {
+
+        index =
+          Math.min(
+            index,
+            maxIndex()
+          );
+
+
+        buildDots();
+
+        update();
+
+      }
+    );
+
+
+    buildDots();
+
+    update();
+
+    startAutoplay();
+
+  }
+
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      initIAMWSocialCarousel
+    );
+
+  } else {
+
+    initIAMWSocialCarousel();
+
+  }
+
+
+  document.addEventListener(
+    'shopify:section:load',
+    function(event) {
+
+      if (
+        event.target &&
+        event.target.id ===
+        'IAMW-SOCIAL-{{ section.id }}'
+      ) {
+
+        initIAMWSocialCarousel();
+
+      }
+
+    }
+  );
+
+})();
+
+</script>
+
+
+{% schema %}
+
+{
+  "name": "IAMW Social Proof",
+
+  "max_blocks": 50,
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "REAL MOMS • REAL KIDS"
+    },
+
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real routines. Real feedback. Real Smart Gummies families."
+    },
+
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>See what parents are sharing about picky eating, vitamins time and their kids’ everyday Smart Gummies routine.</p>"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Carousel"
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_visible_slides",
+      "label": "Visible slides on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto scroll carousel",
+      "default": true
+    },
+
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Auto scroll speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4,
+      "unit": "sec"
+    },
+
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Slide animation speed",
+      "min": 150,
+      "max": 1000,
+      "step": 50,
+      "default": 350,
+      "unit": "ms"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+
+    {
+      "type": "checkbox",
+      "id": "pause_on_interaction",
+      "label": "Pause after interaction",
+      "default": true
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show arrows",
+      "default": true
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show carousel dots",
+      "default": true
+    },
+
+    {
+      "type": "range",
+      "id": "slide_width",
+      "label": "Desktop slide width",
+      "min": 220,
+      "max": 420,
+      "step": 10,
+      "default": 300,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "slide_height",
+      "label": "Desktop slide height",
+      "min": 300,
+      "max": 650,
+      "step": 10,
+      "default": 430,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_slide_width",
+      "label": "Mobile slide width",
+      "min": 240,
+      "max": 360,
+      "step": 10,
+      "default": 300,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_slide_height",
+      "label": "Mobile slide height",
+      "min": 300,
+      "max": 600,
+      "step": 10,
+      "default": 420,
+      "unit": "px"
+    },
+
+    {
+      "type": "select",
+      "id": "media_fit",
+      "label": "Photo / video fit",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ]
+    },
+
+
+    {
+      "type": "header",
+      "content": "Metrics"
+    },
+
+    {
+      "type": "range",
+      "id": "metric_columns",
+      "label": "Desktop metric columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "Max page width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "default": 1320,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Desktop side padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_x",
+      "label": "Mobile side padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "section_gap",
+      "label": "Section gap",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "slide_gap",
+      "label": "Slide gap",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "metric_gap",
+      "label": "Metric gap",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 36,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 30,
+      "max": 64,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "quote_size",
+      "label": "Review quote size",
+      "min": 15,
+      "max": 25,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading",
+      "min": 26,
+      "max": 48,
+      "step": 2,
+      "default": 34,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "label": "Mobile body",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_quote_size",
+      "label": "Mobile review quote",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Quote card background",
+      "default": "#F7EFFB"
+    },
+
+    {
+      "type": "color",
+      "id": "purple",
+      "label": "IAMW purple",
+      "default": "#42106B"
+    },
+
+    {
+      "type": "color",
+      "id": "orange",
+      "label": "Accent orange",
+      "default": "#FF9D16"
+    },
+
+    {
+      "type": "color",
+      "id": "cream",
+      "label": "Media placeholder",
+      "default": "#FFF4D6"
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1C1930"
+    },
+
+    {
+      "type": "color",
+      "id": "muted",
+      "label": "Muted text",
+      "default": "#6C6670"
+    },
+
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Borders",
+      "default": "#E5DAEB"
+    }
+
+  ],
+
+
+  "blocks": [
+
+    {
+      "type": "media_slide",
+      "name": "Photo / video",
+
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Shopify video"
+        },
+
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Optional caption"
+        },
+
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Optional name"
+        }
+
+      ]
+
+    },
+
+
+    {
+      "type": "quote_slide",
+      "name": "Review quote",
+
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Optional customer photo"
+        },
+
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Stars",
+          "default": "★★★★★"
+        },
+
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review quote",
+          "default": "Paste an approved I Am Well customer review here."
+        },
+
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Verified Mommy"
+        },
+
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Supporting label",
+          "default": "Verified customer"
+        }
+
+      ]
+
+    },
+
+
+    {
+      "type": "metric",
+      "name": "Metric card",
+
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Optional icon"
+        },
+
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Or paste SVG"
+        },
+
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 18,
+          "max": 56,
+          "step": 2,
+          "default": 28,
+          "unit": "px"
+        },
+
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Metric value",
+          "info": "Example: 90 Days or Ages 2–15."
+        },
+
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Metric description"
+        }
+
+      ]
+
+    }
+
+  ],
+
+
+  "presets": [
+
+    {
+      "name": "IAMW Social Proof",
+
+      "blocks": [
+
+        {
+          "type": "media_slide"
+        },
+
+        {
+          "type": "quote_slide",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "Replace this with an approved review about appetite, picky eating or easier vitamins time.",
+            "name": "Verified Mommy",
+            "meta": "Verified customer"
+          }
+        },
+
+        {
+          "type": "media_slide"
+        },
+
+        {
+          "type": "quote_slide",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "Replace this with another approved I Am Well customer review.",
+            "name": "Verified Mommy",
+            "meta": "Verified customer"
+          }
+        },
+
+        {
+          "type": "metric",
+          "settings": {
+            "value": "90 Days",
+            "text": "of daily Smart Gummies support in one starter pack."
+          }
+        },
+
+        {
+          "type": "metric",
+          "settings": {
+            "value": "6 Areas",
+            "text": "Appetite, growth, focus, immunity, digestion and everyday wellness."
+          }
+        },
+
+        {
+          "type": "metric",
+          "settings": {
+            "value": "Ages 2–15",
+            "text": "Made for growing kids across different stages."
+          }
+        }
+
+      ]
+
+    }
+
+  ]
+
+}
+
+{% endschema %}
