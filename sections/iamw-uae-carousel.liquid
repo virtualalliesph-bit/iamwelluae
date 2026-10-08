@@ -1,0 +1,102 @@
+{% style %}
+  #shopify-section-{{ section.id }} .iamw-uae-carousel {
+    background: {{ section.settings.background }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .iamw-uae-carousel__viewport {
+    width: min(calc(100% - 32px), {{ section.settings.page_width }}px);
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  #shopify-section-{{ section.id }} .iamw-uae-carousel__viewport::-webkit-scrollbar { display: none; }
+  #shopify-section-{{ section.id }} .iamw-uae-carousel__track {
+    display: flex;
+    gap: {{ section.settings.gap }}px;
+    scroll-snap-type: x mandatory;
+  }
+  #shopify-section-{{ section.id }} .iamw-uae-carousel__card {
+    flex: 0 0 calc((100% - ({{ section.settings.desktop_columns | minus: 1 }} * {{ section.settings.gap }}px)) / {{ section.settings.desktop_columns }});
+    min-width: 0;
+    overflow: hidden;
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+    border-radius: {{ section.settings.radius }}px;
+    background: #fff;
+    scroll-snap-align: start;
+  }
+  #shopify-section-{{ section.id }} .iamw-uae-carousel__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: {{ section.settings.aspect_ratio }};
+    object-fit: {{ section.settings.image_fit }};
+  }
+  #shopify-section-{{ section.id }} .iamw-uae-carousel__placeholder {
+    width: 100%;
+    aspect-ratio: {{ section.settings.aspect_ratio }};
+    background: #eee;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .iamw-uae-carousel__card {
+      flex-basis: calc((100% - ({{ section.settings.mobile_columns | minus: 1 }} * {{ section.settings.gap }}px)) / {{ section.settings.mobile_columns }});
+    }
+  }
+{% endstyle %}
+
+<section class="iamw-uae-carousel">
+  <div class="iamw-uae-carousel__viewport">
+    <div class="iamw-uae-carousel__track">
+      {% for block in section.blocks %}
+        <div class="iamw-uae-carousel__card" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image
+              | image_url: width: 1000
+              | image_tag:
+                class: 'iamw-uae-carousel__image',
+                loading: 'lazy',
+                widths: '240, 360, 480, 720, 1000',
+                sizes: '(max-width: 749px) 50vw, 25vw',
+                alt: block.settings.alt
+            }}
+          {% else %}
+            <div class="iamw-uae-carousel__placeholder"></div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "IAMW UAE Carousel",
+  "max_blocks": 30,
+  "settings": [
+    {"type":"range","id":"desktop_columns","label":"Desktop columns","min":2,"max":6,"step":1,"default":4},
+    {"type":"range","id":"mobile_columns","label":"Mobile columns","min":1,"max":2,"step":1,"default":2},
+    {"type":"range","id":"page_width","label":"Page width","min":800,"max":1600,"step":20,"unit":"px","default":1260},
+    {"type":"range","id":"gap","label":"Gap","min":0,"max":40,"step":2,"unit":"px","default":12},
+    {"type":"range","id":"border_width","label":"Border width","min":0,"max":8,"step":1,"unit":"px","default":3},
+    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":40,"step":1,"unit":"px","default":24},
+    {"type":"select","id":"aspect_ratio","label":"Image ratio","options":[{"value":"1 / 1","label":"Square"},{"value":"4 / 5","label":"Portrait 4:5"},{"value":"3 / 4","label":"Portrait 3:4"},{"value":"auto","label":"Natural"}],"default":"1 / 1"},
+    {"type":"select","id":"image_fit","label":"Image fit","options":[{"value":"cover","label":"Cover"},{"value":"contain","label":"Contain"}],"default":"cover"},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":120,"step":2,"unit":"px","default":18},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":120,"step":2,"unit":"px","default":48},
+    {"type":"color","id":"background","label":"Background","default":"#f8f1ff"},
+    {"type":"color","id":"border_color","label":"Border color","default":"#3c0a6d"}
+  ],
+  "blocks": [
+    {
+      "type":"image",
+      "name":"Image",
+      "settings":[
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"alt","label":"Alt text"}
+      ]
+    }
+  ],
+  "presets":[{"name":"IAMW UAE Carousel","blocks":[{"type":"image"},{"type":"image"},{"type":"image"},{"type":"image"}]}]
+}
+{% endschema %}
