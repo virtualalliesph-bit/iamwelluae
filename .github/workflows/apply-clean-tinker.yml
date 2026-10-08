@@ -1,0 +1,68 @@
+name: Apply clean UAE Tinker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'clean-tinker.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-clean-theme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate and apply clean Tinker
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f clean-tinker.zip
+          workdir="$(mktemp -d)"
+          unzip -q clean-tinker.zip -d "$workdir"
+
+          for dir in assets blocks config layout locales sections snippets templates; do
+            test -d "$workdir/$dir"
+          done
+
+          file_count=$(find "$workdir/assets" "$workdir/blocks" "$workdir/config" "$workdir/layout" "$workdir/locales" "$workdir/sections" "$workdir/snippets" "$workdir/templates" -type f | wc -l | tr -d ' ')
+          test "$file_count" = "481"
+
+          product_sha=$(git hash-object "$workdir/templates/product.json")
+          test "$product_sha" = "502e6e67facd701581125cce909786a071cb50ae"
+
+          python - "$workdir" <<'PY'
+          import json, pathlib, re, sys
+          root = pathlib.Path(sys.argv[1])
+          product = (root / 'templates/product.json').read_text(encoding='utf-8')
+          for bad in ('shopify://apps/', 'shopify://shop_images/', 'shopify://files/'):
+              assert bad not in product, f'Unexpected store-scoped ref in clean product template: {bad}'
+          for old in ('product.no-add-to-cart.json', 'product.sample.json', 'product.smart-gummies.json'):
+              assert not (root / 'templates' / old).exists(), f'Unexpected inherited template: {old}'
+          for folder in ('config', 'templates'):
+              for path in (root / folder).glob('*.json'):
+                  text = path.read_text(encoding='utf-8')
+                  text = re.sub(r'^\s*/\*.*?\*/\s*', '', text, flags=re.S)
+                  json.loads(text)
+          PY
+
+          rm -rf assets blocks config layout locales sections snippets templates
+          cp -a "$workdir/assets" "$workdir/blocks" "$workdir/config" "$workdir/layout" "$workdir/locales" "$workdir/sections" "$workdir/snippets" "$workdir/templates" .
+
+          rm -rf .theme-clean-import .theme-clean-import-xz .theme-import .theme-clean-v2
+          rm -f clean-tinker.zip
+          rm -f .github/workflows/apply-clean-tinker.yml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "reset: clean UAE Tinker baseline"
+          git push
