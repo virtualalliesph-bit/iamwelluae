@@ -1,0 +1,128 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign form_id = 'IAMW-UAE-Product-Form-' | append: section.id
+%}
+
+<section id="iamw-uae-product-hero-{{ section.id }}" class="iamw-uae-product-hero" data-section-id="{{ section.id }}">
+  <div class="iamw-uae-product-hero__inner">
+    <div class="iamw-uae-product-hero__media">
+      {% if product.media.size > 0 %}
+        <div class="iamw-uae-product-hero__stage" data-iamw-stage>
+          {% for media in product.media %}
+            <div class="iamw-uae-product-hero__media-item{% unless forloop.first %} is-hidden{% endunless %}" data-iamw-media="{{ media.id }}">
+              {% case media.media_type %}
+                {% when 'image' %}
+                  {{ media | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480,720,960,1200,1400', sizes: '(min-width: 990px) 50vw, 100vw', class: 'iamw-uae-product-hero__image' }}
+                {% when 'video' %}
+                  {{ media | video_tag: controls: true, image_size: '1200x', class: 'iamw-uae-product-hero__video' }}
+                {% when 'external_video' %}
+                  {{ media | external_video_tag: class: 'iamw-uae-product-hero__video' }}
+                {% else %}
+                  {{ media | media_tag: class: 'iamw-uae-product-hero__image' }}
+              {% endcase %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if product.media.size > 1 %}
+          <div class="iamw-uae-product-hero__thumbs" aria-label="Product media thumbnails">
+            {% for media in product.media limit: 8 %}
+              <button type="button" class="iamw-uae-product-hero__thumb{% if forloop.first %} is-active{% endif %}" data-iamw-thumb="{{ media.id }}" aria-label="Show media {{ forloop.index }}">
+                {% if media.preview_image %}
+                  {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'iamw-uae-product-hero__thumb-image' }}
+                {% endif %}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="iamw-uae-product-hero__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {% endif %}
+    </div>
+
+    <div class="iamw-uae-product-hero__details">
+      {% if section.settings.badge_text != blank %}<div class="iamw-uae-product-hero__badge">{{ section.settings.badge_text }}</div>{% endif %}
+      <h1 class="iamw-uae-product-hero__title">{{ product.title }}</h1>
+      {% if section.settings.show_rating %}
+        <div class="iamw-uae-product-hero__rating" aria-label="{{ section.settings.rating_text | escape }}">
+          <span class="iamw-uae-product-hero__stars">{{ section.settings.rating_stars }}</span>
+          {% if section.settings.rating_text != blank %}<span>{{ section.settings.rating_text }}</span>{% endif %}
+        </div>
+      {% endif %}
+      <div class="iamw-uae-product-hero__price" data-iamw-price>{{ current_variant.price | money_with_currency }}</div>
+
+      {% form 'product', product, id: form_id, class: 'iamw-uae-product-hero__form' %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-iamw-variant-id>
+        {% unless product.has_only_default_variant %}
+          <div class="iamw-uae-product-hero__options">
+            {% for option in product.options_with_values %}
+              <fieldset class="iamw-uae-product-hero__option" data-option-index="{{ forloop.index0 }}">
+                <legend>{{ option.name }}</legend>
+                <div class="iamw-uae-product-hero__option-values">
+                  {% for value in option.values %}
+                    <button type="button" class="iamw-uae-product-hero__option-button{% if option.selected_value == value %} is-selected{% endif %}" data-option-value="{{ value | escape }}" aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}">{{ value }}</button>
+                  {% endfor %}
+                </div>
+              </fieldset>
+            {% endfor %}
+          </div>
+        {% endunless %}
+        <div class="iamw-uae-product-hero__checkout" data-iamw-checkout>{{ form | payment_button }}</div>
+      {% endform %}
+
+      {% if product.description != blank %}<div class="iamw-uae-product-hero__description rte">{{ product.description }}</div>{% endif %}
+      <div class="iamw-uae-product-hero__info-links">
+        {% if section.settings.nutrition_image != blank %}<button type="button" data-iamw-dialog-open="nutrition-{{ section.id }}">{{ section.settings.nutrition_label }}</button>{% endif %}
+        {% if section.settings.fda_image != blank %}<button type="button" data-iamw-dialog-open="fda-{{ section.id }}">{{ section.settings.fda_label }}</button>{% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.nutrition_image != blank %}
+    <dialog id="nutrition-{{ section.id }}" class="iamw-uae-product-hero__dialog"><button type="button" class="iamw-uae-product-hero__dialog-close" data-iamw-dialog-close aria-label="Close">×</button>{{ section.settings.nutrition_image | image_url: width: 1600 | image_tag: loading: 'lazy' }}</dialog>
+  {% endif %}
+  {% if section.settings.fda_image != blank %}
+    <dialog id="fda-{{ section.id }}" class="iamw-uae-product-hero__dialog"><button type="button" class="iamw-uae-product-hero__dialog-close" data-iamw-dialog-close aria-label="Close">×</button>{{ section.settings.fda_image | image_url: width: 1600 | image_tag: loading: 'lazy' }}</dialog>
+  {% endif %}
+</section>
+
+<style>
+  #iamw-uae-product-hero-{{ section.id }}{--iamw-purple:{{ section.settings.purple }};--iamw-orange:{{ section.settings.orange }};--iamw-text:{{ section.settings.text_color }};--iamw-soft:{{ section.settings.soft_background }};background:{{ section.settings.background }};color:var(--iamw-text);padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__inner{width:min({{ section.settings.page_width }}px,calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:{{ section.settings.column_gap }}px;align-items:start}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__stage{border-radius:{{ section.settings.media_radius }}px;overflow:hidden;background:#fff}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__media-item.is-hidden{display:none}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__image,#iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__video{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__thumbs{display:flex;gap:8px;margin-top:10px;overflow:auto;padding-bottom:4px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__thumb{width:64px;height:64px;padding:0;border:1px solid #ddd;border-radius:8px;overflow:hidden;background:#fff;flex:0 0 auto;cursor:pointer}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__thumb.is-active{border:2px solid var(--iamw-purple)}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__thumb-image{width:100%;height:100%;object-fit:cover}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__details{position:sticky;top:24px;padding:32px 12px 16px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__badge{display:inline-block;background:#fbb60d;border-radius:10px;padding:4px 15px;font-size:12px;margin-bottom:12px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__title{margin:0;font-size:{{ section.settings.title_size }}px;line-height:1.12;text-transform:uppercase}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__rating{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__stars{color:#fbb60d;letter-spacing:1px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__price{color:var(--iamw-purple);font-size:{{ section.settings.price_size }}px;font-weight:700;margin:14px 0 16px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__option{border:0;padding:0;margin:0 0 14px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__option legend{font-weight:700;margin-bottom:8px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__option-values{display:flex;flex-wrap:wrap;gap:8px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__option-button{border:1px solid var(--iamw-purple);background:#fff;color:var(--iamw-purple);border-radius:8px;padding:10px 14px;cursor:pointer}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__option-button.is-selected{background:var(--iamw-purple);color:#fff}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__checkout{margin-top:18px}
+  #iamw-uae-product-hero-{{ section.id }} .shopify-payment-button__button{min-height:52px!important;border-radius:8px!important;background:var(--iamw-orange)!important;color:#fff!important;font-weight:800!important}
+  #iamw-uae-product-hero-{{ section.id }} .shopify-payment-button__more-options{color:var(--iamw-purple)!important}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__description{margin-top:20px;font-size:14px;line-height:1.6}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__info-links{display:flex;gap:10px;margin-top:18px;padding:10px 12px;border-radius:22px;background:var(--iamw-soft)}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__info-links button{appearance:none;border:0;background:transparent;color:var(--iamw-purple);text-decoration:underline;cursor:pointer;font-weight:700}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__dialog{width:min(760px,92vw);max-height:90vh;border:0;border-radius:14px;padding:34px 18px 18px}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__dialog::backdrop{background:rgba(0,0,0,.55)}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__dialog img{display:block;width:100%;height:auto}
+  #iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__dialog-close{position:absolute;right:12px;top:8px;border:0;background:transparent;font-size:28px;cursor:pointer}
+  @media(max-width:749px){#iamw-uae-product-hero-{{ section.id }}{padding-top:{{ section.settings.mobile_padding_top }}px;padding-bottom:{{ section.settings.mobile_padding_bottom }}px}#iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__inner{width:calc(100% - 32px);grid-template-columns:1fr;gap:24px}#iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__details{position:static;padding:0}#iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__title{font-size:{{ section.settings.mobile_title_size }}px}#iamw-uae-product-hero-{{ section.id }} .iamw-uae-product-hero__price{font-size:{{ section.settings.mobile_price_size }}px}}
+</style>
+
+<script>
+(()=>{const root=document.getElementById('iamw-uae-product-hero-{{ section.id }}');if(!root)return;root.querySelectorAll('[data-iamw-thumb]').forEach(thumb=>thumb.addEventListener('click',()=>{const id=thumb.dataset.iamwThumb;root.querySelectorAll('[data-iamw-media]').forEach(item=>item.classList.toggle('is-hidden',item.dataset.iamwMedia!==id));root.querySelectorAll('[data-iamw-thumb]').forEach(item=>item.classList.toggle('is-active',item===thumb))}));const variants={{ product.variants | json }};const selected={{ current_variant.options | json }};const input=root.querySelector('[data-iamw-variant-id]');const price=root.querySelector('[data-iamw-price]');const money=cents=>{try{return new Intl.NumberFormat(undefined,{style:'currency',currency:(window.Shopify&&Shopify.currency&&Shopify.currency.active)||'{{ cart.currency.iso_code }}'}).format(cents/100)}catch(e){return(cents/100).toFixed(2)}};root.querySelectorAll('[data-option-index]').forEach(group=>group.querySelectorAll('[data-option-value]').forEach(button=>button.addEventListener('click',()=>{const index=Number(group.dataset.optionIndex);selected[index]=button.dataset.optionValue;group.querySelectorAll('[data-option-value]').forEach(b=>{const active=b===button;b.classList.toggle('is-selected',active);b.setAttribute('aria-pressed',active?'true':'false')});const match=variants.find(variant=>variant.options.every((value,i)=>value===selected[i]));if(match&&input){input.value=match.id;if(price)price.textContent=money(match.price);root.querySelectorAll('.shopify-payment-button button').forEach(btn=>{btn.disabled=!match.available})}}))));root.querySelectorAll('[data-iamw-dialog-open]').forEach(button=>button.addEventListener('click',()=>document.getElementById(button.dataset.iamwDialogOpen)?.showModal()));root.querySelectorAll('[data-iamw-dialog-close]').forEach(button=>button.addEventListener('click',()=>button.closest('dialog')?.close()))})();
+</script>
+
+{% schema %}
+{"name":"IAMW UAE Product Hero","settings":[{"type":"text","id":"badge_text","label":"Badge text","default":""},{"type":"checkbox","id":"show_rating","label":"Show rating","default":true},{"type":"text","id":"rating_stars","label":"Rating stars","default":"★★★★★"},{"type":"text","id":"rating_text","label":"Rating text","default":"1013+ reviews"},{"type":"image_picker","id":"nutrition_image","label":"Nutrition facts image"},{"type":"text","id":"nutrition_label","label":"Nutrition link label","default":"Nutrition Facts"},{"type":"image_picker","id":"fda_image","label":"FDA certification image"},{"type":"text","id":"fda_label","label":"FDA link label","default":"FDA Certification"},{"type":"range","id":"page_width","label":"Page width","min":900,"max":1600,"step":20,"unit":"px","default":1260},{"type":"range","id":"column_gap","label":"Column gap","min":0,"max":100,"step":4,"unit":"px","default":12},{"type":"range","id":"media_radius","label":"Media radius","min":0,"max":30,"step":1,"unit":"px","default":12},{"type":"range","id":"title_size","label":"Title size","min":18,"max":64,"step":1,"unit":"px","default":24},{"type":"range","id":"mobile_title_size","label":"Mobile title size","min":18,"max":48,"step":1,"unit":"px","default":24},{"type":"range","id":"price_size","label":"Price size","min":16,"max":48,"step":1,"unit":"px","default":24},{"type":"range","id":"mobile_price_size","label":"Mobile price size","min":16,"max":40,"step":1,"unit":"px","default":24},{"type":"range","id":"padding_top","label":"Top padding","min":0,"max":120,"step":4,"unit":"px","default":36},{"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":140,"step":4,"unit":"px","default":84},{"type":"range","id":"mobile_padding_top","label":"Mobile top padding","min":0,"max":80,"step":4,"unit":"px","default":20},{"type":"range","id":"mobile_padding_bottom","label":"Mobile bottom padding","min":0,"max":100,"step":4,"unit":"px","default":48},{"type":"color","id":"background","label":"Background","default":"#ffffff"},{"type":"color","id":"soft_background","label":"Soft background","default":"#f7effb"},{"type":"color","id":"purple","label":"Purple","default":"#42106b"},{"type":"color","id":"orange","label":"Orange","default":"#ff8f23"},{"type":"color","id":"text_color","label":"Text","default":"#161116"}],"presets":[{"name":"IAMW UAE Product Hero"}]}
+{% endschema %}
