@@ -6,913 +6,714 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */
-{
+ */{
   "sections": {
-    "iamw_ref_01_timer_haNcPf": {
-      "type": "iamw-ref-01-timer",
-      "disabled": true,
-      "name": "IAMW Countdown",
-      "settings": {
-        "heading": "Special Offer",
-        "subheading": "Limited Offer Ends In:",
-        "end_time": "2026-09-30T23:59:59+08:00",
-        "page_width": 1000,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 16,
-        "padding_bottom": 16,
-        "content_gap": 52,
-        "timer_gap": 10,
-        "box_width": 74,
-        "box_height": 76,
-        "box_radius": 12,
-        "heading_size": 20,
-        "subheading_size": 18,
-        "number_size": 26,
-        "label_size": 14,
-        "mobile_heading_size": 18,
-        "mobile_subheading_size": 15,
-        "mobile_number_size": 22,
-        "mobile_label_size": 12,
-        "background": "#42106b",
-        "box_background": "#2a0848",
-        "text_color": "#ffffff",
-        "accent_color": "#ff9d16"
-      }
-    },
-    "iamw_ref_02_proof_eXYWNV": {
-      "type": "iamw-ref-02-proof",
+    "hero_iLBwPd": {
+      "type": "hero",
       "blocks": {
-        "trust_item_RdiEJc": {
-          "type": "trust_item",
+        "group_mATTUY": {
+          "type": "group",
+          "name": "t:names.group",
           "settings": {
-            "icon_svg": "",
-            "icon_size": 28,
-            "bold_text": "An Easier Daily Routine",
-            "text": "A chewable mixed-berry gummy—no syrup or tablets."
-          }
-        },
-        "trust_item_wXcVdr": {
-          "type": "trust_item",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 28,
-            "bold_text": "Everyday Nutrition Support",
-            "text": "Nutrients for appetite, growth, focus, immunity and digestion."
-          }
-        },
-        "review_LaYUJy": {
-          "type": "review",
-          "settings": {
-            "quote": "“I noticed changes in my child after taking I Am Well Smart Gummies. She seemed to have more energy, and I also noticed her appetite improved. She has gained weight since she started taking Smart Gummies regularly.\n\nI definitely recommend it to my friends and relatives! Even our relatives in the province notice that my youngest daughter looks healthier and has a better appetite.” [Translated from the original Filipino customer review.]",
-            "name": "Eljon Etrobal.",
-            "verified_text": "Customer review • Translated from Filipino",
-            "stars": "★★★★★"
-          }
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "open_in_new_tab": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_U86Qji": {
+              "type": "group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_nptTQe": {
+                  "type": "text",
+                  "name": "t:names.heading",
+                  "settings": {
+                    "text": "<h2><em>Introducing</em></h2>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
+                    "font_size": "1.5rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "{{ settings.color_palette.background }}",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "text_m9AcWC": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h1>Our Newest Arrivals </h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-body--family)",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "{{ settings.color_palette.background }}",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_nptTQe",
+                "text_m9AcWC"
+              ]
+            },
+            "text_ebNxhf": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Bring order to the chaos. When all your tech essentials have a dedicated spot on your desk, you don’t have to waste any time searching for them. </p>",
+                "width": "fit-content",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_U86Qji",
+            "text_ebNxhf"
+          ]
         }
       },
       "block_order": [
-        "trust_item_RdiEJc",
-        "trust_item_wXcVdr",
-        "review_LaYUJy"
+        "group_mATTUY"
       ],
-      "name": "IAMW Proof Story",
+      "name": "t:names.hero",
       "settings": {
-        "rating_stars": "★★★★★",
-        "rating_text": "Feedback from I Am Well parents",
-        "heading": "Does your child lose interest after just a few bites?",
-        "body": "<p>Even when you serve their favourite foods, getting your child to eat a varied diet can be a challenge. If mealtimes have become stressful, you are not alone.</p><p>I Am Well Smart Gummies is a mixed-berry food supplement designed to complement balanced meals and support your child’s daily nutrition.</p>",
-        "cta_text": "EXPLORE SMART GUMMIES",
-        "cta_destination": "anchor",
-        "cta_anchor": "iamw-product",
-        "cta_link": "",
-        "image_fit": "cover",
-        "image_height": 620,
-        "mobile_image_height": 420,
-        "page_width": 1260,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "column_gap": 56,
-        "content_gap": 20,
-        "block_gap": 14,
-        "radius": 16,
-        "heading_size": 44,
-        "body_size": 17,
-        "rating_size": 26,
-        "mobile_heading_size": 34,
-        "mobile_body_size": 16,
-        "background": "#ffffff",
-        "purple": "#42106b",
-        "orange": "#ff9d16",
-        "cream": "#fff4d6",
-        "text_color": "#1c1930",
-        "muted": "#6c6670",
-        "border_color": "#e0d7e8"
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "background_color": "{{ settings.color_palette.foreground }}",
+        "toggle_overlay": true,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 0,
+        "padding-block-end": 31
       }
     },
-    "iamw_ref_03_accordion_P3CQdR": {
-      "type": "iamw-ref-03-accordion",
+    "product_list_EDUBdR": {
+      "type": "product-list",
       "blocks": {
-        "accordion_xVHkFk": {
-          "type": "accordion",
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
           "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 56,
-            "title": "Helps Support Appetite for Picky Eaters",
-            "text": "<p>For children who eat only a small range of foods, Smart Gummies includes L-Lysine, vitamins and minerals to complement their everyday nutrition and support normal growth.</p>"
-          }
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_qK4EWG": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>Make Your Workspace Yours</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_qK4EWG"
+          ]
         },
-        "accordion_kyti89": {
-          "type": "accordion",
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
           "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 56,
-            "title": "Supports Focus & Learning",
-            "text": "<p>DHA, Choline and B Complex Vitamins support normal brain development and nervous system function for busy school days and everyday learning.</p>"
-          }
+            "product_card_gap": 0,
+            "background_color": "{{ settings.color_palette.color4 }}",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 10,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_hpki3q": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group_jHUdWN": {
+              "type": "_product-card-group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 4,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "open_in_new_tab": false,
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24
+              },
+              "blocks": {
+                "product_title_gH3cpy": {
+                  "type": "product-title",
+                  "name": "t:names.product_title",
+                  "settings": {
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "paragraph",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_anAima": {
+                  "type": "price",
+                  "name": "t:names.product_price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "swatches_eYcKAz": {
+                  "type": "swatches",
+                  "name": "t:names.swatches",
+                  "settings": {
+                    "product_swatches_alignment": "flex-start",
+                    "product_swatches_alignment_mobile": "flex-start",
+                    "hide_padding": false,
+                    "product_swatches_padding_top": 4,
+                    "product_swatches_padding_bottom": 0,
+                    "product_swatches_padding_left": 0,
+                    "product_swatches_padding_right": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "product_title_gH3cpy",
+                "price_anAima",
+                "swatches_eYcKAz"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_gallery_hpki3q",
+            "group_jHUdWN"
+          ]
+        }
+      },
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 12,
+        "rows_gap": 12,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 48,
+        "padding-block-end": 64
+      }
+    },
+    "media_with_content_LfPdEJ": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "settings": {
+            "media_type": "video",
+            "video_loop": true,
+            "video_autoplay": true,
+            "image_position": "cover",
+            "video_position": "cover"
+          },
+          "blocks": {}
         },
-        "accordion_fgE7Er": {
-          "type": "accordion",
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
           "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 56,
-            "title": "Helps Fill Everyday Nutrition Gaps",
-            "text": "<p>Picky eating can make variety difficult. Smart Gummies helps complement a balanced diet with key vitamins and minerals for growing kids.</p>"
-          }
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 24
+          },
+          "blocks": {
+            "image_y4ApqF": {
+              "type": "image",
+              "name": "t:names.image",
+              "settings": {
+                "image_ratio": "adapt",
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_Hf79zK": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>Productivity Essentials</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_jxGhdJ": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Objects that partner with your digital tools so you can focus on your most important work.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_zg4nUF": {
+              "type": "button",
+              "settings": {
+                "label": "Shop Now",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_y4ApqF",
+            "text_Hf79zK",
+            "text_jxGhdJ",
+            "button_zg4nUF"
+          ]
+        }
+      },
+      "name": "t:names.media_with_text",
+      "settings": {
+        "media_position": "left",
+        "media_width": "medium",
+        "media_height": "50svh",
+        "section_width": "page-width",
+        "extend_media": true,
+        "background_color": "{{ settings.color_palette.color3 }}",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "collection_list_xpBxCm": {
+      "type": "collection-list",
+      "blocks": {
+        "group_mfTd9p": {
+          "type": "group",
+          "name": "t:names.header",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "open_in_new_tab": false,
+            "padding-block-start": 0,
+            "padding-block-end": 16,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_AYrwfM": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h2>Shop by Collection</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_AYrwfM"
+          ]
         },
-        "accordion_MeHLML": {
-          "type": "accordion",
+        "static-collection-card": {
+          "type": "_collection-card",
+          "name": "t:names.collection_card",
+          "static": true,
           "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 56,
-            "title": "Daily Immunity Support",
-            "text": "<p>Vitamins A, C, D, E and Zinc help support normal immune function for active kids from school days to playtime.</p>"
-          }
-        },
-        "accordion_YQ9thE": {
-          "type": "accordion",
-          "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 56,
-            "title": "Made for Growing Kids",
-            "text": "<p>The formula combines nutrients for appetite, growth, focus, immunity, digestion and overall daily wellness in one simple routine.</p>"
-          }
-        },
-        "accordion_NhAedE": {
-          "type": "accordion",
-          "settings": {
-            "open_by_default": true,
-            "icon_svg": "",
-            "icon_size": 56,
-            "title": "A Kid-Friendly Mixed Berry Gummy",
-            "text": "<p>A chewable mixed-berry gummy that fits into your child’s daily vitamin routine—without syrups or tablets.</p>"
-          }
+            "placement": "on_image",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "collection_card_gap": 8,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 10
+          },
+          "blocks": {
+            "collection_title_zyBdAJ": {
+              "type": "collection-title",
+              "name": "t:names.collection_title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "text_color": "{{ settings.color_palette.foreground }}",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "static": true,
+              "settings": {
+                "image_ratio": "portrait",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "collection_title_zyBdAJ"
+          ]
         }
       },
       "block_order": [
-        "accordion_xVHkFk",
-        "accordion_kyti89",
-        "accordion_fgE7Er",
-        "accordion_MeHLML",
-        "accordion_YQ9thE",
-        "accordion_NhAedE"
+        "group_mfTd9p"
       ],
-      "name": "IAMW Accordion",
+      "name": "t:names.collection_list",
       "settings": {
-        "eyebrow": "WHY I AM WELL GUMMIES?",
-        "heading": "Everyday nutrition support for your growing child.",
-        "intro": "<p>When your child is selective about food, offering a varied diet can take extra effort. I Am Well Smart Gummies is designed to complement balanced meals as part of a consistent daily routine.</p>",
-        "image_fit": "cover",
-        "image_height": 440,
-        "mobile_image_height": 340,
-        "cta_text": "ORDER NOW",
-        "cta_destination": "anchor",
-        "cta_anchor": "iamw-product",
-        "cta_link": "",
-        "trust_text": "Kid-friendly mixed berry gummy • Food supplement",
-        "trust_svg": "",
-        "trust_icon_size": 24,
-        "page_width": 1260,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "section_gap": 40,
-        "column_gap": 40,
-        "accordion_gap": 10,
-        "radius": 14,
-        "heading_size": 42,
-        "body_size": 17,
-        "accordion_title_size": 17,
-        "mobile_heading_size": 34,
-        "mobile_body_size": 16,
-        "mobile_accordion_title_size": 16,
-        "background": "#ffffff",
-        "purple": "#42106b",
-        "orange": "#ff9d16",
-        "cream": "#fff4d6",
-        "text_color": "#1c1930",
-        "muted": "#6c6670",
-        "border_color": "#e2d9ea"
-      }
-    },
-    "iamw_ref_04_tabs_PEwJAN": {
-      "type": "iamw-ref-04-tabs",
-      "blocks": {
-        "tab_WWcTDe": {
-          "type": "tab",
-          "settings": {
-            "title": "Picky Eating",
-            "panel_heading": "How This Helps",
-            "text": "<p>When your child eats only a limited variety of foods, it can be difficult to get a broad range of nutrients from meals alone. Smart Gummies is designed to complement a balanced diet with selected nutrients for normal growth and everyday wellbeing.</p><p><strong>L-Lysine</strong> — included as part of the formula for growing children.</p><p><strong>B-complex vitamins</strong> — support normal energy metabolism.</p><p><strong>Zinc</strong> — supports normal growth and immune function.</p>",
-            "media_position": "right"
-          }
-        },
-        "tab_FjFTdK": {
-          "type": "tab",
-          "settings": {
-            "title": "Focus & Learning",
-            "panel_heading": "How This Helps",
-            "text": "<p>Busy school days and everyday learning need consistent nutritional support. Smart Gummies contains nutrients selected to support normal brain and nervous system function.</p><p><strong>🧠 DHA</strong> — supports normal brain development.</p><p><strong>✨ Choline</strong> — supports brain and nervous system function.</p><p><strong>⚡ B Complex</strong> — supports normal energy metabolism.</p>",
-            "media_position": "right"
-          }
-        },
-        "tab_PeXWLQ": {
-          "type": "tab",
-          "settings": {
-            "title": "Immunity",
-            "panel_heading": "How This Helps",
-            "text": "<p>School, playtime and everyday activities mean growing kids need consistent immune support too.</p><p><strong>🍊 Vitamin C</strong> — supports normal immune function.</p><p><strong>☀️ Vitamin D</strong> — supports normal immune function and development.</p><p><strong>🌱 Zinc</strong> — supports normal immune function.</p>",
-            "media_position": "right"
-          }
-        },
-        "tab_RwFqXW": {
-          "type": "tab",
-          "settings": {
-            "title": "Growth Support",
-            "panel_heading": "How This Helps",
-            "text": "<p>Growing kids need key vitamins, minerals and amino acids as part of a balanced nutrition routine.</p><p><strong>🌱 L-Lysine</strong> — included for appetite and growth support.</p><p><strong>☀️ Vitamin D</strong> — supports normal bones and development.</p><p><strong>⭐ Zinc</strong> — supports normal growth.</p>",
-            "media_position": "right"
-          }
-        }
-      },
-      "block_order": [
-        "tab_WWcTDe",
-        "tab_FjFTdK",
-        "tab_PeXWLQ",
-        "tab_RwFqXW"
-      ],
-      "name": "IAMW Support Tabs",
-      "settings": {
-        "eyebrow": "SMART GUMMIES SUPPORT",
-        "heading": "Everyday nutrients for growing children",
-        "intro": "",
-        "page_width": 1260,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "section_gap": 40,
-        "tab_gap": 26,
-        "radius": 14,
-        "panel_height": 440,
-        "mobile_media_height": 300,
-        "media_fit": "cover",
-        "heading_size": 42,
-        "panel_heading_size": 30,
-        "body_size": 17,
-        "tab_size": 16,
-        "mobile_heading_size": 34,
-        "mobile_panel_heading_size": 26,
-        "mobile_body_size": 16,
-        "mobile_tab_size": 15,
-        "background": "#ffffff",
-        "purple": "#42106b",
-        "orange": "#ff9d16",
-        "cream": "#fff4d6",
-        "text_color": "#1c1930",
-        "muted": "#6c6670",
-        "border_color": "#e2d9ea",
-        "active_tab_color": "#42106b"
-      }
-    },
-    "iamw_ref_05_product_Cwrz9q": {
-      "type": "iamw-ref-05-product",
-      "blocks": {
-        "accordion_xNBdQw": {
-          "type": "accordion",
-          "settings": {
-            "open_by_default": true,
-            "icon_svg": "",
-            "icon_size": 40,
-            "title": "Helps Support Appetite & Healthy Growth",
-            "text": "<p>With L-Lysine plus vitamins and minerals selected to help support appetite and healthy growth, especially for picky eaters.</p>"
-          }
-        },
-        "accordion_TR7kB3": {
-          "type": "accordion",
-          "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 40,
-            "title": "Supports Brain, Focus & Learning",
-            "text": "<p>DHA, Choline, Omega 3-6-9 and B Complex Vitamins provide nutritional support for growing brains, focus and everyday learning.</p>"
-          }
-        },
-        "accordion_jtUnCX": {
-          "type": "accordion",
-          "settings": {
-            "open_by_default": false,
-            "icon_svg": "",
-            "icon_size": 40,
-            "title": "Daily Immunity & Digestion Support",
-            "text": "<p>Vitamins A, C, D and E plus Zinc help support normal immune function, while digestive enzymes are included for digestive support.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "accordion_xNBdQw",
-        "accordion_TR7kB3",
-        "accordion_jtUnCX"
-      ],
-      "name": "IAMW Featured Product",
-      "settings": {
-        "product": "smart-routine-starter-pack-90-days-brain-support",
-        "audience_tabs": "KIDS • AGES 2–15",
-        "stars": "★★★★★",
-        "rating_text": "Customer reviews",
-        "kicker": "SMART GUMMIES • DAILY MULTIVITAMIN FOR KIDS",
-        "custom_title": "Smart Routine Starter Pack: 90 Days of Daily Support",
-        "intro": "<p>A mixed-berry food supplement for children ages 2–15, designed to complement balanced meals as part of a consistent daily routine.</p><p><strong>3 bottles • 30 gummies per bottle</strong></p>",
-        "ingredients_link_text": "",
-        "ingredients_link": "",
-        "show_buy_now": true,
-        "buy_now_text": "BUY NOW",
-        "show_add_to_cart": false,
-        "add_to_cart_text": "START THE 90-DAY SMART ROUTINE",
-        "microcopy": "Food supplement • Kid-friendly mixed berry flavor",
-        "enable_box_popup": true,
-        "box_product_handle": "",
-        "box_variant_id": "",
-        "box_popup_width": 420,
-        "box_heading": "Add a Box?",
-        "box_description": "Would you like to add an optional box to your order? The final price will appear at checkout.",
-        "box_available_note": "Available",
-        "box_unavailable_note": "Currently unavailable",
-        "box_add_button_label": "Yes, add a box",
-        "box_checkout_button_label": "No thanks, continue to checkout",
-        "box_popup_bg": "#ffffff",
-        "box_image_bg": "#f7f4fb",
-        "box_heading_color": "#e49d3f",
-        "box_text_color": "#666666",
-        "box_available_color": "#3c7a3c",
-        "box_add_bg": "#5b2a86",
-        "box_add_text": "#ffffff",
-        "box_checkout_bg": "#5b2a86",
-        "box_checkout_text": "#ffffff",
-        "image_inner_padding": 0,
-        "mobile_image_inner_padding": 0,
-        "thumbnail_limit": 8,
-        "thumbnail_size": 64,
-        "page_width": 1260,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "column_gap": 56,
-        "content_gap": 16,
-        "thumb_gap": 8,
-        "accordion_gap": 8,
-        "radius": 14,
-        "title_size": 38,
-        "body_size": 16,
-        "price_size": 30,
-        "mobile_title_size": 32,
-        "mobile_body_size": 16,
-        "mobile_price_size": 28,
-        "background": "#ffffff",
-        "purple": "#42106b",
-        "orange": "#ff8f23",
-        "cream": "#f7effb",
-        "soft_background": "#f6effa",
-        "text_color": "#161116",
-        "muted": "#6c6670",
-        "border_color": "#8205c6"
-      }
-    },
-    "iamw_ref_06_stock_alert_zVrd7W": {
-      "type": "iamw-ref-06-stock-alert",
-      "name": "IAMW Stock Alert",
-      "settings": {
-        "icon_text": "💜",
-        "heading": "Your 90-Day Smart Gummies Routine",
-        "body": "Build a consistent daily routine with 3 bottles of I Am Well Smart Gummies.\n\nReview the current product price and available shipping options at checkout.",
-        "cta_text": "VIEW THE STARTER PACK",
-        "cta_destination": "anchor",
-        "cta_anchor": "iamw-product",
-        "cta_link": "",
-        "image_fit": "cover",
-        "mobile_image_height": 260,
-        "page_width": 1260,
-        "card_width": 700,
-        "card_height": 240,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "content_padding": 28,
-        "content_gap": 14,
-        "radius": 12,
-        "heading_size": 20,
-        "body_size": 16,
-        "button_size": 16,
-        "mobile_heading_size": 19,
-        "mobile_body_size": 15,
-        "mobile_button_size": 15,
-        "section_background": "#f5edf9",
-        "panel_background": "#ff9d16",
-        "placeholder_background": "#f7effb",
-        "text_color": "#ffffff",
-        "button_background": "#42106b",
-        "button_text_color": "#ffffff"
-      }
-    },
-    "iamw_ref_07_social_proof_VM7hPh": {
-      "type": "iamw-ref-07-social-proof",
-      "blocks": {
-        "media_slide_FmepfV": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_MRPnNV": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_84WRdG": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_BbcWjT": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_8bwrcg": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_Y7jVwE": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_p3B7p6": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_LXVxRJ": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_AbrcEX": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_WLhtqU": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_dF3Tcd": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_mRhjGe": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_WGaG98": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        }
-      },
-      "block_order": [
-        "media_slide_FmepfV",
-        "media_slide_MRPnNV",
-        "media_slide_84WRdG",
-        "media_slide_BbcWjT",
-        "media_slide_8bwrcg",
-        "media_slide_Y7jVwE",
-        "media_slide_p3B7p6",
-        "media_slide_LXVxRJ",
-        "media_slide_AbrcEX",
-        "media_slide_WLhtqU",
-        "media_slide_dF3Tcd",
-        "media_slide_mRhjGe",
-        "media_slide_WGaG98"
-      ],
-      "name": "IAMW Social Proof",
-      "settings": {
-        "eyebrow": "REAL PARENTS • REAL ROUTINES",
-        "heading": "Real routines. Feedback from I Am Well families.",
-        "intro": "<p>Explore customer-shared experiences with mealtimes and their children’s Smart Gummies routines.</p>",
-        "desktop_visible_slides": 4,
-        "autoplay": true,
-        "autoplay_speed": 4,
-        "transition_speed": 350,
-        "pause_on_hover": true,
-        "pause_on_interaction": true,
-        "show_controls": true,
-        "show_dots": true,
-        "slide_width": 300,
-        "slide_height": 430,
-        "mobile_slide_width": 300,
-        "mobile_slide_height": 420,
-        "media_fit": "cover",
-        "metric_columns": 3,
-        "page_width": 1320,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "section_gap": 40,
-        "slide_gap": 14,
-        "metric_gap": 14,
-        "radius": 12,
-        "heading_size": 42,
-        "body_size": 16,
-        "quote_size": 18,
-        "mobile_heading_size": 34,
-        "mobile_body_size": 16,
-        "mobile_quote_size": 17,
-        "background": "#ffffff",
-        "card_background": "#f7effb",
-        "purple": "#42106b",
-        "orange": "#ff9d16",
-        "cream": "#fff4d6",
-        "text_color": "#1c1930",
-        "muted": "#6c6670",
-        "border_color": "#e5daeb"
-      }
-    },
-    "iamw_ref_07_social_proof_qX9fxM": {
-      "type": "iamw-ref-07-social-proof",
-      "blocks": {
-        "metric_dYM4Jm": {
-          "type": "metric",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 28,
-            "value": "Customer experiences",
-            "text": "Explore feedback shared by I Am Well customers"
-          }
-        },
-        "metric_UhMakT": {
-          "type": "metric",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 28,
-            "value": "Parent perspectives",
-            "text": "Hear what families say about their routines"
-          }
-        },
-        "metric_HiTzB8": {
-          "type": "metric",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 28,
-            "value": "Kid-friendly format",
-            "text": "A chewable mixed-berry gummy for daily vitamin routines"
-          }
-        },
-        "media_slide_CBgrjH": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_PxNmWD": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_3kdEmf": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_yHtQEc": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_jJzwWV": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_DPQE3g": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_kGwGLn": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_YVKeWm": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_JYD3Qd": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_4gVAxw": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_GdDcnq": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        }
-      },
-      "block_order": [
-        "metric_dYM4Jm",
-        "metric_UhMakT",
-        "metric_HiTzB8",
-        "media_slide_CBgrjH",
-        "media_slide_PxNmWD",
-        "media_slide_3kdEmf",
-        "media_slide_yHtQEc",
-        "media_slide_jJzwWV",
-        "media_slide_DPQE3g",
-        "media_slide_kGwGLn",
-        "media_slide_YVKeWm",
-        "media_slide_JYD3Qd",
-        "media_slide_4gVAxw",
-        "media_slide_GdDcnq"
-      ],
-      "name": "IAMW Social Proof",
-      "settings": {
-        "eyebrow": "PARENT EXPERIENCES",
-        "heading": "",
-        "intro": "<p>Watch parents share their personal experiences with I Am Well Smart Gummies. Some videos may be in Filipino.</p>",
-        "desktop_visible_slides": 4,
-        "autoplay": true,
-        "autoplay_speed": 4,
-        "transition_speed": 350,
-        "pause_on_hover": true,
-        "pause_on_interaction": true,
-        "show_controls": true,
-        "show_dots": true,
-        "slide_width": 300,
-        "slide_height": 430,
-        "mobile_slide_width": 300,
-        "mobile_slide_height": 420,
-        "media_fit": "cover",
-        "metric_columns": 3,
-        "page_width": 1320,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "section_gap": 40,
-        "slide_gap": 14,
-        "metric_gap": 14,
-        "radius": 12,
-        "heading_size": 42,
-        "body_size": 16,
-        "quote_size": 18,
-        "mobile_heading_size": 34,
-        "mobile_body_size": 16,
-        "mobile_quote_size": 17,
-        "background": "#ffffff",
-        "card_background": "#f7effb",
-        "purple": "#42106b",
-        "orange": "#ff9d16",
-        "cream": "#fff4d6",
-        "text_color": "#1c1930",
-        "muted": "#6c6670",
-        "border_color": "#e5daeb"
-      }
-    },
-    "iamw_ref_09_comparison_3MXCt6": {
-      "type": "iamw-ref-09-comparison",
-      "blocks": {
-        "comparison_VpLwCV": {
-          "type": "comparison",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 24,
-            "label": "Appetite support with L-Lysine",
-            "brand_value": "✓",
-            "brand_note": "",
-            "other_value": "x",
-            "other_note": ""
-          }
-        },
-        "comparison_4cWpKF": {
-          "type": "comparison",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 24,
-            "label": "DHA + Choline for brain support",
-            "brand_value": "✓",
-            "brand_note": "",
-            "other_value": "x",
-            "other_note": ""
-          }
-        },
-        "comparison_jy6NPC": {
-          "type": "comparison",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 24,
-            "label": "Digestive enzymes included",
-            "brand_value": "✓",
-            "brand_note": "",
-            "other_value": "x",
-            "other_note": ""
-          }
-        },
-        "comparison_znaRP3": {
-          "type": "comparison",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 24,
-            "label": "Vitamins + Zinc for immunity support",
-            "brand_value": "✓",
-            "brand_note": "",
-            "other_value": "x",
-            "other_note": ""
-          }
-        },
-        "comparison_4nNX7X": {
-          "type": "comparison",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 24,
-            "label": "Kid-friendly mixed berry gummy",
-            "brand_value": "✓",
-            "brand_note": "",
-            "other_value": "x",
-            "other_note": ""
-          }
-        },
-        "comparison_jn6FhC": {
-          "type": "comparison",
-          "settings": {
-            "icon_svg": "",
-            "icon_size": 24,
-            "label": "No tablet to swallow",
-            "brand_value": "✓",
-            "brand_note": "",
-            "other_value": "x",
-            "other_note": ""
-          }
-        }
-      },
-      "block_order": [
-        "comparison_VpLwCV",
-        "comparison_4cWpKF",
-        "comparison_jy6NPC",
-        "comparison_znaRP3",
-        "comparison_4nNX7X",
-        "comparison_jn6FhC"
-      ],
-      "name": "IAMW Comparison",
-      "settings": {
-        "icon_svg": "",
-        "icon_size": 58,
-        "heading": "Explore I Am Well Smart Gummies",
-        "body": "<p>Discover the selected nutrients and chewable format in I Am Well Smart Gummies. Always compare products using their actual ingredient labels.</p>",
-        "brand_column_title": "I Am Well",
-        "other_column_title": "Other products (check label)",
-        "decor_1_size": 110,
-        "decor_1_top": 5,
-        "decor_1_right": 5,
-        "decor_2_size": 120,
-        "decor_2_top": 70,
-        "decor_2_right": 65,
-        "decor_3_size": 110,
-        "decor_3_bottom": 0,
-        "decor_3_right": 0,
-        "mobile_decor_opacity": 70,
-        "cta_text": "VIEW THE 3-BOTTLE STARTER PACK",
-        "cta_destination": "anchor",
-        "cta_anchor": "iamw-product",
-        "cta_link": "",
-        "page_width": 1320,
-        "padding_x": 24,
-        "mobile_padding_x": 16,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "card_padding": 42,
-        "mobile_card_padding": 20,
-        "column_gap": 40,
-        "row_height": 80,
-        "mobile_row_height": 100,
-        "radius": 16,
-        "heading_size": 44,
-        "body_size": 17,
-        "row_size": 16,
-        "column_title_size": 16,
-        "mobile_heading_size": 38,
-        "mobile_body_size": 16,
-        "mobile_row_size": 15,
-        "mobile_column_title_size": 15,
-        "section_background": "#f7effb",
-        "card_background": "#ffffff",
-        "highlight_color": "#42106b",
-        "highlight_text_color": "#ffffff",
-        "text_color": "#1c1930",
-        "muted": "#6c6670",
-        "border_color": "#e3d8e9",
-        "positive_color": "#ffffff",
-        "negative_color": "#e64e4e"
+        "layout_type": "bento",
+        "carousel_on_mobile": true,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 16,
+        "bento_gap": 12,
+        "rows_gap": 16,
+        "max_collections": 4,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 12,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 48,
+        "padding-block-end": 64
       }
     }
   },
   "order": [
-    "iamw_ref_01_timer_haNcPf",
-    "iamw_ref_02_proof_eXYWNV",
-    "iamw_ref_03_accordion_P3CQdR",
-    "iamw_ref_04_tabs_PEwJAN",
-    "iamw_ref_05_product_Cwrz9q",
-    "iamw_ref_06_stock_alert_zVrd7W",
-    "iamw_ref_07_social_proof_VM7hPh",
-    "iamw_ref_07_social_proof_qX9fxM",
-    "iamw_ref_09_comparison_3MXCt6"
+    "hero_iLBwPd",
+    "product_list_EDUBdR",
+    "media_with_content_LfPdEJ",
+    "collection_list_xpBxCm"
   ]
 }

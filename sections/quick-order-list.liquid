@@ -11,13 +11,24 @@
   fetchpriority="low"
 ></script>
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+{% render 'text-component-shimmer-styles' %}
+{% render 'price-styles' %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div
+  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+></div>
 
 <div
   class="
     section
     section--{{ section.settings.section_width }}
-    color-{{ section.settings.color_scheme }}
+    {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
     section-resource-list
     spacing-style
     gap-style
@@ -32,6 +43,7 @@
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
     data-cart-variant-ids="{{ items_in_cart | map: 'variant_id' | json | escape }}"
+    data-cart-line-keys="{{ items_in_cart | map: 'key' | json | escape }}"
     data-url="{{ product.url }}"
     on:submit="/handleSubmit"
   >
@@ -48,7 +60,7 @@
               class="visually-hidden"
               role="caption"
             >
-              {{ 'content.your_cart' | t }}
+              {{ 'content.quick_order_list' | t }}
             </div>
             <div
               class="quick-order-list__grid-header"
@@ -136,12 +148,13 @@
                   assign sold_out_message = 'products.product.sold_out' | t
 
                   capture quantity_selector_markup
-                    render 'quantity-selector', product: product, variant: variant, in_cart_quantity: variant_cart_quantity, line_index: forloop.index, class: 'quantity cart-quantity', min: 0
+                    render 'quantity-selector', product: product, variant: variant, in_cart_quantity: variant_cart_quantity, line_index: forloop.index, min: 0
                   endcapture
                 %}
                 <div
                   class="quick-order-list__grid-row variant-item"
                   data-variant-id="{{ variant.id }}"
+                  data-cart-line-key="{{ variant_line_item.key }}"
                   ref="variantRows[]"
                   role="row"
                 >
@@ -170,7 +183,9 @@
                           {{ variant_display_name }}
                         </span>
                         {% if section.settings.show_sku %}
-                          <span class="variant-item__sku hidden--mobile">{{ variant.sku }}</span>
+                          <span class="variant-item__sku hidden--mobile"
+                            ><bdi>{{ variant.sku }}</bdi></span
+                          >
                         {% endif %}
 
                         <div class="variant-item__mobile-info hidden--desktop">
@@ -179,7 +194,9 @@
                               {{ variant_display_name }}
                             </span>
                             {% if section.settings.show_sku %}
-                              <span class="variant-item__sku">{{ variant.sku }}</span>
+                              <span class="variant-item__sku"
+                                ><bdi>{{ variant.sku }}</bdi></span
+                              >
                             {% endif %}
                           </div>
                           <div class="variant-item__mobile-price-container">
@@ -208,7 +225,7 @@
                             {% if variant.available %}
                               {{ quantity_selector_markup }}
                               <button
-                                class="button button--tertiary variant-item__remove variant-item__remove--mobile hidden--desktop{% if variant_cart_quantity == 0 %} variant-item__remove--hidden{% endif %}"
+                                class="button variant-item__remove variant-item__remove--mobile hidden--desktop{% if variant_cart_quantity == 0 %} variant-item__remove--hidden{% endif %}"
                                 type="button"
                                 {% if variant_cart_quantity == 0 %}
                                   tabindex="-1"
@@ -228,7 +245,7 @@
                                 <span class="visually-hidden">{{ 'actions.remove' | t }}</span>
                               </button>
                             {% else %}
-                              <span class="quantity cart-quantity">{{ sold_out_message }}</span>
+                              <span>{{ sold_out_message }}</span>
                             {% endif %}
                           </div>
                           {% if variant.available %}
@@ -264,10 +281,10 @@
                         {{ quantity_selector_markup }}
                       {% else %}
                         <div class="volume-pricing-info-placeholder"></div>
-                        <span class="quantity cart-quantity">{{ sold_out_message }}</span>
+                        <span>{{ sold_out_message }}</span>
                       {% endif %}
                       <button
-                        class="button button--tertiary variant-item__remove hidden--mobile {% if variant_cart_quantity == 0 %}variant-item__remove--hidden{% endif %}"
+                        class="button variant-item__remove hidden--mobile {% if variant_cart_quantity == 0 %}variant-item__remove--hidden{% endif %}"
                         type="button"
                         {% if variant_cart_quantity == 0 %}
                           tabindex="-1"
@@ -288,7 +305,7 @@
                   </div>
 
                   <div
-                    class="quick-order-list__grid-cell quick-order-list__grid-cell--price variant-item__price hidden--mobile"
+                    class="quick-order-list__grid-cell quick-order-list__grid-cell--price hidden--mobile"
                     role="cell"
                   >
                     {%- if has_discount -%}
@@ -359,7 +376,7 @@
           <div class="quick-order-list-total__actions">
             <a
               href="{{ routes.cart_url }}"
-              class="quick-order-list__button button button--secondary"
+              class="quick-order-list__button button-secondary"
             >
               <span class="quick-order-list__button-text">{{ 'content.view_cart' | t }}</span>
             </a>
@@ -371,7 +388,7 @@
                 on:click="quick-order-list-component/showRemoveAllConfirmation"
               >
                 {{- 'icon-delete.svg' | inline_asset_content -}}
-                <span class="text-body">{{ 'content.remove_all' | t }}</span>
+                <span>{{ 'content.remove_all' | t }}</span>
               </button>
             {% endif %}
           </div>
@@ -439,7 +456,7 @@
         </span>
         <div class="quick-order-list-total__confirmation-buttons">
           <button
-            class="quick-order-list__button-confirm button button--secondary"
+            class="quick-order-list__button-confirm button-secondary"
             type="button"
             data-action="remove"
             on:click="quick-order-list-component/onRemoveAll"
@@ -627,7 +644,7 @@
   }
 
   .variant-item__sku {
-    font-size: var(--font-size--2xs);
+    font-size: var(--font-size--3xs);
     opacity: var(--opacity-85);
   }
 
@@ -1138,10 +1155,10 @@
       "default": false
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

@@ -17,7 +17,6 @@
           "settings": {
             "title": "Cart",
             "show_count": true,
-            "type_preset": "",
             "alignment": "left",
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -46,8 +45,6 @@
           "static": true,
           "settings": {
             "extend_summary": false,
-            "inherit_color_scheme": true,
-            "color_scheme": "scheme-2",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -58,7 +55,7 @@
       },
       "settings": {
         "section_width": "page-width",
-        "color_scheme": "",
+        "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 24,
         "padding-block-end": 0
       }
@@ -84,8 +81,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -109,12 +104,10 @@
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
-                "font_size": "",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "var(--color-foreground)",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -151,8 +144,7 @@
           "static": true,
           "settings": {
             "product_card_gap": 0,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-e1e09ff5-6396-47cd-ad7a-c05470cf2a2e",
+            "background_color": "{{ settings.color_palette.background }}",
             "border": "none",
             "border_width": 0,
             "border_opacity": 100,
@@ -183,7 +175,6 @@
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
-                "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "space-between",
@@ -198,8 +189,6 @@
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -211,6 +200,7 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "open_in_new_tab": false,
                 "padding-block-start": 24,
                 "padding-block-end": 24,
                 "padding-inline-start": 24,
@@ -231,7 +221,6 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "color": "var(--color-foreground)",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -257,7 +246,6 @@
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "color": "var(--color-foreground)",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -293,7 +281,7 @@
           ]
         }
       },
-      "name": "Featured collection",
+      "name": "t:names.product_list",
       "settings": {
         "collection": "all",
         "layout_type": "grid",
@@ -309,7 +297,7 @@
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 28,
-        "color_scheme": "scheme-1",
+        "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 60,
         "padding-block-end": 72
       }

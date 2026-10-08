@@ -1,37 +1,35 @@
 
 
-{% liquid
-  assign section_height_class = ''
-
-  case section.settings.section_height
-    when '21 / 9'
-      assign section_height_class = 'section-product-hotspots--small'
-    when '16 / 9'
-      assign section_height_class = 'section-product-hotspots--medium'
-    when '4 / 3'
-      assign section_height_class = 'section-product-hotspots--large'
-    when 'auto'
-      if section.settings.image == blank
-        assign section_height_class = 'section-product-hotspots--small'
-      endif
-  endcase
-%}
-
 <script
   src="{{ 'product-hotspot.js' | asset_url }}"
   type="module"
   fetchpriority="low"
 ></script>
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+{% render 'quick-add-styles' %}
+{% render 'quick-add-modal-styles' %}
+{% render 'swatch-styles' %}
+{% render 'quantity-selector-styles' %}
+{% render 'variant-picker-styles' %}
+{% render 'buy-buttons-styles' %}
+{% render 'product-badges-styles' %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div
+  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+></div>
 
 <div
   class="
     section
     section--{{ section.settings.section_width }}
     section-product-hotspots
-    {{ section_height_class }}
-    color-{{ section.settings.color_scheme }}
+    {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
     spacing-style
     gap-style
   "
@@ -97,7 +95,7 @@
 
   /* Hide hotspots without products on touch devices (tablets included) */
   @media (hover: none) {
-    product-hotspot-component.hotspot--hidden-touch {
+    .hotspot.hotspot--hidden-touch {
       display: none;
     }
   }
@@ -105,13 +103,13 @@
   /* Responsive adjustments */
   @media screen and (max-width: 749px) {
     /* Hide dialog on mobile - hotspot opens quick-add modal instead */
-    product-hotspot-component .hotspot-dialog {
+    .hotspot .hotspot-dialog {
       display: none;
     }
   }
 
   /* Hotspot button - positioned element with clickable area */
-  product-hotspot-component {
+  .hotspot {
     position: absolute;
     cursor: pointer;
     width: var(--button-size);
@@ -129,11 +127,11 @@
     z-index: var(--layer-flat);
   }
 
-  product-hotspot-component:has(.hotspot-dialog[open]) {
+  .hotspot:has(.hotspot-dialog[open]) {
     z-index: var(--layer-raised);
   }
 
-  product-hotspot-component .hotspot-trigger {
+  .hotspot .hotspot-trigger {
     padding: 0;
     border: none;
   }
@@ -183,7 +181,7 @@
   /* Bullseye grows on hover or when dialog is open (desktop only) */
   @media screen and (min-width: 750px) {
     .hotspot:hover .hotspot-trigger::after,
-    product-hotspot-component:has(.hotspot-dialog[open]) .hotspot-trigger::after {
+    .hotspot:has(.hotspot-dialog[open]) .hotspot-trigger::after {
       width: calc(var(--hotspot-size) * 0.55);
       height: calc(var(--hotspot-size) * 0.55);
       transition: width 0.2s ease-out, height 0.2s ease-out, background 0.2s ease-out;
@@ -208,7 +206,7 @@
   }
 
   /* Dialog positioning */
-  product-hotspot-component .hotspot-dialog {
+  .hotspot .hotspot-dialog {
     position: absolute;
     padding: 0;
     border-radius: var(--style-border-radius-popover);
@@ -267,8 +265,8 @@
     }
   }
 
-  product-hotspot-component .hotspot-dialog:is(:focus, :focus-visible),
-  product-hotspot-component .hotspot-dialog__link:is(:focus, :focus-visible) {
+  .hotspot .hotspot-dialog:is(:focus, :focus-visible),
+  .hotspot .hotspot-dialog__link:is(:focus, :focus-visible) {
     outline: none;
   }
 
@@ -299,7 +297,7 @@
     min-width: 0;
   }
 
-  product-hotspot-component .hotspot-dialog .hotspot-dialog__sold-out-badge {
+  .hotspot .hotspot-dialog .hotspot-dialog__sold-out-badge {
     display: flex;
     width: fit-content;
     justify-self: flex-end;
@@ -316,7 +314,7 @@
   }
 
   /* Dialog transitions */
-  product-hotspot-component .hotspot-dialog {
+  .hotspot .hotspot-dialog {
     --hotspot-blur: 4px;
     --hotspot-scale: 0.8;
     --hotspot-entry-duration: 0.2s;
@@ -347,14 +345,14 @@
     }
   }
 
-  product-hotspot-component .hotspot-dialog[open][data-showing='true'] {
+  .hotspot .hotspot-dialog[open][data-showing='true'] {
     opacity: 1;
     transform: scale(1) translate(0, 0);
     filter: blur(0px);
   }
 
   @starting-style {
-    product-hotspot-component .hotspot-dialog[open][data-showing='true'] {
+    .hotspot .hotspot-dialog[open][data-showing='true'] {
       opacity: 0;
       filter: blur(var(--hotspot-blur));
       transform: scale(var(--hotspot-scale)) translate(var(--offset-x), var(--offset-y));
@@ -363,7 +361,7 @@
   }
 
   /* Safety triangles for dialogs */
-  product-hotspot-component .hotspot-dialog::after {
+  .hotspot .hotspot-dialog::after {
     content: '';
     position: absolute;
     opacity: 0;
@@ -418,88 +416,54 @@
   }
 
   /* Quick add button */
-  .hotspot-dialog[open] {
+  .hotspot-dialog {
     .quick-add {
       display: flex;
-      flex-direction: column;
       justify-content: flex-end;
-      width: auto;
-      height: auto;
       position: relative;
       z-index: var(--layer-flat);
     }
 
-    .quick-add__button {
-      display: grid;
+    .quick-add__button.add-to-cart-button {
+      width: calc(var(--button-size-md) - 4px);
       position: relative;
-      padding-block: 0;
-      box-shadow: none;
-      align-items: center;
+      transform: translateX(2px);
       justify-self: flex-end;
       height: fit-content;
-      translate: var(--padding-2xs) 0;
       border: none;
-      color: var(--color-foreground);
-      background-color: var(--color-background);
-      overflow: visible;
+      color: var(--quick-add-foreground, var(--color-foreground));
+      background-color: var(--quick-add-background, var(--color-background));
       pointer-events: all;
       opacity: 1;
-      animation: elementSlideInTop var(--animation-speed) var(--animation-easing);
-      transition-property: translate;
-      transition-duration: var(--animation-speed);
-      transition-timing-function: var(--ease-out-cubic);
+      overflow: hidden;
+      outline: 2px solid transparent;
 
-      &::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border-radius: calc(50px + 2px);
-        border: 2px solid transparent;
-        pointer-events: none;
-        transition-property: border-color;
-        transition-duration: 0s;
-        transition-timing-function: var(--ease-out-cubic);
+      @media (prefers-reduced-motion: no-preference) {
+        transition: width var(--animation-speed) var(--ease-out-cubic),
+          outline-color var(--animation-speed) var(--ease-out-cubic) var(--animation-speed-slow),
+          transform var(--animation-speed) var(--ease-out-cubic);
       }
 
-      &:is(:hover, :focus, :focus-visible, :active) {
-        translate: 0 0;
-        transition-delay: var(--animation-speed-slow);
-
-        &::before {
-          border-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));
-          transition-duration: var(--animation-speed);
-          transition-delay: var(--animation-speed-slow);
-        }
+      &:is(:hover, :active) {
+        outline-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));
       }
 
-      @media screen and (min-width: 750px) {
-        display: none;
+      &:focus-visible {
+        outline-color: currentcolor;
+        transition-delay: 0s;
       }
     }
 
-    [data-quick-add-button='add'] {
-      & .quick-add__button--choose {
-        display: none;
-      }
-
-      & .quick-add__button--add {
-        display: grid;
-      }
+    .quick-add__button.add-to-cart-button[data-added='true'] {
+      color: transparent;
     }
+  }
 
-    [data-quick-add-button='choose'] {
-      & .quick-add__button--choose {
-        display: grid;
-      }
-
-      & .quick-add__button--add {
-        display: none;
-      }
-    }
-
-    :has(.hotspot-dialog__sold-out-badge) {
-      .quick-add {
-        display: none;
+  @media screen and (min-width: 750px) {
+    .hotspot-dialog {
+      .quick-add__button:is(:hover, :focus-visible) {
+        width: max-content;
+        transform: translateX(0);
       }
     }
   }
@@ -632,10 +596,10 @@
       "alpha": true
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "placeholder": "t:settings.default",
+      "label": "t:settings.background_color"
     },
     {
       "type": "header",
@@ -740,7 +704,6 @@
       "category": "t:categories.products",
       "settings": {
         "section_width": "page-width",
-        "color_scheme": "scheme-1",
         "product_title_gap": 8,
         "padding-block-start": 40,
         "padding-block-end": 40
