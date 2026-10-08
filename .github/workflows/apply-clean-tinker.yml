@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'clean-tinker.zip'
+      - 'theme_export__iamwell-uae-f0snuka8-myshopify-com-tinker__07OCT2026-0522am.zip'
   workflow_dispatch:
 
 permissions:
@@ -24,9 +25,18 @@ jobs:
         run: |
           set -euo pipefail
 
-          test -f clean-tinker.zip
+          zipfile=""
+          if [ -f clean-tinker.zip ]; then
+            zipfile="clean-tinker.zip"
+          elif [ -f theme_export__iamwell-uae-f0snuka8-myshopify-com-tinker__07OCT2026-0522am.zip ]; then
+            zipfile="theme_export__iamwell-uae-f0snuka8-myshopify-com-tinker__07OCT2026-0522am.zip"
+          else
+            echo "Clean Tinker ZIP not found"
+            exit 1
+          fi
+
           workdir="$(mktemp -d)"
-          unzip -q clean-tinker.zip -d "$workdir"
+          unzip -q "$zipfile" -d "$workdir"
 
           for dir in assets blocks config layout locales sections snippets templates; do
             test -d "$workdir/$dir"
@@ -57,7 +67,7 @@ jobs:
           cp -a "$workdir/assets" "$workdir/blocks" "$workdir/config" "$workdir/layout" "$workdir/locales" "$workdir/sections" "$workdir/snippets" "$workdir/templates" .
 
           rm -rf .theme-clean-import .theme-clean-import-xz .theme-import .theme-clean-v2
-          rm -f clean-tinker.zip
+          rm -f clean-tinker.zip theme_export__iamwell-uae-f0snuka8-myshopify-com-tinker__07OCT2026-0522am.zip
           rm -f .github/workflows/apply-clean-tinker.yml
 
           git config user.name "github-actions[bot]"
