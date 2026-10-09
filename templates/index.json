@@ -207,14 +207,5 @@
       }
     }
   },
-  "order": [
-    "iamw_story",
-    "iamw_benefits",
-    "iamw_tabs",
-    "iamw_products",
-    "iamw_promo",
-    "iamw_social",
-    "iamw_testimonials",
-    "iamw_compare"
-  ]
+  "order": ["iamw_story","iamw_benefits","iamw_tabs","iamw_products","iamw_promo","iamw_social","iamw_testimonials","iamw_compare"]
 }
