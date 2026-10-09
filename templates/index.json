@@ -941,6 +941,44 @@
         "positive_color": "#ffffff",
         "negative_color": "#e64e4e"
       }
+    },
+    "box_checkout_popup_8bPeVh": {
+      "type": "box-checkout-popup",
+      "name": "Box checkout popup",
+      "settings": {
+        "enable_popup": true,
+        "box_product": "i-am-well-box",
+        "box_product_handle": "i-am-well-box",
+        "box_variant_id": "",
+        "buy_now_label": "BUY NOW",
+        "buy_now_bg": "#ff8f23",
+        "buy_now_text": "#ffffff",
+        "buy_now_radius": 12,
+        "popup_width": 420,
+        "popup_image": "shopify://shop_images/WhatsAppImage2026-05-05at1.35.05AM.webp",
+        "heading": "Add a Box?",
+        "description": "Would you like to add a box to your order?",
+        "show_box_price": true,
+        "available_note": "Available",
+        "unavailable_note": "Box is currently unavailable",
+        "add_button_label": "Yes, add a box",
+        "disabled_button_label": "Box unavailable",
+        "checkout_button_label": "No thanks, continue to checkout",
+        "popup_bg_color": "#ffffff",
+        "image_bg_color": "#f7f4fb",
+        "heading_color": "#2d1247",
+        "text_color": "#666666",
+        "available_note_color": "#3c7a3c",
+        "unavailable_note_color": "#b00000",
+        "close_icon_color": "#5b2a86",
+        "add_button_bg": "#5b2a86",
+        "add_button_text": "#ffffff",
+        "disabled_button_bg": "#d9d9d9",
+        "disabled_button_text": "#777777",
+        "checkout_button_bg": "#5b2a86",
+        "checkout_button_hover_bg": "#4a216d",
+        "checkout_button_text": "#ffffff"
+      }
     }
   },
   "order": [
@@ -953,6 +991,7 @@
     "iamw_ref_07_social_proof_VM7hPh",
     "iamw_ref_07_social_proof_qX9fxM",
     "iamw_review_loop_hwaETq",
-    "iamw_ref_09_comparison_3MXCt6"
+    "iamw_ref_09_comparison_3MXCt6",
+    "box_checkout_popup_8bPeVh"
   ]
 }
