@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "blocks": {
     "load_video": "Charger la vidéo : {{ description }}",
@@ -65,24 +74,34 @@
     "nested_product": "{{ product_title }} pour {{ parent_title }}",
     "remove": "Retirer",
     "view_pricing_info": "Afficher les informations de tarification",
-    "open_hotspot": "Ouvrir le point d'accès",
-    "slideshow": "Diaporama"
+    "slideshow": "Diaporama",
+    "header_navigation_label": "Principale",
+    "home_logo_alt": "{{ store_name }} - Accueil",
+    "active_filters": "Activez des filtres :",
+    "product_details": "Détails du produit",
+    "show_product_details": "Afficher les détails du produit pour {{ product_name }}",
+    "show_submenu": "Afficher le sous-menu {{ title }}",
+    "featured_product": "Produit en vedette",
+    "search_suggestions_available": "Rechercher des suggestions disponibles pour « {{ query }} »",
+    "price_filter_low": "Prix bas",
+    "price_filter_high": "Prix élevé",
+    "view_disclosure_information_for_product": "Afficher les informations sur le produit {{ product_title }}"
   },
   "actions": {
     "add_to_cart": "Ajouter au panier",
     "clear_all": "Tout effacer",
-    "remove": "Supprimer",
-    "view_in_your_space": "Afficher dans votre espace",
+    "remove": "Retirer",
+    "view_in_your_space": "Voir dans votre espace",
     "show_filters": "Filtrer",
     "clear": "Effacer",
-    "continue_shopping": "Continuer les achats",
+    "continue_shopping": "Continuer vos achats",
     "log_in_html": "Vous possédez un compte ? <a href=\"{{ link }}\">Connectez-vous</a> pour payer plus vite.",
     "see_items": {
       "one": "Voir {{ count }} article",
-      "other": "Voir {{ count }} articles",
-      "many": "Voir {{ count }} articles"
+      "other": "Voir {{ count }} articles",
+      "many": "Voir {{ count }} articles"
     },
-    "view_all": "Voir tout",
+    "view_all": "Tout afficher",
     "add": "Ajouter",
     "choose": "Choisir",
     "added": "Ajouté",
@@ -107,7 +126,10 @@
     "open_image_in_full_screen": "Ouvrir l’image en plein écran",
     "sort": "Trier",
     "show_all_options": "Afficher toutes les options",
-    "open": "Ouvrir"
+    "open": "Ouvrir",
+    "back_to": "Retour à {{ title }}",
+    "back_to_main_menu": "Retour au menu principal",
+    "zoom_media": "Zoom du support multimédia {{ index }}"
   },
   "content": {
     "reviews": "avis",
@@ -167,7 +189,7 @@
       "other": "{{ count }} produits",
       "many": "{{ count }} produits"
     },
-    "recently_viewed_products": "Récemment consultés",
+    "recently_viewed_products": "Récemment consulté(s)",
     "unavailable": "Indisponible",
     "collection_placeholder": "Titre de la collection",
     "product_card_placeholder": "Titre du produit",
@@ -239,7 +261,7 @@
     "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} caractères utilisés",
     "terms_and_policies": "Conditions générales et politiques",
     "pagination": {
-      "nav_label": "Navigation par pagination",
+      "nav_label": "Pagination",
       "previous": "Précédent",
       "next": "Suivant",
       "page": "Page {{ page }}"
@@ -267,7 +289,9 @@
       "one": "1 article ajouté au panier",
       "other": "{{ count }} articles ajoutés au panier",
       "many": "{{ count }} articles ajoutés au panier"
-    }
+    },
+    "quick_order_list": "Liste de commande rapide",
+    "product_disclosures": "Informations sur le produit"
   },
   "gift_cards": {
     "issued": {
@@ -278,9 +302,9 @@
       "add_to_apple_wallet": "Ajouter à Apple Wallet",
       "qr_image_alt": "Code QR : scannez‑le pour utiliser votre carte‑cadeau",
       "copy_code": "Copier le code de la carte‑cadeau",
-      "expiration_date": "Expire le {{ expires_on }}",
       "copy_code_success": "Le code a bien été copié",
-      "expired": "Expirée"
+      "expired": "Expirée",
+      "expiration_date_html": "Expire le <bdi>{{ expires_on }}</bdi>"
     }
   },
   "placeholders": {
@@ -307,7 +331,9 @@
       "quantity_increments": "Incréments de {{ increment }}",
       "quantity_minimum": "Minimum de {{ minimum }}",
       "quantity_maximum": "Maximum de {{ maximum }}",
-      "in_cart": "dans le panier"
+      "in_cart": "dans le panier",
+      "default_title": "Titre par défaut",
+      "sticky_add_to_cart": "Barre d’ajout rapide au panier"
     }
   },
   "fields": {

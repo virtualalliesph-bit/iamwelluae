@@ -24,7 +24,12 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
+{% render 'deferred-media-product-model-styles' %}
+{% render 'deferred-media-video-styles' %}
+
 {% if section.settings.enable_sticky_add_to_cart %}
+  {% render 'fly-to-cart-styles' %}
+
   {% liquid
     assign current_variant = product.selected_or_first_available_variant
     # Get the initial quantity based on quantity rules
@@ -40,7 +45,7 @@
     data-default-variant-title="{{ 'products.product.default_title' | t }}"
   >
     <div
-      class="sticky-add-to-cart__bar color-{{ settings.popover_color_scheme }}"
+      class="sticky-add-to-cart__bar color-custom-popover"
       data-stuck="false"
       ref="stickyBar"
       role="region"
@@ -87,12 +92,12 @@
         data-singleton="{{ product.has_only_default_variant }}"
         data-single-option="{{ has_single_option }}"
       >
-        <h3
+        <p
           class="sticky-add-to-cart__title"
           data-testid="sticky-product-title"
         >
           {{ product.title | escape }}
-        </h3>
+        </p>
         <div
           class="sticky-add-to-cart__variant"
           data-testid="sticky-variant-title"
@@ -118,7 +123,7 @@
 
       <button
         type="button"
-        class="sticky-add-to-cart__button add-to-cart-button button button--primary"
+        class="sticky-add-to-cart__button add-to-cart-button button"
         ref="addToCartButton"
         on:click="/handleAddToCartClick"
         {% unless current_variant.available %}
@@ -129,7 +134,7 @@
           class="add-to-cart-text"
         >
           {% if current_variant.available %}
-            <span class="svg-wrapper add-to-cart-icon">
+            <span class="svg-wrapper">
               {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
             </span>
           {% endif %}
@@ -144,7 +149,6 @@
               {%- endif -%}
             </span>
             <span
-              class="quantity-display"
               ref="quantityDisplay"
               {% if current_variant.available and initial_quantity > 1 %}
                 style="display: inline;"
@@ -166,10 +170,12 @@
       </button>
     </div>
   </sticky-add-to-cart>
+
+  {% render 'add-to-cart-button-styles' %}
 {% endif %}
 
 {% render 'product-information-content',
-  product_media_size: closest.product.media.size,
+  product: closest.product,
   section_id: section.id,
   settings: section.settings,
   media_gallery: media_gallery,
@@ -180,8 +186,8 @@
 {% stylesheet %}
   .sticky-add-to-cart__bar {
     position: fixed;
-    bottom: 20px;
-    left: 50%;
+    bottom: max(20px, var(--safe-area-inset-bottom));
+    left: 50%; /* stylelint-disable-line csstools/use-logical -- centring pair with a physical translateX(-50%) */
     opacity: 0;
     transform: translateX(-50%) translateY(calc(100% + 40px));
     z-index: calc(var(--layer-sticky) - 1); /* Below sticky header */
@@ -237,7 +243,7 @@
   }
 
   .sticky-add-to-cart__info[data-has-image='false'] {
-    padding-left: var(--padding-lg);
+    padding-inline-start: var(--padding-lg);
   }
 
   .sticky-add-to-cart__image {
@@ -263,6 +269,7 @@
   .sticky-add-to-cart__title {
     font-size: var(--font-paragraph-medium--size);
     font-weight: var(--font-weight-semibold);
+    line-height: var(--font-paragraph--line-height);
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -292,17 +299,21 @@
       max-width: none;
       border-radius: 0;
 
+      /* Full-bleed bar touches the physical bottom edge (viewport-fit=cover); keep the
+         controls above the home indicator while the background fills the safe area */
+      padding-block-end: calc(var(--padding-sm) + var(--safe-area-inset-bottom));
+
       &::before {
         --border: 1px;
       }
+    }
 
-      .add-to-cart-text__content {
-        display: none;
-      }
+    .sticky-add-to-cart__bar .add-to-cart-text__content {
+      display: none;
     }
 
     .sticky-add-to-cart__info[data-has-image='false'] {
-      padding-left: 0;
+      padding-inline-start: 0;
     }
 
     .sticky-add-to-cart__title {
@@ -351,6 +362,7 @@
     .sticky-add-to-cart__info[data-single-option='true'] .sticky-add-to-cart__title {
       display: block;
     }
+
     .sticky-add-to-cart__info[data-single-option='true'] .sticky-add-to-cart__variant {
       display: block;
       overflow: hidden;
@@ -364,6 +376,9 @@
 {
   "name": "t:names.product_information",
   "blocks": [
+    {
+      "type": "@theme"
+    },
     {
       "type": "@app"
     }
@@ -399,11 +414,11 @@
       "options": [
         {
           "value": "left",
-          "label": "t:options.left"
+          "label": "t:options.direction_start"
         },
         {
           "value": "right",
-          "label": "t:options.right"
+          "label": "t:options.direction_end"
         }
       ],
       "default": "left"
@@ -438,10 +453,10 @@
       "default": true
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

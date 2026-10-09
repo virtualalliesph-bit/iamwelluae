@@ -10,6 +10,7 @@
 <product-hotspot-component
   class="hotspot{% if hotspot_product == blank and request.design_mode == false %} hotspot--hidden-touch hidden--mobile{% endif %}"
   style="
+    {% # Intentionally physical: x/y are coordinates on the image, which does not mirror in RTL. %}
     left: calc({{ block.settings.x-position }}% - var(--button-size) / 2);
     top: calc({{ block.settings.y-position }}% - var(--button-size) / 2);
     --hotspot-bg: {{ section.settings.hotspot_color }};
@@ -22,12 +23,13 @@
 >
   <button
     class="hotspot-trigger"
-    aria-label="{{ 'accessibility.open_hotspot' | t }}"
+    aria-label="{{ 'accessibility.show_product_details' | t: product_name: hotspot_product_title }}"
     ref="trigger"
     on:click="/handleHotspotClick"
     style="anchor-name: --hotspot-trigger-{{ block.id }};"
   ></button>
   <dialog
+    aria-label="{{ 'accessibility.product_details' | t }}"
     class="hotspot-dialog"
     ref="dialog"
   >
@@ -56,17 +58,13 @@
           <div
             class="hotspot-dialog__product-price {{ section.settings.product_price_preset | default: 'h6' }}"
           >
-            {% render 'price', product_resource: hotspot_product, block: block %}
+            {% render 'price', product_resource: hotspot_product %}
           </div>
         </div>
         {% if hotspot_product != blank %}
-          {% render 'quick-add',
-            product: hotspot_product,
-            section_id: section.id,
-            block: block,
-            color_scheme: section.settings.color_scheme
-          %}
-          {% if hotspot_product.available == false %}
+          {% if hotspot_product.available %}
+            {% render 'quick-add', product: hotspot_product, section_id: section.id, block: block %}
+          {% else %}
             <div class="hotspot-dialog__sold-out-badge">
               {{ 'content.product_badge_sold_out' | t }}
             </div>

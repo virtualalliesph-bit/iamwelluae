@@ -1,11 +1,14 @@
+
+
 {%- doc -%}
-  Native accelerated checkout block with optional IAMW box prompt.
-  When the box prompt is enabled, the block renders its own Buy Now button
-  inside the existing Shopify product form, opens the box modal first,
-  then adds the selected product (and optionally the box) before checkout.
+  This block is used to display the accelerated checkout button.
+  Intended for product-form.liquid block.
 
   @param {string} can_add_to_cart - Whether the product can be added to the cart
   @param form_obj - The form object
+
+  @example
+  {% content_for 'block', type: 'accelerated-checkout', id: 'accelerated-checkout', can_add_to_cart: can_add_to_cart, form_obj: form %}
 {%- enddoc -%}
 
 {% liquid
@@ -13,274 +16,35 @@
   if request.visual_preview_mode and product == blank
     assign product = collections.all.products.first
   endif
-
-  assign box_product = block.settings.box_product
-  if box_product == blank and block.settings.box_product_handle != blank
-    assign box_product = all_products[block.settings.box_product_handle]
-  endif
-
-  assign box_variant = nil
-  if box_product != blank
-    assign box_variant = box_product.selected_or_first_available_variant
-  endif
-
-  assign prompt_enabled = block.settings.enable_box_prompt
-  assign unique_id = section.id | append: '-' | append: block.id
 %}
 
-{% if prompt_enabled and product != blank and form_obj != blank %}
+{% capture accelerated_checkout_button %}
+  {% if product != blank and form_obj != blank %}
+    {{ form_obj | payment_button }}
+  {% endif %}
+{% endcapture %}
+
+{% if accelerated_checkout_button != blank %}
   <div
-    id="IAMWBoxCheckout-{{ unique_id }}"
-    class="accelerated-checkout-block iamw-box-checkout"
+    class="accelerated-checkout-block"
     ref="acceleratedCheckoutButtonContainer"
     {{ block.shopify_attributes }}
-    {% unless can_add_to_cart %}hidden{% endunless %}
-  >
-    <button
-      type="button"
-      class="button iamw-box-checkout__trigger"
-      data-iamw-box-trigger
-      {% unless can_add_to_cart %}disabled{% endunless %}
-    >
-      {{ block.settings.buy_now_label }}
-    </button>
-
-    <div class="iamw-box-checkout__modal" data-iamw-box-modal hidden aria-hidden="true">
-      <button type="button" class="iamw-box-checkout__backdrop" data-iamw-box-close aria-label="Close"></button>
-      <div class="iamw-box-checkout__card" role="dialog" aria-modal="true" aria-labelledby="IAMWBoxTitle-{{ unique_id }}">
-        <button type="button" class="iamw-box-checkout__close" data-iamw-box-close aria-label="Close">×</button>
-
-        {% if block.settings.popup_image != blank %}
-          <div class="iamw-box-checkout__media">
-            {{ block.settings.popup_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'iamw-box-checkout__image', alt: block.settings.popup_heading }}
-          </div>
-        {% elsif box_product != blank and box_product.featured_image != blank %}
-          <div class="iamw-box-checkout__media">
-            {{ box_product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'iamw-box-checkout__image', alt: block.settings.popup_heading }}
-          </div>
-        {% endif %}
-
-        <div class="iamw-box-checkout__content">
-          <h3 id="IAMWBoxTitle-{{ unique_id }}">{{ block.settings.popup_heading }}</h3>
-          <p>{{ block.settings.popup_text }}</p>
-
-          {% if box_product != blank and box_variant != blank %}
-            <div class="iamw-box-checkout__box-meta">
-              <strong>{{ box_product.title }}</strong>
-              {% if block.settings.show_box_price %}<span>{{ box_variant.price | money_with_currency }}</span>{% endif %}
-            </div>
-          {% endif %}
-
-          <div class="iamw-box-checkout__error" data-iamw-box-error hidden></div>
-
-          <button
-            type="button"
-            class="button iamw-box-checkout__yes"
-            data-iamw-box-yes
-            {% if box_variant == blank or box_variant.available == false %}disabled{% endif %}
-          >
-            {% if box_variant == blank or box_variant.available == false %}
-              {{ block.settings.box_unavailable_label }}
-            {% else %}
-              {{ block.settings.add_box_label }}
-            {% endif %}
-          </button>
-
-          <button type="button" class="button iamw-box-checkout__no" data-iamw-box-no>
-            {{ block.settings.no_box_label }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    #IAMWBoxCheckout-{{ unique_id }}{width:100%;flex:1 1 var(--buy-button-preferred-width,185px)}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__trigger{width:100%;min-height:var(--height-buy-buttons);background:{{ block.settings.buy_now_bg }};color:{{ block.settings.buy_now_text }};border-color:{{ block.settings.buy_now_bg }};font-weight:700}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__modal[hidden]{display:none!important}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__modal{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;padding:20px}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__backdrop{position:absolute;inset:0;width:100%;height:100%;border:0;background:rgba(20,10,30,.58);cursor:pointer}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__card{position:relative;z-index:1;width:min({{ block.settings.popup_width }}px,calc(100vw - 32px));max-height:90vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.25)}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__close{position:absolute;z-index:2;top:10px;right:12px;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:#fff;color:#42106b;font-size:27px;line-height:1;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.12)}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__media{background:#f7effb;padding:18px;text-align:center}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__image{display:block;width:100%;max-height:280px;object-fit:contain;margin:auto;border-radius:12px}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__content{padding:24px}
-    #IAMWBoxCheckout-{{ unique_id }} h3{margin:0 0 8px;color:#42106b;font-size:28px;line-height:1.1}
-    #IAMWBoxCheckout-{{ unique_id }} p{margin:0 0 16px;color:#5d5363;line-height:1.5}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__box-meta{display:flex;justify-content:space-between;gap:16px;padding:12px 14px;margin-bottom:16px;border-radius:10px;background:#f7effb;color:#42106b}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__yes,#IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__no{width:100%;min-height:48px;margin-top:10px}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__yes{background:#42106b;color:#fff;border-color:#42106b}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__no{background:#fff;color:#42106b;border-color:#42106b}
-    #IAMWBoxCheckout-{{ unique_id }} .iamw-box-checkout__error{margin:10px 0;padding:10px 12px;border-radius:8px;background:#fff0f0;color:#a40000;font-size:13px}
-    body.iamw-box-modal-open{overflow:hidden}
-  </style>
-
-  <script>
-    (() => {
-      const wrapper = document.getElementById('IAMWBoxCheckout-{{ unique_id }}');
-      if (!wrapper || wrapper.dataset.bound === 'true') return;
-      wrapper.dataset.bound = 'true';
-
-      const form = wrapper.closest('form[action*="/cart/add"]');
-      const trigger = wrapper.querySelector('[data-iamw-box-trigger]');
-      const modal = wrapper.querySelector('[data-iamw-box-modal]');
-      const yes = wrapper.querySelector('[data-iamw-box-yes]');
-      const no = wrapper.querySelector('[data-iamw-box-no]');
-      const errorBox = wrapper.querySelector('[data-iamw-box-error]');
-      const boxVariantId = {{ box_variant.id | default: 0 | json }};
-      const boxAvailable = {{ box_variant.available | default: false | json }};
-
-      if (!form || !trigger || !modal) return;
-
-      const root = () => (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
-
-      function showError(message) {
-        if (!errorBox) return;
-        errorBox.textContent = message || 'Unable to continue. Please try again.';
-        errorBox.hidden = false;
-      }
-
-      function clearError() {
-        if (!errorBox) return;
-        errorBox.hidden = true;
-        errorBox.textContent = '';
-      }
-
-      function openModal() {
-        clearError();
-        modal.hidden = false;
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('iamw-box-modal-open');
-      }
-
-      function closeModal() {
-        modal.hidden = true;
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('iamw-box-modal-open');
-      }
-
-      function buildMainItem() {
-        const fd = new FormData(form);
-        const id = Number(fd.get('id'));
-        if (!id) return null;
-
-        const item = {
-          id,
-          quantity: Math.max(1, Number(fd.get('quantity') || 1))
-        };
-
-        const sellingPlan = fd.get('selling_plan');
-        if (sellingPlan) item.selling_plan = Number(sellingPlan);
-
-        const properties = {};
-        fd.forEach((value, key) => {
-          const match = key.match(/^properties\[(.+)\]$/);
-          if (match && value !== '') properties[match[1]] = value;
-        });
-        if (Object.keys(properties).length) item.properties = properties;
-
-        return item;
-      }
-
-      async function addAndCheckout(withBox) {
-        clearError();
-        const mainItem = buildMainItem();
-        if (!mainItem) {
-          showError('Please select an available product option first.');
-          return;
-        }
-
-        const items = [mainItem];
-        if (withBox) {
-          if (!boxVariantId || !boxAvailable) {
-            showError('The box is currently unavailable.');
-            return;
-          }
-          items.push({ id: Number(boxVariantId), quantity: 1 });
-        }
-
-        [yes, no, trigger].forEach(btn => { if (btn) btn.disabled = true; });
-
-        try {
-          const response = await fetch(root() + 'cart/add.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ items })
-          });
-
-          if (!response.ok) {
-            const payload = await response.json().catch(() => ({}));
-            throw new Error(payload.description || payload.message || 'Unable to add the item to cart.');
-          }
-
-          window.location.href = root() + 'checkout';
-        } catch (error) {
-          [yes, no, trigger].forEach(btn => { if (btn) btn.disabled = false; });
-          if (yes && (!boxVariantId || !boxAvailable)) yes.disabled = true;
-          showError(error.message);
-        }
-      }
-
-      trigger.addEventListener('click', (event) => {
-        event.preventDefault();
-        openModal();
-      });
-
-      wrapper.querySelectorAll('[data-iamw-box-close]').forEach(btn => btn.addEventListener('click', closeModal));
-      if (yes) yes.addEventListener('click', () => addAndCheckout(true));
-      if (no) no.addEventListener('click', () => addAndCheckout(false));
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && !modal.hidden) closeModal();
-      });
-    })();
-  </script>
-{% else %}
-  {% capture accelerated_checkout_button %}
-    {% if product != blank and form_obj != blank %}
-      {{ form_obj | payment_button }}
+    {% if request.visual_preview_mode %}
+      data-shopify-visual-preview
     {% endif %}
-  {% endcapture %}
-
-  {% if accelerated_checkout_button != blank %}
-    <div
-      class="accelerated-checkout-block"
-      ref="acceleratedCheckoutButtonContainer"
-      {{ block.shopify_attributes }}
-      {% if request.visual_preview_mode %}data-shopify-visual-preview{% endif %}
-      {% unless can_add_to_cart %}hidden{% endunless %}
-    >
-      {{ accelerated_checkout_button }}
-    </div>
-  {% endif %}
+    {% unless can_add_to_cart %}
+      hidden
+    {% endunless %}
+  >
+    {{ accelerated_checkout_button }}
+  </div>
 {% endif %}
 
-{% stylesheet %}
-  .accelerated-checkout-block[data-shopify-visual-preview] { width: 300px; }
-  more-payment-options-link { font-size: smaller; }
-  more-payment-options-link a { --button-color: var(--color-primary); }
-  more-payment-options-link a:hover { --button-color: var(--color-primary-hover); }
-  .shopify-payment-button__more-options[aria-hidden='true'] { display: none; }
-{% endstylesheet %}
+{% render 'buy-buttons-styles' %}
 
 {% schema %}
 {
   "name": "t:names.accelerated_checkout",
-  "tag": null,
-  "settings": [
-    { "type": "checkbox", "id": "enable_box_prompt", "label": "Enable Add a Box prompt", "default": false },
-    { "type": "product", "id": "box_product", "label": "Box product" },
-    { "type": "text", "id": "box_product_handle", "label": "Box product handle fallback", "default": "i-am-well-box" },
-    { "type": "text", "id": "buy_now_label", "label": "Buy Now label", "default": "BUY NOW" },
-    { "type": "color", "id": "buy_now_bg", "label": "Buy Now background", "default": "#ff8f23" },
-    { "type": "color", "id": "buy_now_text", "label": "Buy Now text", "default": "#ffffff" },
-    { "type": "range", "id": "popup_width", "label": "Popup width", "min": 320, "max": 600, "step": 10, "unit": "px", "default": 420 },
-    { "type": "image_picker", "id": "popup_image", "label": "Popup image" },
-    { "type": "text", "id": "popup_heading", "label": "Popup heading", "default": "Add a Box?" },
-    { "type": "textarea", "id": "popup_text", "label": "Popup text", "default": "Would you like to add a box to your order?" },
-    { "type": "checkbox", "id": "show_box_price", "label": "Show box price", "default": true },
-    { "type": "text", "id": "add_box_label", "label": "Add box button", "default": "Yes, add a box" },
-    { "type": "text", "id": "no_box_label", "label": "Continue without box button", "default": "No thanks, continue to checkout" },
-    { "type": "text", "id": "box_unavailable_label", "label": "Unavailable button", "default": "Box unavailable" }
-  ]
+  "tag": null
 }
 {% endschema %}

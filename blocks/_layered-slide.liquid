@@ -1,9 +1,15 @@
+
+
 {%- assign block_index = section.blocks | find_index: 'id', block.id -%}
 
 {%- liquid
   assign preview_image = block.settings.image_1
   if block.settings.media_type_1 == 'video'
     assign preview_image = block.settings.video_1.preview_image
+  endif
+
+  if block.settings.background_color != blank
+    render 'contrast-override', background_color: block.settings.background_color, section_id: block.id, skip_contrast: true
   endif
 -%}
 
@@ -13,6 +19,7 @@
   id="Panel-{{ block.id }}-{{ section.id }}"
   aria-labelledby="Tab-{{ block.id }}-{{ section.id }}"
   tabindex="0"
+  class="layered-slideshow__panel {% if section.settings.drop_shadow %}layered-slideshow__panel--drop-shadow{% endif %}"
   style="--index: {{ block_index }}"
   {% if block_index > 0 %}
     inert
@@ -70,7 +77,7 @@
       {{ placeholder_name | placeholder_svg_tag: 'layered-slideshow__image' }}
     {%- endif -%}
     <div
-      class="layered-slideshow__content spacing-style{% unless block.settings.inherit_color_scheme %} color-{{ block.settings.color_scheme }}{% endunless %} background-transparent"
+      class="layered-slideshow__content spacing-style{% if block.settings.background_color != blank %} color-custom-{{ block.id }}{% endif %} background-transparent"
       style="{% render 'spacing-style', settings: block.settings %}"
     >
       <div
@@ -88,6 +95,30 @@
   "name": "t:names.slide",
   "tag": null,
   "blocks": [
+    {
+      "type": "_heading"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "group"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "jumbo-text"
+    },
     {
       "type": "@theme"
     },
@@ -158,15 +189,15 @@
       "options": [
         {
           "value": "flex-start",
-          "label": "t:options.left"
+          "label": "t:options.direction_start"
         },
         {
           "value": "center",
-          "label": "t:options.center"
+          "label": "t:options.direction_center"
         },
         {
           "value": "flex-end",
-          "label": "t:options.right"
+          "label": "t:options.direction_end"
         },
         {
           "value": "space-between",
@@ -211,15 +242,15 @@
       "options": [
         {
           "value": "flex-start",
-          "label": "t:options.left"
+          "label": "t:options.direction_start"
         },
         {
           "value": "center",
-          "label": "t:options.center"
+          "label": "t:options.direction_center"
         },
         {
           "value": "flex-end",
-          "label": "t:options.right"
+          "label": "t:options.direction_end"
         }
       ],
       "default": "flex-start",
@@ -265,17 +296,10 @@
       "content": "t:content.appearance"
     },
     {
-      "type": "checkbox",
-      "id": "inherit_color_scheme",
-      "label": "t:settings.inherit_color_scheme",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-6",
-      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "checkbox",
@@ -376,6 +400,7 @@
       "blocks": {
         "heading": {
           "type": "text",
+          "name": "t:names.heading",
           "settings": {
             "text": "t:html_defaults.new_arrivals_h2",
             "type_preset": "h2"
