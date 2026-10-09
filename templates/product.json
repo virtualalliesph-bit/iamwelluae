@@ -11,6 +11,7 @@
   "sections": {
     "iamw_product_hero": {
       "type": "iamw-uae-product-hero",
+      "disabled": true,
       "settings": {}
     },
     "box_checkout_popup_N3938K": {
@@ -50,10 +51,27 @@
         "checkout_button_hover_bg": "#4a216d",
         "checkout_button_text": "#ffffff"
       }
+    },
+    "iamw_uae_smart_product_aRfGhB": {
+      "type": "iamw-uae-smart-product",
+      "name": "IAMW UAE Product Page",
+      "settings": {
+        "eyebrow": "SMART GUMMIES",
+        "subtitle": "Brain Support",
+        "rating_value": "5.0",
+        "review_count": "126",
+        "box_product_handle": "i-am-well-box",
+        "box_image": "shopify://shop_images/WhatsAppImage2026-05-05at1.35.05AM.webp",
+        "popup_heading": "Add a Box?",
+        "popup_text": "Would you like to add a gift box to your order?",
+        "popup_yes": "Yes, add a box",
+        "popup_no": "No thanks, continue to checkout"
+      }
     }
   },
   "order": [
     "iamw_product_hero",
-    "box_checkout_popup_N3938K"
+    "box_checkout_popup_N3938K",
+    "iamw_uae_smart_product_aRfGhB"
   ]
 }
