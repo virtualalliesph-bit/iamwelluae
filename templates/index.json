@@ -87,6 +87,7 @@
         "cta_destination": "anchor",
         "cta_anchor": "iamw-product",
         "cta_link": "",
+        "image": "shopify://shop_images/6143214667367649919_1.jpg",
         "image_fit": "cover",
         "image_height": 620,
         "mobile_image_height": 420,
@@ -120,6 +121,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/ddf1863e-9310-44e9-9212-e995f4a34040.avif",
             "icon_svg": "",
             "icon_size": 56,
             "title": "Helps Support Appetite for Picky Eaters",
@@ -130,6 +132,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/5cf27454-7f6f-44f0-84f7-4972f077add7.avif",
             "icon_svg": "",
             "icon_size": 56,
             "title": "Supports Focus & Learning",
@@ -140,6 +143,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/c9ed4f16-6de2-49c3-89ca-55913086791a.avif",
             "icon_svg": "",
             "icon_size": 56,
             "title": "Helps Fill Everyday Nutrition Gaps",
@@ -150,6 +154,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/e8c5dd63-f456-49b1-88c0-08cd15bef868.avif",
             "icon_svg": "",
             "icon_size": 56,
             "title": "Daily Immunity Support",
@@ -160,6 +165,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/43df57c1-e9b0-49c3-958f-b49f208182b5.avif",
             "icon_svg": "",
             "icon_size": 56,
             "title": "Made for Growing Kids",
@@ -170,6 +176,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": true,
+            "icon_image": "shopify://shop_images/ddf1863e-9310-44e9-9212-e995f4a34040.avif",
             "icon_svg": "",
             "icon_size": 56,
             "title": "A Kid-Friendly Mixed Berry Gummy",
@@ -190,6 +197,7 @@
         "eyebrow": "WHY I AM WELL GUMMIES?",
         "heading": "Everyday nutrition support for your growing child.",
         "intro": "<p>When your child is selective about food, offering a varied diet can take extra effort. I Am Well Smart Gummies is designed to complement balanced meals as part of a consistent daily routine.</p>",
+        "image": "shopify://shop_images/6143062380712236434.jpg",
         "image_fit": "cover",
         "image_height": 440,
         "mobile_image_height": 340,
@@ -233,7 +241,8 @@
             "title": "Picky Eating",
             "panel_heading": "How This Helps",
             "text": "<p>When your child eats only a limited variety of foods, it can be difficult to get a broad range of nutrients from meals alone. Smart Gummies is designed to complement a balanced diet with selected nutrients for normal growth and everyday wellbeing.</p><p><strong>L-Lysine</strong> — included as part of the formula for growing children.</p><p><strong>B-complex vitamins</strong> — support normal energy metabolism.</p><p><strong>Zinc</strong> — supports normal growth and immune function.</p>",
-            "media_position": "right"
+            "media_position": "right",
+            "image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"
           }
         },
         "tab_FjFTdK": {
@@ -242,7 +251,8 @@
             "title": "Focus & Learning",
             "panel_heading": "How This Helps",
             "text": "<p>Busy school days and everyday learning need consistent nutritional support. Smart Gummies contains nutrients selected to support normal brain and nervous system function.</p><p><strong>🧠 DHA</strong> — supports normal brain development.</p><p><strong>✨ Choline</strong> — supports brain and nervous system function.</p><p><strong>⚡ B Complex</strong> — supports normal energy metabolism.</p>",
-            "media_position": "right"
+            "media_position": "right",
+            "image": "shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp"
           }
         },
         "tab_PeXWLQ": {
@@ -251,7 +261,8 @@
             "title": "Immunity",
             "panel_heading": "How This Helps",
             "text": "<p>School, playtime and everyday activities mean growing kids need consistent immune support too.</p><p><strong>🍊 Vitamin C</strong> — supports normal immune function.</p><p><strong>☀️ Vitamin D</strong> — supports normal immune function and development.</p><p><strong>🌱 Zinc</strong> — supports normal immune function.</p>",
-            "media_position": "right"
+            "media_position": "right",
+            "image": "shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp"
           }
         },
         "tab_RwFqXW": {
@@ -260,7 +271,8 @@
             "title": "Growth Support",
             "panel_heading": "How This Helps",
             "text": "<p>Growing kids need key vitamins, minerals and amino acids as part of a balanced nutrition routine.</p><p><strong>🌱 L-Lysine</strong> — included for appetite and growth support.</p><p><strong>☀️ Vitamin D</strong> — supports normal bones and development.</p><p><strong>⭐ Zinc</strong> — supports normal growth.</p>",
-            "media_position": "right"
+            "media_position": "right",
+            "image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp"
           }
         }
       },
