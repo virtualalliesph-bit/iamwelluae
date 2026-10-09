@@ -9,22 +9,11 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "iamw-uae-smart-product",
-      "settings": {
-        "eyebrow": "SMART GUMMIES",
-        "subtitle": "Brain Support",
-        "rating_value": "5.0",
-        "review_count": "126",
-        "box_product_handle": "i-am-well-box",
-        "box_image": "shopify://shop_images/WhatsAppImage2026-05-05at1.35.05AM.webp",
-        "popup_heading": "Add a Box?",
-        "popup_text": "Would you like to add a gift box to your order?",
-        "popup_yes": "Yes, add a box",
-        "popup_no": "No thanks, continue to checkout"
-      }
+    "iamw_product_hero": {
+      "type": "iamw-uae-product-hero",
+      "settings": {}
     },
-    "box_checkout_popup_D88kRW": {
+    "box_checkout_popup_N3938K": {
       "type": "box-checkout-popup",
       "name": "Box checkout popup",
       "settings": {
@@ -37,6 +26,7 @@
         "buy_now_text": "#ffffff",
         "buy_now_radius": 12,
         "popup_width": 420,
+        "popup_image": "shopify://shop_images/WhatsAppImage2026-05-05at1.35.05AM.webp",
         "heading": "Add a Box?",
         "description": "Would you like to add a box to your order?",
         "show_box_price": true,
@@ -63,7 +53,7 @@
     }
   },
   "order": [
-    "main",
-    "box_checkout_popup_D88kRW"
+    "iamw_product_hero",
+    "box_checkout_popup_N3938K"
   ]
 }
