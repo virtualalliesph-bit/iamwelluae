@@ -1,0 +1,214 @@
+{
+  "sections": {
+    "iamw_story": {
+      "type": "iamw-story-hero",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "We wanted a simple routine that could support our child through busy school days. The gummy format made it easy to stay consistent every morning.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        }
+      },
+      "block_order": ["review_1"],
+      "settings": {
+        "stars": "★★★★★",
+        "rating_text": "Feedback from I Am Well parents",
+        "heading": "Big school days need a simple daily brain-support routine.",
+        "body": "<p>Learning, play and everyday activities ask a lot from growing kids. A balanced diet remains the foundation, and I Am Well Smart Gummies can help complement that routine with nutrients selected to support normal brain and nervous system function.</p><p>One mixed-berry gummy routine. Easy to remember. Easy to fit into the day.</p>",
+        "cta_label": "EXPLORE BRAIN SUPPORT",
+        "cta_anchor": "iamw-products",
+        "image": "shopify://shop_images/6143214667367649919_1.jpg",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "iamw_benefits": {
+      "type": "iamw-benefits",
+      "blocks": {
+        "benefit_1": {"type":"benefit","settings":{"title":"DHA for Normal Brain Development","text":"<p>DHA is included as part of the formula to support normal brain development during the growing years.</p>","open_by_default":true}},
+        "benefit_2": {"type":"benefit","settings":{"title":"Choline for Brain & Nervous System Function","text":"<p>Choline supports normal brain and nervous system function as part of a balanced nutrition routine.</p>","open_by_default":false}},
+        "benefit_3": {"type":"benefit","settings":{"title":"B Vitamins for Normal Energy Metabolism","text":"<p>B-complex vitamins help support normal energy metabolism for busy school days and everyday activities.</p>","open_by_default":false}},
+        "benefit_4": {"type":"benefit","settings":{"title":"Zinc for Growth & Immune Function","text":"<p>Zinc supports normal growth and immune function as children learn, play and develop.</p>","open_by_default":false}},
+        "benefit_5": {"type":"benefit","settings":{"title":"A Routine Kids Can Enjoy","text":"<p>The chewable mixed-berry gummy format is simple to add to a consistent daily routine without another syrup or tablet.</p>","open_by_default":false}}
+      },
+      "block_order": ["benefit_1","benefit_2","benefit_3","benefit_4","benefit_5"],
+      "settings": {
+        "eyebrow": "DAILY BRAIN SUPPORT",
+        "heading": "Everyday nutrients for growing minds.",
+        "intro": "<p>I Am Well Smart Gummies combines selected nutrients that support normal brain development, nervous system function and everyday nutrition.</p>",
+        "image": "shopify://shop_images/6143062380712236434.jpg",
+        "cta_label": "SEE THE BUNDLES",
+        "cta_anchor": "iamw-products",
+        "microcopy": "Mixed berry gummy • Food supplement",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_tabs": {
+      "type": "iamw-support-tabs",
+      "blocks": {
+        "tab_1": {"type":"tab","settings":{"title":"Focus & Learning","panel_heading":"Nutrition for busy learning days","text":"<p>Consistent nutrition supports the body through school, homework and everyday learning. Smart Gummies includes DHA, Choline and B vitamins as part of that daily routine.</p><p><strong>DHA</strong> — supports normal brain development.</p><p><strong>Choline</strong> — supports normal brain and nervous system function.</p><p><strong>B vitamins</strong> — support normal energy metabolism.</p>","image":"shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp"}},
+        "tab_2": {"type":"tab","settings":{"title":"Brain Development","panel_heading":"Support through the growing years","text":"<p>Growing minds need a broad range of nutrients from balanced meals. Smart Gummies is designed to complement that diet with selected vitamins, minerals, DHA and Choline.</p>","image":"shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"}},
+        "tab_3": {"type":"tab","settings":{"title":"School-Day Energy","panel_heading":"Support normal energy metabolism","text":"<p>School days can be long. B-complex vitamins contribute to normal energy metabolism and fit naturally into a consistent morning routine.</p>","image":"shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp"}},
+        "tab_4": {"type":"tab","settings":{"title":"Everyday Wellness","panel_heading":"More than one part of the routine","text":"<p>Brain support works best as part of overall nutrition. The formula also includes nutrients selected for normal growth, immunity and everyday wellness.</p>","image":"shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp"}}
+      },
+      "block_order": ["tab_1","tab_2","tab_3","tab_4"],
+      "settings": {
+        "eyebrow": "SMART GUMMIES BRAIN SUPPORT",
+        "heading": "Support for school days, learning and growing minds",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_products": {
+      "type": "iamw-bundle-grid",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "badge": "BRAIN SUPPORT ROUTINE",
+            "kicker": "I AM WELL SMART GUMMIES",
+            "title_override": "Build a consistent daily learning routine",
+            "description": "<p>Select the Smart Gummies bundle you want to feature for this brain-support page. Live price and variants are pulled from the Shopify product.</p>",
+            "button_label": "BUY NOW",
+            "microcopy": "Direct to checkout • No cart-page detour"
+          }
+        }
+      },
+      "block_order": ["product_1"],
+      "settings": {
+        "eyebrow": "CHOOSE YOUR ROUTINE",
+        "heading": "Smart Gummies bundles for growing minds",
+        "intro": "<p>Feature one bundle or add a second option for a two-column comparison.</p>",
+        "button_label": "BUY NOW",
+        "loading_label": "GOING TO CHECKOUT…",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff8f23",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_promo": {
+      "type": "iamw-promo-split",
+      "settings": {
+        "eyebrow": "A SIMPLE SCHOOL-DAY ROUTINE",
+        "heading": "Easy to add to mornings before the day gets busy",
+        "body": "<p>A consistent routine is easier when it fits naturally into family life. Use this section to spotlight a school-day bundle, new packaging or a focused brain-support offer.</p>",
+        "cta_label": "VIEW THE BUNDLES",
+        "background": "#f6ecfb",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "padding_top": 42,
+        "padding_bottom": 42
+      }
+    },
+    "iamw_social": {
+      "type": "iamw-social-proof",
+      "blocks": {
+        "proof_1": {"type":"proof","settings":{"alt_text":"I Am Well parent feedback"}},
+        "proof_2": {"type":"proof","settings":{"alt_text":"I Am Well parent feedback"}},
+        "proof_3": {"type":"proof","settings":{"alt_text":"I Am Well parent feedback"}},
+        "proof_4": {"type":"proof","settings":{"alt_text":"I Am Well parent feedback"}}
+      },
+      "block_order": ["proof_1","proof_2","proof_3","proof_4"],
+      "settings": {
+        "eyebrow": "REAL PARENTS • REAL ROUTINES",
+        "heading": "What families say about their I Am Well routine",
+        "intro": "<p>Add approved customer messages and family photos in Theme Editor.</p>",
+        "columns": 4,
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_testimonials": {
+      "type": "iamw-testimonials",
+      "blocks": {
+        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The gummy format is easy to fit into our school morning routine, which makes consistency much easier.","name":"I Am Well parent","meta":"UAE"}},
+        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We wanted one simple routine instead of several different products, and this is easy for the kids to remember.","name":"I Am Well parent","meta":"UAE"}},
+        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient addition to the balanced meals and routines we already focus on at home.","name":"I Am Well parent","meta":"UAE"}},
+        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The mixed berry gummy works well for our family because it feels simple rather than like another chore.","name":"I Am Well parent","meta":"UAE"}}
+      },
+      "block_order": ["testimonial_1","testimonial_2","testimonial_3","testimonial_4"],
+      "settings": {
+        "eyebrow": "PARENT FEEDBACK",
+        "heading": "A brain-support routine families can keep simple",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "iamw_compare": {
+      "type": "iamw-comparison",
+      "blocks": {
+        "feature_1": {"type":"feature","settings":{"feature":"DHA included for brain development support","our_value":"✓","other_value":"×"}},
+        "feature_2": {"type":"feature","settings":{"feature":"Choline for brain & nervous system function","our_value":"✓","other_value":"×"}},
+        "feature_3": {"type":"feature","settings":{"feature":"B vitamins for normal energy metabolism","our_value":"✓","other_value":"×"}},
+        "feature_4": {"type":"feature","settings":{"feature":"Vitamins + Zinc for everyday wellness support","our_value":"✓","other_value":"×"}},
+        "feature_5": {"type":"feature","settings":{"feature":"Kid-friendly mixed berry gummy","our_value":"✓","other_value":"×"}}
+      },
+      "block_order": ["feature_1","feature_2","feature_3","feature_4","feature_5"],
+      "settings": {
+        "eyebrow": "WHY I AM WELL",
+        "heading": "One simple routine for growing minds",
+        "body": "<p>Compare the selected brain-support nutrients and kid-friendly format built into I Am Well Smart Gummies.</p>",
+        "our_label": "I Am Well",
+        "other_label": "Other products",
+        "cta_label": "SHOP BRAIN SUPPORT",
+        "cta_anchor": "iamw-products",
+        "background": "#f7effb",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "iamw_story",
+    "iamw_benefits",
+    "iamw_tabs",
+    "iamw_products",
+    "iamw_promo",
+    "iamw_social",
+    "iamw_testimonials",
+    "iamw_compare"
+  ]
+}
