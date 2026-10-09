@@ -1,0 +1,159 @@
+{% liquid
+  assign product_count = section.blocks.size
+  if product_count < 1
+    assign product_count = 1
+  endif
+  if product_count > 2
+    assign product_count = 3
+  endif
+%}
+
+<section id="iamw-products" class="iamw-bundles iamw-bundles--{{ section.id }}" data-iamw-bundles>
+  <div class="iamw-bundles__inner">
+    <header class="iamw-bundles__header">
+      {% if section.settings.eyebrow != blank %}<div class="iamw-bundles__eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+      {% if section.settings.heading != blank %}<h2>{{ section.settings.heading }}</h2>{% endif %}
+      {% if section.settings.intro != blank %}<div class="iamw-bundles__intro rte">{{ section.settings.intro }}</div>{% endif %}
+    </header>
+
+    <div class="iamw-bundles__grid" style="--iamw-cols:{{ product_count }}">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        {% assign variant = product.selected_or_first_available_variant %}
+        <article class="iamw-bundle-card" data-bundle-card {{ block.shopify_attributes }}>
+          <div class="iamw-bundle-card__media">
+            {% if block.settings.badge != blank %}<span class="iamw-bundle-card__badge">{{ block.settings.badge }}</span>{% endif %}
+            {% if product != blank and product.featured_image != blank %}
+              {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,700,1000,1200', sizes: '(min-width: 900px) 45vw, 100vw', class: 'iamw-bundle-card__image', alt: product.title }}
+            {% elsif block.settings.fallback_image != blank %}
+              {{ block.settings.fallback_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'iamw-bundle-card__image', alt: block.settings.title_override }}
+            {% else %}
+              <div class="iamw-bundle-card__placeholder">Select a Shopify product</div>
+            {% endif %}
+          </div>
+
+          <div class="iamw-bundle-card__content">
+            {% if block.settings.kicker != blank %}<div class="iamw-bundle-card__kicker">{{ block.settings.kicker }}</div>{% endif %}
+            <h3>{{ block.settings.title_override | default: product.title | default: 'Select a product' }}</h3>
+            {% if block.settings.description != blank %}<div class="iamw-bundle-card__description rte">{{ block.settings.description }}</div>{% endif %}
+
+            {% if product != blank and variant != blank %}
+              <div class="iamw-bundle-card__price" data-price>{{ variant.price | money }}</div>
+
+              {% if product.variants.size > 1 %}
+                <label class="iamw-bundle-card__variant-label" for="IAMWBundleVariant-{{ section.id }}-{{ block.id }}">Choose option</label>
+                <select id="IAMWBundleVariant-{{ section.id }}-{{ block.id }}" class="iamw-bundle-card__variant" data-variant-select>
+                  {% for option_variant in product.variants %}
+                    <option value="{{ option_variant.id }}" data-price="{{ option_variant.price | money }}" data-available="{{ option_variant.available }}" {% if option_variant.id == variant.id %}selected{% endif %} {% unless option_variant.available %}disabled{% endunless %}>
+                      {{ option_variant.title }}{% unless option_variant.available %} — Sold out{% endunless %}
+                    </option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+
+              <button type="button" class="iamw-bundle-card__buy" data-buy-now data-variant-id="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                {% if variant.available %}{{ block.settings.button_label | default: section.settings.button_label }}{% else %}SOLD OUT{% endif %}
+              </button>
+            {% else %}
+              <button type="button" class="iamw-bundle-card__buy" disabled>SELECT PRODUCT</button>
+            {% endif %}
+
+            {% if block.settings.microcopy != blank %}<div class="iamw-bundle-card__micro">{{ block.settings.microcopy }}</div>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% style %}
+.iamw-bundles--{{ section.id }}{--purple:{{ section.settings.purple }};--orange:{{ section.settings.orange }};--text:{{ section.settings.text_color }};--muted:{{ section.settings.muted }};--border:{{ section.settings.border_color }};background:{{ section.settings.background }};color:var(--text);padding:{{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;scroll-margin-top:30px}.iamw-bundles--{{ section.id }} *{box-sizing:border-box}.iamw-bundles--{{ section.id }} .iamw-bundles__inner{max-width:1240px;margin:0 auto}.iamw-bundles--{{ section.id }} .iamw-bundles__header{text-align:center;max-width:860px;margin:0 auto 30px}.iamw-bundles--{{ section.id }} .iamw-bundles__eyebrow{color:var(--purple);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.iamw-bundles--{{ section.id }} h2{font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.035em;margin:0}.iamw-bundles--{{ section.id }} .iamw-bundles__intro{color:var(--muted);font-size:16px;line-height:1.6;margin-top:10px}.iamw-bundles--{{ section.id }} .iamw-bundles__grid{display:grid;grid-template-columns:repeat(var(--iamw-cols),minmax(0,1fr));gap:24px}.iamw-bundles--{{ section.id }} .iamw-bundle-card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 10px 32px rgba(60,20,90,.06)}.iamw-bundles--{{ section.id }} .iamw-bundle-card__media{position:relative;background:#f7effb;min-height:360px;display:grid;place-items:center}.iamw-bundles--{{ section.id }} .iamw-bundle-card__image{width:100%;height:100%;min-height:360px;max-height:520px;object-fit:contain;padding:10px}.iamw-bundles--{{ section.id }} .iamw-bundle-card__placeholder{color:var(--muted);font-size:14px}.iamw-bundles--{{ section.id }} .iamw-bundle-card__badge{position:absolute;z-index:1;top:16px;left:16px;background:var(--orange);color:#19131c;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:900}.iamw-bundles--{{ section.id }} .iamw-bundle-card__content{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}.iamw-bundles--{{ section.id }} .iamw-bundle-card__kicker{color:var(--purple);font-size:11px;letter-spacing:.11em;text-transform:uppercase;font-weight:900}.iamw-bundles--{{ section.id }} h3{font-size:clamp(25px,2.5vw,34px);line-height:1.08;letter-spacing:-.025em;margin:0}.iamw-bundles--{{ section.id }} .iamw-bundle-card__description{color:var(--muted);font-size:14px;line-height:1.55}.iamw-bundles--{{ section.id }} .iamw-bundle-card__price{font-size:26px;font-weight:900;color:var(--purple)}.iamw-bundles--{{ section.id }} .iamw-bundle-card__variant-label{font-size:12px;font-weight:800}.iamw-bundles--{{ section.id }} .iamw-bundle-card__variant{width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff}.iamw-bundles--{{ section.id }} .iamw-bundle-card__buy{width:100%;min-height:54px;border:0;border-radius:999px;background:var(--orange);color:#17131f;font:inherit;font-weight:900;cursor:pointer;margin-top:auto}.iamw-bundles--{{ section.id }} .iamw-bundle-card__buy:disabled{opacity:.5;cursor:not-allowed}.iamw-bundles--{{ section.id }} .iamw-bundle-card__micro{text-align:center;color:var(--muted);font-size:11px}
+@media(max-width:899px){.iamw-bundles--{{ section.id }}{padding-left:16px;padding-right:16px}.iamw-bundles--{{ section.id }} .iamw-bundles__grid{grid-template-columns:1fr}.iamw-bundles--{{ section.id }} .iamw-bundle-card__media,.iamw-bundles--{{ section.id }} .iamw-bundle-card__image{min-height:300px}}
+{% endstyle %}
+
+<script>
+(() => {
+  const root = document.querySelector('.iamw-bundles--{{ section.id }}');
+  if (!root || root.dataset.bound === 'true') return;
+  root.dataset.bound = 'true';
+
+  const shopRoot = () => (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
+
+  root.querySelectorAll('[data-bundle-card]').forEach(card => {
+    const select = card.querySelector('[data-variant-select]');
+    const price = card.querySelector('[data-price]');
+    const button = card.querySelector('[data-buy-now]');
+
+    if (select && button) {
+      select.addEventListener('change', () => {
+        const option = select.options[select.selectedIndex];
+        const available = option.dataset.available === 'true';
+        button.dataset.variantId = option.value;
+        button.disabled = !available;
+        button.textContent = available ? {{ section.settings.button_label | json }} : 'SOLD OUT';
+        if (price) price.textContent = option.dataset.price || '';
+      });
+    }
+
+    if (button) {
+      button.addEventListener('click', async () => {
+        const variantId = Number(button.dataset.variantId);
+        if (!variantId || button.disabled) return;
+        const original = button.textContent;
+        button.disabled = true;
+        button.textContent = {{ section.settings.loading_label | json }};
+        try {
+          const response = await fetch(shopRoot() + 'cart/add.js', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json','Accept':'application/json'},
+            body: JSON.stringify({items:[{id:variantId,quantity:1}]})
+          });
+          if (!response.ok) {
+            const payload = await response.json().catch(() => ({}));
+            throw new Error(payload.description || payload.message || 'Unable to continue to checkout.');
+          }
+          window.location.href = shopRoot() + 'checkout';
+        } catch (error) {
+          button.disabled = false;
+          button.textContent = original;
+          alert(error.message);
+        }
+      });
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name":"IAMW Bundle Grid",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"CHOOSE YOUR I AM WELL ROUTINE"},
+    {"type":"text","id":"heading","label":"Heading","default":"Choose the bundle that fits your routine"},
+    {"type":"richtext","id":"intro","label":"Intro","default":"<p>Add one bundle or several. The layout automatically adapts to the number of products selected.</p>"},
+    {"type":"text","id":"button_label","label":"Default Buy Now label","default":"BUY NOW"},
+    {"type":"text","id":"loading_label","label":"Loading label","default":"GOING TO CHECKOUT…"},
+    {"type":"color","id":"background","label":"Background","default":"#ffffff"},
+    {"type":"color","id":"purple","label":"Purple","default":"#42106b"},
+    {"type":"color","id":"orange","label":"Orange","default":"#ff8f23"},
+    {"type":"color","id":"text_color","label":"Text","default":"#17131f"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#655f69"},
+    {"type":"color","id":"border_color","label":"Border","default":"#e6ddeb"},
+    {"type":"range","id":"padding_top","label":"Top spacing","min":20,"max":120,"step":4,"unit":"px","default":52},
+    {"type":"range","id":"padding_bottom","label":"Bottom spacing","min":20,"max":120,"step":4,"unit":"px","default":52}
+  ],
+  "blocks":[
+    {"type":"product","name":"Bundle product","limit":4,"settings":[
+      {"type":"product","id":"product","label":"Shopify product"},
+      {"type":"image_picker","id":"fallback_image","label":"Fallback image"},
+      {"type":"text","id":"badge","label":"Badge","default":"90-DAY ROUTINE"},
+      {"type":"text","id":"kicker","label":"Kicker","default":"SMART ROUTINE BUNDLE"},
+      {"type":"text","id":"title_override","label":"Title override"},
+      {"type":"richtext","id":"description","label":"Description","default":"<p>A simple daily routine designed to complement balanced nutrition.</p>"},
+      {"type":"text","id":"button_label","label":"Buy Now label"},
+      {"type":"text","id":"microcopy","label":"Microcopy","default":"Direct to checkout"}
+    ]}
+  ],
+  "presets":[{"name":"IAMW Bundle Grid","blocks":[{"type":"product"}]}]
+}
+{% endschema %}
