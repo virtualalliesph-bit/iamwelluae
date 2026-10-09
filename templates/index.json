@@ -323,6 +323,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": true,
+            "icon_image": "shopify://shop_images/f1bddf6b-2260-4b45-9b3a-4322a6e916bf.avif",
             "icon_svg": "",
             "icon_size": 40,
             "title": "Helps Support Appetite & Healthy Growth",
@@ -333,6 +334,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/e853ace8-2c75-4b8d-a807-9bc804530c83.avif",
             "icon_svg": "",
             "icon_size": 40,
             "title": "Supports Brain, Focus & Learning",
@@ -343,6 +345,7 @@
           "type": "accordion",
           "settings": {
             "open_by_default": false,
+            "icon_image": "shopify://shop_images/735077b2-9685-495a-ad65-2995865b3024.avif",
             "icon_svg": "",
             "icon_size": 40,
             "title": "Daily Immunity & Digestion Support",
@@ -431,6 +434,7 @@
         "cta_destination": "anchor",
         "cta_anchor": "iamw-product",
         "cta_link": "",
+        "image": "shopify://shop_images/SQUARE.webp",
         "image_fit": "cover",
         "mobile_image_height": 260,
         "page_width": 1260,
