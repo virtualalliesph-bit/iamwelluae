@@ -467,6 +467,7 @@
         "media_slide_FmepfV": {
           "type": "media_slide",
           "settings": {
+            "image": "shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png",
             "caption": "",
             "name": ""
           }
@@ -474,6 +475,7 @@
         "media_slide_MRPnNV": {
           "type": "media_slide",
           "settings": {
+            "image": "shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png",
             "caption": "",
             "name": ""
           }
@@ -481,6 +483,7 @@
         "media_slide_84WRdG": {
           "type": "media_slide",
           "settings": {
+            "image": "shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png",
             "caption": "",
             "name": ""
           }
@@ -488,6 +491,7 @@
         "media_slide_BbcWjT": {
           "type": "media_slide",
           "settings": {
+            "image": "shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png",
             "caption": "",
             "name": ""
           }
@@ -495,6 +499,7 @@
         "media_slide_8bwrcg": {
           "type": "media_slide",
           "settings": {
+            "image": "shopify://shop_images/30f90eaa-34f9-448b-9dca-dd642c0b06a2.png",
             "caption": "",
             "name": ""
           }
@@ -502,55 +507,7 @@
         "media_slide_Y7jVwE": {
           "type": "media_slide",
           "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_p3B7p6": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_LXVxRJ": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_AbrcEX": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_WLhtqU": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_dF3Tcd": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_mRhjGe": {
-          "type": "media_slide",
-          "settings": {
-            "caption": "",
-            "name": ""
-          }
-        },
-        "media_slide_WGaG98": {
-          "type": "media_slide",
-          "settings": {
+            "image": "shopify://shop_images/6ac43f45-3a78-436d-84c1-f7ec4b974760.png",
             "caption": "",
             "name": ""
           }
@@ -562,14 +519,7 @@
         "media_slide_84WRdG",
         "media_slide_BbcWjT",
         "media_slide_8bwrcg",
-        "media_slide_Y7jVwE",
-        "media_slide_p3B7p6",
-        "media_slide_LXVxRJ",
-        "media_slide_AbrcEX",
-        "media_slide_WLhtqU",
-        "media_slide_dF3Tcd",
-        "media_slide_mRhjGe",
-        "media_slide_WGaG98"
+        "media_slide_Y7jVwE"
       ],
       "name": "IAMW Social Proof",
       "settings": {
