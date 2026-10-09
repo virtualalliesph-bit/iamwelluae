@@ -1,0 +1,201 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<section class="iamw-product iamw-product--{{ section.id }}" data-iamw-product>
+  <div class="iamw-product__inner">
+    <div class="iamw-product__gallery">
+      <div class="iamw-product__main-media">
+        {% if product.featured_image != blank %}
+          {{ product.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '500,800,1100,1400', sizes: '(min-width: 900px) 52vw, 100vw', class: 'iamw-product__main-image', alt: product.featured_image.alt | default: product.title }}
+        {% else %}
+          <div class="iamw-product__media-placeholder">Product image</div>
+        {% endif %}
+      </div>
+
+      {% if product.images.size > 1 %}
+        <div class="iamw-product__thumbs" aria-label="Product images">
+          {% for image in product.images limit: 8 %}
+            <button type="button" class="iamw-product__thumb{% if forloop.first %} is-active{% endif %}" data-thumb data-image="{{ image | image_url: width: 1400 }}" aria-label="View image {{ forloop.index }}">
+              {{ image | image_url: width: 180 | image_tag: loading: 'lazy', class: 'iamw-product__thumb-image', alt: image.alt | default: product.title }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="iamw-product__details">
+      {% if section.settings.eyebrow != blank %}<div class="iamw-product__eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+      <h1 class="iamw-product__title">{{ product.title }}</h1>
+
+      {% if section.settings.rating_text != blank %}
+        <div class="iamw-product__rating"><span aria-hidden="true">★★★★★</span> {{ section.settings.rating_text }}</div>
+      {% endif %}
+
+      <div class="iamw-product__price" data-product-price>{{ current_variant.price | money }}</div>
+
+      {% if section.settings.subtext != blank %}<div class="iamw-product__subtext rte">{{ section.settings.subtext }}</div>{% endif %}
+
+      {% assign feature_blocks = section.blocks | where: 'type', 'feature' %}
+      {% if feature_blocks.size > 0 %}
+        <div class="iamw-product__features">
+          {% for block in feature_blocks %}
+            <div class="iamw-product__feature" {{ block.shopify_attributes }}>
+              <span class="iamw-product__check">✓</span>
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if product.variants.size > 1 %}
+        <div class="iamw-product__variant-wrap">
+          <label for="IAMWProductVariant-{{ section.id }}">Choose option</label>
+          <select id="IAMWProductVariant-{{ section.id }}" class="iamw-product__variant" data-product-variant>
+            {% for variant in product.variants %}
+              <option
+                value="{{ variant.id }}"
+                data-price="{{ variant.price | money }}"
+                data-available="{{ variant.available }}"
+                {% if variant.featured_image != blank %}data-image="{{ variant.featured_image | image_url: width: 1400 }}"{% endif %}
+                {% if variant.id == current_variant.id %}selected{% endif %}
+                {% unless variant.available %}disabled{% endunless %}
+              >
+                {{ variant.title }}{% unless variant.available %} — Sold out{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+
+      <button
+        type="button"
+        class="iamw-product__buy"
+        data-product-buy-now
+        data-variant-id="{{ current_variant.id }}"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        {% if current_variant.available %}{{ section.settings.button_label }}{% else %}SOLD OUT{% endif %}
+      </button>
+
+      {% if section.settings.microcopy != blank %}<div class="iamw-product__microcopy">{{ section.settings.microcopy }}</div>{% endif %}
+
+      {% if section.settings.show_description and product.description != blank %}
+        <div class="iamw-product__description rte">{{ product.description }}</div>
+      {% endif %}
+
+      {% assign accordion_blocks = section.blocks | where: 'type', 'accordion' %}
+      {% if accordion_blocks.size > 0 %}
+        <div class="iamw-product__accordions">
+          {% for block in accordion_blocks %}
+            <details class="iamw-product__accordion" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.heading }} <span aria-hidden="true">+</span></summary>
+              <div class="iamw-product__accordion-body rte">{{ block.settings.content }}</div>
+            </details>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% style %}
+.iamw-product--{{ section.id }}{--purple:{{ section.settings.purple }};--orange:{{ section.settings.orange }};--text:{{ section.settings.text_color }};--muted:{{ section.settings.muted }};--border:{{ section.settings.border_color }};background:{{ section.settings.background }};color:var(--text);padding:{{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px}.iamw-product--{{ section.id }} *{box-sizing:border-box}.iamw-product--{{ section.id }} .iamw-product__inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:54px;align-items:start}.iamw-product--{{ section.id }} .iamw-product__gallery{position:sticky;top:24px}.iamw-product--{{ section.id }} .iamw-product__main-media{background:#f7effb;border-radius:20px;overflow:hidden;min-height:520px;display:grid;place-items:center}.iamw-product--{{ section.id }} .iamw-product__main-image{width:100%;height:100%;max-height:700px;object-fit:contain;display:block}.iamw-product--{{ section.id }} .iamw-product__media-placeholder{color:var(--muted)}.iamw-product--{{ section.id }} .iamw-product__thumbs{display:flex;gap:10px;margin-top:12px;overflow:auto;padding-bottom:4px}.iamw-product--{{ section.id }} .iamw-product__thumb{flex:0 0 78px;width:78px;height:78px;border:1px solid var(--border);border-radius:10px;background:#fff;padding:3px;cursor:pointer;overflow:hidden}.iamw-product--{{ section.id }} .iamw-product__thumb.is-active{border:2px solid var(--purple)}.iamw-product--{{ section.id }} .iamw-product__thumb-image{width:100%;height:100%;object-fit:cover;display:block;border-radius:7px}.iamw-product--{{ section.id }} .iamw-product__details{padding-top:10px}.iamw-product--{{ section.id }} .iamw-product__eyebrow{font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}.iamw-product--{{ section.id }} .iamw-product__title{font-size:clamp(34px,4.6vw,56px);line-height:1.02;letter-spacing:-.04em;margin:0 0 12px}.iamw-product--{{ section.id }} .iamw-product__rating{font-size:13px;color:var(--muted);margin-bottom:16px}.iamw-product--{{ section.id }} .iamw-product__rating span{color:var(--orange);letter-spacing:.05em}.iamw-product--{{ section.id }} .iamw-product__price{font-size:28px;font-weight:900;color:var(--purple);margin-bottom:14px}.iamw-product--{{ section.id }} .iamw-product__subtext{font-size:16px;line-height:1.65;color:var(--muted)}.iamw-product--{{ section.id }} .iamw-product__features{display:grid;gap:10px;margin:20px 0}.iamw-product--{{ section.id }} .iamw-product__feature{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45}.iamw-product--{{ section.id }} .iamw-product__check{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border-radius:50%;background:#f2e8f8;color:var(--purple);font-weight:900}.iamw-product--{{ section.id }} .iamw-product__variant-wrap{display:grid;gap:7px;margin:18px 0 14px}.iamw-product--{{ section.id }} .iamw-product__variant-wrap label{font-size:12px;font-weight:800}.iamw-product--{{ section.id }} .iamw-product__variant{min-height:50px;width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);font:inherit}.iamw-product--{{ section.id }} .iamw-product__buy{width:100%;min-height:58px;border:0;border-radius:999px;background:var(--orange);color:#17131f;font:inherit;font-size:16px;font-weight:900;cursor:pointer;padding:14px 24px}.iamw-product--{{ section.id }} .iamw-product__buy:disabled{opacity:.5;cursor:not-allowed}.iamw-product--{{ section.id }} .iamw-product__microcopy{text-align:center;color:var(--muted);font-size:11px;margin-top:8px}.iamw-product--{{ section.id }} .iamw-product__description{margin-top:26px;color:var(--muted);font-size:15px;line-height:1.65}.iamw-product--{{ section.id }} .iamw-product__accordions{margin-top:24px;border-top:1px solid var(--border)}.iamw-product--{{ section.id }} .iamw-product__accordion{border-bottom:1px solid var(--border)}.iamw-product--{{ section.id }} .iamw-product__accordion summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;font-weight:800;padding:16px 0}.iamw-product--{{ section.id }} .iamw-product__accordion summary::-webkit-details-marker{display:none}.iamw-product--{{ section.id }} .iamw-product__accordion-body{padding:0 0 18px;color:var(--muted);font-size:14px;line-height:1.6}
+@media(max-width:899px){.iamw-product--{{ section.id }}{padding-left:16px;padding-right:16px}.iamw-product--{{ section.id }} .iamw-product__inner{grid-template-columns:1fr;gap:28px}.iamw-product--{{ section.id }} .iamw-product__gallery{position:static}.iamw-product--{{ section.id }} .iamw-product__main-media{min-height:360px}.iamw-product--{{ section.id }} .iamw-product__details{padding-top:0}}
+{% endstyle %}
+
+<script>
+(() => {
+  const root = document.querySelector('.iamw-product--{{ section.id }}');
+  if (!root || root.dataset.bound === 'true') return;
+  root.dataset.bound = 'true';
+
+  const mainImage = root.querySelector('.iamw-product__main-image');
+  root.querySelectorAll('[data-thumb]').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const src = thumb.dataset.image;
+      if (mainImage && src) mainImage.src = src;
+      root.querySelectorAll('[data-thumb]').forEach((item) => item.classList.remove('is-active'));
+      thumb.classList.add('is-active');
+    });
+  });
+
+  const select = root.querySelector('[data-product-variant]');
+  const price = root.querySelector('[data-product-price]');
+  const button = root.querySelector('[data-product-buy-now]');
+  const shopRoot = () => (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
+
+  if (select && button) {
+    select.addEventListener('change', () => {
+      const option = select.options[select.selectedIndex];
+      const available = option.dataset.available === 'true';
+      button.dataset.variantId = option.value;
+      button.disabled = !available;
+      button.textContent = available ? {{ section.settings.button_label | json }} : 'SOLD OUT';
+      if (price) price.textContent = option.dataset.price || '';
+      if (mainImage && option.dataset.image) mainImage.src = option.dataset.image;
+    });
+  }
+
+  if (button) {
+    button.addEventListener('click', async () => {
+      const variantId = Number(button.dataset.variantId);
+      if (!variantId || button.disabled) return;
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = {{ section.settings.loading_label | json }};
+
+      try {
+        const response = await fetch(shopRoot() + 'cart/add.js', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({items:[{id:variantId,quantity:1}]})
+        });
+        if (!response.ok) {
+          const payload = await response.json().catch(() => ({}));
+          throw new Error(payload.description || payload.message || 'Unable to continue to checkout.');
+        }
+        window.location.href = shopRoot() + 'checkout';
+      } catch (error) {
+        button.disabled = false;
+        button.textContent = originalText;
+        alert(error.message);
+      }
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name":"IAMW Product Main",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"I AM WELL SMART GUMMIES"},
+    {"type":"text","id":"rating_text","label":"Rating text","default":"Customer reviews"},
+    {"type":"richtext","id":"subtext","label":"Intro text","default":"<p>A simple daily gummy routine designed to complement balanced nutrition for growing children.</p>"},
+    {"type":"text","id":"button_label","label":"Buy Now label","default":"BUY NOW"},
+    {"type":"text","id":"loading_label","label":"Loading label","default":"GOING TO CHECKOUT…"},
+    {"type":"text","id":"microcopy","label":"Button microcopy","default":"Secure checkout • No cart-page detour"},
+    {"type":"checkbox","id":"show_description","label":"Show product description","default":true},
+    {"type":"color","id":"background","label":"Background","default":"#ffffff"},
+    {"type":"color","id":"purple","label":"Purple","default":"#42106b"},
+    {"type":"color","id":"orange","label":"Orange","default":"#ff9d16"},
+    {"type":"color","id":"text_color","label":"Text","default":"#17131f"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#655f69"},
+    {"type":"color","id":"border_color","label":"Border","default":"#e6ddeb"},
+    {"type":"range","id":"padding_top","label":"Top spacing","min":20,"max":120,"step":4,"unit":"px","default":44},
+    {"type":"range","id":"padding_bottom","label":"Bottom spacing","min":20,"max":120,"step":4,"unit":"px","default":60}
+  ],
+  "blocks":[
+    {"type":"feature","name":"Benefit point","limit":6,"settings":[
+      {"type":"text","id":"text","label":"Text","default":"Everyday nutrition support for growing kids"}
+    ]},
+    {"type":"accordion","name":"Product accordion","limit":6,"settings":[
+      {"type":"text","id":"heading","label":"Heading","default":"How to use"},
+      {"type":"richtext","id":"content","label":"Content","default":"<p>Add the approved product information here.</p>"},
+      {"type":"checkbox","id":"open_by_default","label":"Open by default","default":false}
+    ]}
+  ],
+  "presets":[{"name":"IAMW Product Main"}]
+}
+{% endschema %}

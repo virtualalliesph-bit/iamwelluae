@@ -1,0 +1,42 @@
+name: Package IAMW Horizon Theme
+
+on:
+  push:
+    branches:
+      - horizon-rebuild
+  workflow_dispatch:
+
+jobs:
+  package-theme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact commit
+        uses: actions/checkout@v4
+
+      - name: Verify Shopify theme structure
+        run: |
+          test -f layout/theme.liquid
+          test -f templates/index.json
+          test -f templates/product.json
+          test -f templates/page.pampatalino.json
+          test -f sections/iamw-product-main.liquid
+
+      - name: Build uploadable theme ZIP
+        run: |
+          zip -r iamwell-horizon-rebuild.zip \
+            assets \
+            blocks \
+            config \
+            layout \
+            locales \
+            sections \
+            snippets \
+            templates \
+            -x "*/.DS_Store" "*.DS_Store"
+
+      - name: Upload packaged theme
+        uses: actions/upload-artifact@v4
+        with:
+          name: iamwell-horizon-rebuild-theme
+          path: iamwell-horizon-rebuild.zip
+          retention-days: 7
