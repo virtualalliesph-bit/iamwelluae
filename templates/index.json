@@ -739,6 +739,7 @@
         "media_slide_4gVAxw",
         "media_slide_GdDcnq"
       ],
+      "disabled": true,
       "name": "IAMW Social Proof",
       "settings": {
         "eyebrow": "PARENT EXPERIENCES",
@@ -781,6 +782,78 @@
         "text_color": "#1c1930",
         "muted": "#6c6670",
         "border_color": "#e5daeb"
+      }
+    },
+    "iamw_review_loop_hwaETq": {
+      "type": "iamw-review-loop",
+      "blocks": {
+        "review_3CHcMT": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "My child actually looks forward to taking these every day. Easy routine and great taste.",
+            "name": "Aisha R.",
+            "location": "Dubai, UAE"
+          }
+        },
+        "review_XQAzWJ": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "We’ve been very happy with the routine. Simple to give and my little one enjoys the gummies.",
+            "name": "Fatima K.",
+            "location": "Abu Dhabi, UAE"
+          }
+        },
+        "review_Jjpj38": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "A convenient daily supplement that fits easily into our family routine.",
+            "name": "Mariam S.",
+            "location": "Sharjah, UAE"
+          }
+        }
+      },
+      "block_order": [
+        "review_3CHcMT",
+        "review_XQAzWJ",
+        "review_Jjpj38"
+      ],
+      "name": "IAMW Review Loop",
+      "settings": {
+        "eyebrow": "PARENT APPROVED",
+        "heading": "Real routines. Real feedback. Real families.",
+        "subheading": "<p>What parents are saying about I Am Well.</p>",
+        "heading_alignment": "center",
+        "heading_size": 40,
+        "heading_size_mobile": 30,
+        "body_size": 15,
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "pause_on_hover": true,
+        "card_width": 320,
+        "card_width_mobile": 280,
+        "card_min_height": 220,
+        "card_gap": 14,
+        "card_padding": 22,
+        "radius": 16,
+        "review_size": 16,
+        "show_shadow": true,
+        "background": "#ffffff",
+        "card_background": "#ffffff",
+        "text_color": "#1c1930",
+        "muted_color": "#6c6670",
+        "purple": "#42106b",
+        "border_color": "#e5daeb",
+        "page_width": 1320,
+        "side_padding": 24,
+        "side_padding_mobile": 16,
+        "header_gap": 28,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "iamw_ref_09_comparison_3MXCt6": {
@@ -929,6 +1002,7 @@
     "iamw_ref_06_stock_alert_zVrd7W",
     "iamw_ref_07_social_proof_VM7hPh",
     "iamw_ref_07_social_proof_qX9fxM",
+    "iamw_review_loop_hwaETq",
     "iamw_ref_09_comparison_3MXCt6"
   ]
 }
