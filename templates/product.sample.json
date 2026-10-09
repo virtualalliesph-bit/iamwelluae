@@ -1,1 +1,31 @@
-{"sections":{"main":{"type":"iamw-uae-smart-product","settings":{"eyebrow":"SMART GUMMIES","subtitle":"Brain Support","rating_value":"5.0","review_count":"126","box_product_handle":"i-am-well-box","popup_heading":"Add a Box?","popup_text":"Would you like to add a gift box to your order?","popup_yes":"Yes, add a box","popup_no":"No thanks, continue to checkout"}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "iamw-uae-smart-product",
+      "settings": {
+        "eyebrow": "SMART GUMMIES",
+        "subtitle": "Brain Support",
+        "rating_value": "5.0",
+        "review_count": "126",
+        "box_product_handle": "i-am-well-box",
+        "box_image": "shopify://shop_images/WhatsAppImage2026-05-05at1.35.05AM.webp",
+        "popup_heading": "Add a Box?",
+        "popup_text": "Would you like to add a gift box to your order?",
+        "popup_yes": "Yes, add a box",
+        "popup_no": "No thanks, continue to checkout"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
