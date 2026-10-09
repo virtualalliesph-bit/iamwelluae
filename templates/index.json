@@ -1,39 +1,28 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "iamw_story_hero_d6gFET": {
+    "iamw_story": {
       "type": "iamw-story-hero",
       "blocks": {
-        "review_VwPj6P": {
+        "review_1": {
           "type": "review",
           "settings": {
             "stars": "★★★★★",
-            "quote": "I noticed positive changes in our daily routine after adding Smart Gummies consistently.",
-            "name": "I Am Well parent",
-            "meta": "Customer review"
+            "quote": "I noticed changes in my child after taking I Am Well Smart Gummies. She seemed to have more energy, and I also noticed her appetite improved. I definitely recommend it to friends and relatives.",
+            "name": "Eljon Etrobal",
+            "meta": "Customer review • Translated from Filipino"
           }
         }
       },
-      "block_order": [
-        "review_VwPj6P"
-      ],
-      "name": "IAMW Story Hero",
+      "block_order": ["review_1"],
       "settings": {
         "stars": "★★★★★",
         "rating_text": "Feedback from I Am Well parents",
         "heading": "Does your child lose interest after just a few bites?",
-        "body": "<p>Getting a child to eat a varied diet can be a challenge. I Am Well Smart Gummies is designed to complement balanced meals as part of a simple daily routine.</p>",
+        "body": "<p>Even when you serve their favourite foods, getting your child to eat a varied diet can be a challenge. If mealtimes have become stressful, you are not alone.</p><p>I Am Well Smart Gummies is a mixed-berry food supplement designed to complement balanced meals and support your child’s everyday nutrition.</p>",
         "cta_label": "EXPLORE SMART GUMMIES",
         "cta_anchor": "iamw-products",
         "cta_link": "",
+        "image": "shopify://shop_images/6143214667367649919_1.jpg",
         "background": "#ffffff",
         "purple": "#42106b",
         "orange": "#ff9d16",
@@ -43,53 +32,25 @@
         "padding_bottom": 48
       }
     },
-    "iamw_support_tabs_pP8jJ4": {
-      "type": "iamw-support-tabs",
+    "iamw_benefits": {
+      "type": "iamw-benefits",
       "blocks": {
-        "tab_7BpjTg": {
-          "type": "tab",
-          "settings": {
-            "title": "Picky Eating",
-            "panel_heading": "How This Helps",
-            "text": "<p>Add the supporting explanation and nutrients here.</p>"
-          }
-        },
-        "tab_qkf76X": {
-          "type": "tab",
-          "settings": {
-            "title": "Picky Eating",
-            "panel_heading": "How This Helps",
-            "text": "<p>Add the supporting explanation and nutrients here.</p>"
-          }
-        },
-        "tab_MyEW84": {
-          "type": "tab",
-          "settings": {
-            "title": "Picky Eating",
-            "panel_heading": "How This Helps",
-            "text": "<p>Add the supporting explanation and nutrients here.</p>"
-          }
-        },
-        "tab_z8kjzY": {
-          "type": "tab",
-          "settings": {
-            "title": "Picky Eating",
-            "panel_heading": "How This Helps",
-            "text": "<p>Add the supporting explanation and nutrients here.</p>"
-          }
-        }
+        "benefit_1": {"type":"benefit","settings":{"title":"Helps Support Appetite for Picky Eaters","text":"<p>For children who eat only a small range of foods, Smart Gummies includes L-Lysine, vitamins and minerals to complement everyday nutrition and support normal growth.</p>","open_by_default":true}},
+        "benefit_2": {"type":"benefit","settings":{"title":"Helps Fill Everyday Nutrition Gaps","text":"<p>Picky eating can make food variety difficult. Smart Gummies helps complement a balanced diet with selected vitamins and minerals for growing kids.</p>","open_by_default":false}},
+        "benefit_3": {"type":"benefit","settings":{"title":"Supports Growth & Development","text":"<p>L-Lysine, Vitamin D and Zinc are included as part of a daily nutrition routine for growing children.</p>","open_by_default":false}},
+        "benefit_4": {"type":"benefit","settings":{"title":"Daily Immunity Support","text":"<p>Vitamins A, C, D, E and Zinc help support normal immune function for active school and play days.</p>","open_by_default":false}},
+        "benefit_5": {"type":"benefit","settings":{"title":"Supports Focus & Learning Too","text":"<p>DHA, Choline and B vitamins support normal brain and nervous system function as part of the same everyday routine.</p>","open_by_default":false}},
+        "benefit_6": {"type":"benefit","settings":{"title":"A Kid-Friendly Mixed Berry Gummy","text":"<p>A chewable mixed-berry gummy that fits into a child’s daily vitamin routine without another syrup or tablet.</p>","open_by_default":false}}
       },
-      "block_order": [
-        "tab_7BpjTg",
-        "tab_qkf76X",
-        "tab_MyEW84",
-        "tab_z8kjzY"
-      ],
-      "name": "IAMW Support Tabs",
+      "block_order": ["benefit_1","benefit_2","benefit_3","benefit_4","benefit_5","benefit_6"],
       "settings": {
-        "eyebrow": "I AM WELL BENEFIT SUPPORT",
-        "heading": "Everyday nutrients for growing children",
-        "intro": "",
+        "eyebrow": "WHY I AM WELL GUMMIES?",
+        "heading": "Everyday nutrition support for picky eaters.",
+        "intro": "<p>When your child is selective about food, offering a varied diet can take extra effort. I Am Well Smart Gummies is designed to complement balanced meals as part of a consistent daily routine.</p>",
+        "image": "shopify://shop_images/6143062380712236434.jpg",
+        "cta_label": "ORDER NOW",
+        "cta_anchor": "iamw-products",
+        "microcopy": "Kid-friendly mixed berry gummy • Food supplement",
         "background": "#ffffff",
         "purple": "#42106b",
         "orange": "#ff9d16",
@@ -99,10 +60,161 @@
         "padding_top": 52,
         "padding_bottom": 52
       }
+    },
+    "iamw_tabs": {
+      "type": "iamw-support-tabs",
+      "blocks": {
+        "tab_1": {"type":"tab","settings":{"title":"Picky Eating","panel_heading":"Nutrition support when food variety is limited","text":"<p>When your child eats only a limited range of foods, getting a broad mix of nutrients from meals can be difficult.</p><p><strong>L-Lysine</strong> — included as part of the formula for growing children.</p><p><strong>B-complex vitamins</strong> — support normal energy metabolism.</p><p><strong>Zinc</strong> — supports normal growth and immune function.</p>","image":"shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"}},
+        "tab_2": {"type":"tab","settings":{"title":"Growth Support","panel_heading":"Support for the growing years","text":"<p>Growing kids need consistent nutrition from balanced meals. Smart Gummies includes selected vitamins, minerals and amino acids to complement that routine.</p><p><strong>L-Lysine</strong> — included in the daily formula.</p><p><strong>Vitamin D</strong> — supports normal bones and development.</p><p><strong>Zinc</strong> — supports normal growth.</p>","image":"shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp"}},
+        "tab_3": {"type":"tab","settings":{"title":"Immunity","panel_heading":"Everyday immune support","text":"<p>School, playtime and everyday activities mean growing kids need consistent immune support too.</p><p><strong>Vitamin C</strong> — supports normal immune function.</p><p><strong>Vitamin D</strong> — supports normal immune function and development.</p><p><strong>Zinc</strong> — supports normal immune function.</p>","image":"shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp"}},
+        "tab_4": {"type":"tab","settings":{"title":"Focus & Learning","panel_heading":"Support beyond mealtimes","text":"<p>Smart Gummies also includes selected nutrients for normal brain and nervous system function.</p><p><strong>DHA</strong> — supports normal brain development.</p><p><strong>Choline</strong> — supports brain and nervous system function.</p><p><strong>B vitamins</strong> — support normal energy metabolism.</p>","image":"shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp"}}
+      },
+      "block_order": ["tab_1","tab_2","tab_3","tab_4"],
+      "settings": {
+        "eyebrow": "SMART GUMMIES SUPPORT",
+        "heading": "More complete everyday support for selective eaters",
+        "intro": "<p>One simple gummy routine designed to complement the balanced meals you already work hard to provide.</p>",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_products": {
+      "type": "iamw-bundle-grid",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "smart-routine-starter-pack-90-days-brain-support",
+            "badge": "90-DAY ROUTINE",
+            "kicker": "SMART ROUTINE STARTER PACK",
+            "title_override": "90 Days of Daily Support",
+            "description": "<p>A three-month routine for families looking for a simple way to complement the nutrition of picky eaters with one kid-friendly mixed berry gummy.</p>",
+            "button_label": "BUY NOW",
+            "microcopy": "Direct to checkout • No cart-page detour"
+          }
+        }
+      },
+      "block_order": ["product_1"],
+      "settings": {
+        "eyebrow": "CHOOSE YOUR I AM WELL ROUTINE",
+        "heading": "Smart routine bundles for everyday nutrition support",
+        "intro": "<p>Start with one bundle or add another option as the range grows. One selected product displays as one card; two selected products automatically display in two columns.</p>",
+        "button_label": "BUY NOW",
+        "loading_label": "GOING TO CHECKOUT…",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff8f23",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_promo": {
+      "type": "iamw-promo-split",
+      "settings": {
+        "image": "shopify://shop_images/6143062380712236434.jpg",
+        "eyebrow": "A SIMPLE DAILY ROUTINE",
+        "heading": "Less mealtime pressure. More consistent nutrition support.",
+        "body": "<p>Picky eating does not disappear overnight. A simple daily routine can help parents stay consistent while continuing to offer balanced meals and new foods at their child’s own pace.</p>",
+        "cta_label": "VIEW THE STARTER PACK",
+        "cta_link": "",
+        "background": "#f6ecfb",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "padding_top": 42,
+        "padding_bottom": 42
+      }
+    },
+    "iamw_social": {
+      "type": "iamw-social-proof",
+      "blocks": {
+        "proof_1": {"type":"proof","settings":{"image":"shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png","alt_text":"I Am Well parent feedback","caption":"Feedback from an I Am Well parent"}},
+        "proof_2": {"type":"proof","settings":{"image":"shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png","alt_text":"I Am Well parent feedback","caption":"Real family routine"}},
+        "proof_3": {"type":"proof","settings":{"image":"shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png","alt_text":"I Am Well parent feedback","caption":"Customer feedback"}},
+        "proof_4": {"type":"proof","settings":{"image":"shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png","alt_text":"I Am Well parent feedback","caption":"I Am Well family feedback"}}
+      },
+      "block_order": ["proof_1","proof_2","proof_3","proof_4"],
+      "settings": {
+        "eyebrow": "REAL PARENTS • REAL MOMENTS",
+        "heading": "Real routines. Feedback from I Am Well families.",
+        "intro": "<p>See how families are making Smart Gummies part of their everyday routine.</p>",
+        "columns": 4,
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_testimonials": {
+      "type": "iamw-testimonials",
+      "blocks": {
+        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"My child usually loses interest after a few bites, so having a simple daily gummy routine has made consistency easier for us.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We like that it is a gummy and easy to add to our morning routine without another syrup or tablet.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The mixed berry format is easy for the kids to remember as part of their daily routine.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient way to complement the balanced meals and food variety we keep working on at home.","name":"I Am Well parent","meta":"Customer feedback"}}
+      },
+      "block_order": ["testimonial_1","testimonial_2","testimonial_3","testimonial_4"],
+      "settings": {
+        "eyebrow": "PARENT APPROVED",
+        "heading": "A simple routine for families navigating picky eating",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "iamw_compare": {
+      "type": "iamw-comparison",
+      "blocks": {
+        "feature_1": {"type":"feature","settings":{"feature":"L-Lysine included as part of the daily formula","our_value":"✓","other_value":"×"}},
+        "feature_2": {"type":"feature","settings":{"feature":"Selected vitamins and minerals for everyday nutrition","our_value":"✓","other_value":"×"}},
+        "feature_3": {"type":"feature","settings":{"feature":"DHA + Choline for brain-support nutrition","our_value":"✓","other_value":"×"}},
+        "feature_4": {"type":"feature","settings":{"feature":"Vitamins + Zinc for normal immune function","our_value":"✓","other_value":"×"}},
+        "feature_5": {"type":"feature","settings":{"feature":"Kid-friendly mixed berry gummy format","our_value":"✓","other_value":"×"}}
+      },
+      "block_order": ["feature_1","feature_2","feature_3","feature_4","feature_5"],
+      "settings": {
+        "eyebrow": "WHY I AM WELL",
+        "heading": "One simple routine for picky eaters and growing kids",
+        "body": "<p>Explore the selected nutrients and kid-friendly format built into I Am Well Smart Gummies.</p>",
+        "our_label": "I Am Well",
+        "other_label": "Other products",
+        "cta_label": "VIEW THE 3-MONTH STARTER PACK",
+        "cta_anchor": "iamw-products",
+        "background": "#f7effb",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
-    "iamw_story_hero_d6gFET",
-    "iamw_support_tabs_pP8jJ4"
+    "iamw_story",
+    "iamw_benefits",
+    "iamw_tabs",
+    "iamw_products",
+    "iamw_promo",
+    "iamw_social",
+    "iamw_testimonials",
+    "iamw_compare"
   ]
 }
