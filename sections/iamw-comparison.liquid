@@ -1,0 +1,62 @@
+<section class="iamw-compare iamw-compare--{{ section.id }}">
+  <div class="iamw-compare__inner">
+    <div class="iamw-compare__intro">
+      {% if section.settings.eyebrow != blank %}<div class="iamw-compare__eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+      {% if section.settings.heading != blank %}<h2>{{ section.settings.heading }}</h2>{% endif %}
+      {% if section.settings.body != blank %}<div class="iamw-compare__body rte">{{ section.settings.body }}</div>{% endif %}
+      {% if section.settings.cta_label != blank %}<a href="#{{ section.settings.cta_anchor | default: 'iamw-products' }}" class="iamw-compare__cta">{{ section.settings.cta_label }}</a>{% endif %}
+    </div>
+
+    <div class="iamw-compare__table-wrap">
+      <div class="iamw-compare__table">
+        <div class="iamw-compare__row iamw-compare__row--head">
+          <div></div>
+          <div class="iamw-compare__brand">{{ section.settings.our_label }}</div>
+          <div>{{ section.settings.other_label }}</div>
+        </div>
+        {% for block in section.blocks %}
+          <div class="iamw-compare__row" {{ block.shopify_attributes }}>
+            <div class="iamw-compare__feature">{{ block.settings.feature }}</div>
+            <div class="iamw-compare__ours">{{ block.settings.our_value }}</div>
+            <div class="iamw-compare__other">{{ block.settings.other_value }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% style %}
+.iamw-compare--{{ section.id }}{background:{{ section.settings.background }};padding:{{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;color:{{ section.settings.text_color }}}.iamw-compare--{{ section.id }} *{box-sizing:border-box}.iamw-compare--{{ section.id }} .iamw-compare__inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center;background:#fff;border-radius:18px;padding:34px}.iamw-compare--{{ section.id }} .iamw-compare__eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:{{ section.settings.purple }};margin-bottom:8px}.iamw-compare--{{ section.id }} h2{font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.035em;margin:0 0 14px}.iamw-compare--{{ section.id }} .iamw-compare__body{color:{{ section.settings.muted }};font-size:15px;line-height:1.65}.iamw-compare--{{ section.id }} .iamw-compare__cta{display:inline-flex;margin-top:18px;min-height:48px;padding:12px 22px;border-radius:999px;background:{{ section.settings.purple }};color:#fff;text-decoration:none;font-weight:900}.iamw-compare--{{ section.id }} .iamw-compare__table{border:1px solid {{ section.settings.border_color }};border-radius:14px;overflow:hidden}.iamw-compare--{{ section.id }} .iamw-compare__row{display:grid;grid-template-columns:1.6fr .7fr .7fr;border-bottom:1px solid {{ section.settings.border_color }}}.iamw-compare--{{ section.id }} .iamw-compare__row:last-child{border-bottom:0}.iamw-compare--{{ section.id }} .iamw-compare__row>div{padding:13px 14px;display:flex;align-items:center}.iamw-compare--{{ section.id }} .iamw-compare__row--head{font-size:12px;font-weight:900;text-align:center}.iamw-compare--{{ section.id }} .iamw-compare__row--head>div{justify-content:center}.iamw-compare--{{ section.id }} .iamw-compare__brand,.iamw-compare--{{ section.id }} .iamw-compare__ours{background:{{ section.settings.purple }};color:#fff;justify-content:center;text-align:center}.iamw-compare--{{ section.id }} .iamw-compare__other{justify-content:center;text-align:center;color:#9c2f3e}.iamw-compare--{{ section.id }} .iamw-compare__feature{font-size:13px;font-weight:700}
+@media(max-width:899px){.iamw-compare--{{ section.id }}{padding-left:16px;padding-right:16px}.iamw-compare--{{ section.id }} .iamw-compare__inner{grid-template-columns:1fr;padding:22px;gap:28px}.iamw-compare--{{ section.id }} .iamw-compare__table-wrap{overflow:auto}.iamw-compare--{{ section.id }} .iamw-compare__table{min-width:620px}}
+{% endstyle %}
+
+{% schema %}
+{
+  "name":"IAMW Comparison",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"WHY I AM WELL"},
+    {"type":"text","id":"heading","label":"Heading","default":"Explore I Am Well Smart Gummies"},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>Compare the daily routine and formula support with other products.</p>"},
+    {"type":"text","id":"our_label","label":"Our column label","default":"I Am Well"},
+    {"type":"text","id":"other_label","label":"Other column label","default":"Other products"},
+    {"type":"text","id":"cta_label","label":"Button label","default":"VIEW THE ROUTINE"},
+    {"type":"text","id":"cta_anchor","label":"Button anchor","default":"iamw-products"},
+    {"type":"color","id":"background","label":"Background","default":"#f7effb"},
+    {"type":"color","id":"purple","label":"Purple","default":"#42106b"},
+    {"type":"color","id":"text_color","label":"Text","default":"#17131f"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#655f69"},
+    {"type":"color","id":"border_color","label":"Border","default":"#e6ddeb"},
+    {"type":"range","id":"padding_top","label":"Top spacing","min":20,"max":120,"step":4,"unit":"px","default":52},
+    {"type":"range","id":"padding_bottom","label":"Bottom spacing","min":20,"max":120,"step":4,"unit":"px","default":52}
+  ],
+  "blocks":[
+    {"type":"feature","name":"Comparison row","limit":12,"settings":[
+      {"type":"text","id":"feature","label":"Feature","default":"Daily routine support"},
+      {"type":"text","id":"our_value","label":"I Am Well value","default":"✓"},
+      {"type":"text","id":"other_value","label":"Other products value","default":"×"}
+    ]}
+  ],
+  "presets":[{"name":"IAMW Comparison","blocks":[{"type":"feature"},{"type":"feature"},{"type":"feature"},{"type":"feature"}]}]
+}
+{% endschema %}
