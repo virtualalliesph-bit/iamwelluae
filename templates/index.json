@@ -1,285 +1,215 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "iamw_story": {
+      "type": "iamw-story-hero",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "review_1": {
+          "type": "review",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "text_color": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0,0,0,0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "stars": "★★★★★",
+            "quote": "I noticed changes in my child after taking I Am Well Smart Gummies. She seemed to have more energy, and I also noticed her appetite improved. I definitely recommend it to friends and relatives.",
+            "name": "Eljon Etrobal",
+            "meta": "Customer review • Translated from Filipino"
+          }
         }
       },
-      "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
+      "block_order": ["review_1"],
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "background_color": "rgba(0,0,0,0)",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "stars": "★★★★★",
+        "rating_text": "Feedback from I Am Well parents",
+        "heading": "Does your child lose interest after just a few bites?",
+        "body": "<p>Even when you serve their favourite foods, getting your child to eat a varied diet can be a challenge. If mealtimes have become stressful, you are not alone.</p><p>I Am Well Smart Gummies is a mixed-berry food supplement designed to complement balanced meals and support your child’s daily nutrition.</p>",
+        "cta_label": "EXPLORE SMART GUMMIES",
+        "cta_anchor": "iamw-products",
+        "image": "shopify://shop_images/6143214667367649919_1.jpg",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "iamw_benefits": {
+      "type": "iamw-benefits",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "benefit_1": {"type":"benefit","settings":{"title":"Helps Support Appetite for Picky Eaters","text":"<p>For children who eat only a small range of foods, Smart Gummies includes L-Lysine, vitamins and minerals to complement everyday nutrition and support normal growth.</p>","open_by_default":false}},
+        "benefit_2": {"type":"benefit","settings":{"title":"Supports Focus & Learning","text":"<p>DHA, Choline and B Complex Vitamins support normal brain and nervous system function for busy school days and everyday learning.</p>","open_by_default":false}},
+        "benefit_3": {"type":"benefit","settings":{"title":"Helps Fill Everyday Nutrition Gaps","text":"<p>Picky eating can make variety difficult. Smart Gummies helps complement a balanced diet with key vitamins and minerals for growing kids.</p>","open_by_default":false}},
+        "benefit_4": {"type":"benefit","settings":{"title":"Daily Immunity Support","text":"<p>Vitamins A, C, D, E and Zinc help support normal immune function for active kids from school days to playtime.</p>","open_by_default":false}},
+        "benefit_5": {"type":"benefit","settings":{"title":"Made for Growing Kids","text":"<p>The formula combines nutrients for appetite, growth, focus, immunity, digestion and overall daily wellness in one simple routine.</p>","open_by_default":false}},
+        "benefit_6": {"type":"benefit","settings":{"title":"A Kid-Friendly Mixed Berry Gummy","text":"<p>A chewable mixed-berry gummy that fits into your child’s daily vitamin routine—without syrups or tablets.</p>","open_by_default":true}}
+      },
+      "block_order": ["benefit_1","benefit_2","benefit_3","benefit_4","benefit_5","benefit_6"],
+      "settings": {
+        "eyebrow": "WHY I AM WELL GUMMIES?",
+        "heading": "Everyday nutrition support for your growing child.",
+        "intro": "<p>When your child is selective about food, offering a varied diet can take extra effort. I Am Well Smart Gummies is designed to complement balanced meals as part of a consistent daily routine.</p>",
+        "image": "shopify://shop_images/6143062380712236434.jpg",
+        "cta_label": "ORDER NOW",
+        "cta_anchor": "iamw-products",
+        "microcopy": "Kid-friendly mixed berry gummy • Food supplement",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_tabs": {
+      "type": "iamw-support-tabs",
+      "blocks": {
+        "tab_1": {"type":"tab","settings":{"title":"Picky Eating","panel_heading":"How This Helps","text":"<p>When your child eats only a limited variety of foods, it can be difficult to get a broad range of nutrients from meals alone. Smart Gummies is designed to complement a balanced diet with selected nutrients for normal growth and everyday wellbeing.</p><p><strong>L-Lysine</strong> — included as part of the formula for growing children.</p><p><strong>B-complex vitamins</strong> — support normal energy metabolism.</p><p><strong>Zinc</strong> — supports normal growth and immune function.</p>","image":"shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"}},
+        "tab_2": {"type":"tab","settings":{"title":"Focus & Learning","panel_heading":"How This Helps","text":"<p>Busy school days and everyday learning need consistent nutritional support. Smart Gummies contains nutrients selected to support normal brain and nervous system function.</p><p><strong>DHA</strong> — supports normal brain development.</p><p><strong>Choline</strong> — supports brain and nervous system function.</p><p><strong>B Complex</strong> — supports normal energy metabolism.</p>","image":"shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp"}},
+        "tab_3": {"type":"tab","settings":{"title":"Immunity","panel_heading":"How This Helps","text":"<p>School, playtime and everyday activities mean growing kids need consistent immune support too.</p><p><strong>Vitamin C</strong> — supports normal immune function.</p><p><strong>Vitamin D</strong> — supports normal immune function and development.</p><p><strong>Zinc</strong> — supports normal immune function.</p>","image":"shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp"}},
+        "tab_4": {"type":"tab","settings":{"title":"Growth Support","panel_heading":"How This Helps","text":"<p>Growing kids need key vitamins, minerals and amino acids as part of a balanced nutrition routine.</p><p><strong>L-Lysine</strong> — included as part of the daily formula.</p><p><strong>Vitamin D</strong> — supports normal bones and development.</p><p><strong>Zinc</strong> — supports normal growth.</p>","image":"shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp"}}
+      },
+      "block_order": ["tab_1","tab_2","tab_3","tab_4"],
+      "settings": {
+        "eyebrow": "I AM WELL BENEFIT SUPPORT",
+        "heading": "Everyday nutrients for growing children",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_products": {
+      "type": "iamw-bundle-grid",
+      "blocks": {
+        "product_1": {
+          "type": "product",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "badge": "90-DAY ROUTINE",
+            "kicker": "SMART ROUTINE STARTER PACK",
+            "title_override": "90 Days of Daily Support",
+            "description": "<p>Choose the I Am Well bundle that fits your family’s routine. Add the Shopify product in the Theme Editor to activate live pricing, variants and direct checkout.</p>",
+            "button_label": "BUY NOW",
+            "microcopy": "Secure checkout • No cart-page detour"
+          }
         }
       },
-      "name": "t:names.product_list",
+      "block_order": ["product_1"],
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
+        "eyebrow": "CHOOSE YOUR I AM WELL ROUTINE",
+        "heading": "Smart routine bundles for everyday support",
+        "intro": "<p>Start with one bundle or add more as the range grows. One selected product displays as one card; two selected products automatically become a two-column layout.</p>",
+        "button_label": "BUY NOW",
+        "loading_label": "GOING TO CHECKOUT…",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff8f23",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_promo": {
+      "type": "iamw-promo-split",
+      "settings": {
+        "eyebrow": "NEW LOOK. SAME DAILY ROUTINE.",
+        "heading": "Your 90-day Smart Gummies routine",
+        "body": "<p>Build a consistent daily routine with an I Am Well bundle selected for your family. Use this space for packaging updates, bundle launches or a focused campaign message.</p>",
+        "cta_label": "VIEW THE STARTER PACK",
+        "background": "#f6ecfb",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "padding_top": 42,
+        "padding_bottom": 42
+      }
+    },
+    "iamw_social": {
+      "type": "iamw-social-proof",
+      "blocks": {
+        "proof_1": {"type":"proof","settings":{"alt_text":"I Am Well customer feedback"}},
+        "proof_2": {"type":"proof","settings":{"alt_text":"I Am Well customer feedback"}},
+        "proof_3": {"type":"proof","settings":{"alt_text":"I Am Well customer feedback"}},
+        "proof_4": {"type":"proof","settings":{"alt_text":"I Am Well customer feedback"}}
+      },
+      "block_order": ["proof_1","proof_2","proof_3","proof_4"],
+      "settings": {
+        "eyebrow": "REAL PARENTS • REAL MOMENTS",
+        "heading": "Real routines. Feedback from I Am Well families.",
+        "intro": "<p>Add the approved Messenger screenshots and customer images here in Theme Editor.</p>",
         "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "iamw_testimonials": {
+      "type": "iamw-testimonials",
+      "blocks": {
+        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"My child usually loses interest after a few bites, but having a simple daily routine has made consistency much easier for us.","name":"I Am Well parent","meta":"UAE"}},
+        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We like that it is a gummy and easy to fit into our morning routine without another syrup or tablet.","name":"I Am Well parent","meta":"UAE"}},
+        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The routine is easy to remember and the kids enjoy the mixed berry flavour.","name":"I Am Well parent","meta":"UAE"}},
+        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient way to complement the meals we already work hard to prepare every day.","name":"I Am Well parent","meta":"UAE"}}
+      },
+      "block_order": ["testimonial_1","testimonial_2","testimonial_3","testimonial_4"],
+      "settings": {
+        "eyebrow": "PARENT APPROVED",
+        "heading": "Real routines. Real feedback. Real families.",
+        "background": "#ffffff",
+        "purple": "#42106b",
+        "orange": "#ff9d16",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "iamw_compare": {
+      "type": "iamw-comparison",
+      "blocks": {
+        "feature_1": {"type":"feature","settings":{"feature":"Appetite support with L-Lysine","our_value":"✓","other_value":"×"}},
+        "feature_2": {"type":"feature","settings":{"feature":"DHA + Choline for brain support","our_value":"✓","other_value":"×"}},
+        "feature_3": {"type":"feature","settings":{"feature":"Digestive enzyme included","our_value":"✓","other_value":"×"}},
+        "feature_4": {"type":"feature","settings":{"feature":"Vitamins + Zinc for immunity support","our_value":"✓","other_value":"×"}},
+        "feature_5": {"type":"feature","settings":{"feature":"Kid-friendly mixed berry gummy","our_value":"✓","other_value":"×"}}
+      },
+      "block_order": ["feature_1","feature_2","feature_3","feature_4","feature_5"],
+      "settings": {
+        "eyebrow": "WHY I AM WELL",
+        "heading": "Explore I Am Well Smart Gummies",
+        "body": "<p>Discover the selected nutrients and convenient format that make I Am Well easy to add to a family routine.</p>",
+        "our_label": "I Am Well",
+        "other_label": "Other products",
+        "cta_label": "VIEW THE 3-MONTH STARTER PACK",
+        "cta_anchor": "iamw-products",
+        "background": "#f7effb",
+        "purple": "#42106b",
+        "text_color": "#17131f",
+        "muted": "#655f69",
+        "border_color": "#e6ddeb",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "iamw_story",
+    "iamw_benefits",
+    "iamw_tabs",
+    "iamw_products",
+    "iamw_promo",
+    "iamw_social",
+    "iamw_testimonials",
+    "iamw_compare"
   ]
 }
