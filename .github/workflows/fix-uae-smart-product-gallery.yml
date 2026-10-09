@@ -1,0 +1,37 @@
+name: Fix UAE smart product gallery
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-uae-smart-product-gallery.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Fix Liquid image tag ids
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('sections/iamw-uae-smart-product.liquid')
+          s = p.read_text()
+          s = s.replace("  assign hero_media = current_variant.featured_media | default: product.featured_media\n", "  assign hero_media = current_variant.featured_media | default: product.featured_media\n  assign main_image_id = 'iamw-main-image-' | append: section.id\n")
+          s = s.replace("image_tag: id: 'iamw-main-image-' | append: section.id, loading: 'eager'", "image_tag: id: main_image_id, loading: 'eager'")
+          p.write_text(s)
+          PY
+      - name: Remove one-time workflow
+        run: rm .github/workflows/fix-uae-smart-product-gallery.yml
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sections/iamw-uae-smart-product.liquid .github/workflows/fix-uae-smart-product-gallery.yml
+          git commit -m 'fix: correct UAE smart product gallery Liquid markup'
+          git push origin main
