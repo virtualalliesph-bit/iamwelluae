@@ -56,8 +56,30 @@
       },
       "block_order": ["pill_brain","pill_focus","pill_daily","pill_taste","support_taste","support_trust","support_daily"]
     },
-    "offer": {"type":"iamw-product-offer-v2","settings":{"product":"smart-routine-starter-pack-90-days-brain-support"}},
-    "testimonials": {"type":"iamw-testimonials-v2","settings":{}},
+    "offer": {
+      "type": "iamw-product-offer-v2",
+      "settings": {
+        "product": "smart-routine-starter-pack-90-days-brain-support",
+        "purchase_action": "cart",
+        "button_text": "ADD TO CART"
+      },
+      "blocks": {
+        "trust_ship": {"type":"trust","settings":{"text":"Free Shipping"}},
+        "trust_secure": {"type":"trust","settings":{"text":"Secure Checkout"}},
+        "trust_parent": {"type":"trust","settings":{"text":"Trusted by Parents"}}
+      },
+      "block_order": ["trust_ship","trust_secure","trust_parent"]
+    },
+    "testimonials": {
+      "type": "iamw-testimonials-v2",
+      "settings": {},
+      "blocks": {
+        "review_1": {"type":"testimonial","settings":{"rating":5,"review":"Replace this sample with an approved IAMWELL customer review.","parent_name":"Customer name","child_age":"Child age"}},
+        "review_2": {"type":"testimonial","settings":{"rating":5,"review":"Replace this sample with an approved IAMWELL customer review.","parent_name":"Customer name","child_age":"Child age"}},
+        "review_3": {"type":"testimonial","settings":{"rating":5,"review":"Replace this sample with an approved IAMWELL customer review.","parent_name":"Customer name","child_age":"Child age"}}
+      },
+      "block_order": ["review_1","review_2","review_3"]
+    },
     "comparison": {"type":"iamw-comparison-v2","settings":{}},
     "final": {"type":"iamw-final-cta","settings":{}}
   },
