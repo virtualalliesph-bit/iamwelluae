@@ -44,7 +44,7 @@
         <input type="hidden" data-iamw-variant value="{{ product.selected_or_first_available_variant.id }}">
       {% endif %}
 
-      <button type="button" class="iamw-buy" data-iamw-buy {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+      <button type="button" class="iamw-buy" data-iamw-buy data-action="{{ section.settings.purchase_action | default: 'checkout' }}" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
         {{ section.settings.button_label }}
       </button>
       <div class="iamw-micro">{{ section.settings.microcopy }}</div>
@@ -139,7 +139,8 @@
           body:JSON.stringify({items:[{id:Number(field.value),quantity:1}]})
         });
         if (!res.ok) throw new Error('Unable to add item');
-        window.location.assign('/checkout');
+        const action = button.dataset.action || 'checkout';
+        window.location.assign(action === 'cart' ? '/cart' : '/checkout');
       } catch (e) {
         button.disabled = false;
         button.textContent = original;
@@ -154,31 +155,143 @@
 {
   "name": "IAMW Product Page",
   "settings": [
-    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"I AM WELL SMART GUMMIES"},
-    {"type":"richtext","id":"subtext","label":"Short description","default":"<p>A mixed-berry food supplement for growing children, designed to complement balanced meals as part of a simple daily routine.</p>"},
-    {"type":"text","id":"button_label","label":"Buy button","default":"BUY NOW"},
-    {"type":"text","id":"microcopy","label":"Button microcopy","default":"Secure checkout • No cart-page detour"},
-    {"type":"checkbox","id":"show_description","label":"Show Shopify product description","default":true}
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "I AM WELL SMART GUMMIES"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Short description",
+      "default": "<p>A mixed-berry food supplement for growing children, designed to complement balanced meals as part of a simple daily routine.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Buy button",
+      "default": "BUY NOW"
+    },
+    {
+      "type": "select",
+      "id": "purchase_action",
+      "label": "Button action",
+      "options": [
+        {
+          "value": "checkout",
+          "label": "Go directly to checkout"
+        },
+        {
+          "value": "cart",
+          "label": "Add to cart and open cart page"
+        }
+      ],
+      "default": "checkout"
+    },
+    {
+      "type": "text",
+      "id": "microcopy",
+      "label": "Button microcopy",
+      "default": "Secure checkout • No cart-page detour"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show Shopify product description",
+      "default": true
+    }
   ],
   "blocks": [
-    {"type":"feature","name":"Feature","settings":[{"type":"text","id":"text","label":"Text","default":"Everyday nutrition support"}]},
-    {"type":"accordion","name":"Accordion","settings":[
-      {"type":"text","id":"heading","label":"Heading","default":"Good to know"},
-      {"type":"richtext","id":"content","label":"Content","default":"<p>Add product information here.</p>"},
-      {"type":"checkbox","id":"open_by_default","label":"Open by default","default":false}
-    ]}
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Everyday nutrition support"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Good to know"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add product information here.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
   ],
-  "presets": [{
-    "name":"IAMW Product Page",
-    "blocks":[
-      {"type":"feature","settings":{"text":"L-Lysine, vitamins and minerals for everyday nutrition support"}},
-      {"type":"feature","settings":{"text":"DHA + Choline for normal brain and nervous system function"}},
-      {"type":"feature","settings":{"text":"Kid-friendly mixed berry gummy format"}},
-      {"type":"feature","settings":{"text":"Designed to fit into a simple daily routine"}},
-      {"type":"accordion","settings":{"heading":"How to use","content":"<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>","open_by_default":true}},
-      {"type":"accordion","settings":{"heading":"What’s inside","content":"<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>"}},
-      {"type":"accordion","settings":{"heading":"Good to know","content":"<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>"}}
-    ]
-  }]
+  "presets": [
+    {
+      "name": "IAMW Product Page",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "L-Lysine, vitamins and minerals for everyday nutrition support"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "DHA + Choline for normal brain and nervous system function"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Kid-friendly mixed berry gummy format"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Designed to fit into a simple daily routine"
+          }
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "heading": "How to use",
+            "content": "<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>",
+            "open_by_default": true
+          }
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "heading": "What’s inside",
+            "content": "<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>"
+          }
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "heading": "Good to know",
+            "content": "<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -21,20 +21,89 @@
             "title_override": "90 Days of Support for Growing Minds",
             "description": "<p>A three-month routine designed to complement balanced nutrition with DHA, Choline, B vitamins and selected nutrients for growing children.</p>",
             "button_label": "BUY NOW",
-            "microcopy": "Direct to checkout • No cart-page detour"
+            "microcopy": "Direct to checkout • No cart-page detour",
+            "purchase_action": "checkout"
           }
         },
-        "proof_1": {"type":"proof","settings":{"image":"shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png","caption":"Customer feedback"}},
-        "proof_2": {"type":"proof","settings":{"image":"shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png","caption":"Customer feedback"}},
-        "proof_3": {"type":"proof","settings":{"image":"shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png","caption":"Customer feedback"}},
-        "proof_4": {"type":"proof","settings":{"image":"shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png","caption":"Customer feedback"}},
-        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The gummy format is easy to fit into our school morning routine, which makes consistency much easier.","name":"I Am Well parent","meta":"Customer feedback"}},
-        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We wanted one simple routine instead of several different products, and this is easy for the kids to remember.","name":"I Am Well parent","meta":"Customer feedback"}},
-        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient addition to the balanced meals and routines we already focus on at home.","name":"I Am Well parent","meta":"Customer feedback"}},
-        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The mixed berry gummy works well for our family because it feels simple rather than like another chore.","name":"I Am Well parent","meta":"Customer feedback"}}
+        "proof_1": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "proof_2": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "proof_3": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "proof_4": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "The gummy format is easy to fit into our school morning routine, which makes consistency much easier.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "We wanted one simple routine instead of several different products, and this is easy for the kids to remember.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "A convenient addition to the balanced meals and routines we already focus on at home.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        },
+        "testimonial_4": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "The mixed berry gummy works well for our family because it feels simple rather than like another chore.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        }
       },
-      "block_order": ["bundle_1","proof_1","proof_2","proof_3","proof_4","testimonial_1","testimonial_2","testimonial_3","testimonial_4"]
+      "block_order": [
+        "bundle_1",
+        "proof_1",
+        "proof_2",
+        "proof_3",
+        "proof_4",
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "testimonial_4"
+      ]
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

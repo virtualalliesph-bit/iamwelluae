@@ -3,16 +3,70 @@
     "main": {
       "type": "iamw-product-page",
       "blocks": {
-        "feature_1": {"type":"feature","settings":{"text":"L-Lysine, vitamins and minerals for everyday nutrition support"}},
-        "feature_2": {"type":"feature","settings":{"text":"DHA + Choline for normal brain and nervous system function"}},
-        "feature_3": {"type":"feature","settings":{"text":"Kid-friendly mixed berry gummy format"}},
-        "feature_4": {"type":"feature","settings":{"text":"Designed to fit into a simple daily routine"}},
-        "accordion_1": {"type":"accordion","settings":{"heading":"How to use","content":"<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>","open_by_default":true}},
-        "accordion_2": {"type":"accordion","settings":{"heading":"What’s inside","content":"<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>","open_by_default":false}},
-        "accordion_3": {"type":"accordion","settings":{"heading":"Good to know","content":"<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>","open_by_default":false}}
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "text": "L-Lysine, vitamins and minerals for everyday nutrition support"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "text": "DHA + Choline for normal brain and nervous system function"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "text": "Kid-friendly mixed berry gummy format"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "text": "Designed to fit into a simple daily routine"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "heading": "How to use",
+            "content": "<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>",
+            "open_by_default": true
+          }
+        },
+        "accordion_2": {
+          "type": "accordion",
+          "settings": {
+            "heading": "What’s inside",
+            "content": "<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>",
+            "open_by_default": false
+          }
+        },
+        "accordion_3": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Good to know",
+            "content": "<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>",
+            "open_by_default": false
+          }
+        }
       },
-      "block_order": ["feature_1","feature_2","feature_3","feature_4","accordion_1","accordion_2","accordion_3"]
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "accordion_1",
+        "accordion_2",
+        "accordion_3"
+      ],
+      "settings": {
+        "purchase_action": "checkout"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

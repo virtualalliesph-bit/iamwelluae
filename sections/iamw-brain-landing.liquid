@@ -124,7 +124,7 @@
                 {% else %}
                   <input type="hidden" data-iamw-variant value="{{ p.selected_or_first_available_variant.id }}">
                 {% endif %}
-                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy data-action="{{ block.settings.purchase_action | default: 'checkout' }}" {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
                   {{ block.settings.button_label }}
                 </button>
                 <div class="iamw-micro">{{ block.settings.microcopy }}</div>
@@ -326,7 +326,8 @@
           body: JSON.stringify({items:[{id:Number(variantField.value), quantity:1}]})
         });
         if (!res.ok) throw new Error('Unable to add item');
-        window.location.assign('/checkout');
+        const action = button.dataset.action || 'checkout';
+        window.location.assign(action === 'cart' ? '/cart' : '/checkout');
       } catch (e) {
         button.disabled = false;
         button.textContent = original;
@@ -741,6 +742,22 @@
           "id": "button_label",
           "label": "Button label",
           "default": "BUY NOW"
+        },
+        {
+          "type": "select",
+          "id": "purchase_action",
+          "label": "Button action",
+          "options": [
+            {
+              "value": "checkout",
+              "label": "Go directly to checkout"
+            },
+            {
+              "value": "cart",
+              "label": "Add to cart and open cart page"
+            }
+          ],
+          "default": "checkout"
         },
         {
           "type": "text",
