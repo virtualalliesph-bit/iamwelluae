@@ -19,9 +19,7 @@
     },
     "pains": {
       "type": "iamw-parent-pains",
-      "settings": {
-        "image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"
-      },
+      "settings": {"image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"},
       "blocks": {
         "pain_1": {"type":"pain","settings":{"icon":"brain","heading":"Hard to focus","description":"<p>Hard to stay focused during schoolwork or homework?</p>"}},
         "pain_2": {"type":"pain","settings":{"icon":"utensils","heading":"Picky eating","description":"<p>Picky eating makes it harder to get complete nutrition?</p>"}},
@@ -42,9 +40,7 @@
     },
     "bundle": {
       "type": "iamw-routine-bundle",
-      "settings": {
-        "image": "shopify://shop_images/6143062380712236434.jpg"
-      },
+      "settings": {"image": "shopify://shop_images/6143062380712236434.jpg"},
       "blocks": {
         "pill_brain": {"type":"pill","settings":{"label":"Brain Support"}},
         "pill_focus": {"type":"pill","settings":{"label":"Focus & Learning"}},
@@ -58,11 +54,7 @@
     },
     "offer": {
       "type": "iamw-product-offer-v2",
-      "settings": {
-        "product": "smart-routine-starter-pack-90-days-brain-support",
-        "purchase_action": "cart",
-        "button_text": "ADD TO CART"
-      },
+      "settings": {"product":"smart-routine-starter-pack-90-days-brain-support","purchase_action":"cart","button_text":"ADD TO CART"},
       "blocks": {
         "trust_ship": {"type":"trust","settings":{"text":"Free Shipping"}},
         "trust_secure": {"type":"trust","settings":{"text":"Secure Checkout"}},
@@ -92,18 +84,7 @@
       },
       "block_order": ["row_1","row_2","row_3","row_4","row_5"]
     },
-    "final": {
-      "type": "iamw-final-cta",
-      "settings": {
-        "image": "shopify://shop_images/6143214667367649919_1.jpg"
-      },
-      "blocks": {
-        "benefit_brain": {"type":"benefit","settings":{"icon":"brain","text":"Brain support for growing kids"}},
-        "benefit_taste": {"type":"benefit","settings":{"icon":"star","text":"Great tasting and kid approved"}},
-        "benefit_trust": {"type":"benefit","settings":{"icon":"heart","text":"Trusted by parents"}}
-      },
-      "block_order": ["benefit_brain","benefit_taste","benefit_trust"]
-    }
+    "final": {"type":"iamw-final-cta","settings":{}}
   },
   "order": ["hero","pains","benefits","bundle","offer","testimonials","comparison","final"]
 }
