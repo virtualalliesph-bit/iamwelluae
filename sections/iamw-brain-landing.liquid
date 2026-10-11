@@ -1,0 +1,862 @@
+
+{% assign iamw_bundle_count = 0 %}
+{% for block in section.blocks %}
+  {% if block.type == 'bundle' and block.settings.product != blank %}
+    {% assign iamw_bundle_count = iamw_bundle_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+<section id="iamw-{{ section.id }}" class="iamw-landing">
+  <div class="iamw-hero">
+    <div class="iamw-wrap iamw-two">
+      <div class="iamw-copy">
+        <div class="iamw-kicker">{{ section.settings.hero_eyebrow }}</div>
+        <h1>{{ section.settings.hero_heading }}</h1>
+        <div class="iamw-rte">{{ section.settings.hero_body }}</div>
+        <a class="iamw-btn" href="#iamw-products-{{ section.id }}">{{ section.settings.hero_cta_label }}</a>
+      </div>
+      <div class="iamw-media">
+        {% if section.settings.hero_image != blank %}
+          {{ section.settings.hero_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480,720,960,1200,1400', class: 'iamw-img' }}
+        {% else %}
+          <div class="iamw-placeholder">Choose hero image</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="iamw-benefits">
+    <div class="iamw-wrap iamw-two iamw-two--reverse">
+      <div class="iamw-media">
+        {% if section.settings.benefits_image != blank %}
+          {{ section.settings.benefits_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,720,960,1200', class: 'iamw-img' }}
+        {% else %}
+          <div class="iamw-placeholder">Choose benefits image</div>
+        {% endif %}
+      </div>
+      <div>
+        <div class="iamw-kicker">{{ section.settings.benefits_eyebrow }}</div>
+        <h2>{{ section.settings.benefits_heading }}</h2>
+        <div class="iamw-rte iamw-muted">{{ section.settings.benefits_intro }}</div>
+        <div class="iamw-accordion">
+          {% for i in (1..6) %}
+            {% capture title_key %}benefit_{{ i }}_title{% endcapture %}
+            {% capture text_key %}benefit_{{ i }}_text{% endcapture %}
+            {% if section.settings[title_key] != blank %}
+              <details {% if forloop.first %}open{% endif %}>
+                <summary>{{ section.settings[title_key] }} <span>+</span></summary>
+                <div class="iamw-rte">{{ section.settings[text_key] }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="iamw-tabs-section">
+    <div class="iamw-wrap">
+      <div class="iamw-center">
+        <div class="iamw-kicker">{{ section.settings.tabs_eyebrow }}</div>
+        <h2>{{ section.settings.tabs_heading }}</h2>
+      </div>
+      <div class="iamw-tab-buttons" role="tablist">
+        {% for i in (1..4) %}
+          {% capture title_key %}tab_{{ i }}_title{% endcapture %}
+          <button type="button" class="iamw-tab-btn{% if forloop.first %} is-active{% endif %}" data-iamw-tab="{{ i }}">{{ section.settings[title_key] }}</button>
+        {% endfor %}
+      </div>
+      {% for i in (1..4) %}
+        {% capture heading_key %}tab_{{ i }}_heading{% endcapture %}
+        {% capture text_key %}tab_{{ i }}_text{% endcapture %}
+        {% capture image_key %}tab_{{ i }}_image{% endcapture %}
+        <div class="iamw-tab-panel{% if forloop.first %} is-active{% endif %}" data-iamw-panel="{{ i }}">
+          <div class="iamw-two">
+            <div>
+              <h3>{{ section.settings[heading_key] }}</h3>
+              <div class="iamw-rte">{{ section.settings[text_key] }}</div>
+            </div>
+            <div class="iamw-media">
+              {% if section.settings[image_key] != blank %}
+                {{ section.settings[image_key] | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '480,720,1000', class: 'iamw-img' }}
+              {% else %}
+                <div class="iamw-placeholder">Choose tab image</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="iamw-products" id="iamw-products-{{ section.id }}">
+    <div class="iamw-wrap">
+      <div class="iamw-center">
+        <div class="iamw-kicker">{{ section.settings.products_eyebrow }}</div>
+        <h2>{{ section.settings.products_heading }}</h2>
+        <div class="iamw-rte iamw-muted">{{ section.settings.products_intro }}</div>
+      </div>
+      <div class="iamw-product-grid{% if iamw_bundle_count == 1 %} is-single{% endif %}">
+        {% for block in section.blocks %}
+          {% if block.type == 'bundle' %}
+            {% assign p = block.settings.product %}
+            <article class="iamw-product-card" {{ block.shopify_attributes }}>
+              {% if p != blank %}
+                <div class="iamw-product-media">
+                  {% if p.featured_image %}
+                    {{ p.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '420,650,850,1000', class: 'iamw-product-image' }}
+                  {% endif %}
+                </div>
+                <div class="iamw-badge">{{ block.settings.badge }}</div>
+                <div class="iamw-kicker">{{ block.settings.kicker }}</div>
+                <h3>{% if block.settings.title_override != blank %}{{ block.settings.title_override }}{% else %}{{ p.title }}{% endif %}</h3>
+                <div class="iamw-price">{{ p.selected_or_first_available_variant.price | money }}</div>
+                <div class="iamw-rte iamw-muted">{{ block.settings.description }}</div>
+                {% if p.variants.size > 1 %}
+                  <label class="iamw-label" for="iamw-variant-{{ section.id }}-{{ block.id }}">Choose option</label>
+                  <select class="iamw-select" id="iamw-variant-{{ section.id }}-{{ block.id }}" data-iamw-variant>
+                    {% for variant in p.variants %}
+                      <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                        {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}
+                      </option>
+                    {% endfor %}
+                  </select>
+                {% else %}
+                  <input type="hidden" data-iamw-variant value="{{ p.selected_or_first_available_variant.id }}">
+                {% endif %}
+                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                  {{ block.settings.button_label }}
+                </button>
+                <div class="iamw-micro">{{ block.settings.microcopy }}</div>
+              {% else %}
+                <div class="iamw-placeholder iamw-placeholder--product">Select a Shopify product in this bundle block.</div>
+              {% endif %}
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="iamw-promo">
+    <div class="iamw-wrap iamw-two">
+      <div class="iamw-media">
+        {% if section.settings.promo_image != blank %}
+          {{ section.settings.promo_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,720,960,1200', class: 'iamw-img' }}
+        {% else %}
+          <div class="iamw-placeholder">Choose promo image</div>
+        {% endif %}
+      </div>
+      <div class="iamw-copy">
+        <div class="iamw-kicker">{{ section.settings.promo_eyebrow }}</div>
+        <h2>{{ section.settings.promo_heading }}</h2>
+        <div class="iamw-rte">{{ section.settings.promo_body }}</div>
+        <a class="iamw-btn" href="#iamw-products-{{ section.id }}">{{ section.settings.promo_cta_label }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="iamw-proof">
+    <div class="iamw-wrap">
+      <div class="iamw-center">
+        <div class="iamw-kicker">{{ section.settings.proof_eyebrow }}</div>
+        <h2>{{ section.settings.proof_heading }}</h2>
+        <div class="iamw-rte iamw-muted">{{ section.settings.proof_intro }}</div>
+      </div>
+      <div class="iamw-proof-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'proof' %}
+            <div class="iamw-proof-card" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320,520,720,900', class: 'iamw-proof-image' }}
+              {% else %}
+                <div class="iamw-placeholder iamw-proof-ph">Add customer screenshot</div>
+              {% endif %}
+              {% if block.settings.caption != blank %}<div class="iamw-proof-caption">{{ block.settings.caption }}</div>{% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="iamw-testimonials">
+    <div class="iamw-wrap">
+      <div class="iamw-center">
+        <div class="iamw-kicker">{{ section.settings.testimonials_eyebrow }}</div>
+        <h2>{{ section.settings.testimonials_heading }}</h2>
+      </div>
+      <div class="iamw-testimonial-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'testimonial' %}
+            <blockquote class="iamw-testimonial" {{ block.shopify_attributes }}>
+              <div class="iamw-stars">{{ block.settings.stars }}</div>
+              <p>“{{ block.settings.quote }}”</p>
+              <footer><strong>{{ block.settings.name }}</strong>{% if block.settings.meta != blank %}<span>{{ block.settings.meta }}</span>{% endif %}</footer>
+            </blockquote>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="iamw-compare">
+    <div class="iamw-wrap">
+      <div class="iamw-center">
+        <div class="iamw-kicker">{{ section.settings.compare_eyebrow }}</div>
+        <h2>{{ section.settings.compare_heading }}</h2>
+        <div class="iamw-rte iamw-muted">{{ section.settings.compare_body }}</div>
+      </div>
+      <div class="iamw-table-wrap">
+        <table class="iamw-table">
+          <thead><tr><th>Feature</th><th>I Am Well</th><th>Other products</th></tr></thead>
+          <tbody>
+            {% for i in (1..5) %}
+              {% capture row_key %}compare_{{ i }}{% endcapture %}
+              <tr><td>{{ section.settings[row_key] }}</td><td class="yes">✓</td><td class="no">×</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="iamw-center"><a class="iamw-btn" href="#iamw-products-{{ section.id }}">{{ section.settings.compare_cta_label }}</a></div>
+    </div>
+  </div>
+</section>
+
+<style>
+#iamw-{{ section.id }}{--purple:#42106b;--orange:#ff9418;--ink:#17131f;--muted:#655f69;--line:#e7ddeb;--soft:#f7effb;color:var(--ink);font-family:inherit}
+#iamw-{{ section.id }} *{box-sizing:border-box}
+#iamw-{{ section.id }} .iamw-wrap{max-width:1180px;margin:0 auto;padding:64px 24px}
+#iamw-{{ section.id }} .iamw-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+#iamw-{{ section.id }} .iamw-two--reverse{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+#iamw-{{ section.id }} h1,#iamw-{{ section.id }} h2,#iamw-{{ section.id }} h3{margin:0;color:var(--purple);letter-spacing:-.035em}
+#iamw-{{ section.id }} h1{font-size:clamp(42px,6vw,74px);line-height:.98}
+#iamw-{{ section.id }} h2{font-size:clamp(34px,4.5vw,54px);line-height:1.03}
+#iamw-{{ section.id }} h3{font-size:clamp(24px,3vw,34px);line-height:1.08}
+#iamw-{{ section.id }} .iamw-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--orange);margin-bottom:12px}
+#iamw-{{ section.id }} .iamw-rte{font-size:16px;line-height:1.68}
+#iamw-{{ section.id }} .iamw-rte p{margin:12px 0 0}
+#iamw-{{ section.id }} .iamw-muted{color:var(--muted)}
+#iamw-{{ section.id }} .iamw-copy .iamw-rte{margin-top:16px}
+#iamw-{{ section.id }} .iamw-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;margin-top:22px;padding:13px 26px;border:0;border-radius:999px;background:var(--purple);color:#fff;text-decoration:none;font:inherit;font-weight:800;cursor:pointer}
+#iamw-{{ section.id }} .iamw-btn[disabled]{opacity:.45;cursor:not-allowed}
+#iamw-{{ section.id }} .iamw-media{border-radius:22px;overflow:hidden;background:var(--soft)}
+#iamw-{{ section.id }} .iamw-img{display:block;width:100%;height:auto}
+#iamw-{{ section.id }} .iamw-placeholder{min-height:420px;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);background:var(--soft)}
+#iamw-{{ section.id }} .iamw-center{text-align:center;max-width:820px;margin:0 auto 30px}
+#iamw-{{ section.id }} .iamw-benefits,#iamw-{{ section.id }} .iamw-products,#iamw-{{ section.id }} .iamw-testimonials{background:#fff}
+#iamw-{{ section.id }} .iamw-tabs-section,#iamw-{{ section.id }} .iamw-promo,#iamw-{{ section.id }} .iamw-compare{background:var(--soft)}
+#iamw-{{ section.id }} .iamw-accordion{margin-top:24px;border-top:1px solid var(--line)}
+#iamw-{{ section.id }} details{border-bottom:1px solid var(--line);padding:0}
+#iamw-{{ section.id }} summary{display:flex;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;padding:18px 0;font-weight:800;color:var(--purple)}
+#iamw-{{ section.id }} summary::-webkit-details-marker{display:none}
+#iamw-{{ section.id }} details[open] summary span{transform:rotate(45deg)}
+#iamw-{{ section.id }} details .iamw-rte{padding:0 0 18px;color:var(--muted)}
+#iamw-{{ section.id }} .iamw-tab-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
+#iamw-{{ section.id }} .iamw-tab-btn{border:1px solid var(--line);background:#fff;color:var(--purple);border-radius:999px;padding:11px 17px;font:inherit;font-weight:800;cursor:pointer}
+#iamw-{{ section.id }} .iamw-tab-btn.is-active{background:var(--purple);color:#fff;border-color:var(--purple)}
+#iamw-{{ section.id }} .iamw-tab-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px}
+#iamw-{{ section.id }} .iamw-tab-panel.is-active{display:block}
+#iamw-{{ section.id }} .iamw-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:1040px;margin:0 auto}
+#iamw-{{ section.id }} .iamw-product-grid.is-single{grid-template-columns:minmax(0,720px);justify-content:center}
+#iamw-{{ section.id }} .iamw-product-card{border:1px solid var(--line);border-radius:20px;padding:22px;background:#fff;overflow:hidden}
+#iamw-{{ section.id }} .iamw-product-media{border-radius:14px;background:var(--soft);overflow:hidden;margin-bottom:18px}
+#iamw-{{ section.id }} .iamw-product-image{display:block;width:100%;height:auto}
+#iamw-{{ section.id }} .iamw-badge{display:inline-flex;padding:7px 11px;border-radius:999px;background:#fff2df;color:#8c4e00;font-size:11px;font-weight:900;margin-bottom:10px}
+#iamw-{{ section.id }} .iamw-price{font-size:22px;font-weight:900;color:var(--ink);margin:8px 0 12px}
+#iamw-{{ section.id }} .iamw-label{display:block;font-size:13px;font-weight:800;margin:18px 0 6px}
+#iamw-{{ section.id }} .iamw-select{width:100%;min-height:46px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;color:var(--ink)}
+#iamw-{{ section.id }} .iamw-buy{width:100%}
+#iamw-{{ section.id }} .iamw-micro{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+#iamw-{{ section.id }} .iamw-placeholder--product{min-height:260px}
+#iamw-{{ section.id }} .iamw-proof-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+#iamw-{{ section.id }} .iamw-proof-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+#iamw-{{ section.id }} .iamw-proof-image{display:block;width:100%;height:auto}
+#iamw-{{ section.id }} .iamw-proof-ph{min-height:300px}
+#iamw-{{ section.id }} .iamw-proof-caption{padding:10px 12px;font-size:12px;color:var(--muted)}
+#iamw-{{ section.id }} .iamw-testimonial-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+#iamw-{{ section.id }} .iamw-testimonial{margin:0;padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff}
+#iamw-{{ section.id }} .iamw-testimonial p{line-height:1.6}
+#iamw-{{ section.id }} .iamw-testimonial footer{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--muted)}
+#iamw-{{ section.id }} .iamw-stars{color:var(--orange);letter-spacing:.04em}
+#iamw-{{ section.id }} .iamw-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;max-width:920px;margin:0 auto 10px}
+#iamw-{{ section.id }} .iamw-table{width:100%;border-collapse:collapse;min-width:620px}
+#iamw-{{ section.id }} .iamw-table th,#iamw-{{ section.id }} .iamw-table td{padding:16px;border-bottom:1px solid var(--line);text-align:left}
+#iamw-{{ section.id }} .iamw-table th{color:var(--purple)}
+#iamw-{{ section.id }} .iamw-table .yes{color:#208a50;font-weight:900;text-align:center}
+#iamw-{{ section.id }} .iamw-table .no{color:#a44c4c;font-weight:900;text-align:center}
+@media(max-width:900px){
+  #iamw-{{ section.id }} .iamw-wrap{padding:48px 16px}
+  #iamw-{{ section.id }} .iamw-two,#iamw-{{ section.id }} .iamw-two--reverse{grid-template-columns:1fr;gap:26px}
+  #iamw-{{ section.id }} .iamw-hero .iamw-copy{order:1}
+  #iamw-{{ section.id }} .iamw-hero .iamw-media{order:2}
+  #iamw-{{ section.id }} .iamw-product-grid{grid-template-columns:1fr}
+  #iamw-{{ section.id }} .iamw-proof-grid,#iamw-{{ section.id }} .iamw-testimonial-grid{display:flex;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  #iamw-{{ section.id }} .iamw-proof-card,#iamw-{{ section.id }} .iamw-testimonial{flex:0 0 82vw;scroll-snap-align:start}
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('iamw-{{ section.id }}');
+  if (!root || root.dataset.iamwReady === 'true') return;
+  root.dataset.iamwReady = 'true';
+
+  root.querySelectorAll('[data-iamw-tab]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.iamwTab;
+      root.querySelectorAll('[data-iamw-tab]').forEach((b) => b.classList.toggle('is-active', b === button));
+      root.querySelectorAll('[data-iamw-panel]').forEach((p) => p.classList.toggle('is-active', p.dataset.iamwPanel === id));
+    });
+  });
+
+  root.querySelectorAll('[data-iamw-buy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const card = button.closest('.iamw-product-card');
+      const variantField = card && card.querySelector('[data-iamw-variant]');
+      if (!variantField || !variantField.value) return;
+      const original = button.textContent;
+      button.disabled = true;
+      button.textContent = 'GOING TO CHECKOUT…';
+      try {
+        const base = (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
+        const res = await fetch(base + 'cart/add.js', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify({items:[{id:Number(variantField.value), quantity:1}]})
+        });
+        if (!res.ok) throw new Error('Unable to add item');
+        window.location.assign('/checkout');
+      } catch (e) {
+        button.disabled = false;
+        button.textContent = original;
+        alert('Please try again.');
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "IAMW Brain Support Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "FOR GROWING MINDS & BUSY SCHOOL DAYS"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero heading",
+      "default": "Support growing minds with one simple daily routine."
+    },
+    {
+      "type": "richtext",
+      "id": "hero_body",
+      "label": "Hero body",
+      "default": "<p>School, homework, play and everyday learning ask a lot from growing kids. Balanced meals remain the foundation, while I Am Well Smart Gummies can help complement that routine with selected nutrients that support normal brain development and nervous system function.</p><p>One mixed-berry gummy routine. Easy to remember. Easy to fit into the day.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_label",
+      "label": "Hero button",
+      "default": "EXPLORE BRAIN SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "benefits_eyebrow",
+      "label": "Benefits eyebrow",
+      "default": "DAILY BRAIN SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "benefits_heading",
+      "label": "Benefits heading",
+      "default": "Everyday nutrients for growing minds."
+    },
+    {
+      "type": "richtext",
+      "id": "benefits_intro",
+      "label": "Benefits intro",
+      "default": "<p>I Am Well Smart Gummies combines selected nutrients that support normal brain development, nervous system function and everyday nutrition as part of a balanced routine.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "benefits_image",
+      "label": "Benefits image"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1_title",
+      "label": "Benefit 1 title",
+      "default": "DHA for Normal Brain Development"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_1_text",
+      "label": "Benefit 1 text",
+      "default": "<p>DHA is included as part of the formula to support normal brain development during the growing years.</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2_title",
+      "label": "Benefit 2 title",
+      "default": "Choline for Brain & Nervous System Function"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_2_text",
+      "label": "Benefit 2 text",
+      "default": "<p>Choline supports normal brain and nervous system function as part of a balanced nutrition routine.</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3_title",
+      "label": "Benefit 3 title",
+      "default": "B Vitamins for Busy School Days"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_3_text",
+      "label": "Benefit 3 text",
+      "default": "<p>B-complex vitamins help support normal energy metabolism for school, homework and everyday activities.</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefit_4_title",
+      "label": "Benefit 4 title",
+      "default": "Zinc for Growth & Immune Function"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_4_text",
+      "label": "Benefit 4 text",
+      "default": "<p>Zinc supports normal growth and immune function as children learn, play and develop.</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefit_5_title",
+      "label": "Benefit 5 title",
+      "default": "A Routine Kids Can Enjoy"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_5_text",
+      "label": "Benefit 5 text",
+      "default": "<p>The chewable mixed-berry gummy format is simple to add to a consistent daily routine without another syrup or tablet.</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefit_6_title",
+      "label": "Benefit 6 title",
+      "default": "Whole-Child Everyday Nutrition"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit_6_text",
+      "label": "Benefit 6 text",
+      "default": "<p>Brain-support nutrients work alongside vitamins and minerals selected for normal growth, immunity and everyday wellbeing.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tabs_eyebrow",
+      "label": "Tabs eyebrow",
+      "default": "SMART GUMMIES BRAIN SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "tabs_heading",
+      "label": "Tabs heading",
+      "default": "Support for school days, learning and growing minds"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Tab 1 label",
+      "default": "Focus & Learning"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_heading",
+      "label": "Tab 1 heading",
+      "default": "Nutrition for busy learning days"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_text",
+      "label": "Tab 1 text",
+      "default": "<p>Consistent nutrition supports the body through school, homework and everyday learning. Smart Gummies includes DHA, Choline and B vitamins as part of that daily routine.</p><p><strong>DHA</strong> — supports normal brain development.</p><p><strong>Choline</strong> — supports normal brain and nervous system function.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_image",
+      "label": "Tab 1 image"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Tab 2 label",
+      "default": "Brain Development"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_heading",
+      "label": "Tab 2 heading",
+      "default": "Support through the growing years"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_text",
+      "label": "Tab 2 text",
+      "default": "<p>Growing minds need a broad range of nutrients from balanced meals. Smart Gummies is designed to complement that diet with selected vitamins, minerals, DHA and Choline.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_image",
+      "label": "Tab 2 image"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Tab 3 label",
+      "default": "School-Day Energy"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_heading",
+      "label": "Tab 3 heading",
+      "default": "Support normal energy metabolism"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_text",
+      "label": "Tab 3 text",
+      "default": "<p>School days can be long. B-complex vitamins contribute to normal energy metabolism and fit naturally into a consistent morning routine.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_image",
+      "label": "Tab 3 image"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_title",
+      "label": "Tab 4 label",
+      "default": "Everyday Wellness"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_heading",
+      "label": "Tab 4 heading",
+      "default": "More than one part of the routine"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_text",
+      "label": "Tab 4 text",
+      "default": "<p>Brain support works best as part of overall nutrition. The formula also includes nutrients selected for normal growth, immunity and everyday wellness.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_4_image",
+      "label": "Tab 4 image"
+    },
+    {
+      "type": "text",
+      "id": "products_eyebrow",
+      "label": "Products eyebrow",
+      "default": "CHOOSE YOUR ROUTINE"
+    },
+    {
+      "type": "text",
+      "id": "products_heading",
+      "label": "Products heading",
+      "default": "Smart Gummies bundles for growing minds"
+    },
+    {
+      "type": "richtext",
+      "id": "products_intro",
+      "label": "Products intro",
+      "default": "<p>Feature one bundle or add a second option later. One selected product displays as one card; two selected products automatically display in two columns.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_image",
+      "label": "Promo image"
+    },
+    {
+      "type": "text",
+      "id": "promo_eyebrow",
+      "label": "Promo eyebrow",
+      "default": "A SIMPLE SCHOOL-DAY ROUTINE"
+    },
+    {
+      "type": "text",
+      "id": "promo_heading",
+      "label": "Promo heading",
+      "default": "Support growing minds before the day gets busy"
+    },
+    {
+      "type": "richtext",
+      "id": "promo_body",
+      "label": "Promo body",
+      "default": "<p>A consistent routine is easier when it fits naturally into family life. Smart Gummies can be added to the morning routine alongside breakfast, school preparation and the balanced meals you already prioritise.</p>"
+    },
+    {
+      "type": "text",
+      "id": "promo_cta_label",
+      "label": "Promo button",
+      "default": "VIEW THE BUNDLES"
+    },
+    {
+      "type": "text",
+      "id": "proof_eyebrow",
+      "label": "Proof eyebrow",
+      "default": "REAL PARENTS • REAL ROUTINES"
+    },
+    {
+      "type": "text",
+      "id": "proof_heading",
+      "label": "Proof heading",
+      "default": "What families say about their I Am Well routine"
+    },
+    {
+      "type": "richtext",
+      "id": "proof_intro",
+      "label": "Proof intro",
+      "default": "<p>Replace these with your approved customer screenshots and family photos.</p>"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_eyebrow",
+      "label": "Testimonials eyebrow",
+      "default": "PARENT FEEDBACK"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_heading",
+      "label": "Testimonials heading",
+      "default": "A brain-support routine families can keep simple"
+    },
+    {
+      "type": "text",
+      "id": "compare_eyebrow",
+      "label": "Comparison eyebrow",
+      "default": "WHY I AM WELL"
+    },
+    {
+      "type": "text",
+      "id": "compare_heading",
+      "label": "Comparison heading",
+      "default": "One simple routine for growing minds"
+    },
+    {
+      "type": "richtext",
+      "id": "compare_body",
+      "label": "Comparison body",
+      "default": "<p>Explore selected brain-support nutrients and a kid-friendly format designed to complement balanced everyday nutrition.</p>"
+    },
+    {
+      "type": "text",
+      "id": "compare_1",
+      "label": "Comparison row 1",
+      "default": "DHA included for normal brain development support"
+    },
+    {
+      "type": "text",
+      "id": "compare_2",
+      "label": "Comparison row 2",
+      "default": "Choline for normal brain & nervous system function"
+    },
+    {
+      "type": "text",
+      "id": "compare_3",
+      "label": "Comparison row 3",
+      "default": "B vitamins for normal energy metabolism"
+    },
+    {
+      "type": "text",
+      "id": "compare_4",
+      "label": "Comparison row 4",
+      "default": "Vitamins + Zinc for everyday wellness support"
+    },
+    {
+      "type": "text",
+      "id": "compare_5",
+      "label": "Comparison row 5",
+      "default": "Kid-friendly mixed berry gummy format"
+    },
+    {
+      "type": "text",
+      "id": "compare_cta_label",
+      "label": "Comparison button",
+      "default": "SHOP BRAIN SUPPORT"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle product",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "BRAIN SUPPORT ROUTINE"
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Kicker",
+          "default": "I AM WELL SMART GUMMIES"
+        },
+        {
+          "type": "text",
+          "id": "title_override",
+          "label": "Title override",
+          "default": "90 Days of Support for Growing Minds"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>A three-month routine designed to complement balanced nutrition with DHA, Choline, B vitamins and selected nutrients for growing children.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "BUY NOW"
+        },
+        {
+          "type": "text",
+          "id": "microcopy",
+          "label": "Microcopy",
+          "default": "Direct to checkout • No cart-page detour"
+        }
+      ]
+    },
+    {
+      "type": "proof",
+      "name": "Customer proof",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Screenshot or photo"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Stars",
+          "default": "★★★★★"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Add approved customer feedback here."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "I Am Well parent"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta",
+          "default": "Customer feedback"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "IAMW Brain Support Landing",
+      "blocks": [
+        {
+          "type": "bundle"
+        },
+        {
+          "type": "proof"
+        },
+        {
+          "type": "proof"
+        },
+        {
+          "type": "proof"
+        },
+        {
+          "type": "proof"
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "The gummy format is easy to fit into our school morning routine, which makes consistency much easier.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "We wanted one simple routine instead of several different products, and this is easy for the kids to remember.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "A convenient addition to the balanced meals and routines we already focus on at home.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "The mixed berry gummy works well for our family because it feels simple rather than like another chore.",
+            "name": "I Am Well parent",
+            "meta": "Customer feedback"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

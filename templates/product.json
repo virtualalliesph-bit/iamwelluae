@@ -1,86 +1,18 @@
 {
   "sections": {
     "main": {
-      "type": "iamw-product-main",
+      "type": "iamw-product-page",
       "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "text": "L-Lysine, vitamins and minerals for everyday nutrition support"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "text": "DHA + Choline for normal brain and nervous system function"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "text": "Kid-friendly mixed berry gummy format"
-          }
-        },
-        "feature_4": {
-          "type": "feature",
-          "settings": {
-            "text": "Designed to fit into a simple daily routine"
-          }
-        },
-        "accordion_1": {
-          "type": "accordion",
-          "settings": {
-            "heading": "How to use",
-            "content": "<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>",
-            "open_by_default": true
-          }
-        },
-        "accordion_2": {
-          "type": "accordion",
-          "settings": {
-            "heading": "What’s inside",
-            "content": "<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>",
-            "open_by_default": false
-          }
-        },
-        "accordion_3": {
-          "type": "accordion",
-          "settings": {
-            "heading": "Good to know",
-            "content": "<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>",
-            "open_by_default": false
-          }
-        }
+        "feature_1": {"type":"feature","settings":{"text":"L-Lysine, vitamins and minerals for everyday nutrition support"}},
+        "feature_2": {"type":"feature","settings":{"text":"DHA + Choline for normal brain and nervous system function"}},
+        "feature_3": {"type":"feature","settings":{"text":"Kid-friendly mixed berry gummy format"}},
+        "feature_4": {"type":"feature","settings":{"text":"Designed to fit into a simple daily routine"}},
+        "accordion_1": {"type":"accordion","settings":{"heading":"How to use","content":"<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>","open_by_default":true}},
+        "accordion_2": {"type":"accordion","settings":{"heading":"What’s inside","content":"<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>","open_by_default":false}},
+        "accordion_3": {"type":"accordion","settings":{"heading":"Good to know","content":"<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>","open_by_default":false}}
       },
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3",
-        "feature_4",
-        "accordion_1",
-        "accordion_2",
-        "accordion_3"
-      ],
-      "settings": {
-        "eyebrow": "I AM WELL SMART GUMMIES",
-        "rating_text": "Customer reviews",
-        "subtext": "<p>A mixed-berry food supplement for growing children, designed to complement balanced meals as part of a simple daily routine.</p>",
-        "button_label": "BUY NOW",
-        "loading_label": "GOING TO CHECKOUT…",
-        "microcopy": "Secure checkout • No cart-page detour",
-        "show_description": true,
-        "background": "#ffffff",
-        "purple": "#42106b",
-        "orange": "#ff9d16",
-        "text_color": "#17131f",
-        "muted": "#655f69",
-        "border_color": "#e6ddeb",
-        "padding_top": 44,
-        "padding_bottom": 60
-      }
+      "block_order": ["feature_1","feature_2","feature_3","feature_4","accordion_1","accordion_2","accordion_3"]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }
