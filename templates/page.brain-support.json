@@ -29,8 +29,33 @@
       },
       "block_order": ["pain_1","pain_2","pain_3"]
     },
-    "benefits": {"type":"iamw-brain-benefits","settings":{}},
-    "bundle": {"type":"iamw-routine-bundle","settings":{}},
+    "benefits": {
+      "type": "iamw-brain-benefits",
+      "settings": {},
+      "blocks": {
+        "focus": {"type":"benefit","settings":{"icon":"brain","image":"shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp","heading":"Focus Support","description":"<p>Helps support attention and focus for school, play and everyday learning.</p>"}},
+        "learning": {"type":"benefit","settings":{"icon":"book","image":"shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp","heading":"Learning Support","description":"<p>Nutrients that help fuel a curious mind and love for learning.</p>"}},
+        "memory": {"type":"benefit","settings":{"icon":"memory","image":"shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp","heading":"Memory Support","description":"<p>Supports memory and everyday information retention.</p>"}},
+        "nutrition": {"type":"benefit","settings":{"icon":"shield","image":"shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp","heading":"Daily Nutrition","description":"<p>A convenient way to help fill nutritional gaps for growing kids.</p>"}}
+      },
+      "block_order": ["focus","learning","memory","nutrition"]
+    },
+    "bundle": {
+      "type": "iamw-routine-bundle",
+      "settings": {
+        "image": "shopify://shop_images/6143062380712236434.jpg"
+      },
+      "blocks": {
+        "pill_brain": {"type":"pill","settings":{"label":"Brain Support"}},
+        "pill_focus": {"type":"pill","settings":{"label":"Focus & Learning"}},
+        "pill_daily": {"type":"pill","settings":{"label":"Daily Nutrition"}},
+        "pill_taste": {"type":"pill","settings":{"label":"Great Taste"}},
+        "support_taste": {"type":"support","settings":{"icon":"leaf","text":"Kid approved taste"}},
+        "support_trust": {"type":"support","settings":{"icon":"heart","text":"Trusted by parents"}},
+        "support_daily": {"type":"support","settings":{"icon":"star","text":"Complete daily support"}}
+      },
+      "block_order": ["pill_brain","pill_focus","pill_daily","pill_taste","support_taste","support_trust","support_daily"]
+    },
     "offer": {"type":"iamw-product-offer-v2","settings":{"product":"smart-routine-starter-pack-90-days-brain-support"}},
     "testimonials": {"type":"iamw-testimonials-v2","settings":{}},
     "comparison": {"type":"iamw-comparison-v2","settings":{}},
