@@ -80,8 +80,30 @@
       },
       "block_order": ["review_1","review_2","review_3"]
     },
-    "comparison": {"type":"iamw-comparison-v2","settings":{}},
-    "final": {"type":"iamw-final-cta","settings":{}}
+    "comparison": {
+      "type": "iamw-comparison-v2",
+      "settings": {},
+      "blocks": {
+        "row_1": {"type":"row","settings":{"feature":"Supports focus and learning","iamwell":true,"other":false}},
+        "row_2": {"type":"row","settings":{"feature":"Helps support memory and brain development","iamwell":true,"other":false}},
+        "row_3": {"type":"row","settings":{"feature":"Complete daily nutrition in one routine","iamwell":true,"other":false}},
+        "row_4": {"type":"row","settings":{"feature":"Great tasting and kid approved","iamwell":true,"other":false}},
+        "row_5": {"type":"row","settings":{"feature":"Designed with picky eaters in mind","iamwell":true,"other":false}}
+      },
+      "block_order": ["row_1","row_2","row_3","row_4","row_5"]
+    },
+    "final": {
+      "type": "iamw-final-cta",
+      "settings": {
+        "image": "shopify://shop_images/6143214667367649919_1.jpg"
+      },
+      "blocks": {
+        "benefit_brain": {"type":"benefit","settings":{"icon":"brain","text":"Brain support for growing kids"}},
+        "benefit_taste": {"type":"benefit","settings":{"icon":"star","text":"Great tasting and kid approved"}},
+        "benefit_trust": {"type":"benefit","settings":{"icon":"heart","text":"Trusted by parents"}}
+      },
+      "block_order": ["benefit_brain","benefit_taste","benefit_trust"]
+    }
   },
   "order": ["hero","pains","benefits","bundle","offer","testimonials","comparison","final"]
 }
