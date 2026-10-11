@@ -77,15 +77,7 @@
       },
       "block_order": ["row_1","row_2","row_3","row_4","row_5"]
     },
-    "final": {
-      "type":"iamw-final-cta",
-      "settings":{
-        "image":"shopify://shop_images/6143214667367649919_1.jpg",
-        "benefit_1":"Brain support for growing kids",
-        "benefit_2":"Great tasting and kid approved",
-        "benefit_3":"Trusted by parents"
-      }
-    }
+    "final": {"type":"iamw-final-cta","settings":{"image":"shopify://shop_images/6143214667367649919_1.jpg"}}
   },
   "order": ["hero","pains","benefits","bundle","offer","testimonials","comparison","final"]
 }
