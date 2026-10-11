@@ -3,7 +3,7 @@
 <section
   id="iamw-routine-{{ section.id }}"
   class="iamw-brain-section iamw-routine-tabs"
-  style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;--iamw-button:{{ section.settings.button_color }};--iamw-button-text:{{ section.settings.button_text_color }};"
+  style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;--iamw-button:{{ section.settings.button_color }};--iamw-button-text:{{ section.settings.button_text_color }};--iamw-image-fit:{{ section.settings.image_fit }};--iamw-image-position:center {{ section.settings.image_position }};"
 >
   <div class="iamw-brain-wrap">
     <div class="iamw-routine-tabs__intro">
@@ -127,8 +127,8 @@
 #iamw-routine-{{ section.id }} .iamw-routine-tabs__benefit{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;line-height:1.35}
 #iamw-routine-{{ section.id }} .iamw-routine-tabs__benefit .iamw-iconbox{flex:0 0 auto}
 #iamw-routine-{{ section.id }} .iamw-routine-tabs__copy .iamw-btn{margin-top:18px}
-#iamw-routine-{{ section.id }} .iamw-routine-tabs__image{background:#efe7f6;min-height:240px}
-#iamw-routine-{{ section.id }} .iamw-routine-tabs__image img{display:block;width:100%;height:100%;min-height:240px;max-height:330px;object-fit:cover}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__image{background:#efe7f6;min-height:240px;display:flex;align-items:center;justify-content:center}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__image img{display:block;width:100%;height:100%;min-height:240px;max-height:330px;object-fit:var(--iamw-image-fit);object-position:var(--iamw-image-position)}
 @media(min-width:800px){
   #iamw-routine-{{ section.id }} .iamw-routine-tabs__panel{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:stretch}
   #iamw-routine-{{ section.id }} .iamw-routine-tabs__copy{padding:34px 38px}
@@ -179,6 +179,8 @@
     {"type":"text","id":"fallback_heading","label":"Fallback heading","default":"A simple daily routine for brighter tomorrows"},
     {"type":"richtext","id":"fallback_description","label":"Fallback text","default":"<p>A simple daily routine with selected nutrients to complement balanced meals and support growing minds.</p>"},
     {"type":"image_picker","id":"image","label":"Fallback image"},
+    {"type":"select","id":"image_fit","label":"Image fit","options":[{"value":"contain","label":"Contain - show full photo"},{"value":"cover","label":"Cover - fill frame"}],"default":"contain"},
+    {"type":"select","id":"image_position","label":"Image position","options":[{"value":"top","label":"Top"},{"value":"center","label":"Center"},{"value":"bottom","label":"Bottom"}],"default":"center"},
     {"type":"text","id":"button_text","label":"Button text","default":"VIEW THE 90-DAY ROUTINE"},
     {"type":"url","id":"button_link","label":"Button link"},
     {"type":"color","id":"background","label":"Background","default":"#f3e9ff"},
