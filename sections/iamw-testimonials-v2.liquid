@@ -1,114 +1,26 @@
-{{ 'iamw-brain-landing.css' | asset_url | stylesheet_tag }}
-
-<section id="iamw-testimonials-{{ section.id }}" class="iamw-brain-section iamw-testimonials-v2" style="background:{{ section.settings.background }};color:{{ section.settings.text_color }};">
+<section class="iamw-brain-section" style="background:{{ section.settings.background }};color:{{ section.settings.text_color }};">
   <div class="iamw-brain-wrap">
-    <div class="iamw-testimonials-v2__head">
-      {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
-      {% if section.settings.heading != blank %}<h2 class="iamw-heading">{{ section.settings.heading }}</h2>{% endif %}
-      {% if section.settings.subheading != blank %}<div class="iamw-copy iamw-muted">{{ section.settings.subheading }}</div>{% endif %}
-    </div>
+    {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+    {% if section.settings.heading != blank %}<h2 class="iamw-heading">{{ section.settings.heading }}</h2>{% endif %}
+    {% if section.settings.subheading != blank %}<div class="iamw-copy">{{ section.settings.subheading }}</div>{% endif %}
 
-    <div class="iamw-testimonials-v2__carousel" data-carousel>
-      <div class="iamw-testimonials-v2__track" data-track>
-        {% for block in section.blocks %}
-          <article class="iamw-testimonials-v2__card iamw-brain-card" data-card {{ block.shopify_attributes }}>
-            <div class="iamw-testimonials-v2__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
-              {% for i in (1..5) %}
-                <span{% if i > block.settings.rating %} class="is-off"{% endif %}>★</span>
-              {% endfor %}
-            </div>
-
-            {% if block.settings.review != blank %}<div class="iamw-testimonials-v2__review">“{{ block.settings.review }}”</div>{% endif %}
-
-            <div class="iamw-testimonials-v2__person">
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,120,160', alt: block.settings.parent_name }}
-              {% else %}
-                <div class="iamw-testimonials-v2__avatar" aria-hidden="true">♥</div>
-              {% endif %}
-              <div>
-                {% if block.settings.parent_name != blank %}<strong>{{ block.settings.parent_name }}</strong>{% endif %}
-                {% if block.settings.child_age != blank %}<div class="iamw-muted">{{ block.settings.child_age }}</div>{% endif %}
-              </div>
-            </div>
-          </article>
-        {% endfor %}
-      </div>
-
-      {% if section.blocks.size > 1 %}
-        <button class="iamw-testimonials-v2__arrow is-prev" type="button" data-prev aria-label="Previous testimonial">‹</button>
-        <button class="iamw-testimonials-v2__arrow is-next" type="button" data-next aria-label="Next testimonial">›</button>
-        <div class="iamw-testimonials-v2__dots" data-dots aria-label="Testimonial navigation"></div>
-      {% endif %}
+    <div style="display:grid;gap:16px;margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+      {% for block in section.blocks %}
+        <article class="iamw-brain-card" style="padding:20px;" {{ block.shopify_attributes }}>
+          <div style="color:#ff9a1f;margin-bottom:10px;">
+            {% for i in (1..5) %}{% if i <= block.settings.rating %}★{% else %}☆{% endif %}{% endfor %}
+          </div>
+          {% if block.settings.review != blank %}<p>{{ block.settings.review }}</p>{% endif %}
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: block.settings.parent_name }}
+          {% endif %}
+          {% if block.settings.parent_name != blank %}<strong>{{ block.settings.parent_name }}</strong>{% endif %}
+          {% if block.settings.child_age != blank %}<div>{{ block.settings.child_age }}</div>{% endif %}
+        </article>
+      {% endfor %}
     </div>
   </div>
 </section>
-
-<style>
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__head{max-width:820px;margin:0 auto 28px;text-align:center}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__carousel{position:relative}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:2px 2px 12px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__track::-webkit-scrollbar{display:none}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__card{flex:0 0 86%;scroll-snap-align:start;padding:22px;background:#fff}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__stars{color:#ff9a1f;letter-spacing:.05em;margin-bottom:12px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__stars .is-off{opacity:.22}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__review{font-size:15px;line-height:1.6;color:{{ section.settings.text_color }};min-height:72px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__person{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:13px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__person img,#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;background:#efe5fa;display:grid;place-items:center}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__arrow{position:absolute;top:45%;transform:translateY(-50%);z-index:2;width:40px;height:40px;border:0;border-radius:50%;background:#fff;color:{{ section.settings.text_color }};font-size:27px;line-height:1;box-shadow:0 8px 20px rgba(65,18,110,.14);cursor:pointer}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__arrow.is-prev{left:-8px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__arrow.is-next{right:-8px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__dots{display:flex;justify-content:center;gap:7px;margin-top:10px}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#cdb9df;cursor:pointer}
-#iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__dots button.is-active{background:{{ section.settings.text_color }};transform:scale(1.2)}
-@media(min-width:768px){
-  #iamw-testimonials-{{ section.id }} .iamw-testimonials-v2__card{flex-basis:calc((100% - 32px)/3)}
-}
-</style>
-
-<script>
-(() => {
-  const root = document.getElementById('iamw-testimonials-{{ section.id }}');
-  if (!root || root.dataset.carouselReady === 'true') return;
-  root.dataset.carouselReady = 'true';
-
-  const track = root.querySelector('[data-track]');
-  const cards = Array.from(root.querySelectorAll('[data-card]'));
-  const dotsWrap = root.querySelector('[data-dots]');
-  if (!track || cards.length < 2) return;
-
-  let index = 0;
-  const maxIndex = cards.length - 1;
-
-  const updateDots = () => {
-    if (!dotsWrap) return;
-    dotsWrap.querySelectorAll('button').forEach((dot, i) => dot.classList.toggle('is-active', i === index));
-  };
-
-  const goTo = (nextIndex) => {
-    index = Math.max(0, Math.min(maxIndex, nextIndex));
-    const card = cards[index];
-    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    updateDots();
-  };
-
-  if (dotsWrap) {
-    cards.forEach((card, i) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-      if (i === 0) dot.classList.add('is-active');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-  }
-
-  const prev = root.querySelector('[data-prev]');
-  const next = root.querySelector('[data-next]');
-  if (prev) prev.addEventListener('click', () => goTo(index <= 0 ? maxIndex : index - 1));
-  if (next) next.addEventListener('click', () => goTo(index >= maxIndex ? 0 : index + 1));
-})();
-</script>
 
 {% schema %}
 {
@@ -134,6 +46,15 @@
     }
   ],
   "max_blocks": 10,
-  "presets": [{"name":"IAMW Testimonials","blocks":[{"type":"testimonial"},{"type":"testimonial"},{"type":"testimonial"}]}]
+  "presets": [
+    {
+      "name": "IAMW Testimonials",
+      "blocks": [
+        {"type":"testimonial"},
+        {"type":"testimonial"},
+        {"type":"testimonial"}
+      ]
+    }
+  ]
 }
 {% endschema %}
