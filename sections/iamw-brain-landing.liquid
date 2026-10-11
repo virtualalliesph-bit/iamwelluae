@@ -124,7 +124,11 @@
                 {% else %}
                   <input type="hidden" data-iamw-variant value="{{ p.selected_or_first_available_variant.id }}">
                 {% endif %}
-                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy data-action="{{ block.settings.purchase_action | default: 'checkout' }}" {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                {% assign iamw_action = block.settings.purchase_action %}
+                {% if iamw_action == blank or iamw_action == 'inherit' %}
+                  {% assign iamw_action = section.settings.purchase_action_default | default: 'checkout' %}
+                {% endif %}
+                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy data-action="{{ iamw_action }}" {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
                   {{ block.settings.button_label }}
                 </button>
                 <div class="iamw-micro">{{ block.settings.microcopy }}</div>
@@ -589,6 +593,23 @@
       "default": "<p>Feature one bundle or add a second option later. One selected product displays as one card; two selected products automatically display in two columns.</p>"
     },
     {
+      "type": "select",
+      "id": "purchase_action_default",
+      "label": "Default purchase behavior",
+      "info": "Controls all bundle buttons unless a bundle has its own override.",
+      "options": [
+        {
+          "value": "checkout",
+          "label": "Go directly to checkout"
+        },
+        {
+          "value": "cart",
+          "label": "Add to cart and open cart page"
+        }
+      ],
+      "default": "checkout"
+    },
+    {
       "type": "image_picker",
       "id": "promo_image",
       "label": "Promo image"
@@ -749,6 +770,10 @@
           "label": "Button action",
           "options": [
             {
+              "value": "inherit",
+              "label": "Use page default"
+            },
+            {
               "value": "checkout",
               "label": "Go directly to checkout"
             },
@@ -757,7 +782,7 @@
               "label": "Add to cart and open cart page"
             }
           ],
-          "default": "checkout"
+          "default": "inherit"
         },
         {
           "type": "text",

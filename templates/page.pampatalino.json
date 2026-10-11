@@ -9,7 +9,8 @@
         "tab_2_image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp",
         "tab_3_image": "shopify://shop_images/c53cc782-3534-4c6d-8e21-c9b5465ac4af.webp",
         "tab_4_image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
-        "promo_image": "shopify://shop_images/6143062380712236434.jpg"
+        "promo_image": "shopify://shop_images/6143062380712236434.jpg",
+        "purchase_action_default": "checkout"
       },
       "blocks": {
         "bundle_1": {
@@ -22,7 +23,7 @@
             "description": "<p>A three-month routine designed to complement balanced nutrition with DHA, Choline, B vitamins and selected nutrients for growing children.</p>",
             "button_label": "BUY NOW",
             "microcopy": "Direct to checkout • No cart-page detour",
-            "purchase_action": "checkout"
+            "purchase_action": "inherit"
           }
         },
         "proof_1": {

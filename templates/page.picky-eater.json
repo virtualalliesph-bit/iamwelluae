@@ -9,7 +9,8 @@
         "tab_2_image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
         "tab_3_image": "shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp",
         "tab_4_image": "shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp",
-        "promo_image": "shopify://shop_images/6143062380712236434.jpg"
+        "promo_image": "shopify://shop_images/6143062380712236434.jpg",
+        "purchase_action_default": "checkout"
       },
       "blocks": {
         "bundle_1": {
@@ -22,7 +23,7 @@
             "description": "<p>A three-month routine for families looking for a simple way to complement the nutrition of picky eaters with one kid-friendly mixed berry gummy.</p>",
             "button_label": "BUY NOW",
             "microcopy": "Direct to checkout • No cart-page detour",
-            "purchase_action": "checkout"
+            "purchase_action": "inherit"
           }
         },
         "proof_1": {
