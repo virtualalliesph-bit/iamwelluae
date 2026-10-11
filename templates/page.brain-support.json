@@ -33,7 +33,73 @@
     },
     "bundle": {
       "type": "iamw-routine-bundle",
-      "settings": {"image":"shopify://shop_images/6143062380712236434.jpg"}
+      "settings": {
+        "image":"shopify://shop_images/6143062380712236434.jpg",
+        "button_text":"VIEW THE 90-DAY ROUTINE"
+      },
+      "blocks": {
+        "tab_brain": {
+          "type":"tab",
+          "settings": {
+            "label":"Brain Support",
+            "heading":"Daily nutrition for growing minds",
+            "description":"<p>Selected nutrients to complement balanced meals and support normal brain development and nervous system function as part of a consistent daily routine.</p>",
+            "image":"shopify://shop_images/6143062380712236434.jpg",
+            "benefit_1_icon":"brain",
+            "benefit_1_text":"DHA supports normal brain development",
+            "benefit_2_icon":"memory",
+            "benefit_2_text":"Choline supports normal brain and nervous system function",
+            "benefit_3_icon":"shield",
+            "benefit_3_text":"Built for a simple daily nutrition routine"
+          }
+        },
+        "tab_focus": {
+          "type":"tab",
+          "settings": {
+            "label":"Focus & Learning",
+            "heading":"Support for busy school days",
+            "description":"<p>A simple routine with selected nutrients to support everyday learning, normal energy metabolism and growing minds through school, homework and play.</p>",
+            "image":"shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp",
+            "benefit_1_icon":"brain",
+            "benefit_1_text":"Nutrition support for focus and learning",
+            "benefit_2_icon":"book",
+            "benefit_2_text":"B vitamins support normal energy metabolism",
+            "benefit_3_icon":"star",
+            "benefit_3_text":"Easy to keep consistent on school days"
+          }
+        },
+        "tab_daily": {
+          "type":"tab",
+          "settings": {
+            "label":"Daily Nutrition",
+            "heading":"Help fill everyday nutrition gaps",
+            "description":"<p>Balanced meals come first. Smart Gummies is designed to complement that routine with selected vitamins and minerals for growing children.</p>",
+            "image":"shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
+            "benefit_1_icon":"shield",
+            "benefit_1_text":"Selected vitamins and minerals for everyday nutrition",
+            "benefit_2_icon":"leaf",
+            "benefit_2_text":"Designed to complement balanced meals",
+            "benefit_3_icon":"heart",
+            "benefit_3_text":"One simple routine for busy families"
+          }
+        },
+        "tab_taste": {
+          "type":"tab",
+          "settings": {
+            "label":"Great Taste",
+            "heading":"An easy routine kids can enjoy",
+            "description":"<p>A kid-friendly mixed-berry gummy format that is simple to remember and easy to add to the family’s everyday routine.</p>",
+            "image":"shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp",
+            "benefit_1_icon":"star",
+            "benefit_1_text":"Mixed-berry gummy format",
+            "benefit_2_icon":"heart",
+            "benefit_2_text":"Kid-friendly daily routine",
+            "benefit_3_icon":"leaf",
+            "benefit_3_text":"No extra syrup or tablet"
+          }
+        }
+      },
+      "block_order": ["tab_brain","tab_focus","tab_daily","tab_taste"]
     },
     "offer": {
       "type": "iamw-product-offer-v2",
