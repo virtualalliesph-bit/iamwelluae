@@ -1,43 +1,45 @@
-
 {{ 'iamw-brain-landing.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'iamw-brain-testimonials.js' | asset_url }}" defer></script>
-<section class="iamw-brain-section iamw-testimonials-v2" style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;{% if section.settings.button_color != blank %}--iamw-button:{{ section.settings.button_color }};{% endif %}{% if section.settings.button_text_color != blank %}--iamw-button-text:{{ section.settings.button_text_color }};{% endif %}" >
+
+<section id="iamw-testimonials-{{ section.id }}" class="iamw-brain-section iamw-testimonials-v2" style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;">
   <div class="iamw-brain-wrap">
     <div class="iamw-center" style="text-align:{{ section.settings.text_alignment }}">
       {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
       {% if section.settings.heading != blank %}<h2 class="iamw-heading">{{ section.settings.heading }}</h2>{% endif %}
       {% if section.settings.subheading != blank %}<div class="iamw-copy iamw-muted">{{ section.settings.subheading }}</div>{% endif %}
     </div>
-    <div class="iamw-testimonials-v2__carousel" data-iamw-testimonials data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed | times: 1000 }}" data-desktop-slides="{{ section.settings.desktop_slides }}" data-mobile-slides="{{ section.settings.mobile_slides }}" style="--desktop-slides:{{ section.settings.desktop_slides }};--mobile-slides:{{ section.settings.mobile_slides }};">
-      <div class="iamw-testimonials-v2__track" data-iamw-track>
+
+    <div class="iamw-testimonials-v2__carousel" data-carousel data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}" style="--desktop-slides:{{ section.settings.desktop_slides }};--mobile-slides:{{ section.settings.mobile_slides }};">
+      <div class="iamw-testimonials-v2__track" data-track>
         {% for block in section.blocks %}
-          <article class="iamw-testimonials-v2__card iamw-brain-card" data-iamw-card {{ block.shopify_attributes }}>
-            <div class="iamw-testimonials-v2__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
-              {% for i in (1..5) %}<span{% if i > block.settings.rating %} class="is-off"{% endif %}>★</span>{% endfor %}
-            </div>
-            {% if block.settings.review != blank %}<div class="iamw-copy">“{{ block.settings.review }}”</div>{% endif %}
-            <div class="iamw-testimonials-v2__person">
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,120,160', alt: block.settings.image_alt }}
-              {% else %}
-                <div class="iamw-testimonials-v2__avatar" aria-hidden="true">♥</div>
-              {% endif %}
-              <div>
-                <strong>{{ block.settings.parent_name }}</strong>
-                {% if block.settings.child_age != blank %}<div class="iamw-muted">{{ block.settings.child_age }}</div>{% endif %}
+          {% if block.settings.review != blank %}
+            <article class="iamw-testimonials-v2__card iamw-brain-card" data-card {{ block.shopify_attributes }}>
+              <div class="iamw-testimonials-v2__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+                {% for i in (1..5) %}<span{% if i > block.settings.rating %} class="is-off"{% endif %}>★</span>{% endfor %}
               </div>
-            </div>
-          </article>
+              <div class="iamw-copy">“{{ block.settings.review }}”</div>
+              <div class="iamw-testimonials-v2__person">
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,120,160', alt: block.settings.image_alt }}
+                {% endif %}
+                <div>
+                  {% if block.settings.parent_name != blank %}<strong>{{ block.settings.parent_name }}</strong>{% endif %}
+                  {% if block.settings.child_age != blank %}<div class="iamw-muted">{{ block.settings.child_age }}</div>{% endif %}
+                </div>
+              </div>
+            </article>
+          {% endif %}
         {% endfor %}
       </div>
+
       {% if section.settings.show_arrows %}
-        <button class="iamw-testimonials-v2__arrow is-prev" type="button" data-iamw-prev aria-label="Previous testimonials">‹</button>
-        <button class="iamw-testimonials-v2__arrow is-next" type="button" data-iamw-next aria-label="Next testimonials">›</button>
+        <button class="iamw-testimonials-v2__arrow is-prev" type="button" data-prev aria-label="Previous testimonials">‹</button>
+        <button class="iamw-testimonials-v2__arrow is-next" type="button" data-next aria-label="Next testimonials">›</button>
       {% endif %}
-      {% if section.settings.show_dots %}<div class="iamw-testimonials-v2__dots" data-iamw-dots></div>{% endif %}
+      {% if section.settings.show_dots %}<div class="iamw-testimonials-v2__dots" data-dots></div>{% endif %}
     </div>
   </div>
 </section>
+
 <style>
 #shopify-section-{{ section.id }} .iamw-center{max-width:820px;margin:0 auto 26px}
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__carousel{position:relative}
@@ -47,243 +49,88 @@
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__stars{color:#ff9a1f;letter-spacing:.05em;margin-bottom:12px}
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__stars .is-off{opacity:.25}
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__person{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:13px}
-#shopify-section-{{ section.id }} .iamw-testimonials-v2__person img,#shopify-section-{{ section.id }} .iamw-testimonials-v2__avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#efe5fa;display:grid;place-items:center}
+#shopify-section-{{ section.id }} .iamw-testimonials-v2__person img{width:48px;height:48px;border-radius:50%;object-fit:cover}
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:var(--iamw-text);font-size:28px;box-shadow:0 8px 20px rgba(65,18,110,.12);cursor:pointer}
-#shopify-section-{{ section.id }} .iamw-testimonials-v2__arrow.is-prev{left:-12px}
-#shopify-section-{{ section.id }} .iamw-testimonials-v2__arrow.is-next{right:-12px}
+#shopify-section-{{ section.id }} .iamw-testimonials-v2__arrow.is-prev{left:-8px}
+#shopify-section-{{ section.id }} .iamw-testimonials-v2__arrow.is-next{right:-8px}
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__dots{display:flex;justify-content:center;gap:7px;margin-top:12px}
 #shopify-section-{{ section.id }} .iamw-testimonials-v2__dots button{width:8px;height:8px;border:0;border-radius:50%;background:#cdb9df;padding:0;cursor:pointer}
-#shopify-section-{{ section.id }} .iamw-testimonials-v2__dots button.is-active{background:var(--iamw-text);transform:scale(1.25)}
-@media(min-width:768px){
-  #shopify-section-{{ section.id }} .iamw-testimonials-v2__card{flex-basis:calc((100% - (var(--desktop-slides) - 1)*14px)/var(--desktop-slides))}
-}
+#shopify-section-{{ section.id }} .iamw-testimonials-v2__dots button.is-active{background:var(--iamw-text)}
+@media(min-width:768px){#shopify-section-{{ section.id }} .iamw-testimonials-v2__card{flex-basis:calc((100% - (var(--desktop-slides) - 1)*14px)/var(--desktop-slides))}}
 </style>
+
+<script>
+(() => {
+  const root = document.getElementById('iamw-testimonials-{{ section.id }}');
+  if (!root || root.dataset.ready === 'true') return;
+  root.dataset.ready = 'true';
+  const carousel = root.querySelector('[data-carousel]');
+  const track = root.querySelector('[data-track]');
+  const cards = Array.from(root.querySelectorAll('[data-card]'));
+  if (!carousel || !track || cards.length === 0) return;
+  let index = 0;
+  const go = (next) => {
+    index = Math.max(0, Math.min(cards.length - 1, next));
+    cards[index].scrollIntoView({behavior:'smooth', block:'nearest', inline:'start'});
+    root.querySelectorAll('[data-dots] button').forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+  };
+  const dots = root.querySelector('[data-dots]');
+  if (dots) {
+    cards.forEach((card, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+      if (i === 0) dot.classList.add('is-active');
+      dot.addEventListener('click', () => go(i));
+      dots.appendChild(dot);
+    });
+  }
+  const prev = root.querySelector('[data-prev]');
+  const next = root.querySelector('[data-next]');
+  if (prev) prev.addEventListener('click', () => go(index - 1));
+  if (next) next.addEventListener('click', () => go(index + 1));
+  if (carousel.dataset.autoplay === 'true') {
+    const speed = Math.max(3, Number(carousel.dataset.speed || 5)) * 1000;
+    setInterval(() => go(index >= cards.length - 1 ? 0 : index + 1), speed);
+  }
+})();
+</script>
 
 {% schema %}
 {
-  "name": "IAMW Testimonials",
+  "name": "IAMW Testimonials V2",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "REAL FAMILIES. REAL PROGRESS."
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Parents love the difference they see in their kids."
-    },
-    {
-      "type": "richtext",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "<p>Real stories from IAMWELL families about focus, learning and everyday wins.</p>"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Autoplay",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "autoplay_speed",
-      "label": "Autoplay speed",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "unit": "s",
-      "default": 5
-    },
-    {
-      "type": "range",
-      "id": "desktop_slides",
-      "label": "Desktop slides",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "default": 3
-    },
-    {
-      "type": "range",
-      "id": "mobile_slides",
-      "label": "Mobile slides",
-      "min": 1,
-      "max": 2,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "checkbox",
-      "id": "show_dots",
-      "label": "Show navigation dots",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_arrows",
-      "label": "Show arrows",
-      "default": true
-    },
-    {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#f4ebff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#4b168f"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#ff9a1f"
-    },
-    {
-      "type": "range",
-      "id": "heading_size_desktop",
-      "label": "Heading size desktop",
-      "min": 28,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "default": 52
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "label": "Heading size mobile",
-      "min": 24,
-      "max": 52,
-      "step": 2,
-      "unit": "px",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "content_width",
-      "label": "Content width",
-      "min": 900,
-      "max": 1400,
-      "step": 20,
-      "unit": "px",
-      "default": 1180
-    },
-    {
-      "type": "range",
-      "id": "padding_desktop",
-      "label": "Padding desktop",
-      "min": 20,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 56
-    },
-    {
-      "type": "range",
-      "id": "padding_mobile",
-      "label": "Padding mobile",
-      "min": 16,
-      "max": 72,
-      "step": 4,
-      "unit": "px",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
-      ],
-      "default": "center"
-    }
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"REAL FAMILIES. REAL PROGRESS."},
+    {"type":"text","id":"heading","label":"Heading","default":"Parents love the difference they see in their kids."},
+    {"type":"richtext","id":"subheading","label":"Subheading","default":"<p>Real stories from IAMWELL families about focus, learning and everyday wins.</p>"},
+    {"type":"checkbox","id":"autoplay","label":"Autoplay","default":true},
+    {"type":"range","id":"autoplay_speed","label":"Autoplay speed","min":3,"max":10,"step":1,"unit":"s","default":5},
+    {"type":"range","id":"desktop_slides","label":"Desktop slides","min":1,"max":4,"step":1,"default":3},
+    {"type":"range","id":"mobile_slides","label":"Mobile slides","min":1,"max":2,"step":1,"default":1},
+    {"type":"checkbox","id":"show_dots","label":"Show dots","default":true},
+    {"type":"checkbox","id":"show_arrows","label":"Show arrows","default":true},
+    {"type":"color","id":"background","label":"Background","default":"#f4ebff"},
+    {"type":"color","id":"text_color","label":"Text color","default":"#4b168f"},
+    {"type":"color","id":"accent_color","label":"Accent color","default":"#ff9a1f"},
+    {"type":"range","id":"heading_size_desktop","label":"Heading size desktop","min":28,"max":72,"step":2,"unit":"px","default":52},
+    {"type":"range","id":"heading_size_mobile","label":"Heading size mobile","min":24,"max":52,"step":2,"unit":"px","default":36},
+    {"type":"range","id":"content_width","label":"Content width","min":900,"max":1400,"step":20,"unit":"px","default":1180},
+    {"type":"range","id":"padding_desktop","label":"Padding desktop","min":20,"max":100,"step":4,"unit":"px","default":56},
+    {"type":"range","id":"padding_mobile","label":"Padding mobile","min":16,"max":72,"step":4,"unit":"px","default":32},
+    {"type":"range","id":"border_radius","label":"Border radius","min":0,"max":40,"step":2,"unit":"px","default":24},
+    {"type":"select","id":"text_alignment","label":"Text alignment","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"}],"default":"center"}
   ],
   "blocks": [
-    {
-      "type": "testimonial",
-      "name": "Testimonial",
-      "limit": 10,
-      "settings": [
-        {
-          "type": "range",
-          "id": "rating",
-          "label": "Rating",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "default": 5
-        },
-        {
-          "type": "textarea",
-          "id": "review",
-          "label": "Review",
-          "default": "Replace this sample with an approved IAMWELL customer review."
-        },
-        {
-          "type": "text",
-          "id": "parent_name",
-          "label": "Parent name",
-          "default": "Customer name"
-        },
-        {
-          "type": "text",
-          "id": "child_age",
-          "label": "Child age",
-          "default": "Child age"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Customer image"
-        },
-        {
-          "type": "text",
-          "id": "image_alt",
-          "label": "Image alt text"
-        }
-      ]
-    }
+    {"type":"testimonial","name":"Testimonial","settings":[
+      {"type":"range","id":"rating","label":"Rating","min":1,"max":5,"step":1,"default":5},
+      {"type":"textarea","id":"review","label":"Review","default":"Replace this sample with an approved IAMWELL customer review."},
+      {"type":"text","id":"parent_name","label":"Parent name","default":"Customer name"},
+      {"type":"text","id":"child_age","label":"Child age","default":"Child age"},
+      {"type":"image_picker","id":"image","label":"Customer image"},
+      {"type":"text","id":"image_alt","label":"Image alt text"}
+    ]}
   ],
   "max_blocks": 10,
-  "presets": [
-    {
-      "name": "IAMW Testimonials",
-      "blocks": [
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        }
-      ]
-    }
-  ]
+  "presets": [{"name":"IAMW Testimonials V2","blocks":[{"type":"testimonial"},{"type":"testimonial"},{"type":"testimonial"}]}]
 }
 {% endschema %}
