@@ -133,7 +133,7 @@
         "row_4": {"type":"row","settings":{"feature":"Great tasting and kid approved","iamwell":true,"other":false}},
         "row_5": {"type":"row","settings":{"feature":"Designed with picky eaters in mind","iamwell":true,"other":false}}
       },
-      "block_order": ["row_1","row_2","row_3","row_4","tab_taste"]
+      "block_order": ["row_1","row_2","row_3","row_4","row_5"]
     },
     "final": {"type":"iamw-final-cta","settings":{"image":"shopify://shop_images/6143214667367649919_1.jpg"}}
   },
