@@ -33,17 +33,7 @@
     },
     "bundle": {
       "type": "iamw-routine-bundle",
-      "settings": {"image":"shopify://shop_images/6143062380712236434.jpg"},
-      "blocks": {
-        "pill_brain": {"type":"pill","settings":{"label":"Brain Support"}},
-        "pill_focus": {"type":"pill","settings":{"label":"Focus & Learning"}},
-        "pill_daily": {"type":"pill","settings":{"label":"Daily Nutrition"}},
-        "pill_taste": {"type":"pill","settings":{"label":"Great Taste"}},
-        "support_taste": {"type":"support","settings":{"icon":"leaf","text":"Kid approved taste"}},
-        "support_trust": {"type":"support","settings":{"icon":"heart","text":"Trusted by parents"}},
-        "support_daily": {"type":"support","settings":{"icon":"star","text":"Complete daily support"}}
-      },
-      "block_order": ["pill_brain","pill_focus","pill_daily","pill_taste","support_taste","support_trust","support_daily"]
+      "settings": {"image":"shopify://shop_images/6143062380712236434.jpg"}
     },
     "offer": {
       "type": "iamw-product-offer-v2",
