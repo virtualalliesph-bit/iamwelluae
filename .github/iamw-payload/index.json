@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "main": {
+      "type": "iamw-picky-landing",
+      "blocks": {
+        "bundle_1": {
+          "type": "bundle",
+          "settings": {
+            "product": "smart-routine-starter-pack-90-days-brain-support",
+            "badge": "90-DAY ROUTINE",
+            "kicker": "SMART ROUTINE STARTER PACK",
+            "title_override": "90 Days of Daily Support",
+            "description": "<p>A three-month routine for families looking for a simple way to complement the nutrition of picky eaters with one kid-friendly mixed berry gummy.</p>",
+            "button_label": "BUY NOW",
+            "microcopy": "Direct to checkout • No cart-page detour"
+          }
+        },
+        "proof_1": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_2": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_3": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_4": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"My child usually loses interest after a few bites, so having a simple daily gummy routine has made consistency easier for us.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We like that it is a gummy and easy to add to our morning routine without another syrup or tablet.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The mixed berry format is easy for the kids to remember as part of their daily routine.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient way to complement the balanced meals and food variety we keep working on at home.","name":"I Am Well parent","meta":"Customer feedback"}}
+      },
+      "block_order": ["bundle_1","proof_1","proof_2","proof_3","proof_4","testimonial_1","testimonial_2","testimonial_3","testimonial_4"]
+    }
+  },
+  "order": ["main"]
+}

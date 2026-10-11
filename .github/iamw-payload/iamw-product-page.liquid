@@ -1,0 +1,184 @@
+
+<section id="iamw-product-{{ section.id }}" class="iamw-product-page">
+  <div class="iamw-product-wrap">
+    <div class="iamw-gallery">
+      {% if product.media.size > 0 %}
+        {% for media in product.media %}
+          <div class="iamw-gallery-item">
+            {% if media.media_type == 'image' %}
+              {{ media.preview_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480,720,960,1200,1400', class: 'iamw-product-img' }}
+            {% else %}
+              {{ media | media_tag: image_size: '1000x', controls: true }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="iamw-placeholder">Add product media in Shopify</div>
+      {% endif %}
+    </div>
+
+    <div class="iamw-product-info">
+      <div class="iamw-kicker">{{ section.settings.eyebrow }}</div>
+      <h1>{{ product.title }}</h1>
+      <div class="iamw-price" data-iamw-price>{{ product.selected_or_first_available_variant.price | money }}</div>
+      <div class="iamw-rte iamw-muted">{{ section.settings.subtext }}</div>
+
+      <div class="iamw-feature-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="iamw-feature" {{ block.shopify_attributes }}><span>✓</span>{{ block.settings.text }}</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if product.variants.size > 1 %}
+        <label class="iamw-label" for="iamw-product-variant-{{ section.id }}">Choose option</label>
+        <select id="iamw-product-variant-{{ section.id }}" class="iamw-select" data-iamw-variant>
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}
+            </option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <input type="hidden" data-iamw-variant value="{{ product.selected_or_first_available_variant.id }}">
+      {% endif %}
+
+      <button type="button" class="iamw-buy" data-iamw-buy {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+        {{ section.settings.button_label }}
+      </button>
+      <div class="iamw-micro">{{ section.settings.microcopy }}</div>
+
+      <div class="iamw-accordions">
+        {% for block in section.blocks %}
+          {% if block.type == 'accordion' %}
+            <details {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.heading }} <span>+</span></summary>
+              <div class="iamw-rte">{{ block.settings.content }}</div>
+            </details>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_description and product.description != blank %}
+        <div class="iamw-description">
+          <h2>Product details</h2>
+          <div class="iamw-rte">{{ product.description }}</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+#iamw-product-{{ section.id }}{--purple:#42106b;--orange:#ff9418;--ink:#17131f;--muted:#655f69;--line:#e7ddeb;--soft:#f7effb;color:var(--ink);font-family:inherit;padding:48px 24px 70px;background:#fff}
+#iamw-product-{{ section.id }} *{box-sizing:border-box}
+#iamw-product-{{ section.id }} .iamw-product-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:54px;align-items:start}
+#iamw-product-{{ section.id }} .iamw-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#iamw-product-{{ section.id }} .iamw-gallery-item{background:var(--soft);border-radius:14px;overflow:hidden}
+#iamw-product-{{ section.id }} .iamw-gallery-item:first-child{grid-column:1/-1}
+#iamw-product-{{ section.id }} .iamw-product-img{display:block;width:100%;height:auto}
+#iamw-product-{{ section.id }} .iamw-product-info{position:sticky;top:100px}
+#iamw-product-{{ section.id }} .iamw-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--orange);margin-bottom:10px}
+#iamw-product-{{ section.id }} h1{margin:0;color:var(--purple);font-size:clamp(36px,4.5vw,58px);line-height:1;letter-spacing:-.035em}
+#iamw-product-{{ section.id }} h2{color:var(--purple);font-size:26px}
+#iamw-product-{{ section.id }} .iamw-price{font-size:24px;font-weight:900;margin:14px 0}
+#iamw-product-{{ section.id }} .iamw-rte{font-size:16px;line-height:1.65}
+#iamw-product-{{ section.id }} .iamw-muted{color:var(--muted)}
+#iamw-product-{{ section.id }} .iamw-feature-list{display:grid;gap:10px;margin:22px 0}
+#iamw-product-{{ section.id }} .iamw-feature{display:flex;gap:10px;align-items:flex-start}
+#iamw-product-{{ section.id }} .iamw-feature span{color:#208a50;font-weight:900}
+#iamw-product-{{ section.id }} .iamw-label{display:block;font-size:13px;font-weight:800;margin:18px 0 6px}
+#iamw-product-{{ section.id }} .iamw-select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff}
+#iamw-product-{{ section.id }} .iamw-buy{width:100%;min-height:54px;margin-top:16px;border:0;border-radius:999px;background:var(--purple);color:#fff;font:inherit;font-weight:900;cursor:pointer}
+#iamw-product-{{ section.id }} .iamw-buy[disabled]{opacity:.45;cursor:not-allowed}
+#iamw-product-{{ section.id }} .iamw-micro{text-align:center;font-size:12px;color:var(--muted);margin:8px 0 22px}
+#iamw-product-{{ section.id }} .iamw-accordions{border-top:1px solid var(--line)}
+#iamw-product-{{ section.id }} details{border-bottom:1px solid var(--line)}
+#iamw-product-{{ section.id }} summary{display:flex;justify-content:space-between;cursor:pointer;list-style:none;padding:17px 0;font-weight:850;color:var(--purple)}
+#iamw-product-{{ section.id }} summary::-webkit-details-marker{display:none}
+#iamw-product-{{ section.id }} details[open] summary span{transform:rotate(45deg)}
+#iamw-product-{{ section.id }} details .iamw-rte{padding-bottom:17px;color:var(--muted)}
+#iamw-product-{{ section.id }} .iamw-description{margin-top:28px}
+#iamw-product-{{ section.id }} .iamw-placeholder{min-height:420px;display:grid;place-items:center;background:var(--soft);color:var(--muted);border-radius:14px}
+@media(max-width:900px){
+  #iamw-product-{{ section.id }}{padding:30px 16px 54px}
+  #iamw-product-{{ section.id }} .iamw-product-wrap{grid-template-columns:1fr;gap:28px}
+  #iamw-product-{{ section.id }} .iamw-product-info{position:static}
+  #iamw-product-{{ section.id }} .iamw-gallery{grid-template-columns:1fr}
+  #iamw-product-{{ section.id }} .iamw-gallery-item:first-child{grid-column:auto}
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('iamw-product-{{ section.id }}');
+  if (!root || root.dataset.iamwReady === 'true') return;
+  root.dataset.iamwReady = 'true';
+  const select = root.querySelector('select[data-iamw-variant]');
+  if (select) {
+    select.addEventListener('change', () => {
+      const opt = select.options[select.selectedIndex];
+      const price = root.querySelector('[data-iamw-price]');
+      if (price && opt && opt.dataset.price) price.textContent = opt.dataset.price;
+    });
+  }
+  const button = root.querySelector('[data-iamw-buy]');
+  if (button) {
+    button.addEventListener('click', async () => {
+      const field = root.querySelector('[data-iamw-variant]');
+      if (!field || !field.value) return;
+      const original = button.textContent;
+      button.disabled = true;
+      button.textContent = 'GOING TO CHECKOUT…';
+      try {
+        const base = (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
+        const res = await fetch(base + 'cart/add.js', {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({items:[{id:Number(field.value),quantity:1}]})
+        });
+        if (!res.ok) throw new Error('Unable to add item');
+        window.location.assign('/checkout');
+      } catch (e) {
+        button.disabled = false;
+        button.textContent = original;
+        alert('Please try again.');
+      }
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "IAMW Product Page",
+  "settings": [
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"I AM WELL SMART GUMMIES"},
+    {"type":"richtext","id":"subtext","label":"Short description","default":"<p>A mixed-berry food supplement for growing children, designed to complement balanced meals as part of a simple daily routine.</p>"},
+    {"type":"text","id":"button_label","label":"Buy button","default":"BUY NOW"},
+    {"type":"text","id":"microcopy","label":"Button microcopy","default":"Secure checkout • No cart-page detour"},
+    {"type":"checkbox","id":"show_description","label":"Show Shopify product description","default":true}
+  ],
+  "blocks": [
+    {"type":"feature","name":"Feature","settings":[{"type":"text","id":"text","label":"Text","default":"Everyday nutrition support"}]},
+    {"type":"accordion","name":"Accordion","settings":[
+      {"type":"text","id":"heading","label":"Heading","default":"Good to know"},
+      {"type":"richtext","id":"content","label":"Content","default":"<p>Add product information here.</p>"},
+      {"type":"checkbox","id":"open_by_default","label":"Open by default","default":false}
+    ]}
+  ],
+  "presets": [{
+    "name":"IAMW Product Page",
+    "blocks":[
+      {"type":"feature","settings":{"text":"L-Lysine, vitamins and minerals for everyday nutrition support"}},
+      {"type":"feature","settings":{"text":"DHA + Choline for normal brain and nervous system function"}},
+      {"type":"feature","settings":{"text":"Kid-friendly mixed berry gummy format"}},
+      {"type":"feature","settings":{"text":"Designed to fit into a simple daily routine"}},
+      {"type":"accordion","settings":{"heading":"How to use","content":"<p>Follow the directions shown on the product label. Keep the gummies as part of a consistent daily routine alongside balanced meals.</p>","open_by_default":true}},
+      {"type":"accordion","settings":{"heading":"What’s inside","content":"<p>I Am Well Smart Gummies combines selected nutrients including L-Lysine, DHA, Choline, B vitamins, Vitamin C, Vitamin D and Zinc. Refer to the product label for the complete ingredient and nutrition information.</p>"}},
+      {"type":"accordion","settings":{"heading":"Good to know","content":"<p>This is a food supplement and is intended to complement a balanced diet. It is not a substitute for varied meals or professional medical advice.</p>"}}
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+name: Install IAMW standalone sections
+
+on:
+  push:
+    branches:
+      - horizon-rebuild
+    paths:
+      - '.github/iamw-payload/**'
+      - '.github/workflows/install-iamw-standalone.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout horizon-rebuild
+        uses: actions/checkout@v4
+        with:
+          ref: horizon-rebuild
+          fetch-depth: 0
+
+      - name: Install standalone IAMW sections and templates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p sections templates
+          gunzip -c .github/iamw-payload/iamw-picky-landing.liquid.gz > sections/iamw-picky-landing.liquid
+          gunzip -c .github/iamw-payload/iamw-brain-landing.liquid.gz > sections/iamw-brain-landing.liquid
+          cp .github/iamw-payload/iamw-product-page.liquid sections/iamw-product-page.liquid
+          cp .github/iamw-payload/index.json templates/index.json
+          cp .github/iamw-payload/page.pampatalino.json templates/page.pampatalino.json
+          cp .github/iamw-payload/product.json templates/product.json
+
+      - name: Commit installed theme files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "iamw-theme-bot"
+          git config user.email "iamw-theme-bot@users.noreply.github.com"
+          git add sections/iamw-picky-landing.liquid sections/iamw-brain-landing.liquid sections/iamw-product-page.liquid templates/index.json templates/page.pampatalino.json templates/product.json
+          if git diff --cached --quiet; then
+            echo "IAMW standalone files are already installed."
+            exit 0
+          fi
+          git commit -m "build: install standalone IAMW Horizon pages"
+          git push origin HEAD:horizon-rebuild

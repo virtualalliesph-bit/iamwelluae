@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "main": {
+      "type": "iamw-brain-landing",
+      "blocks": {
+        "bundle_1": {
+          "type": "bundle",
+          "settings": {
+            "product": "smart-routine-starter-pack-90-days-brain-support",
+            "badge": "BRAIN SUPPORT ROUTINE",
+            "kicker": "I AM WELL SMART GUMMIES",
+            "title_override": "90 Days of Support for Growing Minds",
+            "description": "<p>A three-month routine designed to complement balanced nutrition with DHA, Choline, B vitamins and selected nutrients for growing children.</p>",
+            "button_label": "BUY NOW",
+            "microcopy": "Direct to checkout • No cart-page detour"
+          }
+        },
+        "proof_1": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_2": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_3": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_4": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The gummy format is easy to fit into our school morning routine, which makes consistency much easier.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We wanted one simple routine instead of several different products, and this is easy for the kids to remember.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient addition to the balanced meals and routines we already focus on at home.","name":"I Am Well parent","meta":"Customer feedback"}},
+        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The mixed berry gummy works well for our family because it feels simple rather than like another chore.","name":"I Am Well parent","meta":"Customer feedback"}}
+      },
+      "block_order": ["bundle_1","proof_1","proof_2","proof_3","proof_4","testimonial_1","testimonial_2","testimonial_3","testimonial_4"]
+    }
+  },
+  "order": ["main"]
+}
