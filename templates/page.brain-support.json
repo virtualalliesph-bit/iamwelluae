@@ -2,344 +2,37 @@
   "sections": {
     "hero": {
       "type": "iamw-brain-hero",
-      "settings": {
-        "hero_image": "shopify://shop_images/6143214667367649919_1.jpg",
-        "background": "#f5ecff",
-        "text_color": "#4b168f",
-        "accent_color": "#ff9a1f",
-        "button_color": "#5a1aa8",
-        "button_text_color": "#ffffff"
-      },
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "icon": "brain",
-            "text": "Supports Focus & Learning"
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "icon": "memory",
-            "text": "Helps Support Memory"
-          }
-        },
-        "benefit_3": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shield",
-            "text": "Everyday Nutrition Support"
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3"
-      ]
+      "settings": {}
     },
     "pains": {
       "type": "iamw-parent-pains",
-      "settings": {
-        "image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"
-      },
-      "blocks": {
-        "pain_1": {
-          "type": "pain",
-          "settings": {
-            "icon": "brain",
-            "heading": "Hard to focus",
-            "description": "<p>Hard to stay focused during schoolwork or homework?</p>"
-          }
-        },
-        "pain_2": {
-          "type": "pain",
-          "settings": {
-            "icon": "utensils",
-            "heading": "Picky eating",
-            "description": "<p>Picky eating makes it harder to get complete nutrition?</p>"
-          }
-        },
-        "pain_3": {
-          "type": "pain",
-          "settings": {
-            "icon": "clock",
-            "heading": "Daily routine",
-            "description": "<p>You want an easy daily routine to support their growing needs?</p>"
-          }
-        }
-      },
-      "block_order": [
-        "pain_1",
-        "pain_2",
-        "pain_3"
-      ]
+      "settings": {}
     },
     "benefits": {
       "type": "iamw-brain-benefits",
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "icon": "brain",
-            "image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp",
-            "heading": "Focus Support",
-            "description": "<p>Helps support attention and focus for school, play and everyday learning.</p>"
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "icon": "book",
-            "image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
-            "heading": "Learning Support",
-            "description": "<p>Nutrients that help fuel a curious mind and love for learning.</p>"
-          }
-        },
-        "benefit_3": {
-          "type": "benefit",
-          "settings": {
-            "icon": "memory",
-            "image": "shopify://shop_images/c53cc782-3534-4c6d-8e21-c9b5465ac4af.webp",
-            "heading": "Memory Support",
-            "description": "<p>Supports memory and everyday information retention.</p>"
-          }
-        },
-        "benefit_4": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shield",
-            "image": "shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp",
-            "heading": "Daily Nutrition",
-            "description": "<p>A convenient way to help fill nutritional gaps for growing kids.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4"
-      ]
+      "settings": {}
     },
     "bundle": {
       "type": "iamw-routine-bundle",
-      "settings": {
-        "image": "shopify://shop_images/6143062380712236434.jpg"
-      },
-      "blocks": {
-        "pill_1": {
-          "type": "pill",
-          "settings": {
-            "label": "Brain Support"
-          }
-        },
-        "pill_2": {
-          "type": "pill",
-          "settings": {
-            "label": "Focus & Learning"
-          }
-        },
-        "pill_3": {
-          "type": "pill",
-          "settings": {
-            "label": "Daily Nutrition"
-          }
-        },
-        "pill_4": {
-          "type": "pill",
-          "settings": {
-            "label": "Great Taste"
-          }
-        },
-        "support_1": {
-          "type": "support",
-          "settings": {
-            "icon": "leaf",
-            "text": "Kid approved taste"
-          }
-        },
-        "support_2": {
-          "type": "support",
-          "settings": {
-            "icon": "heart",
-            "text": "Trusted by parents"
-          }
-        },
-        "support_3": {
-          "type": "support",
-          "settings": {
-            "icon": "star",
-            "text": "Complete daily support"
-          }
-        }
-      },
-      "block_order": [
-        "pill_1",
-        "pill_2",
-        "pill_3",
-        "pill_4",
-        "support_1",
-        "support_2",
-        "support_3"
-      ]
+      "settings": {}
     },
     "offer": {
       "type": "iamw-product-offer-v2",
       "settings": {
-        "product": "smart-routine-starter-pack-90-days-brain-support",
-        "purchase_action": "cart",
-        "button_text": "ADD TO CART"
-      },
-      "blocks": {
-        "trust_1": {
-          "type": "trust",
-          "settings": {
-            "text": "Free Shipping"
-          }
-        },
-        "trust_2": {
-          "type": "trust",
-          "settings": {
-            "text": "Secure Checkout"
-          }
-        },
-        "trust_3": {
-          "type": "trust",
-          "settings": {
-            "text": "Trusted by Parents"
-          }
-        }
-      },
-      "block_order": [
-        "trust_1",
-        "trust_2",
-        "trust_3"
-      ]
+        "product": "smart-routine-starter-pack-90-days-brain-support"
+      }
     },
     "testimonials": {
       "type": "iamw-testimonials-v2",
-      "blocks": {
-        "t1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review": "Replace this sample with an approved IAMWELL customer review.",
-            "parent_name": "Customer name",
-            "child_age": "Child age"
-          }
-        },
-        "t2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review": "Replace this sample with an approved IAMWELL customer review.",
-            "parent_name": "Customer name",
-            "child_age": "Child age"
-          }
-        },
-        "t3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review": "Replace this sample with an approved IAMWELL customer review.",
-            "parent_name": "Customer name",
-            "child_age": "Child age"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3"
-      ]
+      "settings": {}
     },
     "comparison": {
       "type": "iamw-comparison-v2",
-      "blocks": {
-        "r1": {
-          "type": "row",
-          "settings": {
-            "feature": "Supports focus and learning",
-            "iamwell": true,
-            "other": false
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "feature": "Helps support memory and brain development",
-            "iamwell": true,
-            "other": false
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "feature": "Complete daily nutrition in one routine",
-            "iamwell": true,
-            "other": false
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "feature": "Great tasting and kid approved",
-            "iamwell": true,
-            "other": false
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "feature": "Designed with picky eaters in mind",
-            "iamwell": true,
-            "other": false
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5"
-      ]
+      "settings": {}
     },
     "final": {
       "type": "iamw-final-cta",
-      "settings": {
-        "image": "shopify://shop_images/6143214667367649919_1.jpg"
-      },
-      "blocks": {
-        "b1": {
-          "type": "benefit",
-          "settings": {
-            "icon": "brain",
-            "text": "Brain support for growing kids"
-          }
-        },
-        "b2": {
-          "type": "benefit",
-          "settings": {
-            "icon": "star",
-            "text": "Great tasting and kid approved"
-          }
-        },
-        "b3": {
-          "type": "benefit",
-          "settings": {
-            "icon": "heart",
-            "text": "Trusted by parents"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ]
+      "settings": {}
     }
   },
   "order": [
