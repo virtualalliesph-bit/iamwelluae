@@ -1,347 +1,227 @@
-
 {{ 'iamw-brain-landing.css' | asset_url | stylesheet_tag }}
-<section class="iamw-brain-section iamw-routine-bundle" style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;{% if section.settings.button_color != blank %}--iamw-button:{{ section.settings.button_color }};{% endif %}{% if section.settings.button_text_color != blank %}--iamw-button-text:{{ section.settings.button_text_color }};{% endif %}" >
+
+<section
+  id="iamw-routine-{{ section.id }}"
+  class="iamw-brain-section iamw-routine-tabs"
+  style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;--iamw-button:{{ section.settings.button_color }};--iamw-button-text:{{ section.settings.button_text_color }};"
+>
   <div class="iamw-brain-wrap">
-    <div class="iamw-center" style="text-align:{{ section.settings.text_alignment }}">
-      {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
-      {% if section.settings.heading != blank %}<h2 class="iamw-heading">{{ section.settings.heading }}</h2>{% endif %}
-      {% assign pills = section.blocks | where: 'type', 'pill' %}
-      {% if pills.size > 0 %}
-        <div class="iamw-pill-row">
-          {% for block in pills %}
-            {% if block.settings.label != blank %}<span class="iamw-pill" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>{% endif %}
-          {% endfor %}
-        </div>
+    <div class="iamw-routine-tabs__intro">
+      {% if section.settings.eyebrow != blank %}
+        <div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="iamw-heading">{{ section.settings.heading }}</h2>
       {% endif %}
     </div>
-    <div class="iamw-routine-bundle__panel iamw-brain-card">
-      <div class="iamw-routine-bundle__copy">
-        {% if section.settings.card_heading != blank %}<h3>{{ section.settings.card_heading }}</h3>{% endif %}
-        {% if section.settings.description != blank %}<div class="iamw-copy iamw-muted">{{ section.settings.description }}</div>{% endif %}
-        {% assign supports = section.blocks | where: 'type', 'support' %}
-        {% if supports.size > 0 %}
-          <div class="iamw-routine-bundle__supports">
-            {% for block in supports %}
-              {% if block.settings.text != blank %}
-                <div class="iamw-routine-bundle__support" {{ block.shopify_attributes }}>
-                  <div class="iamw-iconbox">{% render 'iamw-icon', name: block.settings.icon, color: section.settings.text_color %}</div>
-                  <span>{{ block.settings.text }}</span>
-                </div>
+
+    {% assign tabs = section.blocks | where: 'type', 'tab' %}
+
+    {% if tabs.size > 0 %}
+      <div class="iamw-routine-tabs__nav" role="tablist" aria-label="Routine support topics">
+        {% for block in tabs %}
+          {% if block.settings.label != blank %}
+            <button
+              type="button"
+              class="iamw-routine-tabs__tab{% if forloop.first %} is-active{% endif %}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="iamw-panel-{{ section.id }}-{{ block.id }}"
+              data-routine-tab="{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="iamw-routine-tabs__panels">
+        {% for block in tabs %}
+          <div
+            id="iamw-panel-{{ section.id }}-{{ block.id }}"
+            class="iamw-routine-tabs__panel iamw-brain-card{% if forloop.first %} is-active{% endif %}"
+            role="tabpanel"
+            data-routine-panel="{{ block.id }}"
+            {% unless forloop.first %}hidden{% endunless %}
+          >
+            <div class="iamw-routine-tabs__copy">
+              {% if block.settings.heading != blank %}
+                <h3>{{ block.settings.heading }}</h3>
               {% endif %}
-            {% endfor %}
+
+              {% if block.settings.description != blank %}
+                <div class="iamw-copy iamw-muted">{{ block.settings.description }}</div>
+              {% endif %}
+
+              <div class="iamw-routine-tabs__benefits">
+                {% if block.settings.benefit_1_text != blank %}
+                  <div class="iamw-routine-tabs__benefit">
+                    <div class="iamw-iconbox">{% render 'iamw-icon', name: block.settings.benefit_1_icon, color: section.settings.text_color %}</div>
+                    <span>{{ block.settings.benefit_1_text }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.benefit_2_text != blank %}
+                  <div class="iamw-routine-tabs__benefit">
+                    <div class="iamw-iconbox">{% render 'iamw-icon', name: block.settings.benefit_2_icon, color: section.settings.text_color %}</div>
+                    <span>{{ block.settings.benefit_2_text }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.benefit_3_text != blank %}
+                  <div class="iamw-routine-tabs__benefit">
+                    <div class="iamw-iconbox">{% render 'iamw-icon', name: block.settings.benefit_3_icon, color: section.settings.text_color %}</div>
+                    <span>{{ block.settings.benefit_3_text }}</span>
+                  </div>
+                {% endif %}
+              </div>
+
+              {% if section.settings.button_text != blank %}
+                <a class="iamw-btn{% if section.settings.button_style == 'outline' %} iamw-btn--outline{% endif %}" href="{{ section.settings.button_link | default: '#brain-product-offer' }}">
+                  {{ section.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+
+            <div class="iamw-routine-tabs__image">
+              {% assign tab_image = block.settings.image | default: section.settings.image %}
+              {% if tab_image != blank %}
+                {{ tab_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,720,900,1200', sizes: '(min-width: 800px) 42vw, 100vw', alt: block.settings.heading }}
+              {% else %}
+                <div class="iamw-placeholder">Choose an image for this tab</div>
+              {% endif %}
+            </div>
           </div>
-        {% endif %}
-        {% if section.settings.button_text != blank %}
-          <a class="iamw-btn{% if section.settings.button_style == 'outline' %} iamw-btn--outline{% endif %}" href="{{ section.settings.button_link | default: '#brain-product-offer' }}">{{ section.settings.button_text }}</a>
-        {% endif %}
+        {% endfor %}
       </div>
-      <div class="iamw-routine-bundle__image">
-        {% if section.settings.image != blank %}
-          {{ section.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '600,900,1200,1500', sizes: '(min-width:768px) 50vw, 100vw', alt: section.settings.image_alt }}
-        {% else %}
-          <div class="iamw-placeholder">Choose the Smart Routine bundle image</div>
-        {% endif %}
+    {% else %}
+      <div class="iamw-routine-tabs__panel iamw-brain-card is-active">
+        <div class="iamw-routine-tabs__copy">
+          <h3>{{ section.settings.fallback_heading }}</h3>
+          <div class="iamw-copy iamw-muted">{{ section.settings.fallback_description }}</div>
+          {% if section.settings.button_text != blank %}
+            <a class="iamw-btn" href="{{ section.settings.button_link | default: '#brain-product-offer' }}">{{ section.settings.button_text }}</a>
+          {% endif %}
+        </div>
+        <div class="iamw-routine-tabs__image">
+          {% if section.settings.image != blank %}
+            {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480,720,900,1200', sizes: '(min-width: 800px) 42vw, 100vw', alt: section.settings.fallback_heading }}
+          {% else %}
+            <div class="iamw-placeholder">Choose a Smart Routine image</div>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 </section>
+
 <style>
-#shopify-section-{{ section.id }} .iamw-center{max-width:840px;margin:0 auto 24px}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__panel{display:grid;grid-template-columns:1fr}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__copy{padding:28px}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__copy h3{font-size:34px;line-height:1.02;margin:0 0 12px;color:var(--iamw-text)}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__supports{display:grid;gap:12px;margin-top:22px}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__support{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__copy .iamw-btn{margin-top:22px}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__image{min-height:300px;background:#efe7f6}
-#shopify-section-{{ section.id }} .iamw-routine-bundle__image img{display:block;width:100%;height:100%;min-height:300px;object-fit:cover}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__intro{max-width:760px;margin:0 auto 18px;text-align:center}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:0 auto 18px}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__tab{appearance:none;border:1px solid rgba(75,22,143,.16);background:#fff;color:var(--iamw-text);border-radius:999px;padding:9px 15px;font:inherit;font-size:12px;font-weight:800;line-height:1.2;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__tab:hover,#iamw-routine-{{ section.id }} .iamw-routine-tabs__tab.is-active{background:var(--iamw-text);color:#fff;border-color:var(--iamw-text)}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__panel{display:grid;grid-template-columns:1fr;overflow:hidden;max-width:1040px;margin:0 auto}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__panel[hidden]{display:none}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__copy{padding:26px}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__copy h3{font-size:30px;line-height:1.05;margin:0 0 10px;color:var(--iamw-text)}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__benefits{display:grid;gap:9px;margin-top:18px}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__benefit{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;line-height:1.35}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__benefit .iamw-iconbox{flex:0 0 auto}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__copy .iamw-btn{margin-top:18px}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__image{background:#efe7f6;min-height:240px}
+#iamw-routine-{{ section.id }} .iamw-routine-tabs__image img{display:block;width:100%;height:100%;min-height:240px;max-height:330px;object-fit:cover}
 @media(min-width:800px){
-  #shopify-section-{{ section.id }} .iamw-routine-bundle__panel{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
-  #shopify-section-{{ section.id }} .iamw-routine-bundle__copy{padding:44px}
-  #shopify-section-{{ section.id }} .iamw-routine-bundle__supports{grid-template-columns:repeat(3,minmax(0,1fr))}
-  #shopify-section-{{ section.id }} .iamw-routine-bundle__image img{min-height:430px}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__panel{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:stretch}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__copy{padding:34px 38px}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__copy h3{font-size:32px}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__image{min-height:310px}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__image img{min-height:310px;max-height:340px}
+}
+@media(max-width:799px){
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__nav::-webkit-scrollbar{display:none}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__tab{flex:0 0 auto}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__copy{order:1}
+  #iamw-routine-{{ section.id }} .iamw-routine-tabs__image{order:2}
 }
 </style>
 
+<script>
+(function(){
+  var root = document.getElementById('iamw-routine-{{ section.id }}');
+  if (!root || root.getAttribute('data-tabs-ready') === 'true') return;
+  root.setAttribute('data-tabs-ready','true');
+  var buttons = root.querySelectorAll('[data-routine-tab]');
+  var panels = root.querySelectorAll('[data-routine-panel]');
+  buttons.forEach(function(button){
+    button.addEventListener('click', function(){
+      var target = button.getAttribute('data-routine-tab');
+      buttons.forEach(function(item){
+        var active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      panels.forEach(function(panel){
+        var active = panel.getAttribute('data-routine-panel') === target;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    });
+  });
+})();
+</script>
+
 {% schema %}
 {
-  "name": "IAMW Routine Bundle",
+  "name": "IAMW Routine Tabs",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "SMART NUTRITION. BRIGHTER DAYS."
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Smart Routine Bundle for Brain Support"
-    },
-    {
-      "type": "text",
-      "id": "card_heading",
-      "label": "Card heading",
-      "default": "A simple daily routine for brighter tomorrows"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>A complete, great tasting bundle with key nutrients to help support focus, learning, memory and everyday brain development.</p>"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Bundle image"
-    },
-    {
-      "type": "text",
-      "id": "image_alt",
-      "label": "Image alt text",
-      "default": "IAMWELL Smart Routine bundle"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button text",
-      "default": "SHOP THE BUNDLE"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#f3e9ff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#4b168f"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#ff9a1f"
-    },
-    {
-      "type": "range",
-      "id": "heading_size_desktop",
-      "label": "Heading size desktop",
-      "min": 28,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "default": 52
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "label": "Heading size mobile",
-      "min": 24,
-      "max": 52,
-      "step": 2,
-      "unit": "px",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "content_width",
-      "label": "Content width",
-      "min": 900,
-      "max": 1400,
-      "step": 20,
-      "unit": "px",
-      "default": 1180
-    },
-    {
-      "type": "range",
-      "id": "padding_desktop",
-      "label": "Padding desktop",
-      "min": 20,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 56
-    },
-    {
-      "type": "range",
-      "id": "padding_mobile",
-      "label": "Padding mobile",
-      "min": 16,
-      "max": 72,
-      "step": 4,
-      "unit": "px",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        {
-          "value": "solid",
-          "label": "Solid"
-        },
-        {
-          "value": "outline",
-          "label": "Outline"
-        }
-      ],
-      "default": "solid"
-    },
-    {
-      "type": "color",
-      "id": "button_color",
-      "label": "Button color",
-      "default": "#5a1aa8"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button text color",
-      "default": "#ffffff"
-    }
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"SMART NUTRITION. BRIGHTER DAYS."},
+    {"type":"text","id":"heading","label":"Heading","default":"Smart Routine Bundle for Brain Support"},
+    {"type":"text","id":"fallback_heading","label":"Fallback heading","default":"A simple daily routine for brighter tomorrows"},
+    {"type":"richtext","id":"fallback_description","label":"Fallback text","default":"<p>A simple daily routine with selected nutrients to complement balanced meals and support growing minds.</p>"},
+    {"type":"image_picker","id":"image","label":"Fallback image"},
+    {"type":"text","id":"button_text","label":"Button text","default":"VIEW THE 90-DAY ROUTINE"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"color","id":"background","label":"Background","default":"#f3e9ff"},
+    {"type":"color","id":"text_color","label":"Text color","default":"#4b168f"},
+    {"type":"color","id":"accent_color","label":"Accent color","default":"#ff9a1f"},
+    {"type":"range","id":"heading_size_desktop","label":"Heading desktop","min":28,"max":60,"step":2,"unit":"px","default":44},
+    {"type":"range","id":"heading_size_mobile","label":"Heading mobile","min":24,"max":42,"step":2,"unit":"px","default":32},
+    {"type":"range","id":"content_width","label":"Content width","min":900,"max":1200,"step":20,"unit":"px","default":1040},
+    {"type":"range","id":"padding_desktop","label":"Padding desktop","min":24,"max":72,"step":4,"unit":"px","default":40},
+    {"type":"range","id":"padding_mobile","label":"Padding mobile","min":20,"max":56,"step":4,"unit":"px","default":28},
+    {"type":"range","id":"border_radius","label":"Border radius","min":0,"max":32,"step":2,"unit":"px","default":20},
+    {"type":"select","id":"button_style","label":"Button style","options":[{"value":"solid","label":"Solid"},{"value":"outline","label":"Outline"}],"default":"solid"},
+    {"type":"color","id":"button_color","label":"Button color","default":"#5a1aa8"},
+    {"type":"color","id":"button_text_color","label":"Button text","default":"#ffffff"}
   ],
   "blocks": [
     {
-      "type": "pill",
-      "name": "Pill",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Brain Support"
-        }
-      ]
-    },
-    {
-      "type": "support",
-      "name": "Support item",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            {
-              "value": "leaf",
-              "label": "Leaf"
-            },
-            {
-              "value": "heart",
-              "label": "Heart"
-            },
-            {
-              "value": "star",
-              "label": "Star"
-            },
-            {
-              "value": "brain",
-              "label": "Brain"
-            },
-            {
-              "value": "shield",
-              "label": "Shield"
-            }
-          ],
-          "default": "leaf"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Kid approved taste"
-        }
+      "type":"tab",
+      "name":"Routine tab",
+      "limit":4,
+      "settings":[
+        {"type":"text","id":"label","label":"Tab label","default":"Brain Support"},
+        {"type":"text","id":"heading","label":"Heading","default":"Daily nutrition for growing minds"},
+        {"type":"richtext","id":"description","label":"Description","default":"<p>Selected nutrients to complement balanced meals and support normal brain and nervous system function.</p>"},
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"select","id":"benefit_1_icon","label":"Benefit 1 icon","options":[{"value":"brain","label":"Brain"},{"value":"book","label":"Book"},{"value":"memory","label":"Memory"},{"value":"shield","label":"Shield"},{"value":"star","label":"Star"},{"value":"heart","label":"Heart"},{"value":"leaf","label":"Leaf"}],"default":"brain"},
+        {"type":"text","id":"benefit_1_text","label":"Benefit 1","default":"Supports normal brain development"},
+        {"type":"select","id":"benefit_2_icon","label":"Benefit 2 icon","options":[{"value":"brain","label":"Brain"},{"value":"book","label":"Book"},{"value":"memory","label":"Memory"},{"value":"shield","label":"Shield"},{"value":"star","label":"Star"},{"value":"heart","label":"Heart"},{"value":"leaf","label":"Leaf"}],"default":"memory"},
+        {"type":"text","id":"benefit_2_text","label":"Benefit 2","default":"Supports brain and nervous system function"},
+        {"type":"select","id":"benefit_3_icon","label":"Benefit 3 icon","options":[{"value":"brain","label":"Brain"},{"value":"book","label":"Book"},{"value":"memory","label":"Memory"},{"value":"shield","label":"Shield"},{"value":"star","label":"Star"},{"value":"heart","label":"Heart"},{"value":"leaf","label":"Leaf"}],"default":"shield"},
+        {"type":"text","id":"benefit_3_text","label":"Benefit 3","default":"Fits a simple daily nutrition routine"}
       ]
     }
   ],
-  "max_blocks": 10,
-  "presets": [
+  "max_blocks":4,
+  "presets":[
     {
-      "name": "IAMW Routine Bundle",
-      "blocks": [
-        {
-          "type": "pill",
-          "settings": {
-            "label": "Brain Support"
-          }
-        },
-        {
-          "type": "pill",
-          "settings": {
-            "label": "Focus & Learning"
-          }
-        },
-        {
-          "type": "pill",
-          "settings": {
-            "label": "Daily Nutrition"
-          }
-        },
-        {
-          "type": "pill",
-          "settings": {
-            "label": "Great Taste"
-          }
-        },
-        {
-          "type": "support",
-          "settings": {
-            "icon": "leaf",
-            "text": "Kid approved taste"
-          }
-        },
-        {
-          "type": "support",
-          "settings": {
-            "icon": "heart",
-            "text": "Trusted by parents"
-          }
-        },
-        {
-          "type": "support",
-          "settings": {
-            "icon": "star",
-            "text": "Complete daily support"
-          }
-        }
+      "name":"IAMW Routine Tabs",
+      "blocks":[
+        {"type":"tab","settings":{"label":"Brain Support","heading":"Daily nutrition for growing minds"}},
+        {"type":"tab","settings":{"label":"Focus & Learning","heading":"Support for busy school days"}},
+        {"type":"tab","settings":{"label":"Daily Nutrition","heading":"Help fill everyday nutrition gaps"}},
+        {"type":"tab","settings":{"label":"Great Taste","heading":"An easy routine kids can enjoy"}}
       ]
     }
   ]
