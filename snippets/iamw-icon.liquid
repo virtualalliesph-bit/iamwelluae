@@ -1,0 +1,29 @@
+
+{% liquid
+  assign icon_name = name | default: 'star'
+  assign stroke = color | default: 'currentColor'
+%}
+<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="{{ stroke }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  {% case icon_name %}
+    {% when 'brain' %}
+      <path d="M9 4.5A3.5 3.5 0 0 0 5.7 9 3.7 3.7 0 0 0 6 16a3.2 3.2 0 0 0 3 3.5c1.3 0 2.4-.7 3-1.8V6.4A3.2 3.2 0 0 0 9 4.5Z"/>
+      <path d="M15 4.5A3.5 3.5 0 0 1 18.3 9a3.7 3.7 0 0 1-.3 7 3.2 3.2 0 0 1-3 3.5c-1.3 0-2.4-.7-3-1.8V6.4A3.2 3.2 0 0 1 15 4.5Z"/>
+      <path d="M8 9.5c1.2.1 2 .7 2.5 1.8M16 9.5c-1.2.1-2 .7-2.5 1.8M8.5 15c.9 0 1.6.4 2 1.1M15.5 15c-.9 0-1.6.4-2 1.1"/>
+    {% when 'book' %}
+      <path d="M4 5.5c2.7-.8 5.2-.4 8 1.4v12c-2.8-1.8-5.3-2.2-8-1.4v-12Z"/><path d="M20 5.5c-2.7-.8-5.2-.4-8 1.4v12c2.8-1.8 5.3-2.2 8-1.4v-12Z"/>
+    {% when 'shield' %}
+      <path d="M12 3 5.5 5.4v5.1c0 4.4 2.6 8 6.5 10 3.9-2 6.5-5.6 6.5-10V5.4L12 3Z"/>
+    {% when 'heart' %}
+      <path d="M20.5 8.8c0 5.2-8.5 10.2-8.5 10.2S3.5 14 3.5 8.8A4.3 4.3 0 0 1 12 7.7a4.3 4.3 0 0 1 8.5 1.1Z"/>
+    {% when 'clock' %}
+      <circle cx="12" cy="12" r="8.5"/><path d="M12 7.2v5.2l3.6 2"/>
+    {% when 'utensils' %}
+      <path d="M6.5 3v7M4 3v4.5c0 1.5 1.1 2.5 2.5 2.5S9 9 9 7.5V3M6.5 10v11M15 3v18M15 3c3.4 1.3 4.4 5.2 1.6 8H15"/>
+    {% when 'memory' %}
+      <path d="M8 8.2A4 4 0 1 1 14.8 11 3.4 3.4 0 0 1 13 17.4h-2.2"/><path d="m8.2 13.2-2.2 2.2 2.2 2.2"/>
+    {% when 'leaf' %}
+      <path d="M19.5 4.5C12 4.7 6.1 8.3 5 15.5c3.5 1.1 6.3.4 8.4-1.4 3-2.6 4.1-6.4 6.1-9.6Z"/><path d="M5 19c1.8-4.5 5-7.7 9.3-9.8"/>
+    {% else %}
+      <path d="m12 3 2.2 4.6 5.1.7-3.7 3.6.9 5.1-4.5-2.4L7.5 17l.9-5.1-3.7-3.6 5.1-.7L12 3Z"/>
+  {% endcase %}
+</svg>

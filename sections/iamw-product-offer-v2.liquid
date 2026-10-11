@@ -1,0 +1,366 @@
+
+{{ 'iamw-brain-landing.css' | asset_url | stylesheet_tag }}
+<section id="brain-product-offer" class="iamw-brain-section iamw-product-offer" style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;{% if section.settings.button_color != blank %}--iamw-button:{{ section.settings.button_color }};{% endif %}{% if section.settings.button_text_color != blank %}--iamw-button-text:{{ section.settings.button_text_color }};{% endif %}" >
+  {% assign p = section.settings.product %}
+  {% if p != blank %}
+    {% assign selected_variant = p.selected_or_first_available_variant %}
+  {% endif %}
+  <div class="iamw-brain-wrap">
+    <div class="iamw-product-offer__panel iamw-brain-card">
+      <div class="iamw-product-offer__content">
+        {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+        <h2 class="iamw-heading">
+          {% if section.settings.custom_heading != blank %}
+            {{ section.settings.custom_heading }}
+          {% elsif p != blank %}
+            {{ p.title }}
+          {% else %}
+            90 Days of Brain Support
+          {% endif %}
+        </h2>
+        {% if p != blank %}
+          <div class="iamw-product-offer__price">
+            <span class="iamw-price" data-iamw-price>{{ selected_variant.price | money }}</span>
+            {% if selected_variant.compare_at_price > selected_variant.price %}
+              <span class="iamw-compare" data-iamw-compare>{{ selected_variant.compare_at_price | money }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if section.settings.description != blank %}<div class="iamw-copy iamw-muted">{{ section.settings.description }}</div>{% endif %}
+        {% if p != blank %}
+          {% if p.variants.size > 1 %}
+            <label class="iamw-product-offer__label" for="iamw-offer-variant-{{ section.id }}">Choose option</label>
+            <select class="iamw-select" id="iamw-offer-variant-{{ section.id }}" data-iamw-variant>
+              {% for variant in p.variants %}
+                <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" data-compare="{{ variant.compare_at_price | money | escape }}" {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" data-iamw-variant value="{{ selected_variant.id }}">
+          {% endif %}
+          <button type="button" class="iamw-btn{% if section.settings.button_style == 'outline' %} iamw-btn--outline{% endif %} iamw-product-offer__buy" data-iamw-buy data-action="{{ section.settings.purchase_action }}" {% unless selected_variant.available %}disabled{% endunless %}>
+            {{ section.settings.button_text }}
+          </button>
+        {% else %}
+          <div class="iamw-placeholder">Select a Shopify product in this section.</div>
+        {% endif %}
+        <div class="iamw-proofline">
+          {% for block in section.blocks %}
+            {% if block.settings.text != blank %}<span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="iamw-product-offer__media">
+        {% if section.settings.custom_image != blank %}
+          {{ section.settings.custom_image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '600,900,1200,1500', sizes: '(min-width:768px) 50vw, 100vw', alt: section.settings.image_alt }}
+        {% elsif p != blank and p.featured_image %}
+          {{ p.featured_image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '600,900,1200,1500', sizes: '(min-width:768px) 50vw, 100vw', alt: p.title }}
+        {% else %}
+          <div class="iamw-placeholder">Choose a product or custom image</div>
+        {% endif %}
+        {% if section.settings.badge != blank %}<div class="iamw-product-offer__badge">{{ section.settings.badge }}</div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+#shopify-section-{{ section.id }} .iamw-product-offer__panel{display:grid;grid-template-columns:1fr}
+#shopify-section-{{ section.id }} .iamw-product-offer__content{padding:28px;text-align:{{ section.settings.text_alignment }}}
+#shopify-section-{{ section.id }} .iamw-product-offer__price{margin:14px 0}
+#shopify-section-{{ section.id }} .iamw-product-offer__label{display:block;margin:18px 0 7px;font-size:13px;font-weight:800;text-align:left}
+#shopify-section-{{ section.id }} .iamw-product-offer__buy{width:100%;margin-top:14px}
+#shopify-section-{{ section.id }} .iamw-product-offer__media{position:relative;min-height:320px;background:#efe7f6;overflow:hidden}
+#shopify-section-{{ section.id }} .iamw-product-offer__media img{display:block;width:100%;height:100%;min-height:320px;object-fit:cover}
+#shopify-section-{{ section.id }} .iamw-product-offer__badge{position:absolute;top:18px;right:18px;width:104px;height:104px;border-radius:50%;background:#5a1aa8;color:#fff;display:grid;place-items:center;text-align:center;padding:12px;font-size:13px;font-weight:900}
+#shopify-section-{{ section.id }} .iamw-product-offer__buy[disabled]{opacity:.45;cursor:not-allowed}
+@media(min-width:800px){
+  #shopify-section-{{ section.id }} .iamw-product-offer__panel{grid-template-columns:minmax(0,1fr) minmax(0,.9fr)}
+  #shopify-section-{{ section.id }} .iamw-product-offer__content{padding:44px}
+  #shopify-section-{{ section.id }} .iamw-product-offer__media img{min-height:460px}
+}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('shopify-section-{{ section.id }}');
+  if (!root || root.dataset.iamwOfferReady === 'true') return;
+  root.dataset.iamwOfferReady = 'true';
+  const select = root.querySelector('select[data-iamw-variant]');
+  if (select) {
+    select.addEventListener('change', () => {
+      const opt = select.options[select.selectedIndex];
+      const price = root.querySelector('[data-iamw-price]');
+      const compare = root.querySelector('[data-iamw-compare]');
+      if (price && opt.dataset.price) price.textContent = opt.dataset.price;
+      if (compare) {
+        compare.textContent = opt.dataset.compare || '';
+        compare.style.display = opt.dataset.compare && opt.dataset.compare !== opt.dataset.price ? '' : 'none';
+      }
+    });
+  }
+  const button = root.querySelector('[data-iamw-buy]');
+  if (button) {
+    button.addEventListener('click', async () => {
+      const field = root.querySelector('[data-iamw-variant]');
+      if (!field || !field.value) return;
+      const original = button.textContent;
+      button.disabled = true;
+      button.textContent = '{{ section.settings.loading_text | escape }}';
+      try {
+        const base = (window.Shopify && Shopify.routes && Shopify.routes.root) ? Shopify.routes.root : '/';
+        const res = await fetch(base + 'cart/add.js', {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({items:[{id:Number(field.value),quantity:1}]})
+        });
+        if (!res.ok) throw new Error('Unable to add item');
+        window.location.assign(button.dataset.action === 'checkout' ? '/checkout' : '/cart');
+      } catch (e) {
+        button.disabled = false;
+        button.textContent = original;
+        alert('Please try again.');
+      }
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "IAMW Product Offer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "DAILY HABITS. BIGGER POSSIBILITIES."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "custom_heading",
+      "label": "Custom heading",
+      "default": "90 Days of Brain Support"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>A 3 month supply to help support your child’s focus, learning, memory and everyday brain development as part of a healthy lifestyle.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image",
+      "label": "Optional custom image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Custom image alt text",
+      "default": "Child enjoying an IAMWELL daily routine"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "GOOD FOR 90 DAYS"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "text",
+      "id": "loading_text",
+      "label": "Loading text",
+      "default": "ADDING…"
+    },
+    {
+      "type": "select",
+      "id": "purchase_action",
+      "label": "After click",
+      "options": [
+        {
+          "value": "cart",
+          "label": "Add to cart and open cart"
+        },
+        {
+          "value": "checkout",
+          "label": "Go directly to checkout"
+        }
+      ],
+      "default": "cart"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f4ebff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#4b168f"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff9a1f"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size desktop",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 24,
+      "max": 52,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 900,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1180
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Padding desktop",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Padding mobile",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#5a1aa8"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "IAMW Product Offer",
+      "blocks": [
+        {
+          "type": "trust",
+          "settings": {
+            "text": "Free Shipping"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "text": "Secure Checkout"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "text": "Trusted by Parents"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

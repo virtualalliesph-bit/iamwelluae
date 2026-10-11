@@ -1,0 +1,270 @@
+
+{{ 'iamw-brain-landing.css' | asset_url | stylesheet_tag }}
+<section class="iamw-brain-section iamw-brain-benefits" style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;{% if section.settings.button_color != blank %}--iamw-button:{{ section.settings.button_color }};{% endif %}{% if section.settings.button_text_color != blank %}--iamw-button-text:{{ section.settings.button_text_color }};{% endif %}" >
+  <div class="iamw-brain-wrap">
+    <div class="iamw-center" style="text-align:{{ section.settings.text_alignment }}">
+      {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+      {% if section.settings.heading != blank %}<h2 class="iamw-heading">{{ section.settings.heading }}</h2>{% endif %}
+    </div>
+    <div class="iamw-brain-benefits__grid">
+      {% for block in section.blocks %}
+        {% if block.settings.heading != blank or block.settings.description != blank or block.settings.image != blank %}
+          <article class="iamw-brain-benefits__card iamw-brain-card" {{ block.shopify_attributes }}>
+            <div class="iamw-brain-benefits__copy">
+              <div class="iamw-iconbox">
+                {% if block.settings.icon_image != blank %}
+                  {{ block.settings.icon_image | image_url: width: 80 | image_tag: loading: 'lazy', widths: '40,60,80', alt: block.settings.icon_alt }}
+                {% else %}
+                  {% render 'iamw-icon', name: block.settings.icon, color: section.settings.text_color %}
+                {% endif %}
+              </div>
+              <h3>{{ block.settings.heading }}</h3>
+              <div class="iamw-copy iamw-muted">{{ block.settings.description }}</div>
+            </div>
+            {% if block.settings.image != blank %}
+              <div class="iamw-brain-benefits__image">
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,520,720,900', sizes: '(min-width:900px) 25vw, 50vw', alt: block.settings.image_alt }}
+              </div>
+            {% endif %}
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<style>
+#shopify-section-{{ section.id }} .iamw-center{max-width:780px;margin:0 auto 26px}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__grid{display:grid;grid-template-columns:1fr;gap:14px}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__card{display:flex;flex-direction:column}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__copy{padding:22px;text-align:center}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__copy .iamw-iconbox{margin:0 auto 12px}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__copy .iamw-iconbox img{width:24px;height:24px;object-fit:contain}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__copy h3{margin:0 0 8px;font-size:20px;color:var(--iamw-text)}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__image{margin-top:auto;aspect-ratio:4/3;overflow:hidden}
+#shopify-section-{{ section.id }} .iamw-brain-benefits__image img{display:block;width:100%;height:100%;object-fit:cover}
+@media(min-width:640px){#shopify-section-{{ section.id }} .iamw-brain-benefits__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:980px){#shopify-section-{{ section.id }} .iamw-brain-benefits__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+
+{% schema %}
+{
+  "name": "IAMW Brain Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "MORE THAN JUST NUTRITION."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Brain support for today and tomorrow."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f4ebff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#4b168f"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff9a1f"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size desktop",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 24,
+      "max": 52,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 900,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1180
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Padding desktop",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Padding mobile",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Fallback icon",
+          "options": [
+            {
+              "value": "brain",
+              "label": "Brain"
+            },
+            {
+              "value": "book",
+              "label": "Book"
+            },
+            {
+              "value": "memory",
+              "label": "Memory"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ],
+          "default": "brain"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon"
+        },
+        {
+          "type": "text",
+          "id": "icon_alt",
+          "label": "Icon alt text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Focus Support"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Helps support attention and focus for school, play and everyday learning.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "IAMW Brain Benefits",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "brain",
+            "heading": "Focus Support",
+            "description": "<p>Helps support attention and focus for school, play and everyday learning.</p>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "book",
+            "heading": "Learning Support",
+            "description": "<p>Nutrients that help fuel a curious mind and love for learning.</p>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "memory",
+            "heading": "Memory Support",
+            "description": "<p>Supports memory and everyday information retention.</p>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "heading": "Daily Nutrition",
+            "description": "<p>A convenient way to help fill nutritional gaps for growing kids.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

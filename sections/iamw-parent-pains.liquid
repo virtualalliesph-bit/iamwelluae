@@ -1,0 +1,281 @@
+
+{{ 'iamw-brain-landing.css' | asset_url | stylesheet_tag }}
+<section class="iamw-brain-section iamw-pains" style="--iamw-bg:{{ section.settings.background }};--iamw-text:{{ section.settings.text_color }};--iamw-accent:{{ section.settings.accent_color }};--iamw-radius:{{ section.settings.border_radius }}px;--iamw-content:{{ section.settings.content_width }}px;--iamw-pad-desktop:{{ section.settings.padding_desktop }}px;--iamw-pad-mobile:{{ section.settings.padding_mobile }}px;--iamw-heading-desktop:{{ section.settings.heading_size_desktop }}px;--iamw-heading-mobile:{{ section.settings.heading_size_mobile }}px;{% if section.settings.button_color != blank %}--iamw-button:{{ section.settings.button_color }};{% endif %}{% if section.settings.button_text_color != blank %}--iamw-button-text:{{ section.settings.button_text_color }};{% endif %}" >
+  <div class="iamw-brain-wrap">
+    <div class="iamw-pains__panel iamw-brain-card">
+      <div class="iamw-pains__image{% if section.settings.image_position == 'right' %} is-right{% endif %}">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480,720,960,1200,1400', sizes: '(min-width:768px) 46vw, 100vw', alt: section.settings.image_alt }}
+        {% else %}
+          <div class="iamw-placeholder">Choose a parent and child image</div>
+        {% endif %}
+      </div>
+      <div class="iamw-pains__content">
+        {% if section.settings.eyebrow != blank %}<div class="iamw-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+        {% if section.settings.heading != blank %}<h2 class="iamw-heading">{{ section.settings.heading }}</h2>{% endif %}
+        <div class="iamw-pains__cards">
+          {% for block in section.blocks %}
+            {% if block.settings.heading != blank or block.settings.description != blank %}
+              <article class="iamw-pains__card" {{ block.shopify_attributes }}>
+                <div class="iamw-iconbox">
+                  {% if block.settings.icon_image != blank %}
+                    {{ block.settings.icon_image | image_url: width: 80 | image_tag: loading: 'lazy', widths: '40,60,80', alt: block.settings.icon_alt }}
+                  {% else %}
+                    {% render 'iamw-icon', name: block.settings.icon, color: section.settings.text_color %}
+                  {% endif %}
+                </div>
+                <h3>{{ block.settings.heading }}</h3>
+                <div class="iamw-copy iamw-muted">{{ block.settings.description }}</div>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+#shopify-section-{{ section.id }} .iamw-pains__panel{display:grid;grid-template-columns:1fr}
+#shopify-section-{{ section.id }} .iamw-pains__image{min-height:280px}
+#shopify-section-{{ section.id }} .iamw-pains__image img{display:block;width:100%;height:100%;min-height:280px;object-fit:cover}
+#shopify-section-{{ section.id }} .iamw-pains__content{padding:28px;text-align:{{ section.settings.text_alignment }}}
+#shopify-section-{{ section.id }} .iamw-pains__cards{display:grid;gap:12px;margin-top:24px}
+#shopify-section-{{ section.id }} .iamw-pains__card{padding:18px;border-radius:18px;background:#fff;text-align:center}
+#shopify-section-{{ section.id }} .iamw-pains__card .iamw-iconbox{margin:0 auto 10px}
+#shopify-section-{{ section.id }} .iamw-pains__card .iamw-iconbox img{width:24px;height:24px;object-fit:contain}
+#shopify-section-{{ section.id }} .iamw-pains__card h3{margin:0 0 8px;font-size:18px;color:var(--iamw-text)}
+@media(min-width:900px){
+  #shopify-section-{{ section.id }} .iamw-pains__panel{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:stretch}
+  #shopify-section-{{ section.id }} .iamw-pains__image.is-right{order:2}
+  #shopify-section-{{ section.id }} .iamw-pains__content{padding:44px}
+  #shopify-section-{{ section.id }} .iamw-pains__cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+</style>
+
+{% schema %}
+{
+  "name": "IAMW Parent Pains",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SAME CHALLENGES. BRIGHTER SOLUTIONS."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sound familiar, parents?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Parent supporting a child during learning time"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Desktop image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f4ebff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#4b168f"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff9a1f"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size desktop",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 24,
+      "max": 52,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 900,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1180
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Padding desktop",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Padding mobile",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pain",
+      "name": "Pain point",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Fallback icon",
+          "options": [
+            {
+              "value": "brain",
+              "label": "Brain"
+            },
+            {
+              "value": "utensils",
+              "label": "Picky eating"
+            },
+            {
+              "value": "clock",
+              "label": "Routine"
+            },
+            {
+              "value": "book",
+              "label": "Learning"
+            }
+          ],
+          "default": "brain"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon"
+        },
+        {
+          "type": "text",
+          "id": "icon_alt",
+          "label": "Icon alt text"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Hard to focus"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Hard to stay focused during schoolwork or homework?</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "IAMW Parent Pains",
+      "blocks": [
+        {
+          "type": "pain",
+          "settings": {
+            "icon": "brain",
+            "heading": "Hard to focus",
+            "description": "<p>Hard to stay focused during schoolwork or homework?</p>"
+          }
+        },
+        {
+          "type": "pain",
+          "settings": {
+            "icon": "utensils",
+            "heading": "Picky eating",
+            "description": "<p>Picky eating makes it harder to get complete nutrition?</p>"
+          }
+        },
+        {
+          "type": "pain",
+          "settings": {
+            "icon": "clock",
+            "heading": "Daily routine",
+            "description": "<p>You want an easy daily routine to support their growing needs?</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
