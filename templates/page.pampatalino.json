@@ -2,6 +2,15 @@
   "sections": {
     "main": {
       "type": "iamw-brain-landing",
+      "settings": {
+        "hero_image": "shopify://shop_images/6143214667367649919_1.jpg",
+        "benefits_image": "shopify://shop_images/6143062380712236434.jpg",
+        "tab_1_image": "shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp",
+        "tab_2_image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp",
+        "tab_3_image": "shopify://shop_images/c53cc782-3534-4c6d-8e21-c9b5465ac4af.webp",
+        "tab_4_image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
+        "promo_image": "shopify://shop_images/6143062380712236434.jpg"
+      },
       "blocks": {
         "bundle_1": {
           "type": "bundle",
@@ -15,10 +24,10 @@
             "microcopy": "Direct to checkout • No cart-page detour"
           }
         },
-        "proof_1": {"type":"proof","settings":{"caption":"Customer feedback"}},
-        "proof_2": {"type":"proof","settings":{"caption":"Customer feedback"}},
-        "proof_3": {"type":"proof","settings":{"caption":"Customer feedback"}},
-        "proof_4": {"type":"proof","settings":{"caption":"Customer feedback"}},
+        "proof_1": {"type":"proof","settings":{"image":"shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png","caption":"Customer feedback"}},
+        "proof_2": {"type":"proof","settings":{"image":"shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png","caption":"Customer feedback"}},
+        "proof_3": {"type":"proof","settings":{"image":"shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png","caption":"Customer feedback"}},
+        "proof_4": {"type":"proof","settings":{"image":"shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png","caption":"Customer feedback"}},
         "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The gummy format is easy to fit into our school morning routine, which makes consistency much easier.","name":"I Am Well parent","meta":"Customer feedback"}},
         "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We wanted one simple routine instead of several different products, and this is easy for the kids to remember.","name":"I Am Well parent","meta":"Customer feedback"}},
         "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient addition to the balanced meals and routines we already focus on at home.","name":"I Am Well parent","meta":"Customer feedback"}},
