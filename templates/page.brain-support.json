@@ -2,14 +2,7 @@
   "sections": {
     "hero": {
       "type": "iamw-brain-hero",
-      "settings": {
-        "hero_image": "shopify://shop_images/6143214667367649919_1.jpg",
-        "background": "#f5ecff",
-        "text_color": "#4b168f",
-        "accent_color": "#ff9a1f",
-        "button_color": "#5a1aa8",
-        "button_text_color": "#ffffff"
-      },
+      "settings": {"hero_image":"shopify://shop_images/6143214667367649919_1.jpg","background":"#f5ecff","text_color":"#4b168f","accent_color":"#ff9a1f","button_color":"#5a1aa8","button_text_color":"#ffffff"},
       "blocks": {
         "benefit_1": {"type":"benefit","settings":{"icon":"brain","text":"Supports Focus & Learning"}},
         "benefit_2": {"type":"benefit","settings":{"icon":"memory","text":"Helps Support Memory"}},
@@ -19,7 +12,7 @@
     },
     "pains": {
       "type": "iamw-parent-pains",
-      "settings": {"image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"},
+      "settings": {"image":"shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp"},
       "blocks": {
         "pain_1": {"type":"pain","settings":{"icon":"brain","heading":"Hard to focus","description":"<p>Hard to stay focused during schoolwork or homework?</p>"}},
         "pain_2": {"type":"pain","settings":{"icon":"utensils","heading":"Picky eating","description":"<p>Picky eating makes it harder to get complete nutrition?</p>"}},
@@ -40,7 +33,7 @@
     },
     "bundle": {
       "type": "iamw-routine-bundle",
-      "settings": {"image": "shopify://shop_images/6143062380712236434.jpg"},
+      "settings": {"image":"shopify://shop_images/6143062380712236434.jpg"},
       "blocks": {
         "pill_brain": {"type":"pill","settings":{"label":"Brain Support"}},
         "pill_focus": {"type":"pill","settings":{"label":"Focus & Learning"}},
@@ -84,7 +77,7 @@
       },
       "block_order": ["row_1","row_2","row_3","row_4","row_5"]
     },
-    "final": {"type":"iamw-final-cta","settings":{}}
+    "final": {"type":"iamw-final-cta","settings":{"image":"shopify://shop_images/6143214667367649919_1.jpg"}}
   },
   "order": ["hero","pains","benefits","bundle","offer","testimonials","comparison","final"]
 }
