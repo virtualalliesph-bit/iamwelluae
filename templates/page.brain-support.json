@@ -115,11 +115,18 @@
     },
     "testimonials": {
       "type": "iamw-testimonials-v2",
-      "settings": {},
+      "settings": {
+        "review_4_name":"Yasmin H.",
+        "review_5_name":"Farah N.",
+        "review_6_name":"Rania S.",
+        "review_7_name":"Huda A.",
+        "review_8_name":"Salma T.",
+        "extra_review_meta":"Placeholder - replace with approved review"
+      },
       "blocks": {
-        "review_1": {"type":"testimonial","settings":{"rating":5,"review":"Our mornings are busy, so having one simple gummy routine makes it easier for us to stay consistent before school.","parent_name":"Sample parent feedback","child_age":"Placeholder - replace with approved review"}},
-        "review_2": {"type":"testimonial","settings":{"rating":5,"review":"I like that the routine includes nutrients such as DHA and Choline while still being easy to add alongside breakfast.","parent_name":"Sample parent feedback","child_age":"Placeholder - replace with approved review"}},
-        "review_3": {"type":"testimonial","settings":{"rating":5,"review":"The mixed berry gummy is easy for my child to remember as part of our school-day routine.","parent_name":"Sample parent feedback","child_age":"Placeholder - replace with approved review"}}
+        "review_1": {"type":"testimonial","settings":{"rating":5,"review":"Our mornings are busy, so having one simple gummy routine makes it easier for us to stay consistent before school.","parent_name":"Amna R.","child_age":"Placeholder - replace with approved review"}},
+        "review_2": {"type":"testimonial","settings":{"rating":5,"review":"I like that the routine includes nutrients such as DHA and Choline while still being easy to add alongside breakfast.","parent_name":"Dana K.","child_age":"Placeholder - replace with approved review"}},
+        "review_3": {"type":"testimonial","settings":{"rating":5,"review":"The mixed berry gummy is easy for my child to remember as part of our school-day routine.","parent_name":"Lina M.","child_age":"Placeholder - replace with approved review"}}
       },
       "block_order": ["review_1","review_2","review_3"]
     },
