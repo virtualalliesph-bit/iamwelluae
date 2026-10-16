@@ -1,0 +1,35 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section class="iamw-b2 iamw-b2-section--lav" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-center">
+      <div class="iamw-b2-kicker">{{ section.settings.eyebrow }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+      {% if section.settings.intro != blank %}<div class="iamw-b2-copy" style="margin-top:12px;">{{ section.settings.intro }}</div>{% endif %}
+    </div>
+    <div class="iamw-b2-faq">
+      {% for block in section.blocks %}
+        <details {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="iamw-b2-copy">{{ block.settings.answer }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"IAMW Brain2 FAQ",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"QUESTIONS PARENTS ASK"},
+    {"type":"text","id":"heading","label":"Heading","default":"Questions about IAMWELL"},
+    {"type":"richtext","id":"intro","label":"Intro","default":"<p>Quick answers about children's brain nutrition and the IAMWELL routine.</p>"},
+    {"type":"color","id":"background","label":"Background","default":"#f4ecff"}
+  ],
+  "blocks":[{"type":"item","name":"FAQ item","limit":8,"settings":[
+    {"type":"text","id":"question","label":"Question","default":"Does IAMWELL contain DHA?"},
+    {"type":"richtext","id":"answer","label":"Answer","default":"<p>Yes. DHA is included in the current IAMWELL product materials. Final claims and quantities should match the approved UAE label.</p>"}
+  ]}],
+  "max_blocks":8,
+  "presets":[{"name":"IAMW Brain2 FAQ"}]
+}
+{% endschema %}
