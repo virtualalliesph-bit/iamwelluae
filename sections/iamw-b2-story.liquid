@@ -1,0 +1,43 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section class="iamw-b2 iamw-b2-section--cream" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-grid2">
+      <div class="iamw-b2-media" style="min-height:360px;">
+        {% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '520,760,1000,1200', alt: section.settings.heading }}{% else %}<div style="min-height:360px;display:grid;place-items:center;color:var(--muted);">Choose school-day image</div>{% endif %}
+      </div>
+      <div>
+        <div class="iamw-b2-kicker">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="iamw-b2-copy" style="margin-top:16px;">{{ section.settings.body }}</div>
+        <div class="iamw-b2-chips">
+          {% for block in section.blocks %}<span class="iamw-b2-chip" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>{% endfor %}
+        </div>
+      </div>
+    </div>
+    <div style="max-width:930px;margin:54px auto 0;text-align:center;">
+      <div class="iamw-b2-kicker">{{ section.settings.bridge_eyebrow }}</div>
+      <h2>{{ section.settings.bridge_heading }}</h2>
+      <div class="iamw-b2-copy" style="margin:16px auto 0;max-width:820px;">{{ section.settings.bridge_body }}</div>
+      <div class="iamw-b2-note" style="max-width:720px;margin-left:auto;margin-right:auto;text-align:left;"><span class="iamw-b2-icon" style="flex:0 0 44px;">{% render 'iamw-icon', name: 'leaf' %}</span><span>{{ section.settings.note }}</span></div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"IAMW Brain2 Story",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"BUSY DAYS. GROWING MINDS."},
+    {"type":"text","id":"heading","label":"Heading","default":"Growing brains have busy days"},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>School mornings begin early. Lessons demand attention. Homework continues after school. Then there may be sport, music, tutoring, play and everything else childhood fits into one day.</p><p>Nutrition supports the body through those growing years, and the brain is part of that story too.</p>"},
+    {"type":"image_picker","id":"image","label":"Lifestyle image"},
+    {"type":"text","id":"bridge_eyebrow","label":"Bridge eyebrow","default":"NUTRITION BEFORE PROMISES"},
+    {"type":"text","id":"bridge_heading","label":"Bridge heading","default":"Brain support should start with nutrition, not promises"},
+    {"type":"richtext","id":"bridge_body","label":"Bridge body","default":"<p>No supplement should promise to make a child smarter. No gummy can replace sleep, balanced meals, physical activity, learning, curiosity or good study habits.</p><p>But the developing brain relies on appropriate nutrition just like the rest of the growing body.</p>"},
+    {"type":"text","id":"note","label":"Highlight note","default":"Support the nutritional foundation behind everyday development and learning."},
+    {"type":"color","id":"background","label":"Background","default":"#fffdf8"}
+  ],
+  "blocks":[{"type":"activity","name":"Activity","limit":6,"settings":[{"type":"text","id":"text","label":"Label","default":"Lessons"}]}],
+  "max_blocks":6,
+  "presets":[{"name":"IAMW Brain2 Story"}]
+}
+{% endschema %}
