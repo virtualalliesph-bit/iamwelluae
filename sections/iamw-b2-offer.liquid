@@ -1,0 +1,87 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section id="iamw-b2-offer" class="iamw-b2 iamw-b2-section--cream" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-grid2" style="align-items:stretch;">
+      <div>
+        <div class="iamw-b2-kicker">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="iamw-b2-copy" style="margin-top:14px;">{{ section.settings.body }}</div>
+        <div class="iamw-b2-times">
+          {% for block in section.blocks %}
+            <div class="iamw-b2-card iamw-b2-time" {{ block.shopify_attributes }}>
+              <span class="iamw-b2-icon">{% render 'iamw-icon', name: block.settings.icon %}</span>
+              <strong style="color:var(--p);">{{ block.settings.label }}</strong>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% assign p = section.settings.product %}
+      <article class="iamw-b2-card iamw-b2-offer">
+        <div class="iamw-b2-offer-media">
+          {% if section.settings.image != blank %}
+            {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '480,720,1000', alt: section.settings.heading }}
+          {% elsif p != blank and p.featured_image %}
+            {{ p.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '480,720,1000', alt: p.title }}
+          {% else %}<div style="height:100%;display:grid;place-items:center;color:var(--muted);">Choose product</div>{% endif %}
+        </div>
+        {% if p != blank %}
+          <div class="iamw-b2-kicker">{{ section.settings.offer_eyebrow }}</div>
+          <h3>{{ p.title }}</h3>
+          <div class="iamw-b2-price" data-b2-price>{{ p.selected_or_first_available_variant.price | money }}</div>
+          <ul class="iamw-b2-checks">
+            <li>3 bottles</li><li>30 gummies per bottle</li><li>90 gummies total</li><li>Mixed berry flavour</li><li>For children ages 2 to 15</li>
+          </ul>
+          {% if p.variants.size > 1 %}
+            <select class="iamw-b2-select" data-b2-variant>
+              {% for variant in p.variants %}<option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}</option>{% endfor %}
+            </select>
+          {% else %}<input type="hidden" data-b2-variant value="{{ p.selected_or_first_available_variant.id }}">{% endif %}
+          <button type="button" class="iamw-b2-btn" style="width:100%;margin-top:18px;" data-b2-buy data-action="{{ section.settings.purchase_action }}" {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>{{ section.settings.button_text }}</button>
+          <div style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center;">{{ section.settings.microcopy }}</div>
+        {% else %}
+          <h3>Select the IAMWELL product</h3><div class="iamw-b2-copy" style="margin-top:10px;">Choose a Shopify product in this section's settings.</div>
+        {% endif %}
+      </article>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const root = document.getElementById('iamw-b2-offer'); if (!root) return;
+  const select = root.querySelector('select[data-b2-variant]'); const price = root.querySelector('[data-b2-price]');
+  if (select && price) select.addEventListener('change', () => { const o = select.options[select.selectedIndex]; if (o && o.dataset.price) price.textContent = o.dataset.price; });
+  const btn = root.querySelector('[data-b2-buy]'); if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const field = root.querySelector('[data-b2-variant]'); if (!field || !field.value) return;
+    btn.disabled = true;
+    try {
+      const res = await fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:Number(field.value),quantity:1}]})});
+      if (!res.ok) throw new Error('add');
+      window.location.href = btn.dataset.action === 'checkout' ? '/checkout' : '/cart';
+    } catch(e) { btn.disabled = false; alert('Please try again.'); }
+  });
+})();
+</script>
+{% schema %}
+{
+  "name":"IAMW Brain2 Offer",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"A SIMPLE DAILY ROUTINE"},
+    {"type":"text","id":"heading","label":"Heading","default":"Brain nutrition is an everyday habit"},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>Choose a part of your family routine that is easy to remember, then follow the approved IAMWELL serving directions consistently.</p>"},
+    {"type":"product","id":"product","label":"Product"},
+    {"type":"image_picker","id":"image","label":"Offer image"},
+    {"type":"text","id":"offer_eyebrow","label":"Offer eyebrow","default":"IAMWELL SMART ROUTINE STARTER PACK"},
+    {"type":"text","id":"button_text","label":"Button text","default":"START THEIR SMART ROUTINE"},
+    {"type":"select","id":"purchase_action","label":"Button action","default":"cart","options":[{"value":"cart","label":"Add to cart"},{"value":"checkout","label":"Go to checkout"}]},
+    {"type":"text","id":"microcopy","label":"Microcopy","default":"UAE delivery options available at checkout • Secure checkout"},
+    {"type":"color","id":"background","label":"Background","default":"#fffdf8"}
+  ],
+  "blocks":[{"type":"time","name":"Routine time","limit":4,"settings":[
+    {"type":"select","id":"icon","label":"Icon","default":"clock","options":[{"value":"clock","label":"Clock"},{"value":"star","label":"Star"},{"value":"heart","label":"Heart"},{"value":"book","label":"Book"}]},
+    {"type":"text","id":"label","label":"Label","default":"Breakfast"}
+  ]}],
+  "max_blocks":4,
+  "presets":[{"name":"IAMW Brain2 Offer"}]
+}
+{% endschema %}
