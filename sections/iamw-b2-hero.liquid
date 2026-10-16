@@ -1,0 +1,63 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section class="iamw-b2 iamw-b2-section--cream" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-grid2">
+      <div>
+        {% if section.settings.eyebrow != blank %}<div class="iamw-b2-kicker">{{ section.settings.eyebrow }}</div>{% endif %}
+        <h1>{{ section.settings.heading }}</h1>
+        {% if section.settings.body != blank %}<div class="iamw-b2-copy" style="margin-top:18px;">{{ section.settings.body }}</div>{% endif %}
+        {% if section.settings.button_text != blank %}<a class="iamw-b2-btn" style="margin-top:22px;" href="{{ section.settings.button_link | default: '#iamw-b2-offer' }}">{{ section.settings.button_text }}</a>{% endif %}
+        {% if section.settings.microcopy != blank %}<div style="margin-top:12px;font-size:14px;color:var(--muted);font-weight:700;">{{ section.settings.microcopy }}</div>{% endif %}
+      </div>
+      <div class="iamw-b2-media" style="min-height:460px;">
+        {% if section.settings.mobile_image != blank %}
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ section.settings.mobile_image | image_url: width: 900 }}">
+            {% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '600,900,1200,1400', alt: section.settings.heading }}{% endif %}
+          </picture>
+        {% elsif section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '600,900,1200,1400', alt: section.settings.heading }}
+        {% else %}
+          <div style="min-height:460px;display:grid;place-items:center;color:var(--muted);">Choose hero image</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div style="background:{{ section.settings.strip_background }};border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="iamw-b2-wrap" style="padding-top:20px;padding-bottom:20px;">
+      <div class="iamw-b2-strip">
+        {% for block in section.blocks %}
+          <div class="iamw-b2-strip-item" {{ block.shopify_attributes }}>
+            <span class="iamw-b2-icon">{% render 'iamw-icon', name: block.settings.icon %}</span>
+            <div>{{ block.settings.text }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"IAMW Brain2 Hero",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"NUTRITION FOR GROWING MINDS"},
+    {"type":"text","id":"heading","label":"Heading","default":"Support the Growing Mind Behind Every School Day"},
+    {"type":"richtext","id":"body","label":"Description","default":"<p>IAMWELL Smart Gummies combines DHA, Choline, Omega 3 6 9, B complex vitamins and everyday nutritional support in one child friendly routine.</p>"},
+    {"type":"text","id":"button_text","label":"Button text","default":"SUPPORT THEIR SMART ROUTINE"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"text","id":"microcopy","label":"Microcopy","default":"For children ages 2 to 15 • Mixed berry food supplement"},
+    {"type":"image_picker","id":"image","label":"Hero image"},
+    {"type":"image_picker","id":"mobile_image","label":"Mobile image"},
+    {"type":"color","id":"background","label":"Background","default":"#fffdf8"},
+    {"type":"color","id":"strip_background","label":"Benefit strip","default":"#f3eaff"}
+  ],
+  "blocks":[
+    {"type":"benefit","name":"Benefit","limit":5,"settings":[
+      {"type":"select","id":"icon","label":"Icon","default":"brain","options":[{"value":"brain","label":"Brain"},{"value":"book","label":"Book"},{"value":"shield","label":"Shield"},{"value":"heart","label":"Heart"},{"value":"leaf","label":"Leaf"},{"value":"star","label":"Star"}]},
+      {"type":"text","id":"text","label":"Text","default":"Growing mind support"}
+    ]}
+  ],
+  "max_blocks":5,
+  "presets":[{"name":"IAMW Brain2 Hero"}]
+}
+{% endschema %}
