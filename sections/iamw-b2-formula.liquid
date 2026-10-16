@@ -1,0 +1,54 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section class="iamw-b2 iamw-b2-section--cream" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-grid2">
+      <div>
+        <div class="iamw-b2-kicker">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="iamw-b2-copy" style="margin-top:16px;">{{ section.settings.body }}</div>
+        {% if section.settings.button_text != blank %}<a class="iamw-b2-btn" style="margin-top:22px;" href="{{ section.settings.button_link | default: '#iamw-b2-offer' }}">{{ section.settings.button_text }}</a>{% endif %}
+      </div>
+      <div class="iamw-b2-media" style="min-height:330px;">
+        {% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '520,760,1000,1200', alt: section.settings.heading }}{% else %}<div style="min-height:330px;display:grid;place-items:center;color:var(--muted);">Choose product image</div>{% endif %}
+      </div>
+    </div>
+    <div class="iamw-b2-center" style="margin-top:56px;">
+      <div class="iamw-b2-kicker">{{ section.settings.nutrient_eyebrow }}</div>
+      <h2>{{ section.settings.nutrient_heading }}</h2>
+      <div class="iamw-b2-copy" style="margin-top:12px;">{{ section.settings.nutrient_intro }}</div>
+    </div>
+    <div class="iamw-b2-nutrients">
+      {% for block in section.blocks %}
+        <article class="iamw-b2-card iamw-b2-nutrient" {{ block.shopify_attributes }}>
+          <span class="iamw-b2-icon">{% render 'iamw-icon', name: block.settings.icon %}</span>
+          <h3>{{ block.settings.heading }}</h3>
+          <div class="iamw-b2-copy" style="font-size:15px;margin-top:8px;">{{ block.settings.text }}</div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"IAMW Brain2 Formula",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"MEET THE IAMWELL SMART ROUTINE"},
+    {"type":"text","id":"heading","label":"Heading","default":"Brain nutrition as part of an everyday routine"},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>IAMWELL Smart Gummies is a mixed berry food supplement for children ages 2 to 15.</p><p>The current formula includes DHA, Choline, Omega 3 6 9 and B complex vitamins alongside additional vitamins, minerals and digestive support ingredients.</p>"},
+    {"type":"image_picker","id":"image","label":"Product image"},
+    {"type":"text","id":"button_text","label":"Button text","default":"START THEIR SMART ROUTINE"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"text","id":"nutrient_eyebrow","label":"Nutrient eyebrow","default":"KEY NUTRIENTS FOR GROWING MINDS"},
+    {"type":"text","id":"nutrient_heading","label":"Nutrient heading","default":"Nutrition for growing minds"},
+    {"type":"richtext","id":"nutrient_intro","label":"Nutrient intro","default":"<p>A combination of nutrients selected for growing children, with DHA and Choline at the centre of the brain-support story.</p>"},
+    {"type":"color","id":"background","label":"Background","default":"#fffdf8"}
+  ],
+  "blocks":[{"type":"nutrient","name":"Nutrient","limit":6,"settings":[
+    {"type":"select","id":"icon","label":"Icon","default":"brain","options":[{"value":"brain","label":"Brain"},{"value":"book","label":"Book"},{"value":"shield","label":"Shield"},{"value":"leaf","label":"Leaf"},{"value":"heart","label":"Heart"},{"value":"star","label":"Star"}]},
+    {"type":"text","id":"heading","label":"Heading","default":"DHA"},
+    {"type":"richtext","id":"text","label":"Text","default":"<p>Included as part of IAMWELL's nutritional support for growing minds.</p>"}
+  ]}],
+  "max_blocks":6,
+  "presets":[{"name":"IAMW Brain2 Formula"}]
+}
+{% endschema %}
