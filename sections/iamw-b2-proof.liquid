@@ -1,0 +1,66 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section class="iamw-b2 iamw-b2-section--lav" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-grid2" style="align-items:stretch;">
+      <div class="iamw-b2-card" style="padding:28px;">
+        <div class="iamw-b2-kicker">{{ section.settings.why_eyebrow }}</div>
+        <h2 style="font-size:clamp(30px,3vw,42px);">{{ section.settings.why_heading }}</h2>
+        <ul class="iamw-b2-checks">
+          {% for block in section.blocks %}{% if block.type == 'reason' %}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{% endif %}{% endfor %}
+        </ul>
+      </div>
+      <div class="iamw-b2-card" style="padding:28px;background:#f4f8e9;">
+        <div class="iamw-b2-kicker">{{ section.settings.broader_eyebrow }}</div>
+        <h2 style="font-size:clamp(30px,3vw,42px);">{{ section.settings.broader_heading }}</h2>
+        <div class="iamw-b2-copy" style="margin-top:14px;">{{ section.settings.broader_body }}</div>
+        <div class="iamw-b2-strip" style="grid-template-columns:repeat(4,1fr);margin-top:18px;">
+          <div class="iamw-b2-strip-item"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'brain' %}</span>Brain Nutrition</div>
+          <div class="iamw-b2-strip-item"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'shield' %}</span>Everyday Nutrition</div>
+          <div class="iamw-b2-strip-item"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'heart' %}</span>Growing Years</div>
+          <div class="iamw-b2-strip-item"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'leaf' %}</span>Simple Routine</div>
+        </div>
+      </div>
+    </div>
+    <div class="iamw-b2-center" style="margin-top:58px;">
+      <div class="iamw-b2-kicker">{{ section.settings.review_eyebrow }}</div>
+      <h2>{{ section.settings.review_heading }}</h2>
+      {% if section.settings.review_note != blank %}<div style="margin-top:8px;font-size:12px;color:var(--muted);opacity:.75;">{{ section.settings.review_note }}</div>{% endif %}
+    </div>
+    <div class="iamw-b2-reviews">
+      {% for block in section.blocks %}{% if block.type == 'review' %}
+        <article class="iamw-b2-card iamw-b2-review" {{ block.shopify_attributes }}>
+          <div class="iamw-b2-stars">★★★★★</div>
+          <p>“{{ block.settings.review }}”</p>
+          <strong>{{ block.settings.name }}</strong>
+          {% if block.settings.location != blank %}<div style="font-size:13px;color:var(--muted);margin-top:3px;">{{ block.settings.location }}</div>{% endif %}
+        </article>
+      {% endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"IAMW Brain2 Proof",
+  "settings":[
+    {"type":"text","id":"why_eyebrow","label":"Why eyebrow","default":"WHY IAMWELL"},
+    {"type":"text","id":"why_heading","label":"Why heading","default":"Why parents choose a broader routine"},
+    {"type":"text","id":"broader_eyebrow","label":"Broader eyebrow","default":"A BROADER APPROACH"},
+    {"type":"text","id":"broader_heading","label":"Broader heading","default":"More than a single nutrient routine"},
+    {"type":"richtext","id":"broader_body","label":"Broader body","default":"<p>IAMWELL combines DHA and Choline with Omega 3 6 9, B complex vitamins and other everyday nutritional support ingredients, helping parents think about brain nutrition within the bigger picture of growing children.</p>"},
+    {"type":"text","id":"review_eyebrow","label":"Review eyebrow","default":"PARENT ROUTINES"},
+    {"type":"text","id":"review_heading","label":"Review heading","default":"What families value in an everyday routine"},
+    {"type":"text","id":"review_note","label":"Review note","default":"Illustrative review copy for layout; replace with approved UAE customer reviews before launch."},
+    {"type":"color","id":"background","label":"Background","default":"#f4ecff"}
+  ],
+  "blocks":[
+    {"type":"reason","name":"Reason","limit":5,"settings":[{"type":"text","id":"text","label":"Text","default":"DHA + Choline within a broader nutrition routine"}]},
+    {"type":"review","name":"Review","limit":4,"settings":[
+      {"type":"textarea","id":"review","label":"Review","default":"The gummy format is simple to fit into our morning routine."},
+      {"type":"text","id":"name","label":"Name","default":"Aisha M."},
+      {"type":"text","id":"location","label":"Location","default":"Dubai"}
+    ]}
+  ],
+  "max_blocks":9,
+  "presets":[{"name":"IAMW Brain2 Proof"}]
+}
+{% endschema %}
