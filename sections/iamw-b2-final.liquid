@@ -1,0 +1,34 @@
+{{ 'iamw-brain2.css' | asset_url | stylesheet_tag }}
+<section class="iamw-b2 iamw-b2-final" style="background:{{ section.settings.background }};">
+  <div class="iamw-b2-wrap">
+    <div class="iamw-b2-grid2">
+      <div>
+        <div class="iamw-b2-kicker" style="color:#ffc43a;">{{ section.settings.eyebrow }}</div>
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="iamw-b2-copy" style="margin-top:16px;">{{ section.settings.body }}</div>
+        <a class="iamw-b2-btn" style="margin-top:22px;" href="{{ section.settings.button_link | default: '#iamw-b2-offer' }}">{{ section.settings.button_text }}</a>
+      </div>
+      <div class="iamw-b2-card" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);padding:24px;color:#fff;">
+        <div class="iamw-b2-strip" style="grid-template-columns:repeat(3,1fr);">
+          <div class="iamw-b2-strip-item" style="color:#fff;"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'brain' %}</span>DHA + Choline</div>
+          <div class="iamw-b2-strip-item" style="color:#fff;"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'heart' %}</span>Mixed berry gummy</div>
+          <div class="iamw-b2-strip-item" style="color:#fff;"><span class="iamw-b2-icon">{% render 'iamw-icon', name: 'star' %}</span>Ages 2 to 15</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"IAMW Brain2 Final",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"SUPPORT THE GROWING YEARS"},
+    {"type":"text","id":"heading","label":"Heading","default":"Support More Than Today's Homework. Support the Growing Years Behind It."},
+    {"type":"richtext","id":"body","label":"Body","default":"<p>Every lesson, every new question and every skill they practise is part of something bigger. IAMWELL Smart Gummies gives parents a simple way to make brain-supporting nutrition part of the everyday routine.</p>"},
+    {"type":"text","id":"button_text","label":"Button text","default":"START THEIR SMART ROUTINE"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"color","id":"background","label":"Background","default":"#4a0c83"}
+  ],
+  "presets":[{"name":"IAMW Brain2 Final"}]
+}
+{% endschema %}
