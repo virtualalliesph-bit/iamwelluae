@@ -2,9 +2,41 @@
 
 {% render 'cart-products' %}
 
+<script>
+  (() => {
+    const disableCartProductLinks = (root = document) => {
+      root.querySelectorAll('.cart-items__media-container[href], .cart-items__title[href]').forEach((link) => {
+        link.removeAttribute('href');
+        link.removeAttribute('target');
+        link.setAttribute('aria-disabled', 'true');
+        link.setAttribute('tabindex', '-1');
+      });
+    };
+
+    disableCartProductLinks();
+
+    document.addEventListener('shopify:section:load', (event) => {
+      disableCartProductLinks(event.target);
+    });
+
+    if (!window.__iamwCartProductLinksObserver) {
+      const observer = new MutationObserver(() => disableCartProductLinks());
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+      window.__iamwCartProductLinksObserver = observer;
+    }
+  })();
+</script>
+
 {% stylesheet %}
   .cart-page__title + .cart-page__items {
     margin-block-start: var(--margin-lg);
+  }
+
+  .cart-items__media-container[aria-disabled='true'],
+  .cart-items__title[aria-disabled='true'] {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
   }
 {% endstylesheet %}
 
