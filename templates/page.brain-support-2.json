@@ -60,6 +60,7 @@
         "heading": "Support the Growing Mind Behind Every School Day",
         "body": "<p>IAMWELL Smart Gummies combines DHA, Choline, Omega 3 6 9, B complex vitamins and everyday nutritional support in one child friendly routine.</p>",
         "button_text": "SUPPORT THEIR SMART ROUTINE",
+        "button_link": "",
         "microcopy": "For children ages 2 to 15 • Mixed berry food supplement",
         "image": "shopify://shop_images/6143214667367649919_1.jpg",
         "background": "#fffdf8",
@@ -192,6 +193,7 @@
         "body": "<p>IAMWELL Smart Gummies is a mixed berry food supplement for children ages 2 to 15.</p><p>The current formula includes DHA, Choline, Omega 3 6 9 and B complex vitamins alongside additional vitamins, minerals and digestive support ingredients.</p>",
         "image": "shopify://shop_images/6143062380712236434.jpg",
         "button_text": "START THEIR SMART ROUTINE",
+        "button_link": "",
         "nutrient_eyebrow": "KEY NUTRIENTS FOR GROWING MINDS",
         "nutrient_heading": "Nutrition for growing minds",
         "nutrient_intro": "<p>DHA and Choline lead the brain-support story, supported by a broader everyday nutrition formula for growing children.</p>",
@@ -329,7 +331,7 @@
         "eyebrow": "A SIMPLE DAILY ROUTINE",
         "heading": "Brain nutrition is an everyday habit",
         "body": "<p>Choose a part of your family routine that is easy to remember, then follow the approved IAMWELL serving directions consistently.</p>",
-        "product": "smart-routine-starter-pack-for-picky-eaters",
+        "product": "brain-booster-smart-routine-starter-pack",
         "offer_eyebrow": "IAMWELL SMART ROUTINE STARTER PACK",
         "button_text": "START THEIR SMART ROUTINE",
         "purchase_action": "cart",
@@ -421,6 +423,7 @@
         "heading": "Support More Than Today's Homework. Support the Growing Years Behind It.",
         "body": "<p>Every lesson, every new question and every skill they practise is part of something bigger. IAMWELL Smart Gummies gives parents a simple way to make brain-supporting nutrition part of the everyday routine.</p>",
         "button_text": "START THEIR SMART ROUTINE",
+        "button_link": "",
         "background": "#4a0c83"
       }
     }
