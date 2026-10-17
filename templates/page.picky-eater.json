@@ -1,43 +1,130 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "iamw-picky-landing",
-      "settings": {
-        "hero_image": "shopify://shop_images/6143214667367649919_1.jpg",
-        "benefits_image": "shopify://shop_images/6143062380712236434.jpg",
-        "tab_1_image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp",
-        "tab_2_image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
-        "tab_3_image": "shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp",
-        "tab_4_image": "shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp",
-        "promo_image": "shopify://shop_images/6143062380712236434.jpg",
-        "purchase_action_default": "checkout"
-      },
       "blocks": {
         "bundle_1": {
           "type": "bundle",
           "settings": {
-            "product": "smart-routine-starter-pack-90-days-brain-support",
+            "product": "smart-routine-starter-pack-for-picky-eaters",
             "badge": "90-DAY ROUTINE",
             "kicker": "SMART ROUTINE STARTER PACK",
             "title_override": "90 Days of Daily Support",
             "description": "<p>A three-month routine for families looking for a simple way to complement the nutrition of picky eaters with one kid-friendly mixed berry gummy.</p>",
             "button_label": "BUY NOW",
-            "microcopy": "Direct to checkout • No cart-page detour",
-            "purchase_action": "inherit"
+            "purchase_action": "inherit",
+            "microcopy": "Direct to checkout • No cart-page detour"
           }
         },
-        "proof_1": {"type":"proof","settings":{"image":"shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png","caption":"Customer feedback"}},
-        "proof_2": {"type":"proof","settings":{"image":"shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png","caption":"Customer feedback"}},
-        "proof_3": {"type":"proof","settings":{"image":"shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png","caption":"Customer feedback"}},
-        "proof_4": {"type":"proof","settings":{"image":"shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png","caption":"Customer feedback"}},
-        "testimonial_1": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"My child usually loses interest after a few bites, so having a simple daily gummy routine has made consistency easier for us.","name":"Aisha M.","meta":"Illustrative review"}},
-        "testimonial_2": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We like that it is a gummy and easy to add to our morning routine without another syrup or tablet.","name":"Priya S.","meta":"Illustrative review"}},
-        "testimonial_3": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The mixed berry format is easy for the kids to remember as part of their daily routine.","name":"Maria L.","meta":"Illustrative review"}},
-        "testimonial_4": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"A convenient way to complement the balanced meals and food variety we keep working on at home.","name":"Sarah K.","meta":"Illustrative review"}},
-        "testimonial_5": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"Busy mornings are easier when the routine is simple. One gummy is easy for us to remember alongside breakfast.","name":"Noor A.","meta":"Illustrative review"}},
-        "testimonial_6": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"With a selective eater, I like having a consistent nutrition routine while we keep offering different foods at mealtimes.","name":"Hana R.","meta":"Illustrative review"}},
-        "testimonial_7": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"The chewable format feels much easier to fit into our day than adding another syrup to the routine.","name":"Fatima D.","meta":"Illustrative review"}},
-        "testimonial_8": {"type":"testimonial","settings":{"stars":"★★★★★","quote":"We still focus on balanced meals and food variety, and this is a convenient addition to the routine we already have.","name":"Rina P.","meta":"Illustrative review"}}
+        "proof_1": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/0dc41214-7098-4e4b-a721-1c7eb8f4bea0.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "proof_2": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/5fdcce24-5bcb-4dbe-bd18-28f2206dcaac.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "proof_3": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/c3c9b8a3-4d4e-44f1-9260-b108d17b5cc0.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "proof_4": {
+          "type": "proof",
+          "settings": {
+            "image": "shopify://shop_images/b2360d8f-f23d-4e70-833b-17c8469a8658.png",
+            "caption": "Customer feedback"
+          }
+        },
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "My child usually loses interest after a few bites, so having a simple daily gummy routine has made consistency easier for us.",
+            "name": "Aisha M.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "We like that it is a gummy and easy to add to our morning routine without another syrup or tablet.",
+            "name": "Priya S.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "The mixed berry format is easy for the kids to remember as part of their daily routine.",
+            "name": "Maria L.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_4": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "A convenient way to complement the balanced meals and food variety we keep working on at home.",
+            "name": "Sarah K.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_5": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "Busy mornings are easier when the routine is simple. One gummy is easy for us to remember alongside breakfast.",
+            "name": "Noor A.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_6": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "With a selective eater, I like having a consistent nutrition routine while we keep offering different foods at mealtimes.",
+            "name": "Hana R.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_7": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "The chewable format feels much easier to fit into our day than adding another syrup to the routine.",
+            "name": "Fatima D.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        },
+        "testimonial_8": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "We still focus on balanced meals and food variety, and this is a convenient addition to the routine we already have.",
+            "name": "Rina P.",
+            "meta": "Placeholder — replace with approved review"
+          }
+        }
       },
       "block_order": [
         "bundle_1",
@@ -53,8 +140,20 @@
         "testimonial_6",
         "testimonial_7",
         "testimonial_8"
-      ]
+      ],
+      "settings": {
+        "hero_image": "shopify://shop_images/6143214667367649919_1.jpg",
+        "benefits_image": "shopify://shop_images/6143062380712236434.jpg",
+        "tab_1_image": "shopify://shop_images/d93f1980-d021-4f46-ae63-f679aec70c6d.webp",
+        "tab_2_image": "shopify://shop_images/b12b6f52-8ba7-4c6d-8bac-10bcee59f1c0.webp",
+        "tab_3_image": "shopify://shop_images/c53cc782-3534-4c6d-9e21-c9b5465ac4af.webp",
+        "tab_4_image": "shopify://shop_images/eecca562-8e91-4c64-a067-dd99be101c40.webp",
+        "purchase_action_default": "checkout",
+        "promo_image": "shopify://shop_images/6143062380712236434.jpg"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

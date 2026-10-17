@@ -1,7 +1,60 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "iamw-b2-hero",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "brain",
+            "text": "DHA + Choline"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "book",
+            "text": "Growing Mind Nutrition"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "text": "School-Day Routine"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "text": "Everyday Nutrition"
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "text": "Ages 2 to 15"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
       "settings": {
         "eyebrow": "NUTRITION FOR GROWING MINDS",
         "heading": "Support the Growing Mind Behind Every School Day",
@@ -11,18 +64,56 @@
         "image": "shopify://shop_images/6143214667367649919_1.jpg",
         "background": "#fffdf8",
         "strip_background": "#f3eaff"
-      },
-      "blocks": {
-        "b1": {"type":"benefit","settings":{"icon":"brain","text":"DHA + Choline"}},
-        "b2": {"type":"benefit","settings":{"icon":"book","text":"Growing Mind Nutrition"}},
-        "b3": {"type":"benefit","settings":{"icon":"star","text":"School-Day Routine"}},
-        "b4": {"type":"benefit","settings":{"icon":"shield","text":"Everyday Nutrition"}},
-        "b5": {"type":"benefit","settings":{"icon":"heart","text":"Ages 2 to 15"}}
-      },
-      "block_order": ["b1","b2","b3","b4","b5"]
+      }
     },
     "story": {
       "type": "iamw-b2-story",
+      "blocks": {
+        "a1": {
+          "type": "activity",
+          "settings": {
+            "text": "Lessons"
+          }
+        },
+        "a2": {
+          "type": "activity",
+          "settings": {
+            "text": "Homework"
+          }
+        },
+        "a3": {
+          "type": "activity",
+          "settings": {
+            "text": "Sports"
+          }
+        },
+        "a4": {
+          "type": "activity",
+          "settings": {
+            "text": "Music"
+          }
+        },
+        "a5": {
+          "type": "activity",
+          "settings": {
+            "text": "Play"
+          }
+        },
+        "a6": {
+          "type": "activity",
+          "settings": {
+            "text": "Friends"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6"
+      ],
       "settings": {
         "eyebrow": "BUSY DAYS. GROWING MINDS.",
         "heading": "Growing brains have busy days",
@@ -33,19 +124,68 @@
         "bridge_body": "<p>No supplement should promise to make a child smarter. No gummy can replace sleep, balanced meals, physical activity, learning, curiosity or good study habits.</p><p>But the developing brain relies on appropriate nutrition just like the rest of the growing body.</p>",
         "note": "Support the nutritional foundation behind everyday development and learning.",
         "background": "#fffdf8"
-      },
-      "blocks": {
-        "a1":{"type":"activity","settings":{"text":"Lessons"}},
-        "a2":{"type":"activity","settings":{"text":"Homework"}},
-        "a3":{"type":"activity","settings":{"text":"Sports"}},
-        "a4":{"type":"activity","settings":{"text":"Music"}},
-        "a5":{"type":"activity","settings":{"text":"Play"}},
-        "a6":{"type":"activity","settings":{"text":"Friends"}}
-      },
-      "block_order": ["a1","a2","a3","a4","a5","a6"]
+      }
     },
     "formula": {
       "type": "iamw-b2-formula",
+      "blocks": {
+        "n1": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "brain",
+            "heading": "DHA",
+            "text": "<p>Included as part of IAMWELL's nutritional support for growing minds.</p>"
+          }
+        },
+        "n2": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "brain",
+            "heading": "Choline",
+            "text": "<p>Included alongside DHA within the IAMWELL formula for the broader growing-mind nutrition story.</p>"
+          }
+        },
+        "n3": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "heart",
+            "heading": "Omega 3 6 9",
+            "text": "<p>A blend of essential fats included within the product's broader children's nutrition profile.</p>"
+          }
+        },
+        "n4": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "book",
+            "heading": "B Complex Vitamins",
+            "text": "<p>A group of vitamins included within IAMWELL's everyday nutrition formula.</p>"
+          }
+        },
+        "n5": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "shield",
+            "heading": "Vitamins + Zinc",
+            "text": "<p>Vitamins and minerals that support the broader daily nutrition proposition.</p>"
+          }
+        },
+        "n6": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Digestive Enzymes",
+            "text": "<p>Included within the existing IAMWELL product formulation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6"
+      ],
       "settings": {
         "eyebrow": "MEET THE IAMWELL SMART ROUTINE",
         "heading": "Brain nutrition as part of an everyday routine",
@@ -56,19 +196,85 @@
         "nutrient_heading": "Nutrition for growing minds",
         "nutrient_intro": "<p>DHA and Choline lead the brain-support story, supported by a broader everyday nutrition formula for growing children.</p>",
         "background": "#fffdf8"
-      },
-      "blocks": {
-        "n1":{"type":"nutrient","settings":{"icon":"brain","heading":"DHA","text":"<p>Included as part of IAMWELL's nutritional support for growing minds.</p>"}},
-        "n2":{"type":"nutrient","settings":{"icon":"brain","heading":"Choline","text":"<p>Included alongside DHA within the IAMWELL formula for the broader growing-mind nutrition story.</p>"}},
-        "n3":{"type":"nutrient","settings":{"icon":"heart","heading":"Omega 3 6 9","text":"<p>A blend of essential fats included within the product's broader children's nutrition profile.</p>"}},
-        "n4":{"type":"nutrient","settings":{"icon":"book","heading":"B Complex Vitamins","text":"<p>A group of vitamins included within IAMWELL's everyday nutrition formula.</p>"}},
-        "n5":{"type":"nutrient","settings":{"icon":"shield","heading":"Vitamins + Zinc","text":"<p>Vitamins and minerals that support the broader daily nutrition proposition.</p>"}},
-        "n6":{"type":"nutrient","settings":{"icon":"leaf","heading":"Digestive Enzymes","text":"<p>Included within the existing IAMWELL product formulation.</p>"}}
-      },
-      "block_order": ["n1","n2","n3","n4","n5","n6"]
+      }
     },
     "proof": {
       "type": "iamw-b2-proof",
+      "blocks": {
+        "r1": {
+          "type": "reason",
+          "settings": {
+            "text": "More than a single nutrient routine"
+          }
+        },
+        "r2": {
+          "type": "reason",
+          "settings": {
+            "text": "DHA + Choline within a broader nutrition formula"
+          }
+        },
+        "r3": {
+          "type": "reason",
+          "settings": {
+            "text": "Mixed berry gummy format"
+          }
+        },
+        "r4": {
+          "type": "reason",
+          "settings": {
+            "text": "Made for consistent everyday use"
+          }
+        },
+        "r5": {
+          "type": "reason",
+          "settings": {
+            "text": "Supports the bigger picture of growing-child nutrition"
+          }
+        },
+        "v1": {
+          "type": "review",
+          "settings": {
+            "review": "My son likes the taste and it fits into our morning routine without making vitamins feel complicated.",
+            "name": "Aisha M.",
+            "location": "Dubai"
+          }
+        },
+        "v2": {
+          "type": "review",
+          "settings": {
+            "review": "I chose IAMWELL because the formula brings DHA and Choline into one simple routine for our family.",
+            "name": "Karen L.",
+            "location": "Abu Dhabi"
+          }
+        },
+        "v3": {
+          "type": "review",
+          "settings": {
+            "review": "The gummy format is easy to remember before school and works well with the routine we already have.",
+            "name": "Michelle R.",
+            "location": "Sharjah"
+          }
+        },
+        "v4": {
+          "type": "review",
+          "settings": {
+            "review": "I like that it brings several nutrients together instead of making the routine feel like multiple products.",
+            "name": "James T.",
+            "location": "Dubai"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
       "settings": {
         "why_eyebrow": "WHY IAMWELL",
         "why_heading": "Why parents choose a broader routine",
@@ -79,60 +285,134 @@
         "review_heading": "What families value in an everyday routine",
         "review_note": "Illustrative review copy for layout; replace with approved UAE customer reviews before launch.",
         "background": "#f4ecff"
-      },
-      "blocks": {
-        "r1":{"type":"reason","settings":{"text":"More than a single nutrient routine"}},
-        "r2":{"type":"reason","settings":{"text":"DHA + Choline within a broader nutrition formula"}},
-        "r3":{"type":"reason","settings":{"text":"Mixed berry gummy format"}},
-        "r4":{"type":"reason","settings":{"text":"Made for consistent everyday use"}},
-        "r5":{"type":"reason","settings":{"text":"Supports the bigger picture of growing-child nutrition"}},
-        "v1":{"type":"review","settings":{"review":"My son likes the taste and it fits into our morning routine without making vitamins feel complicated.","name":"Aisha M.","location":"Dubai"}},
-        "v2":{"type":"review","settings":{"review":"I chose IAMWELL because the formula brings DHA and Choline into one simple routine for our family.","name":"Karen L.","location":"Abu Dhabi"}},
-        "v3":{"type":"review","settings":{"review":"The gummy format is easy to remember before school and works well with the routine we already have.","name":"Michelle R.","location":"Sharjah"}},
-        "v4":{"type":"review","settings":{"review":"I like that it brings several nutrients together instead of making the routine feel like multiple products.","name":"James T.","location":"Dubai"}}
-      },
-      "block_order": ["r1","r2","r3","r4","r5","v1","v2","v3","v4"]
+      }
     },
     "offer": {
       "type": "iamw-b2-offer",
+      "blocks": {
+        "t1": {
+          "type": "time",
+          "settings": {
+            "icon": "star",
+            "label": "Breakfast"
+          }
+        },
+        "t2": {
+          "type": "time",
+          "settings": {
+            "icon": "book",
+            "label": "Before School"
+          }
+        },
+        "t3": {
+          "type": "time",
+          "settings": {
+            "icon": "heart",
+            "label": "After School"
+          }
+        },
+        "t4": {
+          "type": "time",
+          "settings": {
+            "icon": "clock",
+            "label": "Evening"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "settings": {
         "eyebrow": "A SIMPLE DAILY ROUTINE",
         "heading": "Brain nutrition is an everyday habit",
         "body": "<p>Choose a part of your family routine that is easy to remember, then follow the approved IAMWELL serving directions consistently.</p>",
-        "product": "smart-routine-starter-pack-90-days-brain-support",
+        "product": "smart-routine-starter-pack-for-picky-eaters",
         "offer_eyebrow": "IAMWELL SMART ROUTINE STARTER PACK",
         "button_text": "START THEIR SMART ROUTINE",
         "purchase_action": "cart",
         "microcopy": "UAE delivery options available at checkout • Secure checkout",
         "background": "#fffdf8"
-      },
-      "blocks": {
-        "t1":{"type":"time","settings":{"icon":"star","label":"Breakfast"}},
-        "t2":{"type":"time","settings":{"icon":"book","label":"Before School"}},
-        "t3":{"type":"time","settings":{"icon":"heart","label":"After School"}},
-        "t4":{"type":"time","settings":{"icon":"clock","label":"Evening"}}
-      },
-      "block_order": ["t1","t2","t3","t4"]
+      }
     },
     "faq": {
       "type": "iamw-b2-faq",
+      "blocks": {
+        "q1": {
+          "type": "item",
+          "settings": {
+            "question": "What nutrients support a child's growing brain?",
+            "answer": "<p>Children need a broad range of nutrients as part of a balanced diet. IAMWELL includes DHA, Choline and B complex vitamins within its current brain-support formulation.</p>"
+          }
+        },
+        "q2": {
+          "type": "item",
+          "settings": {
+            "question": "What is DHA?",
+            "answer": "<p>DHA is an Omega 3 fatty acid commonly associated with brain and eye nutrition. Any specific health claim should match IAMWELL's approved UAE product information.</p>"
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "question": "Does IAMWELL contain DHA?",
+            "answer": "<p>Yes. DHA is included in the current IAMWELL product materials.</p>"
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "question": "Does IAMWELL contain Choline?",
+            "answer": "<p>Yes. Choline is included in the current IAMWELL product materials.</p>"
+          }
+        },
+        "q5": {
+          "type": "item",
+          "settings": {
+            "question": "Is IAMWELL a focus supplement?",
+            "answer": "<p>IAMWELL should be understood as a children's nutritional supplement rather than a medicine or a guaranteed concentration product.</p>"
+          }
+        },
+        "q6": {
+          "type": "item",
+          "settings": {
+            "question": "Will IAMWELL improve school performance?",
+            "answer": "<p>IAMWELL does not guarantee better grades or academic performance. Learning depends on many factors including education, sleep, nutrition, physical wellbeing and study habits.</p>"
+          }
+        },
+        "q7": {
+          "type": "item",
+          "settings": {
+            "question": "What ages can take IAMWELL?",
+            "answer": "<p>Current product information identifies ages 2 to 15. Follow the approved UAE label and age-specific serving directions.</p>"
+          }
+        },
+        "q8": {
+          "type": "item",
+          "settings": {
+            "question": "How many gummies come in the starter pack?",
+            "answer": "<p>The Smart Routine Starter Pack contains three bottles with 30 gummies in each bottle.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ],
       "settings": {
         "eyebrow": "QUESTIONS PARENTS ASK",
         "heading": "Questions about IAMWELL",
         "intro": "<p>Quick answers about children's brain nutrition and the IAMWELL routine.</p>",
         "background": "#f4ecff"
-      },
-      "blocks": {
-        "q1":{"type":"item","settings":{"question":"What nutrients support a child's growing brain?","answer":"<p>Children need a broad range of nutrients as part of a balanced diet. IAMWELL includes DHA, Choline and B complex vitamins within its current brain-support formulation.</p>"}},
-        "q2":{"type":"item","settings":{"question":"What is DHA?","answer":"<p>DHA is an Omega 3 fatty acid commonly associated with brain and eye nutrition. Any specific health claim should match IAMWELL's approved UAE product information.</p>"}},
-        "q3":{"type":"item","settings":{"question":"Does IAMWELL contain DHA?","answer":"<p>Yes. DHA is included in the current IAMWELL product materials.</p>"}},
-        "q4":{"type":"item","settings":{"question":"Does IAMWELL contain Choline?","answer":"<p>Yes. Choline is included in the current IAMWELL product materials.</p>"}},
-        "q5":{"type":"item","settings":{"question":"Is IAMWELL a focus supplement?","answer":"<p>IAMWELL should be understood as a children's nutritional supplement rather than a medicine or a guaranteed concentration product.</p>"}},
-        "q6":{"type":"item","settings":{"question":"Will IAMWELL improve school performance?","answer":"<p>IAMWELL does not guarantee better grades or academic performance. Learning depends on many factors including education, sleep, nutrition, physical wellbeing and study habits.</p>"}},
-        "q7":{"type":"item","settings":{"question":"What ages can take IAMWELL?","answer":"<p>Current product information identifies ages 2 to 15. Follow the approved UAE label and age-specific serving directions.</p>"}},
-        "q8":{"type":"item","settings":{"question":"How many gummies come in the starter pack?","answer":"<p>The Smart Routine Starter Pack contains three bottles with 30 gummies in each bottle.</p>"}}
-      },
-      "block_order": ["q1","q2","q3","q4","q5","q6","q7","q8"]
+      }
     },
     "final": {
       "type": "iamw-b2-final",
@@ -145,5 +425,13 @@
       }
     }
   },
-  "order": ["hero","story","formula","proof","offer","faq","final"]
+  "order": [
+    "hero",
+    "story",
+    "formula",
+    "proof",
+    "offer",
+    "faq",
+    "final"
+  ]
 }
