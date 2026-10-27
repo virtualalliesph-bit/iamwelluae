@@ -19,14 +19,14 @@
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
+            "horizontal_alignment": "center",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 6,
-            "width": "fill",
-            "custom_width": 100,
+            "gap": 4,
+            "width": "custom",
+            "custom_width": 72,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -54,8 +54,8 @@
               "settings": {
                 "text": "<p><strong>Disclaimer:</strong> I Am Well Smart Gummies are food supplements intended to complement a balanced diet and healthy lifestyle. They are not intended to diagnose, treat, cure, or prevent any disease. Individual needs and results may vary. Please consult a qualified healthcare professional before use if your child has a medical condition or is taking medication.</p>",
                 "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
+                "max_width": "normal",
+                "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "0.75rem",
@@ -75,25 +75,192 @@
               "blocks": {}
             }
           },
-          "block_order": [
-            "text_disclaimer"
-          ]
+          "block_order": ["text_disclaimer"]
         }
       },
-      "block_order": [
-        "group_disclaimer"
-      ],
-      "name": "t:names.footer",
+      "block_order": ["group_disclaimer"],
+      "name": "Disclaimer",
       "settings": {
-        "section_width": "full-width",
-        "gap": 8,
+        "section_width": "page-width",
+        "gap": 4,
         "background_color": "#F5F0FA",
-        "padding-block-start": 12,
-        "padding-block-end": 12
+        "padding-block-start": 10,
+        "padding-block-end": 10
+      }
+    },
+    "footer_main": {
+      "type": "footer",
+      "blocks": {
+        "brand_column": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 14,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "open_in_new_tab": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "footer_logo": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/I_AM_WELL_-_Primary_Logo_05.png",
+                "link": "/",
+                "image_ratio": "adapt",
+                "width": "custom",
+                "custom_width": 58,
+                "width_mobile": "custom",
+                "custom_width_mobile": 45,
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "brand_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Everyday nutritional support for growing children, made simple for busy family routines.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#FFFFFF",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["footer_logo", "brand_text"]
+        },
+        "menu_shop": {
+          "type": "menu",
+          "settings": {
+            "menu": "footer",
+            "heading": "SHOP",
+            "menu_spacing": 10,
+            "show_as_accordion": true,
+            "accordion_icon": "plus",
+            "accordion_dividers": false,
+            "background_color": "",
+            "text_color": "#FFFFFF",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "menu_policies": {
+          "type": "menu",
+          "settings": {
+            "menu": "policies",
+            "heading": "POLICIES",
+            "menu_spacing": 10,
+            "show_as_accordion": true,
+            "accordion_icon": "plus",
+            "accordion_dividers": false,
+            "background_color": "",
+            "text_color": "#FFFFFF",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["brand_column", "menu_shop", "menu_policies"],
+      "name": "Main footer",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 40,
+        "background_color": "#3C0A6D",
+        "padding-block-start": 38,
+        "padding-block-end": 28
+      }
+    },
+    "footer_utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "text_color": "#FFFFFF",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "policy_list": {
+          "type": "footer-policy-list",
+          "settings": {
+            "text_color": "#FFFFFF",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["copyright", "policy_list"],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "background_color": "#3C0A6D",
+        "divider_thickness": 0.5,
+        "divider_color": "#FFFFFF",
+        "padding-block-start": 14,
+        "padding-block-end": 18
       }
     }
   },
-  "order": [
-    "footer_disclaimer"
-  ]
+  "order": ["footer_disclaimer", "footer_main", "footer_utilities"]
 }
