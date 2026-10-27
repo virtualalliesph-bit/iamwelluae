@@ -32,17 +32,21 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
             "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -63,7 +67,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#6F6678",
+                "text_color": "#6f6678",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -75,15 +79,19 @@
               "blocks": {}
             }
           },
-          "block_order": ["text_disclaimer"]
+          "block_order": [
+            "text_disclaimer"
+          ]
         }
       },
-      "block_order": ["group_disclaimer"],
+      "block_order": [
+        "group_disclaimer"
+      ],
       "name": "Disclaimer",
       "settings": {
         "section_width": "page-width",
         "gap": 4,
-        "background_color": "#F5F0FA",
+        "background_color": "#f5f0fa",
         "padding-block-start": 10,
         "padding-block-end": 10
       }
@@ -109,17 +117,21 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
             "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -129,7 +141,7 @@
             "footer_logo": {
               "type": "image",
               "settings": {
-                "image": "shopify://shop_images/I_AM_WELL_-_Primary_Logo_05.png",
+                "image": "shopify://shop_images/I_AM_WELL_-_Primary_Logo_03.avif",
                 "link": "/",
                 "image_ratio": "adapt",
                 "width": "custom",
@@ -140,6 +152,7 @@
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
+                "border_color": "",
                 "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -162,7 +175,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#FFFFFF",
+                "text_color": "#ffffff",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -174,19 +187,22 @@
               "blocks": {}
             }
           },
-          "block_order": ["footer_logo", "brand_text"]
+          "block_order": [
+            "footer_logo",
+            "brand_text"
+          ]
         },
         "menu_shop": {
           "type": "menu",
           "settings": {
             "menu": "footer",
-            "heading": "SHOP",
+            "heading": "POlicies",
             "menu_spacing": 10,
             "show_as_accordion": true,
             "accordion_icon": "plus",
             "accordion_dividers": false,
             "background_color": "",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "heading_preset": "h5",
             "link_preset": "paragraph",
             "padding-block-start": 0,
@@ -198,15 +214,16 @@
         },
         "menu_policies": {
           "type": "menu",
+          "disabled": true,
           "settings": {
-            "menu": "policies",
+            "menu": "footer",
             "heading": "POLICIES",
             "menu_spacing": 10,
             "show_as_accordion": true,
             "accordion_icon": "plus",
             "accordion_dividers": false,
             "background_color": "",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "heading_preset": "h5",
             "link_preset": "paragraph",
             "padding-block-start": 0,
@@ -217,12 +234,16 @@
           "blocks": {}
         }
       },
-      "block_order": ["brand_column", "menu_shop", "menu_policies"],
+      "block_order": [
+        "brand_column",
+        "menu_shop",
+        "menu_policies"
+      ],
       "name": "Main footer",
       "settings": {
         "section_width": "page-width",
         "gap": 40,
-        "background_color": "#3C0A6D",
+        "background_color": "#3c0a6d",
         "padding-block-start": 38,
         "padding-block-end": 28
       }
@@ -234,7 +255,7 @@
           "type": "footer-copyright",
           "settings": {
             "show_powered_by": false,
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -243,24 +264,31 @@
         "policy_list": {
           "type": "footer-policy-list",
           "settings": {
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "font_size": "0.75rem",
             "case": "none"
           },
           "blocks": {}
         }
       },
-      "block_order": ["copyright", "policy_list"],
+      "block_order": [
+        "copyright",
+        "policy_list"
+      ],
       "settings": {
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "#3C0A6D",
+        "background_color": "#3c0a6d",
         "divider_thickness": 0.5,
-        "divider_color": "#FFFFFF",
+        "divider_color": "#ffffff",
         "padding-block-start": 14,
         "padding-block-end": 18
       }
     }
   },
-  "order": ["footer_disclaimer", "footer_main", "footer_utilities"]
+  "order": [
+    "footer_disclaimer",
+    "footer_main",
+    "footer_utilities"
+  ]
 }
