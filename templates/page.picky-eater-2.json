@@ -11,27 +11,110 @@
   "sections": {
     "hero": {
       "type": "iamw-b2-hero",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "utensils",
+            "text": "For Selective Eaters"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "text": "Everyday Nutrition"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "text": "Growing Child Support"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "text": "Simple Gummy Routine"
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "book",
+            "text": "Ages 2 to 15"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
       "settings": {
         "eyebrow": "FOR PICKY EATERS AND LIMITED DIETS",
         "heading": "When They Eat the Same Few Foods, Support What Their Diet May Be Missing",
-        "body": "<p>IAMWELL Smart Gummies helps complement balanced meals with nutrients selected to support growing children as part of a simple daily routine.</p>",
+        "body": "<p>I Am Well Smart Gummies helps complement balanced meals with nutrients selected to support growing children as part of a simple daily routine.</p>",
         "button_text": "START THEIR SMART ROUTINE",
-        "microcopy": "3 bottles • 30 gummies per bottle • Mixed berry food supplement",
+        "button_link": "",
+        "microcopy": "\"Food supplement. Not intended to diagnose, treat, or prevent any medical condition.\"",
         "image": "shopify://shop_images/6143214667367649919_1.jpg",
         "background": "#fffdf8",
         "strip_background": "#f3eaff"
-      },
-      "blocks": {
-        "b1": {"type":"benefit","settings":{"icon":"utensils","text":"For Selective Eaters"}},
-        "b2": {"type":"benefit","settings":{"icon":"shield","text":"Everyday Nutrition"}},
-        "b3": {"type":"benefit","settings":{"icon":"heart","text":"Growing Child Support"}},
-        "b4": {"type":"benefit","settings":{"icon":"star","text":"Simple Gummy Routine"}},
-        "b5": {"type":"benefit","settings":{"icon":"book","text":"Ages 2 to 15"}}
-      },
-      "block_order": ["b1","b2","b3","b4","b5"]
+      }
     },
     "story": {
       "type": "iamw-b2-story",
+      "blocks": {
+        "a1": {
+          "type": "activity",
+          "settings": {
+            "text": "Same breakfast"
+          }
+        },
+        "a2": {
+          "type": "activity",
+          "settings": {
+            "text": "Veggies refused"
+          }
+        },
+        "a3": {
+          "type": "activity",
+          "settings": {
+            "text": "Fish refused"
+          }
+        },
+        "a4": {
+          "type": "activity",
+          "settings": {
+            "text": "Untouched lunchbox"
+          }
+        },
+        "a5": {
+          "type": "activity",
+          "settings": {
+            "text": "Safe foods"
+          }
+        },
+        "a6": {
+          "type": "activity",
+          "settings": {
+            "text": "Unpredictable days"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6"
+      ],
       "settings": {
         "eyebrow": "WHEN PICKY EATING MAKES NUTRITION FEEL UNCERTAIN",
         "heading": "Does this look familiar?",
@@ -42,42 +125,158 @@
         "bridge_body": "<p>A child can eat enough food and still eat a very narrow range of foods. When the same foods appear day after day, it can become harder to include a broad variety of vitamins, minerals, essential fats and other nutrients through meals alone.</p><p>A supplement should never replace balanced food. Instead, it can sit alongside meals as one part of a broader nutrition routine.</p>",
         "note": "Support what their diet may be missing — alongside balanced meals, not instead of them.",
         "background": "#fffdf8"
-      },
-      "blocks": {
-        "a1":{"type":"activity","settings":{"text":"Same breakfast"}},
-        "a2":{"type":"activity","settings":{"text":"Veggies refused"}},
-        "a3":{"type":"activity","settings":{"text":"Fish refused"}},
-        "a4":{"type":"activity","settings":{"text":"Untouched lunchbox"}},
-        "a5":{"type":"activity","settings":{"text":"Safe foods"}},
-        "a6":{"type":"activity","settings":{"text":"Unpredictable days"}}
-      },
-      "block_order": ["a1","a2","a3","a4","a5","a6"]
+      }
     },
     "formula": {
       "type": "iamw-b2-formula",
+      "blocks": {
+        "n1": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "star",
+            "heading": "L Lysine",
+            "text": "<p>An amino acid included as part of IAMWELL's everyday children's nutrition formula.</p>"
+          }
+        },
+        "n2": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "brain",
+            "heading": "DHA + Choline",
+            "text": "<p>Included within the broader nutrition formula for growing children.</p>"
+          }
+        },
+        "n3": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "heart",
+            "heading": "Omega 3 6 9",
+            "text": "<p>Essential fats included within the product's broader children's nutrition profile.</p>"
+          }
+        },
+        "n4": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "book",
+            "heading": "B Complex Vitamins",
+            "text": "<p>A group of vitamins included within IAMWELL's everyday nutrition formula.</p>"
+          }
+        },
+        "n5": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "shield",
+            "heading": "Vitamins + Zinc",
+            "text": "<p>Familiar vitamins and minerals included as part of the broader daily nutrition proposition.</p>"
+          }
+        },
+        "n6": {
+          "type": "nutrient",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Digestive Enzymes",
+            "text": "<p>Included within the existing IAMWELL product formulation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6"
+      ],
       "settings": {
         "eyebrow": "MEET IAMWELL SMART GUMMIES",
         "heading": "Everyday nutritional support in one simple routine",
         "body": "<p>IAMWELL Smart Gummies is a mixed berry food supplement for children ages 2 to 15.</p><p>The formula combines nutrients selected for growing children in a convenient chewable format that can be incorporated into an everyday family routine. It is designed to complement balanced meals, not replace them.</p>",
         "image": "shopify://shop_images/6143062380712236434.jpg",
         "button_text": "START THEIR SMART ROUTINE",
+        "button_link": "",
         "nutrient_eyebrow": "WHAT IS INSIDE IAMWELL?",
         "nutrient_heading": "Nutrients for growing children",
         "nutrient_intro": "<p>A broader everyday nutrition formula that brings several support areas together in one child-friendly mixed berry gummy.</p>",
         "background": "#fffdf8"
-      },
-      "blocks": {
-        "n1":{"type":"nutrient","settings":{"icon":"star","heading":"L Lysine","text":"<p>An amino acid included as part of IAMWELL's everyday children's nutrition formula.</p>"}},
-        "n2":{"type":"nutrient","settings":{"icon":"brain","heading":"DHA + Choline","text":"<p>Included within the broader nutrition formula for growing children.</p>"}},
-        "n3":{"type":"nutrient","settings":{"icon":"heart","heading":"Omega 3 6 9","text":"<p>Essential fats included within the product's broader children's nutrition profile.</p>"}},
-        "n4":{"type":"nutrient","settings":{"icon":"book","heading":"B Complex Vitamins","text":"<p>A group of vitamins included within IAMWELL's everyday nutrition formula.</p>"}},
-        "n5":{"type":"nutrient","settings":{"icon":"shield","heading":"Vitamins + Zinc","text":"<p>Familiar vitamins and minerals included as part of the broader daily nutrition proposition.</p>"}},
-        "n6":{"type":"nutrient","settings":{"icon":"leaf","heading":"Digestive Enzymes","text":"<p>Included within the existing IAMWELL product formulation.</p>"}}
-      },
-      "block_order": ["n1","n2","n3","n4","n5","n6"]
+      }
     },
     "proof": {
       "type": "iamw-b2-proof",
+      "blocks": {
+        "r1": {
+          "type": "reason",
+          "settings": {
+            "text": "Support for everyday nutritional gaps"
+          }
+        },
+        "r2": {
+          "type": "reason",
+          "settings": {
+            "text": "Several nutrients brought together in one routine"
+          }
+        },
+        "r3": {
+          "type": "reason",
+          "settings": {
+            "text": "Mixed berry gummy format"
+          }
+        },
+        "r4": {
+          "type": "reason",
+          "settings": {
+            "text": "Made for consistent everyday use"
+          }
+        },
+        "r5": {
+          "type": "reason",
+          "settings": {
+            "text": "Designed to complement balanced meals"
+          }
+        },
+        "v1": {
+          "type": "review",
+          "settings": {
+            "review": "My child usually sticks to the same few foods, so I like having one simple routine alongside the meals we keep working on.",
+            "name": "Aisha M.",
+            "location": "Dubai"
+          }
+        },
+        "v2": {
+          "type": "review",
+          "settings": {
+            "review": "The gummy format is easier for us to remember than adding another syrup or tablet to the morning routine.",
+            "name": "Priya S.",
+            "location": "Abu Dhabi"
+          }
+        },
+        "v3": {
+          "type": "review",
+          "settings": {
+            "review": "We still focus on food variety, but I like having a consistent daily option for the days when meals are less balanced than planned.",
+            "name": "Maria L.",
+            "location": "Sharjah"
+          }
+        },
+        "v4": {
+          "type": "review",
+          "settings": {
+            "review": "Busy mornings feel simpler when the nutrition routine is easy to remember and fits into what we already do every day.",
+            "name": "Sarah K.",
+            "location": "Dubai"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
       "settings": {
         "why_eyebrow": "WHY IAMWELL",
         "why_heading": "Why parents choose a simpler nutrition routine",
@@ -88,22 +287,46 @@
         "review_heading": "What families value about a simple gummy routine",
         "review_note": "Illustrative review copy",
         "background": "#f4ecff"
-      },
-      "blocks": {
-        "r1":{"type":"reason","settings":{"text":"Support for everyday nutritional gaps"}},
-        "r2":{"type":"reason","settings":{"text":"Several nutrients brought together in one routine"}},
-        "r3":{"type":"reason","settings":{"text":"Mixed berry gummy format"}},
-        "r4":{"type":"reason","settings":{"text":"Made for consistent everyday use"}},
-        "r5":{"type":"reason","settings":{"text":"Designed to complement balanced meals"}},
-        "v1":{"type":"review","settings":{"review":"My child usually sticks to the same few foods, so I like having one simple routine alongside the meals we keep working on.","name":"Aisha M.","location":"Dubai"}},
-        "v2":{"type":"review","settings":{"review":"The gummy format is easier for us to remember than adding another syrup or tablet to the morning routine.","name":"Priya S.","location":"Abu Dhabi"}},
-        "v3":{"type":"review","settings":{"review":"We still focus on food variety, but I like having a consistent daily option for the days when meals are less balanced than planned.","name":"Maria L.","location":"Sharjah"}},
-        "v4":{"type":"review","settings":{"review":"Busy mornings feel simpler when the nutrition routine is easy to remember and fits into what we already do every day.","name":"Sarah K.","location":"Dubai"}}
-      },
-      "block_order": ["r1","r2","r3","r4","r5","v1","v2","v3","v4"]
+      }
     },
     "offer": {
       "type": "iamw-b2-offer",
+      "blocks": {
+        "t1": {
+          "type": "time",
+          "settings": {
+            "icon": "star",
+            "label": "Breakfast"
+          }
+        },
+        "t2": {
+          "type": "time",
+          "settings": {
+            "icon": "book",
+            "label": "School Prep"
+          }
+        },
+        "t3": {
+          "type": "time",
+          "settings": {
+            "icon": "heart",
+            "label": "Dinner"
+          }
+        },
+        "t4": {
+          "type": "time",
+          "settings": {
+            "icon": "clock",
+            "label": "Bedtime"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "settings": {
         "eyebrow": "A SIMPLE DAILY NUTRITION ROUTINE",
         "heading": "Make nutrition support one of the easy parts of the day",
@@ -114,34 +337,84 @@
         "purchase_action": "cart",
         "microcopy": "3 bottles • 30 gummies per bottle • UAE delivery options shown at checkout",
         "background": "#fffdf8"
-      },
-      "blocks": {
-        "t1":{"type":"time","settings":{"icon":"star","label":"Breakfast"}},
-        "t2":{"type":"time","settings":{"icon":"book","label":"School Prep"}},
-        "t3":{"type":"time","settings":{"icon":"heart","label":"Dinner"}},
-        "t4":{"type":"time","settings":{"icon":"clock","label":"Bedtime"}}
-      },
-      "block_order": ["t1","t2","t3","t4"]
+      }
     },
     "faq": {
       "type": "iamw-b2-faq",
+      "blocks": {
+        "q1": {
+          "type": "item",
+          "settings": {
+            "question": "What vitamins are good for picky eaters?",
+            "answer": "<p>Nutritional needs differ between children. A balanced diet remains the foundation. When food variety is limited, parents may consider an age-appropriate supplement after reviewing the child's diet and speaking with a healthcare professional where appropriate.</p>"
+          }
+        },
+        "q2": {
+          "type": "item",
+          "settings": {
+            "question": "Can picky eaters take a multivitamin?",
+            "answer": "<p>Many children's supplements are designed to complement balanced meals. Check age recommendations, ingredients and serving instructions before use.</p>"
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "question": "Is IAMWELL suitable for picky eaters?",
+            "answer": "<p>IAMWELL Smart Gummies is designed as everyday nutritional support for growing children and can complement meals when food variety is difficult.</p>"
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "question": "What age is IAMWELL Smart Gummies for?",
+            "answer": "<p>Current product information identifies ages 2 to 15. Always follow the approved UAE product label.</p>"
+          }
+        },
+        "q5": {
+          "type": "item",
+          "settings": {
+            "question": "Does IAMWELL replace vegetables or healthy meals?",
+            "answer": "<p>No. Supplements should complement a balanced diet rather than replace nutritious food.</p>"
+          }
+        },
+        "q6": {
+          "type": "item",
+          "settings": {
+            "question": "What does IAMWELL taste like?",
+            "answer": "<p>IAMWELL Smart Gummies has a mixed berry flavour.</p>"
+          }
+        },
+        "q7": {
+          "type": "item",
+          "settings": {
+            "question": "Does IAMWELL contain DHA?",
+            "answer": "<p>Yes. DHA appears in the current IAMWELL product materials.</p>"
+          }
+        },
+        "q8": {
+          "type": "item",
+          "settings": {
+            "question": "Does IAMWELL contain L Lysine?",
+            "answer": "<p>Yes. L Lysine is included in the current product formula.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ],
       "settings": {
         "eyebrow": "QUESTIONS PARENTS ASK",
         "heading": "Questions about picky eating and IAMWELL",
         "intro": "<p>Quick answers about children's nutrition, selective eating and the IAMWELL routine.</p>",
         "background": "#f4ecff"
-      },
-      "blocks": {
-        "q1":{"type":"item","settings":{"question":"What vitamins are good for picky eaters?","answer":"<p>Nutritional needs differ between children. A balanced diet remains the foundation. When food variety is limited, parents may consider an age-appropriate supplement after reviewing the child's diet and speaking with a healthcare professional where appropriate.</p>"}},
-        "q2":{"type":"item","settings":{"question":"Can picky eaters take a multivitamin?","answer":"<p>Many children's supplements are designed to complement balanced meals. Check age recommendations, ingredients and serving instructions before use.</p>"}},
-        "q3":{"type":"item","settings":{"question":"Is IAMWELL suitable for picky eaters?","answer":"<p>IAMWELL Smart Gummies is designed as everyday nutritional support for growing children and can complement meals when food variety is difficult.</p>"}},
-        "q4":{"type":"item","settings":{"question":"What age is IAMWELL Smart Gummies for?","answer":"<p>Current product information identifies ages 2 to 15. Always follow the approved UAE product label.</p>"}},
-        "q5":{"type":"item","settings":{"question":"Does IAMWELL replace vegetables or healthy meals?","answer":"<p>No. Supplements should complement a balanced diet rather than replace nutritious food.</p>"}},
-        "q6":{"type":"item","settings":{"question":"What does IAMWELL taste like?","answer":"<p>IAMWELL Smart Gummies has a mixed berry flavour.</p>"}},
-        "q7":{"type":"item","settings":{"question":"Does IAMWELL contain DHA?","answer":"<p>Yes. DHA appears in the current IAMWELL product materials.</p>"}},
-        "q8":{"type":"item","settings":{"question":"Does IAMWELL contain L Lysine?","answer":"<p>Yes. L Lysine is included in the current product formula.</p>"}}
-      },
-      "block_order": ["q1","q2","q3","q4","q5","q6","q7","q8"]
+      }
     },
     "final": {
       "type": "iamw-b2-final",
@@ -150,9 +423,18 @@
         "heading": "You Cannot Plan Every Bite. You Can Build a More Consistent Nutrition Routine.",
         "body": "<p>Some meals will be balanced. Some lunchboxes will come home untouched. Some weeks will include far more beige food than you planned. IAMWELL Smart Gummies gives parents a simple way to complement balanced meals with everyday nutritional support.</p>",
         "button_text": "START THEIR SMART ROUTINE",
+        "button_link": "",
         "background": "#4a0c83"
       }
     }
   },
-  "order": ["hero","story","formula","proof","offer","faq","final"]
+  "order": [
+    "hero",
+    "story",
+    "formula",
+    "proof",
+    "offer",
+    "faq",
+    "final"
+  ]
 }

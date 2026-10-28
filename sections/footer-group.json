@@ -58,7 +58,7 @@
               "settings": {
                 "text": "<p><strong>Disclaimer:</strong> I Am Well Smart Gummies are food supplements intended to complement a balanced diet and healthy lifestyle. They are not intended to diagnose, treat, cure, or prevent any disease. Individual needs and results may vary. Please consult a qualified healthcare professional before use if your child has a medical condition or is taking medication.</p>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -67,7 +67,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#6f6678",
+                "text_color": "{{ settings.color_palette.foreground }}",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
