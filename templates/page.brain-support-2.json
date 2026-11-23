@@ -236,6 +236,7 @@
         "v1": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/IMG_8617.heic",
             "review": "My son likes the taste and it fits into our morning routine without making vitamins feel complicated.",
             "name": "Aisha M.",
             "location": "Dubai"
@@ -244,8 +245,9 @@
         "v2": {
           "type": "review",
           "settings": {
-            "review": "I chose IAMWELL because the formula brings DHA and Choline into one simple routine for our family.",
-            "name": "Karen L.",
+            "image": "shopify://shop_images/TRN_COPY_6.png",
+            "review": "I chose I Am Well Gummies because the formula brings DHA and Choline into one simple routine for our family. I'm really loving the result to my Calyz",
+            "name": "Hannah",
             "location": "Abu Dhabi"
           }
         },
