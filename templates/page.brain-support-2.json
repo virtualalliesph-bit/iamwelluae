@@ -237,7 +237,7 @@
           "type": "review",
           "settings": {
             "image": "shopify://shop_images/IMG_8617.heic",
-            "review": "My son likes the taste and it fits into our morning routine without making vitamins feel complicated.",
+            "review": "What I’ve noticed lately is that my son can sit down and finish a worksheet with fewer reminders from me. That’s a little win for us. He likes the taste of the gummies, too.",
             "name": "Aisha M.",
             "location": "Dubai"
           }
@@ -246,15 +246,16 @@
           "type": "review",
           "settings": {
             "image": "shopify://shop_images/TRN_COPY_6.png",
-            "review": "I chose I Am Well Gummies because the formula brings DHA and Choline into one simple routine for our family. I'm really loving the result to my Calyz",
-            "name": "Hannah",
+            "review": "I chose I Am Well for Calyz because it has DHA and choline in one gummy. Lately, when we read together after school, he stays with the story a little longer. I love those extra few pages with him.",
+            "name": "Hannah P.",
             "location": "Abu Dhabi"
           }
         },
         "v3": {
           "type": "review",
           "settings": {
-            "review": "The gummy format is easy to remember before school and works well with the routine we already have.",
+            "image": "shopify://shop_images/TRN_COPY_7.png",
+            "review": "Even on mornings when we’re looking for a missing shoe, we usually remember the gummy. It’s one little part of getting ready for school that feels easy now.",
             "name": "Michelle R.",
             "location": "Sharjah"
           }
@@ -262,8 +263,9 @@
         "v4": {
           "type": "review",
           "settings": {
-            "review": "I like that it brings several nutrients together instead of making the routine feel like multiple products.",
-            "name": "James T.",
+            "image": "shopify://shop_images/IMG_8677.heic",
+            "review": "My child’s teacher recently mentioned that he’s been finishing more of his classwork on his own. I was really happy to hear that.",
+            "name": "Kams T.",
             "location": "Dubai"
           }
         }
