@@ -350,10 +350,10 @@
   },
   "order": [
     "hero",
+    "offer",
     "pains",
     "benefits",
     "bundle",
-    "offer",
     "testimonials",
     "comparison",
     "final"
