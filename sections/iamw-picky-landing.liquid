@@ -25,6 +25,59 @@
     </div>
   </div>
 
+  <div class="iamw-products" id="iamw-products-{{ section.id }}">
+    <div class="iamw-wrap">
+      <div class="iamw-center">
+        <div class="iamw-kicker">{{ section.settings.products_eyebrow }}</div>
+        <h2>{{ section.settings.products_heading }}</h2>
+        <div class="iamw-rte iamw-muted">{{ section.settings.products_intro }}</div>
+      </div>
+      <div class="iamw-product-grid{% if iamw_bundle_count == 1 %} is-single{% endif %}">
+        {% for block in section.blocks %}
+          {% if block.type == 'bundle' %}
+            {% assign p = block.settings.product %}
+            <article class="iamw-product-card" {{ block.shopify_attributes }}>
+              {% if p != blank %}
+                <div class="iamw-product-media">
+                  {% if p.featured_image %}
+                    {{ p.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '420,650,850,1000', class: 'iamw-product-image' }}
+                  {% endif %}
+                </div>
+                <div class="iamw-badge">{{ block.settings.badge }}</div>
+                <div class="iamw-kicker">{{ block.settings.kicker }}</div>
+                <h3>{% if block.settings.title_override != blank %}{{ block.settings.title_override }}{% else %}{{ p.title }}{% endif %}</h3>
+                <div class="iamw-price">{{ p.selected_or_first_available_variant.price | money }}</div>
+                <div class="iamw-rte iamw-muted">{{ block.settings.description }}</div>
+                {% if p.variants.size > 1 %}
+                  <label class="iamw-label" for="iamw-variant-{{ section.id }}-{{ block.id }}">Choose option</label>
+                  <select class="iamw-select" id="iamw-variant-{{ section.id }}-{{ block.id }}" data-iamw-variant>
+                    {% for variant in p.variants %}
+                      <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                        {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}
+                      </option>
+                    {% endfor %}
+                  </select>
+                {% else %}
+                  <input type="hidden" data-iamw-variant value="{{ p.selected_or_first_available_variant.id }}">
+                {% endif %}
+                {% assign iamw_action = block.settings.purchase_action %}
+                {% if iamw_action == blank or iamw_action == 'inherit' %}
+                  {% assign iamw_action = section.settings.purchase_action_default | default: 'checkout' %}
+                {% endif %}
+                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy data-action="{{ iamw_action }}" {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                  {{ block.settings.button_label }}
+                </button>
+                <div class="iamw-micro">{{ block.settings.microcopy }}</div>
+              {% else %}
+                <div class="iamw-placeholder iamw-placeholder--product">Select a Shopify product in this bundle block.</div>
+              {% endif %}
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
   <div class="iamw-benefits">
     <div class="iamw-wrap iamw-two iamw-two--reverse">
       <div class="iamw-media">
@@ -86,59 +139,6 @@
           </div>
         </div>
       {% endfor %}
-    </div>
-  </div>
-
-  <div class="iamw-products" id="iamw-products-{{ section.id }}">
-    <div class="iamw-wrap">
-      <div class="iamw-center">
-        <div class="iamw-kicker">{{ section.settings.products_eyebrow }}</div>
-        <h2>{{ section.settings.products_heading }}</h2>
-        <div class="iamw-rte iamw-muted">{{ section.settings.products_intro }}</div>
-      </div>
-      <div class="iamw-product-grid{% if iamw_bundle_count == 1 %} is-single{% endif %}">
-        {% for block in section.blocks %}
-          {% if block.type == 'bundle' %}
-            {% assign p = block.settings.product %}
-            <article class="iamw-product-card" {{ block.shopify_attributes }}>
-              {% if p != blank %}
-                <div class="iamw-product-media">
-                  {% if p.featured_image %}
-                    {{ p.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '420,650,850,1000', class: 'iamw-product-image' }}
-                  {% endif %}
-                </div>
-                <div class="iamw-badge">{{ block.settings.badge }}</div>
-                <div class="iamw-kicker">{{ block.settings.kicker }}</div>
-                <h3>{% if block.settings.title_override != blank %}{{ block.settings.title_override }}{% else %}{{ p.title }}{% endif %}</h3>
-                <div class="iamw-price">{{ p.selected_or_first_available_variant.price | money }}</div>
-                <div class="iamw-rte iamw-muted">{{ block.settings.description }}</div>
-                {% if p.variants.size > 1 %}
-                  <label class="iamw-label" for="iamw-variant-{{ section.id }}-{{ block.id }}">Choose option</label>
-                  <select class="iamw-select" id="iamw-variant-{{ section.id }}-{{ block.id }}" data-iamw-variant>
-                    {% for variant in p.variants %}
-                      <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
-                        {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}
-                      </option>
-                    {% endfor %}
-                  </select>
-                {% else %}
-                  <input type="hidden" data-iamw-variant value="{{ p.selected_or_first_available_variant.id }}">
-                {% endif %}
-                {% assign iamw_action = block.settings.purchase_action %}
-                {% if iamw_action == blank or iamw_action == 'inherit' %}
-                  {% assign iamw_action = section.settings.purchase_action_default | default: 'checkout' %}
-                {% endif %}
-                <button type="button" class="iamw-btn iamw-buy" data-iamw-buy data-action="{{ iamw_action }}" {% unless p.selected_or_first_available_variant.available %}disabled{% endunless %}>
-                  {{ block.settings.button_label }}
-                </button>
-                <div class="iamw-micro">{{ block.settings.microcopy }}</div>
-              {% else %}
-                <div class="iamw-placeholder iamw-placeholder--product">Select a Shopify product in this bundle block.</div>
-              {% endif %}
-            </article>
-          {% endif %}
-        {% endfor %}
-      </div>
     </div>
   </div>
 
