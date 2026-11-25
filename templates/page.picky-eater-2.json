@@ -430,10 +430,10 @@
   },
   "order": [
     "hero",
+    "offer",
     "story",
     "formula",
     "proof",
-    "offer",
     "faq",
     "final"
   ]
