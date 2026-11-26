@@ -196,7 +196,7 @@
           "type": "menu",
           "settings": {
             "menu": "footer",
-            "heading": "POlicies",
+            "heading": "Policies",
             "menu_spacing": 10,
             "show_as_accordion": true,
             "accordion_icon": "plus",
